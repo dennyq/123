@@ -99,16 +99,17 @@ section.content-header > h1{
   font-size: 11px;
 }
 .login-page, .register-page {
-  background: #58696a;
+  /*background: #58696a;*/
+  background: #ddd;
 }
 .login-box, .register-box {
   width: 100%;
   margin: 0 auto!important;
 }
 .login-wrapper{
-
+  /*margin-top: 50%;*/
   /*width: 1100px;*/
-  margin: 0 auto;
+  margin: 15% auto 0 auto;
 }
 .main_logo-fago{
   height: 100px;
@@ -117,9 +118,9 @@ section.content-header > h1{
   height: 150px;
 }
 .login-box-body, .register-box-body {
-  width: 320px;
+  width: 330px;
   margin:0 auto;
-  background: #58696a;
+  /*background: #58696a;*/
   padding: 0px !important;
   border-top: 0;
   color: #666;
@@ -129,14 +130,16 @@ section.content-header > h1{
 }
 .upper-logo{
   /*height: 200px;*/
-  background-color: #f6f3d8;
+  /*height: auto;*/
+  /*background-color: #f6f3d8;*/
 }
 .m-upper-logo{
 
 }
 .lower-logo{
-
-  height: auto;
+  padding: 15px;
+vertical-align: bottom;
+height: 10px;
   background-color: #58696a;
   /*background-image:url("/imgs/img_mbg-illust.png") ;*/
 }
@@ -153,7 +156,7 @@ section.content-header > h1{
   position: relative;
 }
 .has-icon input{
-  padding-left: 40px;
+  padding-left: 20px;
 }
 .form-control-icon {
   position: absolute;
@@ -173,7 +176,7 @@ section.content-header > h1{
 .form-group.has-icon .form-control{
 
   /*padding: 10px 12px;*/
-  height: 48px;
+  height: 40px;
 
 }
 .icon-user{
@@ -797,8 +800,10 @@ div#loadingDiv{
   height:300px;
 }
 .bg-farm{
-  background-image:url("/imgs/img_mbg-illust.png");
-  background-position: bottom right;
+  background: #1d8eae;
+  /*background-image:url("/imgs/bg_main.png");*/
+  background-position: top center;
+  /*background-position: bottom right;*/
   background-repeat: no-repeat;
 }
 .mobile label{
@@ -956,4 +961,29 @@ margin-top: 15%;
 
 .m-btn{
   cursor: pointer !important;
+}
+.login-box{
+  width:845px;
+  border-top: 4px solid #ee545f;
+}
+.left-left{
+  width:328px;
+  padding: 10px;
+  height:290px;
+  float: left;
+  background-color: #fff;
+}
+.right-left{
+  width:515px;
+  padding: 30px 2px 44px 70px;
+  height:290px;
+  float: left;
+  background-color: #fff;
+}
+input.form-control {
+  background-color: #f0f0f0;
+}
+.img-margin{
+  margin-right: 10px;
+  /*margin-bottom: 3px;*/
 }

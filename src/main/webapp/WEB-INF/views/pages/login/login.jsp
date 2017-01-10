@@ -5,33 +5,35 @@
 </head>
 <div class="login-wrapper">
   <div class="login-box">
-
-      <!-- /.login-logo -->
+    <div class="left-left">
+      <div style="height: 10px;"></div>
+      <img src="/imgs/img_m_logo.png"/>
+      <div style="height: 30px;"></div>
+      <img src="/imgs/img_m_illust.png" style="margin-left: 30px;"/>
+      <div style="height: 10px;"></div>
+    </div>
+    <div class="right-left">
       <div class="login-box-body">
-
         <form method="post">
+          <label for="famers-id"><img src="/imgs/img_m_id.png" class="img-margin"/>아이디</label>
           <div class="form-group has-icon non-bottom">
             <input id="famers-id" name="famersId" class="form-control" placeholder="UserID">
-            <span class="icon-user form-control-icon"></span>
           </div>
+          <div style="height: 10px;"></div>
+          <label for="famers-pw"><img src="/imgs/img_m_id-04.png" class="img-margin"/>패스워드</label>
           <div class="form-group has-icon">
             <input id="famers-pw" name="famersPw" type="password" class="form-control" placeholder="Password">
-            <span class="icon-password form-control-icon"></span>
+
           </div>
           <div class="row">
-
-            <div class="col-xs-12">
-              <a id="famersLogin" class="btn btn-light-green btn-block btn-flat">로그인</a>
-            </div>
-            <!-- /.col -->
+              <a id="famersLogin" class="btn "><img src="/imgs/bt_login.png"></a>
           </div>
         </form>
 
-
-        <%--<a href="#">I forgot my password</a><br>--%>
-        <%--<a href="register.html" class="text-center">Register a new membership</a>--%>
-
       </div>
+    </div>
+
+
       <!-- /.login-box-body -->
 
     </div>
@@ -44,6 +46,14 @@
 
 <script>
   $(function () {
+
+    var windowHeight = $(window).height();
+    var footerHeight = 50;
+    var loginHeight = 290;
+//    console.log(windowHeight);
+
+    $('.upper-logo').css('height',windowHeight-footerHeight-loginHeight+'px');
+    $('.lower-logo').css('height',footerHeight+'px');
 
     $('#famersLogin').click(function(){
       var req = {};

@@ -14,24 +14,13 @@
 </head>
 <body class="hold-transition login-page bg-farm">
 <div class="upper-logo">
-  <div class="login-wrapper">
-    <div class="main_logo-fago">
-      <img src="/imgs/main_logo-fago.png" alt="main_logo-fago">
-    </div>
-    <div class="login-logo">
-      <img src="/imgs/main_logo.png" alt="main_logo">
-    </div>
-  </div>
-</div>
-<div class="lower-logo" >
-
-
   <page:applyDecorator name="lib"/>
   <decorator:body/>
+</div>
+<div class="lower-logo" >
+  <center>  copy...</center>
 
 </div>
-
-
 </body>
 </html>
 
