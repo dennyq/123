@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.DataMapper">
+
+  <sql id="listConditions">
+    WHERE 1=1  AND A.memberid = #{login_uid}
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='sch_joindate != null and sch_joindate != ""'>
+      AND A.joindate  LIKE CONCAT('%', #{sch_joindate},'%')
+    </if>
+    <if test='sch_name != null and sch_name != ""'>
+      AND A.name  LIKE CONCAT('%', #{sch_name},'%')
+    </if>
+    <if test='sch_usestartdate != null and sch_usestartdate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
+    </if>
+    <if test='sch_useenddate != null and sch_useenddate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
+    </if>
+    <if test='sch_handphone != null and sch_handphone != ""'>
+      AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
+    </if>
+  </sql>
+
+  <select id="graphList" parameterType="dbmap" resultType="dbmap">
+
+    SELECT
+    A.memberid,
+    A.temperature1,
+    A.humidity1,
+    A.carbondioxide1,
+    A.temperature2,
+    A.humidity2,
+    A.carbondioxide2,
+    A.temperature3,
+    A.humidity3,
+    A.carbondioxide3,
+    A.temperature4,
+    A.humidity4,
+    A.carbondioxide4,
+    A.temperature5,
+    A.humidity5,
+    A.carbondioxide5,
+    A.temperature6,
+    A.humidity6,
+    A.carbondioxide6,
+    A.temperature7,
+    A.humidity7,
+    A.carbondioxide7,
+    A.temperature8,
+    A.humidity8,
+    A.carbondioxide8,
+    A.regtime,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "date",
+    DATE_FORMAT( A.regtime,'%H:%i:%s') "time",
+    DATE_FORMAT( A.regtime,'%H') "x"
+    FROM innersensorstate A
+    <include refid="com.hs.web.mapper.DataMapper.listConditions"/>
+    AND DATE_FORMAT(A.regtime,'%Y%m%d') = DATE_FORMAT(#{sch_date},'%Y%m%d')
+    ORDER BY A.regtime DESC
+
+  </select>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT
+          A.memberid,
+          A.temperature1,
+          A.humidity1,
+          A.carbondioxide1,
+          A.temperature2,
+          A.humidity2,
+          A.carbondioxide2,
+          A.temperature3,
+          A.humidity3,
+          A.carbondioxide3,
+          A.temperature4,
+          A.humidity4,
+          A.carbondioxide4,
+          A.temperature5,
+          A.humidity5,
+          A.carbondioxide5,
+          A.temperature6,
+          A.humidity6,
+          A.carbondioxide6,
+          A.temperature7,
+          A.humidity7,
+          A.carbondioxide7,
+          A.temperature8,
+          A.humidity8,
+          A.carbondioxide8,
+          A.regtime,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "date",
+    DATE_FORMAT( A.regtime,'%H:%i:%s') "time"
+    FROM innersensorstate A
+    <include refid="com.hs.web.mapper.DataMapper.listConditions"/>
+    ORDER BY A.regtime DESC
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="listCnt" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM innersensorstate A
+    <include refid="com.hs.web.mapper.DataMapper.listConditions"/>
+  </select>
+
+  <select id="idCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM innersensorstate A
+     WHERE A.memberid  = #{memberid}
+  </select>
+
+  <select id="idPwCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM innersensorstate A
+    WHERE A.memberid  = #{memberid} AND  A.password  = #{password}
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+    SELECT
+        A.memberid,
+          A.temperature1,
+          A.humidity1,
+          A.carbondioxide1,
+          A.temperature2,
+          A.humidity2,
+          A.carbondioxide2,
+          A.temperature3,
+          A.humidity3,
+          A.carbondioxide3,
+          A.temperature4,
+          A.humidity4,
+          A.carbondioxide4,
+          A.temperature5,
+          A.humidity5,
+          A.carbondioxide5,
+          A.temperature6,
+          A.humidity6,
+          A.carbondioxide6,
+          A.temperature7,
+          A.humidity7,
+          A.carbondioxide7,
+          A.temperature8,
+          A.humidity8,
+          A.carbondioxide8,
+          A.regtime,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "date",
+    DATE_FORMAT( A.regtime,'%H:%i:%s') "time"
+    FROM innersensorstate A
+    WHERE 1=1 AND A.memberid = #{memberid}
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO innersensorstate (
+    memberid,
+    password,
+    grade,
+    name,
+    telephone,
+    handphone,
+    cameracount,
+    ipaddress,
+    listenport,
+    camerainfo1,
+    camerainfo2,
+    camerainfo3,
+    camerainfo4,
+    camerainfo5,
+    camerainfo6,
+    camerainfo7,
+    camerainfo8,
+    joindate,
+    usestartdate,
+    useenddate,
+    deleteyn,
+    regtime
+    )
+    VALUES (
+    #{memberid},
+    #{password},
+    #{grade},
+    #{name},
+    #{telephone},
+    #{handphone},
+    0,
+    #{ipaddress},
+    20001,
+    #{camerainfo1},
+    #{camerainfo2},
+    #{camerainfo3},
+    #{camerainfo4},
+    #{camerainfo5},
+    #{camerainfo6},
+    #{camerainfo7},
+    #{camerainfo8},
+    #{joindate},
+    #{usestartdate},
+    #{useenddate},
+    0,
+    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="memberid" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <update id="update" parameterType="dbmap">
+    UPDATE innersensorstate
+    <set>
+      <if test='memberid != null and memberid != ""'>memberid = #{memberid},</if>
+      <if test='password != null and password != ""'>password = #{password},</if>
+      <if test='grade != null and grade != ""'>grade = #{grade},</if>
+      <if test='name != null and name != ""'>name = #{name},</if>
+      <if test='telephone != null and telephone != ""'>telephone = #{telephone},</if>
+      <if test='handphone != null and handphone != ""'>handphone = #{handphone},</if>
+      <if test='cameracount != null and cameracount != ""'>cameracount = #{cameracount},</if>
+      <if test='ipaddress != null and ipaddress != ""'>ipaddress = #{ipaddress},</if>
+      <if test='listenport != null and listenport != ""'>listenport = #{listenport},</if>
+      <if test='camerainfo1 != null and camerainfo1 != ""'>camerainfo1 = #{camerainfo1},</if>
+      <if test='camerainfo2 != null and camerainfo2 != ""'>camerainfo2 = #{camerainfo2},</if>
+      <if test='camerainfo3 != null and camerainfo3 != ""'>camerainfo3 = #{camerainfo3},</if>
+      <if test='camerainfo4 != null and camerainfo4 != ""'>camerainfo4 = #{camerainfo4},</if>
+      <if test='camerainfo5 != null and camerainfo5 != ""'>camerainfo5 = #{camerainfo5},</if>
+      <if test='camerainfo6 != null and camerainfo6 != ""'>camerainfo6 = #{camerainfo6},</if>
+      <if test='camerainfo7 != null and camerainfo7 != ""'>camerainfo7 = #{camerainfo7},</if>
+      <if test='camerainfo8 != null and camerainfo8 != ""'>camerainfo8 = #{camerainfo8},</if>
+      <if test='joindate != null and joindate != ""'>joindate = #{joindate},</if>
+      <if test='usestartdate != null and usestartdate != ""'>usestartdate = #{usestartdate},</if>
+      <if test='useenddate != null and useenddate != ""'>useenddate = #{useenddate},</if>
+      <if test='deleteyn != null and deleteyn != ""'>deleteyn = #{deleteyn},</if>     
+      <if test='regtime!= null and regtime!= ""'>regtime = DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s'),</if>
+    </set>
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+  <update id="updateHitcount" parameterType="dbmap">
+    UPDATE innersensorstate
+    set hitcount = hitcount+1
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+
+  <delete id="delete" parameterType="dbmap">
+    UPDATE innersensorstate
+    SET deleteyn	 = 1
+    WHERE 1=1
+    AND memberid = #{memberid}
+
+  </delete>
+
+
+
+
+</mapper>

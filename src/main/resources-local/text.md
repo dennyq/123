@@ -1,0 +1,10 @@
+    <Resource name="jdbc/ifarms"
+      auth="Container" 
+      type="javax.sql.DataSource" 
+      driverClassName="core.log.jdbc.driver.MysqlDriver" 
+      url="jdbc:mysql://localhost:3306/hssecurity" 
+      username="root" 
+      password="lampard925184" 
+      maxActive="20" 
+      maxIdle="10" 
+      maxWait="10000" /> 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_web" default="compile.module.web">
+  <dirname property="module.web.basedir" file="${ant.file.module_web}"/>
+  
+  <property name="module.jdk.home.web" value="${jdk.home.1.6}"/>
+  <property name="module.jdk.bin.web" value="${jdk.bin.1.6}"/>
+  <property name="module.jdk.classpath.web" value="jdk.classpath.1.6"/>
+  
+  <property name="compiler.args.web" value="-encoding x-windows-949 -source 1.6 ${compiler.args}"/>
+  
+  <property name="web.output.dir" value="${module.web.basedir}/out/production/web"/>
+  <property name="web.testoutput.dir" value="${module.web.basedir}/out/test/web"/>
+  
+  <path id="web.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="web.module.production.classpath">
+    <path refid="${module.jdk.classpath.web}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.tomcat_lib.classpath"/>
+    <path refid="library.tp-common-0.0.1.classpath"/>
+  </path>
+  
+  <path id="web.runtime.production.module.classpath">
+    <pathelement location="${web.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.tomcat_lib.classpath"/>
+    <path refid="library.tp-common-0.0.1.classpath"/>
+  </path>
+  
+  <path id="web.module.classpath">
+    <path refid="${module.jdk.classpath.web}"/>
+    <pathelement location="${web.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.tomcat_lib.classpath"/>
+    <path refid="library.tp-common-0.0.1.classpath"/>
+  </path>
+  
+  <path id="web.runtime.module.classpath">
+    <pathelement location="${web.testoutput.dir}"/>
+    <pathelement location="${web.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.tomcat_lib.classpath"/>
+    <path refid="library.tp-common-0.0.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.web">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.web">
+    <patternset refid="excluded.from.module.web"/>
+  </patternset>
+  
+  <path id="web.module.sourcepath">
+    <dirset dir="${module.web.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.web" depends="compile.module.web.production,compile.module.web.tests" description="Compile module web"/>
+  
+  <target name="compile.module.web.production" depends="register.custom.compilers" description="Compile module web; production classes">
+    <mkdir dir="${web.output.dir}"/>
+    <javac2 destdir="${web.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.web}/javac">
+      <compilerarg line="${compiler.args.web}"/>
+      <bootclasspath refid="web.module.bootclasspath"/>
+      <classpath refid="web.module.production.classpath"/>
+      <src refid="web.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.web"/>
+    </javac2>
+    
+    <copy todir="${web.output.dir}">
+      <fileset dir="${module.web.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.web.tests" depends="register.custom.compilers,compile.module.web.production" description="compile module web; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.web" description="cleanup module">
+    <delete dir="${web.output.dir}"/>
+    <delete dir="${web.testoutput.dir}"/>
+  </target>
+</project>

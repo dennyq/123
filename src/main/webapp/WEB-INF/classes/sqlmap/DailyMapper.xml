@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.DailyMapper">
+
+  <sql id="listConditions">
+    WHERE 1=1  AND A.memberid = #{login_uid}
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='sch_joindate != null and sch_joindate != ""'>
+      AND A.joindate  LIKE CONCAT('%', #{sch_joindate},'%')
+    </if>
+    <if test='sch_name != null and sch_name != ""'>
+      AND A.name  LIKE CONCAT('%', #{sch_name},'%')
+    </if>
+    <if test='sch_daydate != null and sch_daydate != ""'>
+
+      AND  DATE_FORMAT(A.daydate,'%Y%m%d') = DATE_FORMAT(#{sch_daydate},'%Y%m%d')
+    </if>
+
+    <if test='sch_usestartdate != null and sch_usestartdate != ""'>
+
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
+    </if>
+    <if test='sch_useenddate != null and sch_useenddate != ""'>
+
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
+    </if>
+    <if test='sch_handphone != null and sch_handphone != ""'>
+      AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
+    </if>
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT
+          A.memberid,
+          A.daydate,
+          A.cultivationspecies,
+          A.cultivationcropsstate,
+          A.yield,
+          A.note,
+          A.regtime,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "date",
+    DATE_FORMAT( A.regtime,'%H:%i:%s') "time"
+    FROM farmingdaily A
+    <include refid="com.hs.web.mapper.DailyMapper.listConditions"/>
+    ORDER BY A.regtime DESC
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="listCnt" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM farmingdaily A
+    <include refid="com.hs.web.mapper.DailyMapper.listConditions"/>
+  </select>
+
+  <select id="idCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM farmingdaily A
+     WHERE A.memberid  = #{memberid}
+  </select>
+
+  <select id="idPwCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM farmingdaily A
+    WHERE A.memberid  = #{memberid} AND  A.password  = #{password}
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+    SELECT
+          A.memberid,
+          A.daydate,
+          A.cultivationspecies,
+          A.cultivationcropsstate,
+          A.yield,
+          A.note,
+          A.regtime,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "date",
+    DATE_FORMAT( A.regtime,'%H:%i:%s') "time"
+    FROM farmingdaily A
+    <include refid="com.hs.web.mapper.DailyMapper.listConditions"/>
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO farmingdaily (
+    memberid,
+    daydate,
+    cultivationspecies,
+    cultivationcropsstate,
+    yield,
+    note,
+    regtime
+    )
+    VALUES (
+    #{login_uid},
+    DATE_FORMAT(#{sch_daydate},'%Y%m%d'),
+    #{cultivationspecies},
+    #{cultivationcropsstate},
+    #{yield},
+    #{note},
+    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="memberid" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <update id="update" parameterType="dbmap">
+    UPDATE farmingdaily
+    <set>
+      <!--<if test='memberid != null and memberid != ""'>memberid  = #{memberid},</if>-->
+      <!--<if test='daydate != null and daydate != ""'>daydate  = DATE_FORMAT(daydate,'%Y%m%d'),</if>-->
+      <if test='cultivationspecies != null and cultivationspecies != ""'>cultivationspecies  = #{cultivationspecies},</if>
+      <if test='cultivationcropsstate != null and cultivationcropsstate != ""'>cultivationcropsstate  = #{cultivationcropsstate},</if>
+      <if test='yield != null and yield != ""'>yield  = #{yield},</if>
+      <if test='note != null and note != ""'>note  = #{note},</if>
+      <if test='regtime!= null and regtime!= ""'>regtime = DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s'),</if>
+
+    </set>
+    WHERE 1=1
+    AND memberid = #{login_uid}
+    AND  DATE_FORMAT(daydate,'%Y%m%d') = DATE_FORMAT(#{sch_daydate},'%Y%m%d')
+  </update>
+
+  <update id="updateHitcount" parameterType="dbmap">
+    UPDATE farmingdaily
+    set hitcount = hitcount+1
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+
+  <delete id="delete" parameterType="dbmap">
+    UPDATE farmingdaily
+    SET deleteyn	 = 1
+    WHERE 1=1
+    AND memberid = #{memberid}
+
+  </delete>
+
+
+
+
+
+
+
+</mapper>

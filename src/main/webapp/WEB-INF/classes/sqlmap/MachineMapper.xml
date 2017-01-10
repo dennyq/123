@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.MachineMapper">
+
+  <sql id="listConditions">
+
+    WHERE 1=1 AND A.grade = '2'
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='joindate != null and joindate != ""'>
+      AND A.joindate  <![CDATA[>=]]> #{joindate_low} and A.joindate <![CDATA[<=]]> #{joindate_high}
+    </if>
+    <if test='outdate != null and outdate != ""'>
+      AND A.outdate <![CDATA[>=]]> #{outdate_low} and A.outdate <![CDATA[<=]]> #{outdate_high}
+    </if>
+    <if test='usestartdate != null and usestartdate != ""'>
+      AND A.usestartdate <![CDATA[>=]]> #{usestartdate_low} and A.usestartdate <![CDATA[<=]]> #{usestartdate_high}
+    </if>
+    <if test='useenddate != null and useenddate != ""'>
+      AND A.useenddate <![CDATA[>=]]> #{useenddate_low} and A.useenddate <![CDATA[<=]]> #{useenddate_high}
+    </if>
+    <if test='sch_machine_name != null and sch_machine_name != ""'>
+      AND A.name LIKE CONCAT('%', #{sch_machine_name},'%')
+    </if>
+    <if test='sch_machine_contactpoint != null and sch_machine_contactpoint != ""'>
+      AND A.contactpoint LIKE CONCAT('%', #{sch_machine_contactpoint},'%')
+    </if>
+    <if test='sch_member_name != null and sch_member_name != ""'>
+      AND (SELECT C.name FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid = B.memberid LIMIT 0,1)  LIKE CONCAT('%', #{sch_member_name},'%')
+    </if>
+    <if test='sch_member_contactpoint != null and sch_member_contactpoint != ""'>
+      AND (SELECT C.contactpoint FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid =  B.memberid LIMIT 0,1)  LIKE CONCAT('%', #{sch_member_contactpoint},'%')
+    </if>
+
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    SELECT
+            A.memberid,
+            A.grade,
+            A.name AS "machine_name",
+            A.contactpoint AS "machine_contact",
+            A.note,
+            DATE_FORMAT(A.joindate,'%Y.%m.%d') "joindate",
+            DATE_FORMAT(A.outdate,'%Y.%m.%d') "outdate",
+            DATE_FORMAT(A.usestartdate,'%Y.%m.%d') "usestartdate",
+            DATE_FORMAT(A.useenddate,'%Y.%m.%d') "useenddate",
+            DATE_FORMAT(A.regtime,'%Y.%m.%d.%H.%i.%s') "regtime"
+          ,(SELECT C.name FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid = B.memberid LIMIT 0,1) AS "member_name"
+          ,(SELECT C.contactpoint FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid =  B.memberid LIMIT 0,1) AS "member_contact"
+    FROM machine A
+    <include refid="com.hs.web.mapper.MachineMapper.listConditions"/>
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+     SELECT
+            A.memberid,
+            A.grade,
+            A.name AS "machine_name",
+            A.contactpoint AS "machine_contact",
+            A.note,
+            DATE_FORMAT(A.joindate,'%Y.%m.%d') "joindate",
+            DATE_FORMAT(A.outdate,'%Y.%m.%d') "outdate",
+            DATE_FORMAT(A.usestartdate,'%Y.%m.%d') "usestartdate",
+            DATE_FORMAT(A.useenddate,'%Y.%m.%d') "useenddate",
+            DATE_FORMAT(A.regtime,'%Y.%m.%d.%H.%i.%s') "regtime"
+          ,(SELECT C.name FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid = B.memberid LIMIT 0,1) AS "member_name"
+          ,(SELECT C.contactpoint FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid =  B.memberid LIMIT 0,1) AS "member_contact"
+    FROM machine A
+      WHERE 1=1 AND A.memberid = #{memberid}
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO machine (
+                            memberid,
+                            password,
+                            grade,
+                            name,
+                            contactpoint,
+                            note,
+                            joindate,
+                            outdate,
+                            usestartdate,
+                            useenddate,
+                            regtime
+    VALUES
+                            #{memberid},
+                            #{password},
+                            #{grade},
+                            #{name},
+                            #{contactpoint},
+                            #{note},
+                            #{joindate},
+                            #{outdate},
+                            #{usestartdate},
+                            #{useenddate},
+    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    <selectKey resultType="int" keyProperty="memberid" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <update id="update" parameterType="dbmap">
+    UPDATE machine
+   <set>
+    <if test='memberid != null and memberid != ""'>memberid= #{memberid},</if>
+    <if test='password !=null and password !=""'>password= #{password},</if>
+    <if test='grade !=null and grade !=""'>grade= #{grade},</if>
+    <if test='name !=null and name !=""'>name= #{name},</if>
+    <if test='contactpoint != null and contactpoint != ""'>contactpoint= #{contactpoint},</if>
+    <if test='note !=null and note !=""'>note= #{note},</if>
+    <if test='joindate !=null and joindate !=""'>joindate= #{joindate},</if>
+    <if test='outdate !=null and outdate !=""'>outdate= #{outdate},</if>
+    <if test='usestartdate != null and usestartdate != ""'>usestartdate= #{usestartdate},</if>
+    <if test='useenddate !=null and useenddate !=""'>useenddate= #{useenddate},</if>
+    <if test='regtime !=null and regtime !=""'>regtime= #{regtime},</if>
+   </set>
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+  <select id="chkMemberExist" parameterType="dbmap" resultType="dbmap">
+    SELECT B.memberid FROM mappinginfo B where B.memberid = #{memberid}
+  </select>
+
+  <update id="updateMember" parameterType="dbmap">
+    UPDATE member
+    <set>
+      <if test='member_name !=null and member_name !=""'>name= #{member_name},</if>
+      <if test='member_contact !=null and member_contact !=""'>contactpoint= #{member_contact},</if>
+    </set>
+    WHERE     memberid = #{memberid}
+  </update>
+
+  <delete id="delete" parameterType="dbmap">
+    DELETE FROM machine
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </delete>
+
+  <update id="initailizePwd" parameterType="dbmap">
+    UPDATE machine
+    SET password= '1234'
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+
+
+
+
+
+
+</mapper>

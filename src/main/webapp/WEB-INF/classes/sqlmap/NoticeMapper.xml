@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.NoticeMapper">
+
+  <sql id="listConditions">
+
+    WHERE 1=1
+    <if test='sch_text != null and sch_text != ""'>
+      AND (A.title  LIKE CONCAT('%', #{sch_text},'%') OR A.content  LIKE CONCAT('%', #{sch_text},'%'))
+    </if>
+
+
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT
+          A.noticenumber,
+          A.title,
+          A.hitcount,
+          A.content,
+          DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+    FROM notification A
+
+    <include refid="com.hs.web.mapper.NoticeMapper.listConditions"/>
+    ORDER BY A.regtime DESC
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="listCnt" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM notification A
+    <include refid="com.hs.web.mapper.NoticeMapper.listConditions"/>
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+     SELECT
+              A.noticenumber,
+              A.title,
+              A.hitcount,
+              A.content,
+              DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+         FROM notification A
+        WHERE 1=1 AND A.noticenumber = #{noticenumber}
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO notification ( title, hitcount, content, regtime)
+    VALUES ( #{title}, 0, #{content}, DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s'))
+    <selectKey resultType="int" keyProperty="noticenumber" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <update id="update" parameterType="dbmap">
+    UPDATE notification
+   <set>
+    <if test='noticenumber!= null and noticenumber!= ""'>noticenumber = #{noticenumber},</if>
+    <if test='title!=null and title!=""'>title = #{title},</if>
+    <if test='hitcount!=null and hitcount!=""'>hitcount = #{hitcount},</if>
+    <if test='content!=null and content!=""'>content = #{content},</if>
+    <if test='regtime!= null and regtime!= ""'>regtime = DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s'),</if>
+   </set>
+    WHERE 1=1
+    AND noticenumber = #{noticenumber}
+  </update>
+
+  <update id="updateHitcount" parameterType="dbmap">
+    UPDATE notification
+   set hitcount = hitcount+1
+    WHERE 1=1
+    AND noticenumber = #{noticenumber}
+  </update>
+
+
+  <delete id="delete" parameterType="dbmap">
+    DELETE FROM notification
+    WHERE 1=1
+    AND noticenumber = #{noticenumber}
+  </delete>
+
+
+
+
+
+
+
+</mapper>

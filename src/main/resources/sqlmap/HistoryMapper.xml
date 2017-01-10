@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hs.web.mapper.HistoryMapper">
+  <sql id="listConditions">
+    WHERE 1=1
+
+    <if test='login_uid != null and login_uid != "admin" and login_memberid != null and login_memberid != ""'>
+      AND C.memberid = #{login_memberid}
+    </if>
+
+    <if test='login_uid != null and login_uid != "admin" and (login_memberid == null or login_memberid == "")'>
+      AND A.memberid = #{login_uid}
+    </if>
+
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='scantime != null and scantime != ""'>
+      AND DATE_FORMAT(A.scantime,'%Y%m%d') <![CDATA[>=]]> #{scantime_low} and DATE_FORMAT(A.scantime,'%Y%m%d') <![CDATA[<=]]> #{scantime_high}
+    </if>
+    <if test='sch_machine_name != null and sch_machine_name != ""'>
+      AND B.name LIKE CONCAT('%', #{sch_machine_name},'%')
+    </if>
+    <if test='sch_machine_contactpoint != null and sch_machine_contactpoint != ""'>
+      AND B.contactpoint LIKE CONCAT('%', #{sch_machine_contactpoint},'%')
+    </if>
+    <if test='sch_member_name != null and sch_member_name != ""'>
+      AND D.name LIKE CONCAT('%', #{sch_member_name},'%')
+    </if>
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND D.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='sch_scanning_name != null and sch_scanning_name != ""'>
+      AND A.name LIKE CONCAT('%', #{sch_scanning_name},'%')
+    </if>
+    <if test='sch_juminnumber != null and sch_juminnumber != ""'>
+      AND A.juminnumber LIKE CONCAT('%', #{sch_juminnumber},'%')
+    </if>
+    <if test='sch_member_contactpoint != null and sch_member_contactpoint != ""'>
+      AND (SELECT C.contactpoint FROM mappinginfo B INNER JOIN member C ON B.memberid = C.memberid WHERE A.memberid =  B.memberid)  LIKE CONCAT('%', #{sch_member_contactpoint},'%')
+    </if>
+    ORDER BY  A.regtime DESC
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    SELECT
+            A.memberid,
+            DATE_FORMAT(A.scantime,'%Y.%m.%d %H:%i:%s') "scantime",
+            A.scantime AS "scantimeori",
+    CASE A.cardkind WHEN  1 THEN '미인식'
+    WHEN 2 THEN '주민등록증'
+    WHEN  3 THEN '구형운전면허증'
+    ELSE '신형운전면허증' END 'cardkindnm',
+    A.cardkind,
+            A.name,
+            A.juminnumber,
+            DATE_FORMAT(A.issuedate,'%Y.%m.%d') "issuedate",
+            A.licensenumber,
+            '********************' AS "serialnumber",
+            A.realcardflag,
+    CASE A.realcardflag WHEN  1 THEN '진짜'
+    ELSE '가짜' END 'realcardflagnm',
+            A.realnameflag,
+    CASE A.realnameflag WHEN  1 THEN '일치'
+    WHEN 2 THEN '불일치'
+    WHEN  3 THEN '정보없음'
+    ELSE '시스템장애' END 'realnameflagnm',
+            A.adultflag,
+    CASE A.adultflag WHEN  1 THEN '성인'
+    ELSE '미성년' END 'adultflagnm',
+            A.imagefilepath,
+            A.generalimagefile,
+            A.irimagefile,
+            A.signimagefile,
+            A.regtime,
+            D.memberid,
+            D.name as "member_name",
+            D.contactpoint as "member_contactpoint",
+            B.memberid,
+            B.name as "machine_name"
+    FROM scanning_hist A
+    LEFT outer  join machine B on A.memberid = B.memberid
+    LEFT outer join mappinginfo C on B.memberid = C.memberid
+    LEFT outer join member D on C.memberid = D.memberid
+    <include refid="com.hs.web.mapper.HistoryMapper.listConditions"/>
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+    SELECT
+    A.memberid,
+    DATE_FORMAT(A.scantime,'%Y.%m.%d %H:%i:%s') "scantime",
+    A.cardkind,
+    A.name,
+    A.juminnumber,
+    DATE_FORMAT(A.issuedate,'%Y.%m.%d') "issuedate",
+    A.licensenumber,
+    '********************' AS "serialnumber",
+    A.realcardflag,
+    A.realnameflag,
+    A.adultflag,
+    A.imagefilepath,
+    A.generalimagefile,
+    A.irimagefile,
+    A.signimagefile,
+    A.regtime,
+    D.memberid,
+    D.name as "member_name",
+    B.memberid,
+    B.name as "machine_name"
+    from scanning_hist A
+    INNER join machine B on A.memberid = B.memberid
+    INNER join mappinginfo C on B.memberid = C.memberid
+    INNER join member D on C.memberid = D.memberid
+    WHERE 1=1
+    AND A.memberid = #{memberid}
+    AND A.scantime = #{scantime}
+    AND D.memberid = #{memberid}
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO scanning_hist (
+    memberid,
+    scantime,
+    cardkind,
+    name,
+    juminnumber,
+    issuedate,
+    licensenumber,
+    serialnumber,
+    realcardflag,
+    realnameflag,
+    adultflag,
+    imagefilepath,
+    generalimagefile,
+    irimagefile,
+    signimagefile,
+    regtime
+    )
+    VALUES
+    (
+    #{memberid},
+    DATE_FORMAT(#{scantime},'%Y%m%d%H%i%s'),
+    #{cardkind},
+    #{name},
+    #{juminnumber},
+     #{issuedate},
+    #{licensenumber},
+    #{serialnumber},
+    #{realcardflag},
+    #{realnameflag},
+    #{adultflag},
+    #{imagefilepath},
+    #{generalimagefile},
+    #{irimagefile},
+    #{signimagefile},
+ DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+   )
+  </insert>
+
+  <update id="update" parameterType="dbmap">
+    UPDATE machine
+    <set>
+      <if test='memberid != null and memberid != ""'>memberid= #{memberid},</if>
+      <if test='password !=null and password !=""'>password= #{password},</if>
+      <if test='grade !=null and grade !=""'>grade= #{grade},</if>
+      <if test='name !=null and name !=""'>name= #{name},</if>
+      <if test='contactpoint != null and contactpoint != ""'>contactpoint= #{contactpoint},</if>
+      <if test='note !=null and note !=""'>note= #{note},</if>
+      <if test='joindate !=null and joindate !=""'>joindate= #{joindate},</if>
+      <if test='outdate !=null and outdate !=""'>outdate= #{outdate},</if>
+      <if test='usestartdate != null and usestartdate != ""'>usestartdate= #{usestartdate},</if>
+      <if test='useenddate !=null and useenddate !=""'>useenddate= #{useenddate},</if>
+      <if test='regtime !=null and regtime !=""'>regtime= #{regtime},</if>
+    </set>
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+  <delete id="delete" parameterType="dbmap">
+    DELETE FROM scanning_hist
+    WHERE 1=1
+    AND memberid = #{memberid}
+    AND DATE_FORMAT(scantime,'%Y%m%d%H%i%s') = DATE_FORMAT(#{scantime},'%Y%m%d%H%i%s')
+    <if test='generalimagefile !=null and generalimagefile !=""'>
+      AND generalimagefile = #{generalimagefile}
+    </if>
+    <if test='irimagefile !=null and irimagefile !=""'>
+      AND irimagefile = #{irimagefile}
+    </if>
+    <if test='signimagefile !=null and signimagefile !=""'>
+      AND signimagefile = #{signimagefile}
+    </if>
+
+  </delete>
+
+  <update id="initailizePwd" parameterType="dbmap">
+    UPDATE machine
+    SET password= '1234'
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+
+
+
+</mapper>

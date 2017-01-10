@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="">
+  <excludes>
+    <pattern>*.json</pattern>
+    <pattern>*.json/*</pattern>
+    <pattern>*Popup*</pattern>
+    <pattern>/apps</pattern>
+    <pattern>/noauth</pattern>
+    <pattern>/admin/adminNoAuth</pattern>
+    <pattern>/admin/loginPage</pattern>
+    <pattern>/download/*</pattern>
+    <pattern>/download</pattern>
+    <pattern>/login/*</pattern>
+    <!--<pattern>/m_login/*</pattern>-->
+    <!--<pattern>/m_login/*</pattern>-->
+    <!-- nice name chk -->
+    <pattern>/common/nameNiceChk*</pattern>
+
+  </excludes>
+
+
+  <!--프론트-->
+  <decorator name="header" page="/WEB-INF/views/decorators/header.jsp"/>
+  <decorator name="left" page="/WEB-INF/views/decorators/left.jsp"/>
+  <decorator name="footer" page="/WEB-INF/views/decorators/footer.jsp"/>
+  <decorator name="lib" page="/WEB-INF/views/decorators/lib.jsp"/>
+  <decorator name="headLib" page="/WEB-INF/views/decorators/headLib.jsp"/>
+  <decorator name="layers" page="/WEB-INF/views/decorators/layers.jsp"/>
+
+  <decorator name="baseMachine" page="/WEB-INF/views/decorators/baseMachine.jsp">
+    <pattern>*</pattern>
+  </decorator>
+
+  <decorator name="base" page="/WEB-INF/views/decorators/base.jsp">
+    <pattern>/main/*</pattern>
+    <pattern>/*/*</pattern>
+  </decorator>
+
+  <decorator name="login" page="/WEB-INF/views/decorators/login.jsp">
+    <pattern>/</pattern>
+  </decorator>
+
+  <decorator name="m_login" page="/WEB-INF/views/decorators/m_login.jsp">
+    <pattern>/m_login/</pattern>
+    <pattern>/m_login</pattern>
+
+  </decorator>
+
+  <decorator name="m_base" page="/WEB-INF/views/decorators/m_base.jsp">
+    <pattern>/m_list/</pattern>
+    <pattern>/m_list</pattern>
+
+  </decorator>
+
+
+  <!--<decorator name="baseMachine" page="/WEB-INF/views/decorators/baseMachine.jsp">-->
+    <!--<pattern>/*/*</pattern>-->
+  <!--</decorator>-->
+
+  <!--팝업-->
+  <decorator name="popup" page="/WEB-INF/views/decorators/popup.jsp">
+    <pattern>*Pop*</pattern>
+  </decorator>
+
+</decorators>
