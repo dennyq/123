@@ -24,30 +24,27 @@
     )
   </insert>
 
+
   <select id="login" parameterType="dbmap" resultType="dbmap">
 
     SELECT
       A.memberid,
       A.password,
       A.grade,
+      A.gubun,
+      A.openflag,
       A.name,
       A.telephone,
       A.handphone,
-      A.cameracount,
-      A.ipaddress,
-      A.listenport,
-      A.camerainfo1,
-      A.camerainfo2,
-      A.camerainfo3,
-      A.camerainfo4,
-      A.camerainfo5,
-      A.camerainfo6,
-      A.camerainfo7,
-      A.camerainfo8,
-      A.joindate,
+      A.address,
+      A.address_etc,
+      A.introduce,
+      A.latitude,
+      A.longitude,
       A.usestartdate,
       A.useenddate,
       A.deleteyn,
+      A.lastconnecttime,
       A.regtime
 
     FROM member A

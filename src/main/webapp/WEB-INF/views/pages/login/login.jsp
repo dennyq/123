@@ -60,9 +60,9 @@
       req = $(this).closest('form').serialize();
       $als.execute('<c:url value="/login"/>', req, function (data) {
         if (data.result_message == 'success') {
-          location.href = '/notice/list';
+          location.href = '/member/list';
         }else  if (data.result_message == 'success_admin') {
-          location.href = '/notice/list';
+          location.href = '/member/list';
         }else{
           alert('아이디나 비밀번호가 맞지 않습니다.');
         }

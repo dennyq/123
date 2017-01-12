@@ -15,31 +15,32 @@
 
   <decorator:head/>
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="skin-white layout-top-nav" style="height: auto;">
+<div class="wrapper" style="height: auto;">
 
-<div class="wrapper">
-  <page:applyDecorator name="header"/>
+  <div class="wrapper">
+    <page:applyDecorator name="header"/>
 
-  <!-- Left side column. contains the logo and sidebar -->
-  <page:applyDecorator name="left"/>
+    <!-- Left side column. contains the logo and sidebar -->
+    <%--<page:applyDecorator name="left"/>--%>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <div class="overlay dark">
-      <i class="fa fa-refresh fa-spin"></i>
-    </div>
-    <page:applyDecorator name="lib"/>
-    <decorator:body/>
-    <!-- Content Header (Page header) -->
+    <!-- Content Wrapper. Contains page content -->
+    <%--<div class="content-wrapper">--%>
+      <div class="container">
+        <page:applyDecorator name="lib"/>
+        <decorator:body/>
+        <!-- Content Header (Page header) -->
+
+      </div>
+    <%--</div>--%>
+    <!-- /.content-wrapper -->
+
+
+
 
   </div>
-  <!-- /.content-wrapper -->
+  <!-- ./wrapper -->
 
-
-
-
-</div>
-<!-- ./wrapper -->
 
 <script>
 //  var monitorSetTimeOut =null;

@@ -4,20 +4,21 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>사용자 정보 관리</title>
+  <title>회원 관리</title>
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
 <section class="content-header">
   <h1>
-    사용자 정보 관리
+    회원 <c:if test="${not empty data}">상세</c:if>
+    <c:if test="${empty data}">등록</c:if>
   </h1>
   <div class="breadcrumb-line"></div>
 
   <ol class="breadcrumb">
     <li><a href="<c:url value="/"/>">HOME</a></li>
-    <li ><a href="<c:url value="/member/list"/>">사용자 정보</a></li>
-    <li ><a href="<c:url value="/member/detail/${data.memberid}"/>">사용자 정보
+    <li ><a href="<c:url value="/member/list"/>">회원</a></li>
+    <li ><a href="<c:url value="/member/detail/${data.memberid}"/>">회원
 <c:if test="${not empty data}">상세</c:if>
 <c:if test="${empty data}">등록</c:if>
       </a></li>
@@ -33,7 +34,7 @@
         <div class="col-md-12">
           <div class="">
             <div class="box-header-sm">
-              <h3 class="box-title"<img src="/imgs/h3_bullet.png"/>사용자 정보</h3>
+              <h3 class="box-title"<img src="/imgs/h3_bullet.png"/>회원</h3>
             </div>
             <div id="progressIndicator" style="display: none"></div>
 
@@ -42,19 +43,21 @@
             <div class="box-body bg-gray">
 <c:if test="${empty data}">
   <input type="hidden"  name="isNew" value="Y"/>
-              <div class="col-md-12">
+              <%--<div class="col-md-12">--%>
+
+                <%--</div>--%>
+
+              <div class="col-md-6">
+
                 <div class="form-group">
-                  <label for="memberid" class="col-sm-2 ">아이디</label>
+                  <label for="memberid" class="col-sm-4 ">아이디</label>
 
                   <div class="col-sm-3">
                     <input name="memberid"  id="memberid" placeholder="아이디" class="form-control">
                   </div>
-                  <a id="id_check" class="btn"><img src="/imgs/bt_id-overlap.png" alt="중복검사"></a>
+                  <a id="id_check" class="btn">사용유무검사</a>
                   <input type="hidden" id="idCheck" value="N"/>
                 </div>
-                </div>
-
-              <div class="col-md-6">
 
                 <div class="form-group">
                   <label for="password" class="col-sm-4 ">비밀번호</label>
@@ -65,48 +68,27 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="name" class="col-sm-4 ">이름</label>
+                  <label for="name" class="col-sm-4 ">회원명</label>
 
                   <div class="col-sm-6">
-                    <input name="name"  id="name" placeholder="이름" class="form-control">
+                    <input name="name"  id="name" placeholder="회원명" class="form-control">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="telephone" class="col-sm-4 ">자택전화</label>
+                  <label for="address" class="col-sm-4 ">주소</label>
 
                   <div class="col-sm-6">
-                    <input name="telephone"  id="telephone" placeholder="자택전화" class="form-control">
+                    <input name="address"  id="address" placeholder="주소" class="form-control">
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="handphone" class="col-sm-4 ">휴대폰</label>
-
-                  <div class="col-sm-6">
-                    <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control">
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6 right">
-                <div class="form-group">
-                  <label for="cfrm_password" class="col-sm-4 ">비밀번호확인</label>
-
-                  <div class="col-sm-6">
-                    <input name="cfrm_password" id="cfrm_password" placeholder="비밀번호확인" class="form-control" type="password" >
-                  </div>
-
                 </div>
                 <div class="form-group">
-                  <label for="joindate" class="col-sm-4 ">가입일자</label>
+                  <label for="telephone" class="col-sm-4 ">전화번호</label>
 
                   <div class="col-sm-6">
-                    <input name="joindate"  id="joindate" placeholder="가입일자" class="form-control datepicker">
+                    <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control">
                   </div>
-
                 </div>
-
                 <div class="form-group">
                   <label for="usestartdate" class="col-sm-4 ">사용시작일자</label>
 
@@ -116,11 +98,56 @@
 
                 </div>
 
+
+              </div>
+
+              <div class="col-md-6 right">
+                <div class="form-group">
+                  <label for="name" class="col-sm-4 ">구분선택</label>
+
+                  <div class="col-sm-6">
+                    <input type="radio" name="name"  id="type" placeholder="이름" class="">약국&nbsp;
+                    <input type="radio" name="name"  id="type" placeholder="이름" class="">병원
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="cfrm_password" class="col-sm-4 ">비밀번호확인</label>
+
+                  <div class="col-sm-6">
+                    <input name="cfrm_password" id="cfrm_password" placeholder="비밀번호확인" class="form-control" type="password" >
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="address_etc" class="col-sm-4 ">기타주소입력</label>
+
+                  <div class="col-sm-6">
+                    <input name="address_etc"  id="address_etc" placeholder="기타주소입력" class="form-control datepicker">
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="handphone" class="col-sm-4 ">휴대폰</label>
+
+                  <div class="col-sm-6">
+                    <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control">
+                  </div>
+                </div>
+
+
                 <div class="form-group">
                   <label for="useenddate" class="col-sm-4 ">사용종료일자</label>
 
                   <div class="col-sm-6">
                     <input name="useenddate"  id="useenddate" placeholder="사용종료일자" class="form-control datepicker">
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="introduce" class="col-sm-4 ">회원기타소개</label>
+
+                  <div class="col-sm-6">
+                    <input name="introduce"  id="introduce" placeholder="회원기타소개" class="form-control datepicker" value="${data.introduce}">
                   </div>
 
                 </div>
@@ -157,22 +184,30 @@
                       <input name="name"  id="name" placeholder="이름" class="form-control" value="${data.name}">
                     </div>
                   </div>
-
                   <div class="form-group">
-                    <label for="telephone" class="col-sm-4 ">자택전화</label>
+                    <label for="name" class="col-sm-4 ">주소</label>
 
                     <div class="col-sm-6">
-                      <input name="telephone"  id="telephone" placeholder="자택전화" class="form-control" value="${data.telephone}">
+                      <input name="name"  id="name" placeholder="주소" class="form-control" value="${data.name}">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="handphone" class="col-sm-4 ">휴대폰</label>
+                    <label for="telephone" class="col-sm-4 ">전화번호</label>
 
                     <div class="col-sm-6">
-                      <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control" value="${data.handphone}">
+                      <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control" value="${data.telephone}">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="usestartdate" class="col-sm-4 ">사용시작일자</label>
+
+                    <div class="col-sm-6">
+                      <input name="usestartdate"  id="usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${data.usestartdate}">
+                    </div>
+
+                  </div>
+
                 </div>
 
                 <div class="col-md-6 right">
@@ -184,13 +219,22 @@
                     </div>
 
                   </div>
+
                   <div class="form-group">
-                    <label for="joindate" class="col-sm-4 ">가입일자</label>
+                    <label for="joindate" class="col-sm-4 ">기타 주소입력</label>
 
                     <div class="col-sm-6">
-                      <input name="joindate"  id="joindate" placeholder="가입일자" class="form-control datepicker" value="${data.joindate}">
+                      <input name="joindate"  id="joindate" placeholder="기타 주소입력" class="form-control datepicker" value="${data.joindate}">
                     </div>
 
+                  </div>
+
+                  <div class="form-group">
+                    <label for="handphone" class="col-sm-4 ">휴대폰</label>
+
+                    <div class="col-sm-6">
+                      <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control" value="${data.handphone}">
+                    </div>
                   </div>
 
                   <div class="form-group">
@@ -210,10 +254,22 @@
                     </div>
 
                   </div>
+
+                  <div class="form-group">
+                    <label for="useenddate" class="col-sm-4 ">회원기타소개</label>
+
+                    <div class="col-sm-6">
+                      <input name="useenddate"  id="useenddate" placeholder="회원기타소개" class="form-control datepicker" value="${data.useenddate}">
+                    </div>
+
+                  </div>
                 </div>
 
+
               </c:if>
+
             </div>
+
 
 
 
@@ -225,124 +281,6 @@
 
         </div><%--md12--%>
 
-        <div class="col-md-12">
-          <div class="">
-
-            <div id="progressIndicator" style="display: none"></div>
-
-            <!-- form start -->
-
-            <div class="box-body bg-gray"  style="border-top: 1px solid #ececec">
-
-              <input type="hidden"  name="isNew" value="N"/>
-
-
-              <div class="col-md-6">
-
-                <div class="form-group">
-                  <label for="cameracount" class="col-sm-4 ">카메라갯수</label>
-
-                  <div class="col-sm-6">
-                    <input name="cameracount"  id="cameracount"  placeholder="카메라갯수" class="form-control" value="${data.cameracount}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="camerainfo1" class="col-sm-4 ">1번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo1"  id="camerainfo1" placeholder="1번 카메라정보" class="form-control" value="${data.camerainfo1}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-
-                  <label for="camerainfo2" class="col-sm-4 ">2번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo2"  id="camerainfo2" placeholder="2번 카메라정보" class="form-control " value="${data.camerainfo2}">
-                  </div>
-
-                </div>
-                <div class="form-group">
-                  <label for="camerainfo4" class="col-sm-4 ">4번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo4"  id="camerainfo4" placeholder="4번 카메라정보" class="form-control " value="${data.camerainfo4}">
-                  </div>
-
-                </div>
-                <div class="form-group">
-                  <label for="camerainfo6" class="col-sm-4 ">6번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo6"  id="camerainfo6" placeholder="6번 카메라정보" class="form-control " value="${data.camerainfo6}">
-                  </div>
-
-                </div>
-                <div class="form-group">
-                  <label for="listenport" class="col-sm-4 ">8번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo8"  id="camerainfo8" placeholder="8번 카메라정보" class="form-control" value="${data.camerainfo8}">
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="col-md-6 right">
-                <div class="form-group">
-                  <label for="ipaddress" class="col-sm-4 ">공유기 IP주소</label>
-
-                  <div class="col-sm-6">
-                    <input name="ipaddress"  id="ipaddress" placeholder="공유기 IP주소" class="form-control" value="${data.ipaddress}">
-                  </div>
-
-                </div>
-                <div class="form-group">
-                  <label for="listenport" class="col-sm-4 ">리슨포트</label>
-
-                  <div class="col-sm-6">
-                    <input name="listenport" id="listenport" placeholder="리슨포트" class="form-control"
-                           value="${data.listenport}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="listenport" class="col-sm-4 ">3번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo3"  id="camerainfo3" placeholder="3번 카메라정보" class="form-control" value="${data.camerainfo3}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="listenport" class="col-sm-4 ">5번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo5"  id="camerainfo5" placeholder="5번 카메라정보" class="form-control" value="${data.camerainfo5}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="listenport" class="col-sm-4 ">7번 카메라정보</label>
-
-                  <div class="col-sm-6">
-                    <input name="camerainfo7"  id="camerainfo7" placeholder="7번 카메라정보" class="form-control" value="${data.camerainfo7}">
-                  </div>
-                </div>
-
-              </div>
-
-              <div style="float: right;color:#e08e0b">
-                카메라정보 > 카메라포트:접속아이디:패스워드 ex)4520:admin:4321
-              </div>
-            </div>
-
-
-
-
-          </div><!-- /.box -->
-        </div>
       </div><!-- /.row -->
     </section>
 
@@ -378,7 +316,7 @@
       $(this).removeClass('active')
 //      console.log(this);
       var menu = $(this).attr('menu');
-      if(menu=='사용자관리'){
+      if(menu=='회원관리'){
         $(this).addClass('active')
       }
     })

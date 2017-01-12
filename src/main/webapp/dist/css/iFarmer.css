@@ -5,7 +5,7 @@ html *{
 }
 body{
   /*font-family: 'Noto Sans Korean', sans-serif !important;;*/
-  background-color: #efefef;
+  background-color: #fff;
 }
 
 .main-sidebar, .left-side {
@@ -68,7 +68,7 @@ body{
 .content-wrapper{
 
   background:#fff;
-  width: 784px;
+  /*width: 784px;*/
 }
 section.content-header > h1{
   margin-top: 30px;
@@ -987,3 +987,24 @@ input.form-control {
   margin-right: 10px;
   /*margin-bottom: 3px;*/
 }
+.bg-white{
+  background-color: #fff;
+}
+.navbar-top{
+  background-color: #fff;
+  height: 35px;
+  margin-bottom: 15px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+.navbar-top .navbar-nav>li>a {
+  font-size: 14px;
+  color: #acacac;
+}
+.blue-thick-line{
+  background-color: #0e84a5;
+  height: 50px;
+}.content-header {
+   position: relative;
+   padding: 33px 15px 0 15px;
+ }

@@ -28,28 +28,25 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-          A.memberid,
-          A.password,
-          A.grade,
-          A.name,
-          A.telephone,
-          A.handphone,
-          A.cameracount,
-          A.ipaddress,
-          A.listenport,
-          A.camerainfo1,
-          A.camerainfo2,
-          A.camerainfo3,
-          A.camerainfo4,
-          A.camerainfo5,
-          A.camerainfo6,
-          A.camerainfo7,
-          A.camerainfo8,
-    DATE_FORMAT( A.joindate,'%Y.%m.%d') "joindate",
-    DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-    DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-          A.deleteyn,
-          DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+      A.memberid,
+      A.password,
+      A.grade,
+      A.gubun,
+      A.openflag,
+      A.name,
+      A.telephone,
+      A.handphone,
+      A.address,
+      A.address_etc,
+      A.introduce,
+      A.latitude,
+      A.longitude,
+      A.usestartdate,
+      A.useenddate,
+      A.deleteyn,
+      A.lastconnecttime,
+      A.regtime
+
     FROM member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
     ORDER BY A.regtime DESC
@@ -83,28 +80,24 @@
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-          A.memberid,
-          A.password,
-          A.grade,
-          A.name,
-          A.telephone,
-          A.handphone,
-          A.cameracount,
-          A.ipaddress,
-          A.listenport,
-          A.camerainfo1,
-          A.camerainfo2,
-          A.camerainfo3,
-          A.camerainfo4,
-          A.camerainfo5,
-          A.camerainfo6,
-          A.camerainfo7,
-          A.camerainfo8,
-        DATE_FORMAT( A.joindate,'%Y.%m.%d') "joindate",
-    DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-    DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-          A.deleteyn,
-    DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+        A.memberid,
+        A.password,
+        A.grade,
+        A.gubun,
+        A.openflag,
+        A.name,
+        A.telephone,
+        A.handphone,
+        A.address,
+        A.address_etc,
+        A.introduce,
+        A.latitude,
+        A.longitude,
+        A.usestartdate,
+        A.useenddate,
+        A.deleteyn,
+        A.lastconnecttime,
+        A.regtime
     FROM member A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>

@@ -41,7 +41,8 @@ public class MainController extends ControllerPageBase  {
 
         if (req.get("login_uid") != null) {
 
-            return "redirect:/notice/list";
+//            return "redirect:/notice/list";
+            return "redirect:/member/list";
         } else {
 
             return "pages/login/login";
