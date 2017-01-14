@@ -52,12 +52,18 @@
 
 <c:if test="${empty data}">
   <center>
-    <a id="saveBtn" class="btn btn-green btn-flat md-height">저장</a>
-    <a href="<c:url value="/member/list"/>" class="btn btn-green btn-flat md-height">목록</a>
+    <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">가입하기</a>
+    <a href="<c:url value="/member/list"/>" class="btn btn-blue-green btn-flat md-height">목록</a>
   </center>
 
 </c:if>
-
+<c:if test="${not empty data}">
+  <center>
+    <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+    <a id="delBtn" class="btn btn-green btn-flat md-height showEditor">삭제</a>
+    <a id="initailizePwdBtn" class="btn "><img src="/imgs/bt_pw-reset.png" alt="비번초기화"></a>
+  </center>
+</c:if>
 </form>
 
 <script>
@@ -65,13 +71,12 @@
   $(function(){
 
     $('ul.sidebar-menu li.treeview').each(function(index){
-      $(this).removeClass('active')
-//      console.log(this);
+      $(this).removeClass('active');
       var menu = $(this).attr('menu');
       if(menu=='회원관리'){
         $(this).addClass('active')
       }
-    })
+    });
 
     $('.datepicker').datepicker({
       format: "yyyy.mm.dd",
@@ -93,32 +98,38 @@
 
     });
 
+    //저장
     $('#saveBtn').click(function(){
+      console.log($('#detailFrm'));
+
       if($('#memberid').val() ==''){
         alert('아이디를 입력해주세요');
         $('#memberid').focus();
         return false;
       }
-      if($('#password').val() ==''){
-        alert('비밀번호를 입력해주세요');
-        $('#password').focus();
-        return false;
-      }
-      if($('#cfrm_password').val() ==''){
-        alert('비밀번호확인을 입력해주세요');
-        $('#cfrm_password').focus();
-        return false;
-      }
+      <c:if test="${empty data}">
+        if($('#password').val() ==''){
+          alert('비밀번호를 입력해주세요');
+          $('#password').focus();
+          return false;
+        }
+        if($('#cfrm_password').val() ==''){
+          alert('비밀번호확인을 입력해주세요');
+          $('#cfrm_password').focus();
+          return false;
+        }
+      </c:if>
       if($('#name').val() ==''){
         alert('이름을 입력해주세요');
         $('#name').focus();
         return false;
       }
-      if($('#joindate').val() ==''){
-        alert('가입일자를 입력해주세요');
-        $('#joindate').focus();
+      if($('#gubun').val() ==''){
+        alert('약국/병원 구분을 입력해주세요');
+        $('#gubun').focus();
         return false;
       }
+
       if($('#usestartdate').val() ==''){
         alert('사용시작일자를 입력해주세요');
         $('#usestartdate').focus();
@@ -130,20 +141,22 @@
         return false;
       }
 
+      <c:if test="${empty data}">
+        if($('#password').val() != $('#cfrm_password').val()){
+          alert('비밀번호가 일치하지 않습니다.');
+          $('#password').focus();
+          return false;
+        }
 
-      if($('#password').val() != $('#cfrm_password').val()){
-        alert('비밀번호가 일치하지 않습니다.');
-        $('#password').focus();
-        return false;
-      }
+              if($('#idCheck').val() != 'Y'){
+          alert('아이디 중복검사를 해주세요.');
+
+          return false;
+        }
+      </c:if>
 <c:if test="${empty data}">
-            if($('#idCheck').val() != 'Y'){
-        alert('아이디 중복검사를 해주세요.');
 
-        return false;
-      }
-  </c:if>
-
+      </c:if>
       $('#detailFrm').submit();
 
 

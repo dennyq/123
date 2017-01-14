@@ -46,7 +46,6 @@
       A.deleteyn,
       A.lastconnecttime,
       A.regtime
-
     FROM member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
     ORDER BY A.regtime DESC
@@ -63,7 +62,6 @@
     SELECT COUNT(*) AS cnt
     FROM member A
       WHERE 1=1 AND deleteyn = 0 AND A.memberid  = #{memberid}
-
   </select>
 
   <select id="idPwCheck" parameterType="dbmap" resultType="int">

@@ -26,8 +26,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">회원등록</a></li>
-              <li><a href="#">회원조회</a></li>
+              <li><a href="/member/detail">회원등록</a></li>
+              <li><a href="/member/list">회원조회</a></li>
             </ul>
           </li>
           <li class="dropdown">

@@ -195,6 +195,11 @@ height: 10px;
   color: #fff;
   padding: 7px 10px 10px 9px!important;
 }
+.btn-blue-green{
+  background-color: #0e83a4 !important;
+  color: #fff!important;
+  padding: 7px 10px 10px 9px!important;
+}
 .md-height{
 
   height: 34px!important;
@@ -1007,4 +1012,8 @@ input.form-control {
 }.content-header {
    position: relative;
    padding: 33px 15px 0 15px;
+ }
+ .btn-box{
+margin-top: 20px;
+margin-bottom: 20px;
  }
