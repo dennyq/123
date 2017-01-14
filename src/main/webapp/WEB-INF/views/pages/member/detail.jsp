@@ -37,13 +37,18 @@
           <div id="progressIndicator" style="display: none"></div>
           <div class="box-body bg-gray">
             <!-- input start -->
-            <c:if test="${empty data}">
+            <c:if test="${empty data && changePwd ne 'Y'}">
               <%@include file="new.jsp"%>
             </c:if>
 
-            <c:if test="${not empty data}">
+            <c:if test="${not empty data && changePwd ne 'Y'}">
               <%@include file="update.jsp"%>
             </c:if>
+
+            <c:if test="${changePwd eq 'Y'}">
+              <%@include file="changePwd.jsp"%>
+            </c:if>
+
         </div><!-- //.box -->
       </div><!-- //.col-md-12 -->
     </div><!-- //.row -->
@@ -57,13 +62,18 @@
   </center>
 
 </c:if>
-<c:if test="${not empty data}">
+<c:if test="${not empty data && changePwd ne 'Y'}">
   <center>
     <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
     <a id="delBtn" class="btn btn-green btn-flat md-height showEditor">삭제</a>
-    <a id="initailizePwdBtn" class="btn "><img src="/imgs/bt_pw-reset.png" alt="비번초기화"></a>
+    <a id="changePagePwdBtn" class="btn btn-blue-green btn-flat md-height">비밀번호 변경</a>
   </center>
 </c:if>
+  <c:if test="${not empty data && changePwd eq 'Y'}">
+    <center>
+      <a id="changePwdBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+    </center>
+  </c:if>
 </form>
 
 <script>
@@ -185,20 +195,27 @@
 
     });
 
-    $('#initailizePwdBtn').click(function(){
+    $('#changePagePwdBtn').click(function(){
+      var id = $('#memberid').val();
+      console.log(id);
+      location.href='/member/changePwdPage/'+id;
+
+    });
+
+    $('#changePwdBtn').click(function(){
 
       var req = {};
       req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/initailizePwd"/>', req, function (data) {
+      $als.execute('<c:url value="/member/changePwd"/>', req, function (data) {
         if (data.result_message == 'success') {
-          alert('초기화되었습니다.');
+          alert('비밀번호가 변경되었습니다.');
+          location.href='/member/list';
+        }else if (data.result_message == 'fail') {
+          alert('비밀번호가 맞지 않습니다.');
         }
       }, function (err) {
         alert(err.result_message);
       });
-
-
-
     });
   });
   <!-- bind end -->

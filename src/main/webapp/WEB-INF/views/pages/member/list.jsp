@@ -74,13 +74,13 @@
                 <div class="form-group">
                   <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
                   <div class="col-sm-6">
-                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control" value="${sch_usestartdate}">
+                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${sch_usestartdate}">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="sch_useenddate" class="col-sm-4 ">사용종료일자</label>
                   <div class="col-sm-6">
-                    <input name="sch_useenddate"  id="sch_useenddate" placeholder="사용종료일자" class="form-control" value="${sch_useenddate}">
+                    <input name="sch_useenddate"  id="sch_useenddate" placeholder="사용종료일자" class="form-control datepicker" value="${sch_useenddate}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -95,7 +95,7 @@
             <!--// box-body end -->
             <div class="btn-box">
               <center>
-                  <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height" href="<c:url value="/member/detail"/>">조회</a>
+                  <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height" >조회</a>
               </center>
             </div>
           </form>

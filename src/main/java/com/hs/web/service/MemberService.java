@@ -54,10 +54,6 @@ public class MemberService extends ServiceBase {
     return res;
   }
 
-
-
-
-
   //상세
   public ResultMap detail(RequestMap req) {
     ResultMap res = ResultMap.create();
@@ -125,6 +121,23 @@ public class MemberService extends ServiceBase {
 
 
     if (Global.isDev) logger.debug("[main save] send:{}", res);
+    return res;
+  }
+  //저장
+  public ResultMap changePwd(RequestMap req) throws IOException {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[member changePwd] recv:{}", req);
+
+    int idPwCheckCnt = mapper.idPwCheck(req);
+    if(idPwCheckCnt==1){
+      mapper.changePwd(req);
+
+    }else {
+      res.put("result_message","fail");
+    }
+
+
+    if (Global.isDev) logger.debug("[member changePwd] send:{}", res);
     return res;
   }
 

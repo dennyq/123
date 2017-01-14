@@ -8,8 +8,8 @@
     <if test='sch_memberid != null and sch_memberid != ""'>
       AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
     </if>
-    <if test='sch_joindate != null and sch_joindate != ""'>
-      AND A.joindate  LIKE CONCAT('%', #{sch_joindate},'%')
+    <if test='sch_address != null and sch_address != ""'>
+      AND A.address  LIKE CONCAT('%', #{sch_address},'%')
     </if>
     <if test='sch_name != null and sch_name != ""'>
       AND A.name  LIKE CONCAT('%', #{sch_name},'%')
@@ -22,6 +22,12 @@
     </if>
     <if test='sch_handphone != null and sch_handphone != ""'>
       AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
+    </if>
+    <if test='sch_telephone != null and sch_telephone != ""'>
+      AND A.telephone  LIKE CONCAT('%', #{sch_telephone},'%')
+    </if>
+    <if test='sch_introduce != null and sch_introduce != ""'>
+      AND A.introduce  LIKE CONCAT('%', #{sch_introduce},'%')
     </if>
   </sql>
 
@@ -145,6 +151,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
+
+  <update id="changePwd" parameterType="dbmap">
+    UPDATE member SET password = #{newPassword}
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
 
   <update id="update" parameterType="dbmap">
     UPDATE member

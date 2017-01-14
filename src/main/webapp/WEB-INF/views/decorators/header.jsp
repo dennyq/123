@@ -33,15 +33,14 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">광고관리 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">회원등록</a></li>
-              <li><a href="#">회원조회</a></li>
+              <li><a href="#">광고등록</a></li>
+              <li><a href="#">광고조회</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">환경설정 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">회원등록</a></li>
-              <li><a href="#">회원조회</a></li>
+              <li><a href="/member/changePwdPage/">비밀번호 변경</a></li>
             </ul>
           </li>
         </ul>

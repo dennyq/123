@@ -20,4 +20,6 @@ public interface MemberMapper extends CrudMapper{
   int idPwDelChk(DbMap req);
 
   void restore(DbMap req);
+
+  void changePwd(DbMap req);
 }
