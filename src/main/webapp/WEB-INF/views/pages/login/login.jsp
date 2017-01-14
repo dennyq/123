@@ -61,9 +61,8 @@
       $als.execute('<c:url value="/login"/>', req, function (data) {
         if (data.result_message == 'success') {
           alert('관리자외에 접근할 수 없습니다..');
-//          location.href = '/member/detail';
         }else  if (data.result_message == 'success_admin') {
-          location.href = '/member/detail';
+          location.href = '/member/list';
         }else{
           alert('아이디나 비밀번호가 맞지 않습니다.');
         }
