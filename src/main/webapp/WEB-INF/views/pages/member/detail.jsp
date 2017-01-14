@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8">
   <title>회원 관리</title>
-
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
@@ -27,14 +26,13 @@
     </li>
   </ol>
 </section>
-
 <!-- Main content -->
 <section class="content">
   <div class="paddingInside">
       <div class="row">
         <div class="col-md-12">
           <div class="box-header-sm">
-            <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>회원</h3>
+            <h3 class="box-title">회원</h3>
           </div>
           <div id="progressIndicator" style="display: none"></div>
           <div class="box-body bg-gray">

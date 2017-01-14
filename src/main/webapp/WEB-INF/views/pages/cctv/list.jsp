@@ -30,7 +30,7 @@
         <div class="col-md-12">
           <div class="bottom-25">
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>영상보기</h3>
+              <h3 class="box-title">영상보기</h3>
             </div>
             <input type="hidden" id="loginip" name="loginip" value="${loginip}"/>
             <input type="hidden" id="port" name="port" value="${port}"/>

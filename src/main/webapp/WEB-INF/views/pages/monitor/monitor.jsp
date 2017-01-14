@@ -31,7 +31,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
               <div class="box-header-sm">
-                <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>통신상태</h3>
+                <h3 class="box-title">통신상태</h3>
               </div>
 
 
@@ -120,7 +120,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>내부 무선센서정보</h3>
+              <h3 class="box-title">내부 무선센서정보</h3>
             </div>
 
 
@@ -233,7 +233,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>내부 유선센서정보</h3>
+              <h3 class="box-title">내부 유선센서정보</h3>
             </div>
 
 
@@ -276,7 +276,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>기상센서노드 정보</h3>
+              <h3 class="box-title">기상센서노드 정보</h3>
             </div>
 
 
@@ -390,7 +390,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>정역 채널 상태정보</h3>
+              <h3 class="box-title">정역 채널 상태정보</h3>
             </div>
 
 
@@ -567,7 +567,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>ON-OFF 채널 상태 정보</h3>
+              <h3 class="box-title">ON-OFF 채널 상태 정보</h3>
             </div>
 
 
@@ -725,7 +725,7 @@
           <div class="bottom-25">
             <%--<form id="searchFrm" action="<c:url value="/monitor/search"/>" class="form-horizontal" method="post">--%>
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>양액정보</h3>
+              <h3 class="box-title">양액정보</h3>
             </div>
             <%--</form>--%>
             <!-- form end -->

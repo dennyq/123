@@ -29,7 +29,7 @@
           <div class="bottom-25">
             <form id="searchFrm" action="<c:url value="/notice/search"/>" class="form-horizontal" method="post">
               <div class="box-header-sm">
-                <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>공지사항 조회</h3>
+                <h3 class="box-title">공지사항 조회</h3>
               </div>
               <div class="col-xs-6">
                 <c:if test="${isAdmin}">

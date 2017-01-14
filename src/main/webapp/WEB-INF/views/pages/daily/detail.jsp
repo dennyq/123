@@ -33,7 +33,7 @@
         <div class="col-md-12">
           <div class="">
             <div class="box-header-sm">
-              <h3 class="box-title"<img src="/imgs/h3_bullet.png"/>사용자 정보</h3>
+              <h3 class="box-title"사용자 정보</h3>
             </div>
             <div id="progressIndicator" style="display: none"></div>
 

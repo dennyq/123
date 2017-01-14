@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="bottom-25">
                         <div class="box-header-sm">
-                            <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>정역 채널 상태 정보</h3>
+                            <h3 class="box-title">정역 채널 상태 정보</h3>
                         </div>
                     </div>
                 </div>
@@ -378,7 +378,7 @@
                 <div class="col-md-12">
                     <div class="bottom-25">
                         <div class="box-header-sm">
-                            <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>ON-OFF 채널 상태 정보</h3>
+                            <h3 class="box-title">ON-OFF 채널 상태 정보</h3>
                         </div>
                     </div>
                 </div>

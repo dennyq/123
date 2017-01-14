@@ -29,7 +29,7 @@
         <div class="col-md-12">
           <div class="bottom-25">
             <div class="box-header-sm">
-              <h3 class="box-title"><img src="/imgs/h3_bullet.png"/>데이터 관리</h3>
+              <h3 class="box-title">데이터 관리</h3>
             </div>
             <!-- form start -->
 
@@ -80,7 +80,7 @@
               <!-- result  -->
 
                   <div class="box-header-sm">
-                    <h3 class="box-title margin0"><img src="/imgs/h3_bullet.png"/>조회 결과</h3>
+                    <h3 class="box-title margin0">조회 결과</h3>
                   </div>
 
 
