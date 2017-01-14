@@ -13,6 +13,7 @@
           </div>
       </div>
     </div>
+    <div class="header-border"></div>
     <div class="container">
 
       <div class="navbar-header">
