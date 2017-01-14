@@ -4,7 +4,7 @@
 <html>
     <head>
         <%--<meta charset="UTF-8">--%>
-        <title>IFARMERS</title>
+        <title>PHARMACY4U</title>
         <style type="text/css">
             .erobox { width:522px; margin:0 auto; padding:64px 0 64px 0; }
             /*.erobox .erotext_area { height:335px; background:url(/images/ero_bg.png) left top no-repeat; }*/

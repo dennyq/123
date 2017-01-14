@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <head>
-  <title>IFARMERS</title>
+  <title>PHARMACY4U</title>
 </head>
 <%--<form method="post">--%>
     <div class="mobile">

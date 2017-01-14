@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>IFARMERS</title>
+    <title>PHARMACY4U</title>
     <style type="text/css">
         .erobox { width:522px; margin:0 auto; padding:64px 0 64px 0; }
         .erobox .erotext_area { height:335px;/* background:url(/images/ero_bg.png) left top no-repeat; */}
@@ -42,7 +42,7 @@
 
 <div id ="content">
     <div class="headerinner">
-        <h1 class="logo"><a href="/">IFARMERS</a></h1>
+        <h1 class="logo"><a href="/">PHARMACY4U</a></h1>
     </div>
 
     <div class="main"></div>

@@ -19,7 +19,7 @@
       <div class="m-nav-title">
         <i class="fa fa-fw fa-caret-left m-font-nav"></i>
         <span class="m-nav-text">
-          iFarmers
+          PHARMACY4U
         </span>
 
       </div>

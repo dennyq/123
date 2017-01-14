@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <head>
-  <title>IFARMERS</title>
+  <title>PHARMACY4U</title>
 </head>
 <div class="login-wrapper">
   <div class="login-box">
@@ -60,9 +60,10 @@
       req = $(this).closest('form').serialize();
       $als.execute('<c:url value="/login"/>', req, function (data) {
         if (data.result_message == 'success') {
-          location.href = '/member/list';
+          alert('관리자외에 접근할 수 없습니다..');
+//          location.href = '/member/detail';
         }else  if (data.result_message == 'success_admin') {
-          location.href = '/member/list';
+          location.href = '/member/detail';
         }else{
           alert('아이디나 비밀번호가 맞지 않습니다.');
         }

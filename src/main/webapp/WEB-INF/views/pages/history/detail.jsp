@@ -287,10 +287,10 @@
 
 <%--</div>--%>
 
-<%--&lt;%&ndash;<img src="/image/IFARMERS-01_home.jpg" width="700px"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<img src="/image/IFARMERS-02_machine_admin.jpg" width="700px"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<img src="/image/IFARMERS-03_machine_edit.jpg" width="700px"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<img src="/image/IFARMERS-04_history_admin.jpg" width="700px"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<img src="/image/PHARMACY4U-01_home.jpg" width="700px"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<img src="/image/PHARMACY4U-02_machine_admin.jpg" width="700px"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<img src="/image/PHARMACY4U-03_machine_edit.jpg" width="700px"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<img src="/image/PHARMACY4U-04_history_admin.jpg" width="700px"/>&ndash;%&gt;--%>
 
 
 
