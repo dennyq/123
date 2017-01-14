@@ -144,7 +144,7 @@
                     <td>${total-(pageTimes)-idx.count+1}</td>
                     <td>${items.memberid}</td>
                     <td>${items.name}</td>
-                    <td>${items.gubun}</td>
+                    <td><c:if test="${items.gubun eq 1}">약국</c:if><c:if test="${items.gubun eq 2}">병원</c:if></td>
                     <td>${items.telephone}</td>
                     <td>${items.usestartdate}</td>
                     <td>${items.useenddate}</td>
