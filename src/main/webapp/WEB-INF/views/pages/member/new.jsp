@@ -8,10 +8,10 @@
 <div class="col-md-6">
   <div class="form-group">
     <label for="memberid" class="col-sm-4 ">아이디</label>
-    <div class="col-sm-3">
-      <input name="memberid"  id="memberid" placeholder="아이디" class="form-control">
+    <div class="col-sm-4">
+      <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" style="    width:130px">
     </div>
-    <a id="id_check" class="btn">사용유무검사</a>
+    <a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png" style="margin-left: -25px;"/></a>
     <input type="hidden" id="idCheck" value="N"/>
   </div>
   <div class="form-group">
@@ -26,6 +26,7 @@
       <input name="name"  id="name" placeholder="회원명" class="form-control">
     </div>
   </div>
+
   <div class="form-group">
     <label for="address" class="col-sm-4 ">주소</label>
     <div class="col-sm-6">
@@ -51,7 +52,7 @@
 <div class="col-md-6 right">
   <div class="form-group">
     <label for="name" class="col-sm-4 ">구분선택</label>
-    <div class="col-sm-6">
+    <div class="col-sm-6" style="height: 34px">
       <input type="radio" name="gubun" value="1" checked>약국&nbsp;
       <input type="radio" name="gubun" value="2">병원
     </div>
@@ -60,6 +61,12 @@
     <label for="cfrm_password" class="col-sm-4 ">비밀번호확인</label>
     <div class="col-sm-6">
       <input name="cfrm_password" id="cfrm_password" placeholder="비밀번호확인" class="form-control" type="password" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 "></label>
+    <div class="col-sm-6" style="height: 34px">
+      <input type="hidden">
     </div>
   </div>
   <div class="form-group">

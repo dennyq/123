@@ -733,3 +733,6 @@ function endLoading(){
 	//setTimeout(function(){$('.overlay').removeClass('active');},5000);
 	$('.overlay').removeClass('active');
 }
+function chageImgSrc(thisObj){
+	console.log($(thisObj).find('img').attr('src'));
+}

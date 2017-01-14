@@ -74,17 +74,17 @@ section.content-header > h1{
   margin-top: 30px;
   font-weight: bold;
   font-size: 30px;
-  color: #58696a;
+  color: #666666;
 }
 .content-header > .breadcrumb-line {
-  width: 722px;
-  border: 1px solid #ececec;
-  margin: 5px 0 5px 0;
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  margin: 20px 0 5px 0;
 }
 .content-header > .breadcrumb {
   float: right;
   background: transparent;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-bottom: 0;
   font-size: 11px;
   padding: 7px 5px;
@@ -201,7 +201,7 @@ height: 10px;
   padding: 7px 10px 10px 9px!important;
 }
 .md-height{
-
+  line-height: 1.4;
   height: 34px!important;
 }
 .padding-left-25{
@@ -998,18 +998,23 @@ input.form-control {
 .navbar-top{
   background-color: #fff;
   height: 35px;
-  margin-bottom: 15px;
-
+  margin-top: 10px;
+  margin-bottom: 40px;
   border-bottom: 1px solid #eeeeee;
 }
 .navbar-top .navbar-nav>li>a {
   font-size: 14px;
   color: #acacac;
+  line-height: 0.5;
 }
 .blue-thick-line{
-  background-color: #0e84a5;
+  background-color: #0e85a6;
+  width: 100%;
   height: 50px;
-}.content-header {
+  top: 130px;
+  position: absolute;
+}
+.content-header {
    position: relative;
    padding: 33px 15px 0 15px;
  }
@@ -1017,3 +1022,71 @@ input.form-control {
 margin-top: 20px;
 margin-bottom: 20px;
  }
+ /*
+  * header 관련
+ */
+.main-header {
+  max-height: 150px;
+}
+.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 12px 7px;
+  color: #444;
+  font-size: 16px;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+  background-color: #fff;
+  border-color: #337ab7;
+  color: #337ab7;
+  font-size: 16px;
+}
+.nav > li > a:hover, .nav > li > a:active, .nav > li > a:focus {
+  color: #acacac;
+  background: #fff;
+
+}
+.back-slash{
+  /*background-image: url('/imgs/bt_alertcheck.png');*/
+}
+.form-group > label{
+  color: #666666;
+  font-size: 16px;
+}
+.box-body {
+  border-top: 1px solid #bcbcbc;
+  border-bottom: 1px solid #bcbcbc;
+  padding: 30px 10px 10px 10px
+}
+#navbar-collapse > ul.dropdown-menu > li> a{
+  padding: 12px 9px;
+  height:24px;
+  position: absolute;
+  /*position:relative;*/
+}
+.navbar-nav>li>.dropdown-menu {
+  margin-left: 8px;
+  margin-top: 1px;
+  background: url(/imgs/img_2thbg.png) 26px 4px no-repeat;
+}
+#navbar-collapse > ul.dropdownmenu{
+  position:relative;
+}
+#navbar-collapse >ul.navbar-nav >li.dropdown>  a{
+padding: 10px 10px 10px 15px;
+}
+
+#navbar-collapse > ul > li.dropdown.open > ul > li {
+  display:inline;margin-left:0;position:relative;float:left
+}
+#navbar-collapse > ul > li.dropdown.open > ul > li > a{
+  display:inline-block; padding:14px 10px 10px 10px; font-size:14px; color:#fff;
+  background-color: transparent;
+  /*background: url(/imgs/img_2thbg.png) center no-repeat;*/
+}
+/*dropdownmenu*/
+.dropdown-menu {
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
+}

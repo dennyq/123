@@ -13,7 +13,7 @@
     회원 <c:if test="${not empty data}">상세</c:if>
     <c:if test="${empty data}">등록</c:if>
   </h1>
-  <div class="breadcrumb-line"></div>
+
 
   <ol class="breadcrumb">
     <li><a href="<c:url value="/"/>">HOME</a></li>
@@ -31,11 +31,8 @@
   <div class="paddingInside">
       <div class="row">
         <div class="col-md-12">
-          <div class="box-header-sm">
-            <h3 class="box-title">회원</h3>
-          </div>
           <div id="progressIndicator" style="display: none"></div>
-          <div class="box-body bg-gray">
+          <div class="box-body">
             <!-- input start -->
             <c:if test="${empty data && changePwd ne 'Y'}">
               <%@include file="new.jsp"%>
@@ -51,6 +48,7 @@
 
         </div><!-- //.box -->
       </div><!-- //.col-md-12 -->
+        <%--<div class="breadcrumb-line"></div>--%>
     </div><!-- //.row -->
   </div><!-- //.paddingInside -->
 </section>

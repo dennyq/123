@@ -9,6 +9,7 @@
 
   <title><decorator:title/></title>
   <page:applyDecorator name="headLib"/>
+  <page:applyDecorator name="lib"/>
   <decorator:head/>
 
 </head>
@@ -16,7 +17,7 @@
 <div class="wrapper" style="height: auto;">
     <page:applyDecorator name="header"/>
       <div class="container">
-        <page:applyDecorator name="lib"/>
+
         <decorator:body/>
       </div>
 </div>
