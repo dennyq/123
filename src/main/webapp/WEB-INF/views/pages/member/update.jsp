@@ -31,6 +31,7 @@
   <label for="latitude" class="col-sm-4 ">위도</label>
   <div class="col-sm-6">
     <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
+    <input name="oldlatitude"  id="oldlatitude" placeholder="위도" class="form-control" value="${data.latitude}">
   </div>
 </div>
   <div class="form-group">
@@ -72,6 +73,7 @@
     <label for="longitude" class="col-sm-4 ">경도</label>
     <div class="col-sm-6">
       <input name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
+      <input name="oldlongitude"  id="oldlongitude" placeholder="경도" class="form-control" value="${data.longitude}">
     </div>
   </div>
 

@@ -244,6 +244,8 @@
     });
 
 
+
+
     $('.datepicker').datepicker({
       format: "yyyy.mm.dd",
 //      startDate: '+0d',
@@ -266,9 +268,20 @@
 
     //저장
     $('#saveBtn').click(function(){
-//      console.log($('#detailFrm'));
-      searchAddressAndSave();
 
+
+      var latitude = $('#latitude').val();
+      var oldlatitude = $('#oldlatitude').val();
+      var longitude = $('#longitude').val();
+      var oldlongitude = $('#oldlongitude').val();
+      var address = $('#address').val();
+      console.log(latitude);
+      console.log(oldlatitude);
+      if ((latitude != oldlatitude || longitude != oldlongitude )){
+        saveFunction();
+      }else{
+        searchAddressAndSave();
+      }
 
 
     });
