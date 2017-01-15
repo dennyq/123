@@ -166,6 +166,21 @@
   }
   var saveFunction = function(){
 
+    var latitude = $('#latitude').val();
+    var longitude = $('#longitude').val();
+//    console.log(latitude.split('.')[0].length)
+//    console.log(longitude.split('.')[0].length)
+    if(latitude.split('.')[0].length>4){
+      alert('올바른 위도값이 아닙니다.');
+      $('#latitude').focus();
+      return false;
+    }
+    if(longitude.split('.')[0].length>4){
+      alert('올바른 경도값이 아닙니다.');
+      $('#longitude').focus();
+      return false;
+    }
+
     if($('#memberid').val() ==''){
       alert('아이디를 입력해주세요');
       $('#memberid').focus();
@@ -275,8 +290,8 @@
       var longitude = $('#longitude').val();
       var oldlongitude = $('#oldlongitude').val();
       var address = $('#address').val();
-      console.log(latitude);
-      console.log(oldlatitude);
+//      console.log(latitude);
+//      console.log(oldlatitude);
       if ((latitude != oldlatitude || longitude != oldlongitude )){
         saveFunction();
       }else{

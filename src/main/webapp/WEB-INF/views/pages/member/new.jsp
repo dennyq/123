@@ -39,10 +39,10 @@
       <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control">
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" style="display: none">
     <label for="latitude" class="col-sm-4 ">위도</label>
     <div class="col-sm-6">
-      <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
+      <input type="hidden" name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
     </div>
   </div>
   <div class="form-group">
@@ -87,10 +87,10 @@
       <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control">
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" style="display: none">
     <label for="longitude" class="col-sm-4 ">경도</label>
     <div class="col-sm-6">
-      <input name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
+      <input type="hidden" name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
     </div>
   </div>
   <div class="form-group">

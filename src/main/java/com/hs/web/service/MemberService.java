@@ -83,6 +83,16 @@ public class MemberService extends ServiceBase {
     String joindate =  req.get("joindate")+"";
     String usestartdate =  req.get("usestartdate")+"";
     String useenddate =  req.get("useenddate")+"";
+    String longitude =  req.get("longitude")+"";
+    String latitude =  req.get("latitude")+"";
+    longitude = longitude.equals("")?"0":longitude;
+    latitude = latitude.equals("")?"0":latitude;
+    double longitudeDouble =  Double.parseDouble(longitude);
+    double latitudeDouble =  Double.parseDouble(latitude);
+    req.put("longitude",longitudeDouble);
+    req.put("latitude",latitudeDouble);
+
+
     req.put("joindate",joindate.replace(".",""));
     req.put("usestartdate",usestartdate.replace(".",""));
     req.put("useenddate",useenddate.replace(".",""));
