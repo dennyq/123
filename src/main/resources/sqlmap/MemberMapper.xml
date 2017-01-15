@@ -133,7 +133,7 @@
       #{grade},
       #{gubun},
       #{openflag},
-      #{namehandphone},
+      #{name},
       #{telephone},
       #{handphone},
       #{address},

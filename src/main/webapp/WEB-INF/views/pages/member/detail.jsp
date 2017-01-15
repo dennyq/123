@@ -88,7 +88,7 @@
 
     $('.datepicker').datepicker({
       format: "yyyy.mm.dd",
-      startDate: '+0d',
+//      startDate: '+0d',
       todayBtn: true
     });
 
