@@ -28,11 +28,11 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="latitude" class="col-sm-4 ">위도</label>
-    <div class="col-sm-6">
-      <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
-    </div>
+  <label for="latitude" class="col-sm-4 ">위도</label>
+  <div class="col-sm-6">
+    <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
   </div>
+</div>
   <div class="form-group">
     <label for="usestartdate" class="col-sm-4 ">사용시작일자</label>
     <div class="col-sm-6">

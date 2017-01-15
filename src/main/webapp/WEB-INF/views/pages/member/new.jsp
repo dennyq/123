@@ -40,6 +40,12 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="latitude" class="col-sm-4 ">위도</label>
+    <div class="col-sm-6">
+      <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
+    </div>
+  </div>
+  <div class="form-group">
     <label for="usestartdate" class="col-sm-4 ">사용시작일자</label>
     <div class="col-sm-6">
       <input name="usestartdate"  id="usestartdate" placeholder="사용시작일자" class="form-control datepicker">
@@ -79,6 +85,12 @@
     <label for="handphone" class="col-sm-4 ">휴대폰</label>
     <div class="col-sm-6">
       <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="longitude" class="col-sm-4 ">경도</label>
+    <div class="col-sm-6">
+      <input name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
     </div>
   </div>
   <div class="form-group">
