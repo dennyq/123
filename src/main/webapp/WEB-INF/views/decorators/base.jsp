@@ -21,6 +21,7 @@
         <decorator:body/>
       </div>
 </div>
+<page:applyDecorator name="footer"/>
 <script>
   $(function(){
     var minH = $('.main-sidebar').outerHeight()-356;

@@ -14,12 +14,12 @@
 </head>
 <body class="hold-transition login-page bg-farm">
 <div class="upper-logo">
+  <img src="/imgs/bg_main.png" style="position: absolute;top:0;left:0;width: 100%;z-index: -1;"/>
   <page:applyDecorator name="lib"/>
   <decorator:body/>
 </div>
 <div class="lower-logo" >
-  <center>  copy...</center>
-
+  Copyright@Pharmacy4u.All Rights Reserved.
 </div>
 </body>
 </html>

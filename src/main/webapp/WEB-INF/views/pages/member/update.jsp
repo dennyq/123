@@ -52,14 +52,14 @@
   </div>
   <div class="form-group">
     <label class="col-sm-4 "></label>
-    <div class="col-sm-6" style="height: 34px">
+    <div class="col-sm-6" style="height: 46px">
       <input type="hidden" >
     </div>
   </div>
   <div class="form-group">
     <label for="address_etc" class="col-sm-4 ">기타 주소입력</label>
     <div class="col-sm-6">
-      <input name="address_etc"  id="address_etc" placeholder="기타 주소입력" class="form-control datepicker" value="${data.address_etc}">
+      <input name="address_etc"  id="address_etc" placeholder="기타 주소입력" class="form-control" value="${data.address_etc}">
     </div>
   </div>
   <div class="form-group">
@@ -90,7 +90,7 @@
   <div class="form-group">
     <label for="introduce" class="col-sm-2 ">회원기타소개</label>
     <div class="col-sm-9">
-      <input name="introduce"  id="introduce" placeholder="회원기타소개" class="form-control datepicker" value="${data.introduce}">
+      <input name="introduce"  id="introduce" placeholder="회원기타소개" class="form-control" value="${data.introduce}">
     </div>
   </div>
 </div>

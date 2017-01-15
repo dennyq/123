@@ -10,8 +10,15 @@
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
 <section class="content-header">
   <h1>
-    회원 <c:if test="${not empty data}">상세</c:if>
-    <c:if test="${empty data}">등록</c:if>
+    <c:if test="${empty data && changePwd ne 'Y'}">
+      회원등록
+    </c:if>
+    <c:if test="${not empty data && changePwd ne 'Y'}">
+      회원상세
+    </c:if>
+    <c:if test="${changePwd eq 'Y'}">
+      비밀번호변경
+    </c:if>
   </h1>
 
 
@@ -19,10 +26,7 @@
     <li><a href="<c:url value="/"/>">HOME</a></li>
     <li><a href="<c:url value="/member/list"/>">회원</a></li>
     <li>
-      <a href="<c:url value="/member/detail/${data.memberid}"/>">회원
-        <c:if test="${not empty data}">상세</c:if>
-        <c:if test="${empty data}">등록</c:if>
-      </a>
+      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
     </li>
   </ol>
 </section>
@@ -52,7 +56,7 @@
     </div><!-- //.row -->
   </div><!-- //.paddingInside -->
 </section>
-
+  <div id="map" style="width:100%;height:350px;display: none"></div>
 <c:if test="${empty data}">
   <center>
     <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">가입하기</a>
@@ -75,7 +79,151 @@
 </form>
 
 <script>
-  <!-- //bind start -->
+  var searchAddressAndSave = function(){
+   var address = $('#address').val();
+    if (address != null && address != ''){
+      $.ajax({
+        url: "https://apis.daum.net/local/geo/addr2coord?apikey=3449b8f92183a8efbf5dafe9ceb3c430&q="+address+"&output=json",
+        dataType: 'jsonp',
+        jsonpCallback: "myCallback",
+        success: function(data) {
+          console.log('성공 - ', data);
+          if(data){
+            if(data.channel){
+              if(data.channel.item.length>=1){
+                if(data.channel.item[0].lat){
+                  var lat = data.channel.item[0].lat;
+                  console.log('lat - ', lat);
+                  $('#latitude').val(lat);
+                }
+                if(data.channel.item[0].lng){
+                  var lng = data.channel.item[0].lng;
+
+                  console.log('lng - ', lng);
+
+                  $('#longitude').val(lng);
+                }
+
+
+              }
+
+            }
+
+          }
+
+          saveFunction();
+        },
+        error: function(xhr) {
+          console.log('실패 - ', xhr);
+        }
+      });
+    }else{
+      saveFunction();
+    }
+
+  }
+  var searchAddress = function(){
+    var address = $('#address').val();
+    if (address != null && address != '') {
+      $.ajax({
+        url: "https://apis.daum.net/local/geo/addr2coord?apikey=3449b8f92183a8efbf5dafe9ceb3c430&q=" + address + "&output=json",
+        dataType: 'jsonp',
+        jsonpCallback: "myCallback",
+        success: function (data) {
+          console.log('성공 - ', data);
+          if (data) {
+            if (data.channel) {
+              if (data.channel.item.length >= 1) {
+                console.log(data.channel.item.length );
+                if (data.channel.item[0].lat) {
+                  var lat = data.channel.item[0].lat;
+                  console.log('lat - ', lat);
+                  $('#latitude').val(lat);
+                }
+                if (data.channel.item[0].lng) {
+                  var lng = data.channel.item[0].lng;
+
+                  console.log('lng - ', lng);
+
+                  $('#longitude').val(lng);
+                }
+
+
+              }
+
+            }
+
+          }
+
+//        saveFunction();
+        },
+        error: function (xhr) {
+          console.log('실패 - ', xhr);
+        }
+      });
+    }
+
+  }
+  var saveFunction = function(){
+
+    if($('#memberid').val() ==''){
+      alert('아이디를 입력해주세요');
+      $('#memberid').focus();
+      return false;
+    }
+    <c:if test="${empty data}">
+    if($('#password').val() ==''){
+      alert('비밀번호를 입력해주세요');
+      $('#password').focus();
+      return false;
+    }
+    if($('#cfrm_password').val() ==''){
+      alert('비밀번호확인을 입력해주세요');
+      $('#cfrm_password').focus();
+      return false;
+    }
+    </c:if>
+    if($('#name').val() ==''){
+      alert('이름을 입력해주세요');
+      $('#name').focus();
+      return false;
+    }
+    if($('#gubun').val() ==''){
+      alert('약국/병원 구분을 입력해주세요');
+      $('#gubun').focus();
+      return false;
+    }
+
+    if($('#usestartdate').val() ==''){
+      alert('사용시작일자를 입력해주세요');
+      $('#usestartdate').focus();
+      return false;
+    }
+    if($('#useenddate').val() ==''){
+      alert('사용종료일자를 입력해주세요');
+      $('#useenddate').focus();
+      return false;
+    }
+
+    <c:if test="${empty data}">
+    if($('#password').val() != $('#cfrm_password').val()){
+      alert('비밀번호가 일치하지 않습니다.');
+      $('#password').focus();
+      return false;
+    }
+
+    if($('#idCheck').val() != 'Y'){
+      alert('아이디 중복검사를 해주세요.');
+
+      return false;
+    }
+    </c:if>
+    <c:if test="${empty data}">
+
+    </c:if>
+    $('#detailFrm').submit();
+
+  }
   $(function(){
 
     $('ul.sidebar-menu li.treeview').each(function(index){
@@ -85,6 +233,16 @@
         $(this).addClass('active')
       }
     });
+
+    $('#address').keydown(function (key) {
+      if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        searchAddress();
+      }
+    });
+    $('#address').focusout(function (key) {
+        searchAddress();
+    });
+
 
     $('.datepicker').datepicker({
       format: "yyyy.mm.dd",
@@ -108,64 +266,9 @@
 
     //저장
     $('#saveBtn').click(function(){
-      console.log($('#detailFrm'));
+//      console.log($('#detailFrm'));
+      searchAddressAndSave();
 
-      if($('#memberid').val() ==''){
-        alert('아이디를 입력해주세요');
-        $('#memberid').focus();
-        return false;
-      }
-      <c:if test="${empty data}">
-        if($('#password').val() ==''){
-          alert('비밀번호를 입력해주세요');
-          $('#password').focus();
-          return false;
-        }
-        if($('#cfrm_password').val() ==''){
-          alert('비밀번호확인을 입력해주세요');
-          $('#cfrm_password').focus();
-          return false;
-        }
-      </c:if>
-      if($('#name').val() ==''){
-        alert('이름을 입력해주세요');
-        $('#name').focus();
-        return false;
-      }
-      if($('#gubun').val() ==''){
-        alert('약국/병원 구분을 입력해주세요');
-        $('#gubun').focus();
-        return false;
-      }
-
-      if($('#usestartdate').val() ==''){
-        alert('사용시작일자를 입력해주세요');
-        $('#usestartdate').focus();
-        return false;
-      }
-      if($('#useenddate').val() ==''){
-        alert('사용종료일자를 입력해주세요');
-        $('#useenddate').focus();
-        return false;
-      }
-
-      <c:if test="${empty data}">
-        if($('#password').val() != $('#cfrm_password').val()){
-          alert('비밀번호가 일치하지 않습니다.');
-          $('#password').focus();
-          return false;
-        }
-
-              if($('#idCheck').val() != 'Y'){
-          alert('아이디 중복검사를 해주세요.');
-
-          return false;
-        }
-      </c:if>
-<c:if test="${empty data}">
-
-      </c:if>
-      $('#detailFrm').submit();
 
 
     });

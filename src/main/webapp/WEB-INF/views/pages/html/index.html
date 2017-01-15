@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>주소로 장소 표시하기</title>
+
+</head>
+<body>
+<p style="margin-top:-12px">
+    <em class="link">
+        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+        </a>
+    </em>
+</p>
+<input id="searchText" name="searchText" value="제주특별자치도 제주시 첨단로 242"/><button id="search">검색</button>
+<div id="map" style="width:100%;height:350px;" ></div>
+<ul>
+    <li><a href="juso1.html">juso1.html : 가장 디폴트 예제</a></li>
+    <li><a href="juso2.html">juso2.html : 시도/군구/동리 검색 ....아직 진행중</a></li>
+    <li><a href="juso3.html">juso3.html : 우편번호 검색으로 검색된 주소로 지도에 위치보기</a></li>
+</ul>
+<!--혹시 무료 주소연계서비스 하는 사이트의 API를 사용하여 기획서의-->
+<!--4페이지와 5페이지의 시도, 군구, 동로 항목 콤보 박스 구현이-->
+<!--가능한 지 테스트 좀 해줄 수 있나요?-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=3449b8f92183a8efbf5dafe9ceb3c430&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+    // 지도를 생성합니다
+    var map = new daum.maps.Map(mapContainer, mapOption);
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new daum.maps.services.Geocoder();
+
+    $('#search').click(function(){
+        var text = $('#searchText').val();
+        findMap(text);
+    });
+
+    var findMap = function(str){
+        // 주소로 좌표를 검색합니다
+        geocoder.addr2coord(str, function(status, result) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === daum.maps.services.Status.OK) {
+
+                var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new daum.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+                // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                var iwContent = '<div style="padding:5px;">'+coords+'<br>'+str+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new daum.maps.InfoWindow({
+                    content: iwContent,
+                    removable : iwRemoveable
+                });
+//            infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+
+                // 마커에 클릭이벤트를 등록합니다
+                daum.maps.event.addListener(marker, 'click', function() {
+                    // 마커 위에 인포윈도우를 표시합니다
+                    infowindow.open(map, marker);
+                });
+            }
+        });
+
+    }
+
+
+</script>
+</body>
+</html>

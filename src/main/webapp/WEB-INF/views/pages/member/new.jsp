@@ -30,7 +30,7 @@
   <div class="form-group">
     <label for="address" class="col-sm-4 ">주소</label>
     <div class="col-sm-6">
-      <input name="address"  id="address" placeholder="주소" class="form-control">
+      <input name="address"  id="address" placeholder="주소" class="form-control" >
     </div>
   </div>
   <div class="form-group">
@@ -94,4 +94,5 @@
     </div>
   </div>
 </div>
+<div style="height: 200px;"></div>
 <!--// right input end -->

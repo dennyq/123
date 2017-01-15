@@ -111,7 +111,7 @@ section.content-header > h1{
 .login-wrapper{
   /*margin-top: 50%;*/
   /*width: 1100px;*/
-  margin: 15% auto 0 auto;
+  margin: 0 auto;
 }
 .main_logo-fago{
   height: 100px;
@@ -139,10 +139,14 @@ section.content-header > h1{
 
 }
 .lower-logo{
+text-align: center;
   padding: 15px;
 vertical-align: bottom;
 height: 10px;
-  background-color: #58696a;
+  background-color: #042a35;
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
   /*background-image:url("/imgs/img_mbg-illust.png") ;*/
 }
 .btn-light-green {
@@ -1098,4 +1102,7 @@ padding: 10px 10px 10px 15px;
 .header-border{
   border-bottom: 1px solid #eeeeee;
   margin-bottom: 35px;
+}
+.wrapper{
+  margin-bottom: 100px;
 }

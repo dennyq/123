@@ -50,9 +50,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_telephone" class="col-sm-4 ">자택전화</label>
+                  <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
                   <div class="col-sm-6">
-                    <input name="sch_telephone"  id="sch_telephone" placeholder="자택전화" class="form-control" value="${sch_telephone}">
+                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -65,12 +65,12 @@
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
               <div class="col-md-6 right">
-                <div class="form-group">
-                  <label for="sch_joindate" class="col-sm-4 ">가입일자</label>
-                  <div class="col-sm-6">
-                    <input name="sch_joindate"  id="sch_joindate" placeholder="가입일자" class="form-control" value="${sch_joindate}">
-                  </div>
-                </div>
+                <%--<div class="form-group">--%>
+                  <%--<label for="sch_regtime" class="col-sm-4 ">가입일자</label>--%>
+                  <%--<div class="col-sm-6">--%>
+                    <%--<input name="sch_regtime"  id="sch_regtime" placeholder="가입일자" class="form-control datepicker" value="${sch_regtime}">--%>
+                  <%--</div>--%>
+                <%--</div>--%>
                 <div class="form-group">
                   <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
                   <div class="col-sm-6">
@@ -102,25 +102,27 @@
           <!--// form end-->
         </div>
       </div>
-      <div class="box-header-sm">
-        <h3 class="box-title">회원 조회 결과</h3>
-      </div>
-      <div class="col-xs-12">
-        <div class="">
 
+      <div class="col-md-12">
+        <div class="">
+          <div class="box-header-sm">
+            <h3 class="box-title">회원 조회 결과</h3>
+          </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">
               <colgroup>
-                <col width="8px"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
-                <col width="10%"/>
+                <col width="1%"/><%--번호--%>
+                <col width="7%"/><%--아이디--%>
+                <col width="7%"/><%--회원명--%>
+                <col width="5%"/><%--구분--%>
+                <col width="8%"/><%--전화번호--%>
+                <col width="10%"/><%--위도--%>
+                <col width="10%"/><%--경도--%>
+                <col width="8%"/><%--사용시작일자--%>
+                <col width="8%"/><%--사용종료일자--%>
+                <col width="8%"/><%--폰번호--%>
+                <col width="8%"/><%--소개--%>
+                <col width="*"/><%--주소--%>
               </colgroup>
               <thead>
                 <tr class="bg-gray text-align-center">
@@ -129,6 +131,8 @@
                   <td>회원명</td>
                   <td>구분</td>
                   <td>전화번호</td>
+                  <td>위도</td>
+                  <td>경도</td>
                   <td>사용시작일자</td>
                   <td>사용종료일자</td>
                   <td>폰번호</td>
@@ -146,6 +150,8 @@
                     <td>${items.name}</td>
                     <td><c:if test="${items.gubun eq 1}">약국</c:if><c:if test="${items.gubun eq 2}">병원</c:if></td>
                     <td>${items.telephone}</td>
+                    <td>${items.latitude}</td>
+                    <td>${items.longitude}</td>
                     <td>${items.usestartdate}</td>
                     <td>${items.useenddate}</td>
                     <td>${items.handphone}</td>

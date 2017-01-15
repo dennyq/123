@@ -3,7 +3,9 @@
 <head>
   <title>PHARMACY4U</title>
 </head>
+<div style="height:40%;"></div>
 <div class="login-wrapper">
+  <%--<img src="/imgs/bg_logbox.png" style="position: relative;width: 860px"/>--%>
   <div class="login-box">
     <div class="left-left">
       <div style="height: 10px;"></div>
@@ -13,6 +15,7 @@
       <div style="height: 10px;"></div>
     </div>
     <div class="right-left">
+
       <div class="login-box-body">
         <form method="post">
           <label for="famers-id"><img src="/imgs/img_m_id.png" class="img-margin"/>아이디</label>
@@ -42,14 +45,14 @@
 <!-- /.login-box -->
 </div>
 
-
+<div style="height:30%;"></div>
 
 <script>
   $(function () {
 
     var windowHeight = $(window).height();
     var footerHeight = 50;
-    var loginHeight = 290;
+    var loginHeight = -100;
 //    console.log(windowHeight);
 
     $('.upper-logo').css('height',windowHeight-footerHeight-loginHeight+'px');

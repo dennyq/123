@@ -72,10 +72,10 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="telephone" class="col-sm-4 ">자택전화</label>
+                    <label for="telephone" class="col-sm-4 ">전화번호</label>
 
                     <div class="col-sm-6">
-                      <input name="telephone"  id="telephone" placeholder="자택전화" class="form-control" value="${data.telephone}">
+                      <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control" value="${data.telephone}">
                     </div>
                   </div>
 
