@@ -1,50 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
-
 <input type="hidden"  name="isNew" value="Y"/>
-<input type="hidden"  name="openflag" value="0"/>
-<input type="hidden"  name="deleteyn" value="0"/>
+
 <!-- left input start -->
+<div class="col-md-12">
+  <div class="form-group">
+    <label for="adtitle" class="col-sm-2 ">광고 제목</label>
+    <div class="col-sm-8">
+      <input name="adtitle"  id="adtitle" placeholder="광고 제목" class="form-control"/>
+      <input type="hidden" id="adCheck" value="N"/>
+    </div>
+    <span class="col-sm-1"><a id="ad_check" class="btn btn-blue-green btn-flat md-height" onmouseover="chageImgSrc(this);" style="width: 100%">검색</a></span>
+  </div>
+</div>
+
+
 <div class="col-md-6">
+
   <div class="form-group">
-    <label for="memberid" class="col-sm-4 ">광고 제목</label>
-    <div class="col-sm-4">
-      <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" style="    width:130px">
-    </div>
-    <a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png" style="margin-left: -25px;"/></a>
-    <input type="hidden" id="idCheck" value="N"/>
-  </div>
-  <div class="form-group">
-    <label for="password" class="col-sm-4 ">광고주명</label>
+    <label for="adowner" class="col-sm-4 ">광고주명</label>
     <div class="col-sm-6">
-      <input name="password"  id="password" placeholder="비밀번호" class="form-control">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="name" class="col-sm-4 ">광고주연락처</label>
-    <div class="col-sm-6">
-      <input name="name"  id="name" placeholder="회원명" class="form-control">
+      <input name="adowner"  id="adowner" placeholder="광고주명" class="form-control">
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="address" class="col-sm-4 ">주소</label>
-    <div class="col-sm-6">
-      <input name="address"  id="address" placeholder="주소" class="form-control" >
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="telephone" class="col-sm-4 ">전화번호</label>
-    <div class="col-sm-6">
-      <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control">
-    </div>
-  </div>
-  <div class="form-group" style="display: none">
-    <label for="latitude" class="col-sm-4 ">위도</label>
-    <div class="col-sm-6">
-      <input type="hidden" name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
-    </div>
-  </div>
+
   <div class="form-group">
     <label for="usestartdate" class="col-sm-4 ">사용시작일자</label>
     <div class="col-sm-6">
@@ -57,52 +37,25 @@
 <!-- right input start -->
 <div class="col-md-6 right">
   <div class="form-group">
-    <label for="name" class="col-sm-4 ">구분선택</label>
-    <div class="col-sm-6" style="height: 34px">
-      <input type="radio" name="gubun" value="1" checked>약국&nbsp;
-      <input type="radio" name="gubun" value="2">병원
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="cfrm_password" class="col-sm-4 ">비밀번호확인</label>
+    <label for="telephone" class="col-sm-4 ">광고주연락처</label>
     <div class="col-sm-6">
-      <input name="cfrm_password" id="cfrm_password" placeholder="비밀번호확인" class="form-control" type="password" >
+      <input name="telephone"  id="telephone" placeholder="회원명" class="form-control">
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-4 "></label>
-    <div class="col-sm-6" style="height: 34px">
-      <input type="hidden">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="address_etc" class="col-sm-4 ">기타주소</label>
-    <div class="col-sm-6">
-      <input name="address_etc"  id="address_etc" placeholder="기타주소" class="form-control">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="handphone" class="col-sm-4 ">휴대폰</label>
-    <div class="col-sm-6">
-      <input name="handphone"  id="handphone" placeholder="휴대폰" class="form-control">
-    </div>
-  </div>
-  <div class="form-group" style="display: none">
-    <label for="longitude" class="col-sm-4 ">경도</label>
-    <div class="col-sm-6">
-      <input type="hidden" name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
-    </div>
-  </div>
+
   <div class="form-group">
     <label for="useenddate" class="col-sm-4 ">사용종료일자</label>
     <div class="col-sm-6">
       <input name="useenddate"  id="useenddate" placeholder="사용종료일자" class="form-control datepicker">
     </div>
   </div>
+
+</div>
+<div class="col-md-12">
   <div class="form-group">
-    <label for="introduce" class="col-sm-4 ">소개</label>
-    <div class="col-sm-6">
-      <input name="introduce"  id="introduce" placeholder="소개" class="form-control">
+    <label for="filename" class="col-sm-2 ">광고 파일</label>
+    <div class="col-sm-9">
+      <input name="filename"  id="filename" placeholder="광고 파일" class="form-control"  type="file">
     </div>
   </div>
 </div>
