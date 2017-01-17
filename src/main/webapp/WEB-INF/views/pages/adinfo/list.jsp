@@ -5,18 +5,18 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>회원 관리</title>
+  <title>광고 조회</title>
 </head>
 <body>
   <section class="content-header">
     <h1>
-      회원 관리
+      광고 조회
     </h1>
     <div class="breadcrumb-line"></div>
     <ol class="breadcrumb">
       <li><a href="<c:url value="/"/>">HOME</a></li>
-      <li ><a href="<c:url value="/member/list"/>">회원 정보</a></li>
-      <li ><a href="<c:url value="/member/list"/>">회원 정보 조회</a></li>
+      <li ><a href="<c:url value="/member/list"/>">광고 관리</a></li>
+      <li ><a href="<c:url value="/member/list"/>">광고 조회</a></li>
     </ol>
   </section>
 
@@ -29,7 +29,7 @@
         <!-- bottom-25 start -->
         <div class="bottom-25">
           <div class="box-header-sm">
-            <h3 class="box-title">회원 조회</h3>
+            <h3 class="box-title">광고 조회</h3>
           </div>
           <!-- form start -->
           <form id="searchFrm" action="<c:url value="/member/search"/>" class="form-horizontal" method="post">
@@ -106,7 +106,7 @@
       <div class="col-md-12">
         <div class="">
           <div class="box-header-sm">
-            <h3 class="box-title">회원 조회 결과</h3>
+            <h3 class="box-title">광고 조회 결과</h3>
           </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">

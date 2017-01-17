@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hs.web.mapper.MemberMapper">
+<mapper namespace="com.hs.web.mapper.AdInfoMapper">
 
   <sql id="listConditions">
     WHERE 1=1 AND deleteyn = 0
@@ -20,9 +20,6 @@
     <if test='sch_useenddate != null and sch_useenddate != ""'>
       AND A.useenddate  LIKE CONCAT('%', #{sch_useenddate},'%')
     </if>
-    <if test='sch_regtime != null and sch_regtime != ""'>
-      AND A.regtime  LIKE CONCAT('%', #{sch_regtime},'%')
-    </if>
     <if test='sch_handphone != null and sch_handphone != ""'>
       AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
     </if>
@@ -37,26 +34,17 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-      A.memberid,
-      A.password,
-      A.grade,
-      A.gubun,
-      A.openflag,
-      A.name,
+      A.adindex,
+      A.adtitle,
+      A.adowner,
       A.telephone,
-      A.handphone,
-      A.address,
-      A.address_etc,
-      A.introduce,
-      A.latitude,
-      A.longitude,
-    DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-    DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-      A.deleteyn,
-      A.lastconnecttime,
-    DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+      A.usestartdate,
+      A.useenddate,
+      A.playorder,
+      A.filename,
+      A.regtime
     FROM member A
-    <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
+    <include refid="com.hs.web.mapper.AdInfoMapper.listConditions"/>
     ORDER BY A.regtime DESC
     <include refid="com.hs.web.mapper.paging_end"/>
   </select>
@@ -64,7 +52,7 @@
   <select id="listCnt" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM member A
-    <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
+    <include refid="com.hs.web.mapper.AdInfoMapper.listConditions"/>
   </select>
 
   <select id="idCheck" parameterType="dbmap" resultType="int">
@@ -100,11 +88,11 @@
         A.introduce,
         A.latitude,
         A.longitude,
-      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
+        A.usestartdate,
+        A.useenddate,
         A.deleteyn,
         A.lastconnecttime,
-      DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+        A.regtime
     FROM member A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>
