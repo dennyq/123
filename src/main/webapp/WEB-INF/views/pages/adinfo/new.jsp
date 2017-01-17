@@ -7,7 +7,7 @@
 <!-- left input start -->
 <div class="col-md-6">
   <div class="form-group">
-    <label for="memberid" class="col-sm-4 ">아이디</label>
+    <label for="memberid" class="col-sm-4 ">광고 제목</label>
     <div class="col-sm-4">
       <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" style="    width:130px">
     </div>
@@ -15,13 +15,13 @@
     <input type="hidden" id="idCheck" value="N"/>
   </div>
   <div class="form-group">
-    <label for="password" class="col-sm-4 ">비밀번호</label>
+    <label for="password" class="col-sm-4 ">광고주명</label>
     <div class="col-sm-6">
-      <input name="password" type="password"  id="password" placeholder="비밀번호" class="form-control">
+      <input name="password"  id="password" placeholder="비밀번호" class="form-control">
     </div>
   </div>
   <div class="form-group">
-    <label for="name" class="col-sm-4 ">회원명</label>
+    <label for="name" class="col-sm-4 ">광고주연락처</label>
     <div class="col-sm-6">
       <input name="name"  id="name" placeholder="회원명" class="form-control">
     </div>

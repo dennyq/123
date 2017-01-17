@@ -5,18 +5,18 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>광고 조회</title>
+  <title>광고 관리</title>
 </head>
 <body>
   <section class="content-header">
     <h1>
-      광고 조회
+      광고 관리
     </h1>
     <div class="breadcrumb-line"></div>
     <ol class="breadcrumb">
       <li><a href="<c:url value="/"/>">HOME</a></li>
-      <li ><a href="<c:url value="/member/list"/>">광고 관리</a></li>
-      <li ><a href="<c:url value="/member/list"/>">광고 조회</a></li>
+      <li ><a href="<c:url value="/member/list"/>">광고 정보</a></li>
+      <li ><a href="<c:url value="/member/list"/>">광고 정보 조회</a></li>
     </ol>
   </section>
 
@@ -44,9 +44,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">회원명</label>
+                  <label for="sch_name" class="col-sm-4 ">광고명</label>
                   <div class="col-sm-6">
-                    <input name="sch_name"  id="sch_name" placeholder="회원명" class="form-control" value="${sch_name}">
+                    <input name="sch_name"  id="sch_name" placeholder="광고명" class="form-control" value="${sch_name}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -113,7 +113,7 @@
               <colgroup>
                 <col width="1%"/><%--번호--%>
                 <col width="7%"/><%--아이디--%>
-                <col width="7%"/><%--회원명--%>
+                <col width="7%"/><%--광고명--%>
                 <col width="5%"/><%--구분--%>
                 <col width="10%"/><%--전화번호--%>
                 <col width="10%"/><%--위도--%>
@@ -128,7 +128,7 @@
                 <tr class="bg-gray text-align-center">
                   <td>번호</td>
                   <td>아이디</td>
-                  <td>회원명</td>
+                  <td>광고명</td>
                   <td>구분</td>
                   <td>전화번호</td>
                   <td>위도</td>
@@ -223,7 +223,7 @@
     $('ul.sidebar-menu li.treeview').each(function(index){
       $(this).removeClass('active');
       var menu = $(this).attr('menu');
-      if(menu=='회원관리'){
+      if(menu=='광고관리'){
         $(this).addClass('active')
       }
     });

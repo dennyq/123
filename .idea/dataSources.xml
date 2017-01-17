@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="279990133">
-    <data-source source="LOCAL" name="MySQL - ifarmers@iriwa.iptime.org" uuid="1e3f5682-5472-4622-93d4-b8cad9344e19">
-      <driver-ref>mysql</driver-ref>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://iriwa.iptime.org:3306/ifarmers</jdbc-url>
-      <driver-properties>
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-      </driver-properties>
-      <libraries />
-    </data-source>
+  <component name="DataSourceManagerImpl" format="xml" hash="713386580">
     <data-source source="LOCAL" name="MySQL - ifarmers@localhost" uuid="7abd749d-00d0-4605-88ad-6ab16e8289ad">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

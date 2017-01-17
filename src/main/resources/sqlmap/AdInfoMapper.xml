@@ -4,7 +4,7 @@
 <mapper namespace="com.hs.web.mapper.AdInfoMapper">
 
   <sql id="listConditions">
-    WHERE 1=1 AND deleteyn = 0
+    WHERE 1=1
     <if test='sch_memberid != null and sch_memberid != ""'>
       AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
     </if>
@@ -20,6 +20,9 @@
     <if test='sch_useenddate != null and sch_useenddate != ""'>
       AND A.useenddate  LIKE CONCAT('%', #{sch_useenddate},'%')
     </if>
+    <if test='sch_regtime != null and sch_regtime != ""'>
+      AND A.regtime  LIKE CONCAT('%', #{sch_regtime},'%')
+    </if>
     <if test='sch_handphone != null and sch_handphone != ""'>
       AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
     </if>
@@ -34,16 +37,16 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-      A.adindex,
-      A.adtitle,
-      A.adowner,
-      A.telephone,
-      A.usestartdate,
-      A.useenddate,
-      A.playorder,
-      A.filename,
-      A.regtime
-    FROM member A
+    A.adindex,
+    A.adtitle,
+    A.adowner,
+    A.telephone,
+    A.usestartdate,
+    A.useenddate,
+    A.playorder,
+    A.filename,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+    FROM adinfo A
     <include refid="com.hs.web.mapper.AdInfoMapper.listConditions"/>
     ORDER BY A.regtime DESC
     <include refid="com.hs.web.mapper.paging_end"/>
@@ -51,165 +54,69 @@
 
   <select id="listCnt" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM member A
+    FROM adinfo A
     <include refid="com.hs.web.mapper.AdInfoMapper.listConditions"/>
-  </select>
-
-  <select id="idCheck" parameterType="dbmap" resultType="int">
-    SELECT COUNT(*) AS cnt
-    FROM member A
-      WHERE 1=1 AND deleteyn = 0 AND A.memberid  = #{memberid}
-  </select>
-
-  <select id="idPwCheck" parameterType="dbmap" resultType="int">
-    SELECT COUNT(*) AS cnt
-    FROM member A
-    WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
-  </select>
-
-    <select id="idPwDelChk" parameterType="dbmap" resultType="int">
-        SELECT COUNT(*) AS cnt
-        FROM member A
-        WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
-    </select>
+  </select>  
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-        A.memberid,
-        A.password,
-        A.grade,
-        A.gubun,
-        A.openflag,
-        A.name,
-        A.telephone,
-        A.handphone,
-        A.address,
-        A.address_etc,
-        A.introduce,
-        A.latitude,
-        A.longitude,
-        A.usestartdate,
-        A.useenddate,
-        A.deleteyn,
-        A.lastconnecttime,
-        A.regtime
-    FROM member A
+      A.adindex	,
+      A.adtitle	,
+      A.adowner	,
+      A.telephone	,
+      A.usestartdate	,
+      A.useenddate	,
+      A.playorder	,
+      A.filename	,
+      DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+    FROM adinfo A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>
 
   <insert id="insert" parameterType="dbmap">
-    INSERT INTO member (
-      memberid,
-      password,
-      grade,
-      gubun,
-      openflag,
-      name,
-      telephone,
-      handphone,
-      address,
-      address_etc,
-      introduce,
-      latitude,
-      longitude,
-      usestartdate,
-      useenddate,
-      deleteyn,
-      lastconnecttime,
-      regtime
+    INSERT INTO adinfo (
+    adindex,
+    adtitle,
+    adowner,
+    telephone,
+    usestartdate,
+    useenddate,
+    playorder,
+    filename,   
+    regtime
     )
     VALUES (
-      #{memberid},
-      #{password},
-      #{grade},
-      #{gubun},
-      #{openflag},
-      #{name},
-      #{telephone},
-      #{handphone},
-      #{address},
-      #{address_etc},
-      #{introduce},
-      #{latitude},
-      #{longitude},
-      #{usestartdate},
-      #{useenddate},
-      #{deleteyn},
-      #{lastconnecttime},
-      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    #{adindex},
+    #{adtitle},
+    #{adowner},
+    #{telephone},
+    #{usestartdate},
+    #{useenddate},
+    #{playorder},
+    #{filename},    
+    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
     <selectKey resultType="int" keyProperty="memberid" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
 
-  <update id="changePwd" parameterType="dbmap">
-    UPDATE member SET password = #{newPassword}
-    WHERE 1=1
-    AND memberid = #{memberid}
-  </update>
-
 
   <update id="update" parameterType="dbmap">
-    UPDATE member
+    UPDATE adinfo
     <set>
-      <if test='memberid != null and memberid != ""'>memberid= #{memberid},</if>
-      <if test='password != null and password != ""'>password= #{password},</if>
-      <if test='grade != null and grade != ""'>grade= #{grade},</if>
-      <if test='gubun != null and gubun != ""'>gubun= #{gubun},</if>
-      <if test='openflag != null and openflag != ""'>openflag= #{openflag},</if>
-      <if test='name != null and name != ""'>name= #{name},</if>
-      <if test='telephone != null and telephone != ""'>telephone= #{telephone},</if>
-      <if test='handphone != null and handphone != ""'>handphone= #{handphone},</if>
-      <if test='address != null and address != ""'>address= #{address},</if>
-      <if test='address_etc != null and address_etc != ""'>address_etc= #{address_etc},</if>
-      <if test='introduce != null and introduce != ""'>introduce= #{introduce},</if>
-      <if test='latitude != null and latitude != ""'>latitude= #{latitude},</if>
-      <if test='longitude != null and longitude != ""'>longitude= #{longitude},</if>
-      <if test='usestartdate != null and usestartdate != ""'>usestartdate= #{usestartdate},</if>
-      <if test='useenddate != null and useenddate != ""'>useenddate= #{useenddate},</if>
-      <if test='deleteyn != null and deleteyn != ""'>deleteyn= #{deleteyn},</if>
-      <if test='lastconnecttime != null and lastconnecttime != ""'>lastconnecttime= #{lastconnecttime},</if>
+      <if test='adindex != null and adindex != ""'>adindex = #{adindex},</if>
+      <if test='adtitle != null and adtitle != ""'>adtitle = #{adtitle},</if>
+      <if test='adowner != null and adowner != ""'>adowner = #{adowner},</if>
+      <if test='telephone != null and telephone != ""'>telephone = #{telephone},</if>
+      <if test='usestartdate != null and usestartdate != ""'>usestartdate = #{usestartdate},</if>
+      <if test='useenddate != null and useenddate != ""'>useenddate = #{useenddate},</if>
+      <if test='playorder != null and playorder != ""'>playorder = #{playorder},</if>
+      <if test='filename != null and filename != ""'>filename = #{filename},</if>
       <if test='regtime != null and regtime != ""'>regtime= DATE_FORMATNOW()+0,'%Y%m%d%H%i%s')</if>
     </set>
     WHERE 1=1
-    AND memberid = #{memberid}
+    AND adindex = #{adindex}
   </update>
-
-  <update id="updateHitcount" parameterType="dbmap">
-    UPDATE member
-    set hitcount = hitcount+1
-    WHERE 1=1
-    AND memberid = #{memberid}
-  </update>
-
-
-  <delete id="delete" parameterType="dbmap">
-    UPDATE member
-    SET deleteyn	 = 1
-    WHERE 1=1
-    AND memberid = #{memberid}
-
-  </delete>
-
-
-    <delete id="restore" parameterType="dbmap">
-        UPDATE member
-        SET deleteyn	 = 0
-        WHERE 1=1
-        AND memberid = #{memberid}
-
-    </delete>
-
-
-  <update id="initailizePwd" parameterType="dbmap">
-    UPDATE member
-    SET password= '1234'
-    WHERE 1=1
-    AND memberid = #{memberid}
-  </update>
-
-
-
 
 </mapper>

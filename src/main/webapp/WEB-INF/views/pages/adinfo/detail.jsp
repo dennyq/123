@@ -4,17 +4,17 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>회원 관리</title>
+  <title>광고 관리</title>
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
 <section class="content-header">
   <h1>
     <c:if test="${empty data && changePwd ne 'Y'}">
-      회원등록
+      광고등록
     </c:if>
     <c:if test="${not empty data && changePwd ne 'Y'}">
-      회원상세
+      광고상세
     </c:if>
     <c:if test="${changePwd eq 'Y'}">
       비밀번호변경
@@ -24,9 +24,9 @@
 
   <ol class="breadcrumb">
     <li><a href="<c:url value="/"/>">HOME</a></li>
-    <li><a href="<c:url value="/member/list"/>">회원</a></li>
+    <li><a href="<c:url value="/member/list"/>">광고</a></li>
     <li>
-      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
+      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">광고등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">광고상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
     </li>
   </ol>
 </section>
@@ -244,7 +244,7 @@
     $('ul.sidebar-menu li.treeview').each(function(index){
       $(this).removeClass('active');
       var menu = $(this).attr('menu');
-      if(menu=='회원관리'){
+      if(menu=='광고관리'){
         $(this).addClass('active')
       }
     });

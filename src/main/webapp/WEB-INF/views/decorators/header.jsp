@@ -34,8 +34,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">광고 관리</a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">광고등록</a></li>
-              <li><a href="#">광고조회</a></li>
+              <li><a href="/adinfo/detail">광고등록</a></li>
+              <li><a href="/adinfo/list">광고조회</a></li>
             </ul>
           </li>
           <li class="dropdown">
