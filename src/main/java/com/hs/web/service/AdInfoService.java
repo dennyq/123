@@ -81,50 +81,23 @@ public class AdInfoService extends ServiceBase {
   public ResultMap save(RequestMap req) throws IOException {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[main save] recv:{}", req);
-    String joindate =  req.get("joindate")+"";
+
     String usestartdate =  req.get("usestartdate")+"";
     String useenddate =  req.get("useenddate")+"";
-    String longitude =  req.get("longitude")+"";
-    String latitude =  req.get("latitude")+"";
-    longitude = longitude.equals("")?"0":longitude;
-    latitude = latitude.equals("")?"0":latitude;
-    double longitudeDouble =  Double.parseDouble(longitude);
-    double latitudeDouble =  Double.parseDouble(latitude);
-    req.put("longitude",longitudeDouble);
-    req.put("latitude",latitudeDouble);
 
 
-    req.put("joindate",joindate.replace(".",""));
+
+
     req.put("usestartdate",usestartdate.replace(".",""));
     req.put("useenddate",useenddate.replace(".",""));
 
-    int idPwCheckCnt = mapper.idPwCheck(req);
+
 
     if(req.get("isNew").equals("Y")){
-      if(req.get("memberid").equals("admin")){
-        req.put("grade","1");
-      }else {
-        req.put("grade","2");
-      }
 
-      if (idPwCheckCnt != 0) {
-        throw new BizException("9009","id_exist");
-      }
-
-      int idPwDelChk = mapper.idPwDelChk(req);
-      logger.info("idPwDelChk={}",idPwDelChk);
-
-      if(idPwDelChk==1){
-        //삭제했으니 delyn 원복
-        mapper.restore(req);
-        mapper.update(req);
-      }else{
         mapper.insert(req);
-      }
 
     }else{
-
-
 
       mapper.update(req);
     }
