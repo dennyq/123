@@ -15,8 +15,8 @@
     <div class="breadcrumb-line"></div>
     <ol class="breadcrumb">
       <li><a href="<c:url value="/"/>">HOME</a></li>
-      <li ><a href="<c:url value="/member/list"/>">광고 정보</a></li>
-      <li ><a href="<c:url value="/member/list"/>">광고 정보 조회</a></li>
+      <li ><a href="<c:url value="/adinfo/list"/>">광고 정보</a></li>
+      <li ><a href="<c:url value="/adinfo/list"/>">광고 정보 조회</a></li>
     </ol>
   </section>
 
@@ -32,49 +32,40 @@
             <h3 class="box-title">광고 조회</h3>
           </div>
           <!-- form start -->
-          <form id="searchFrm" action="<c:url value="/member/search"/>" class="form-horizontal" method="post">
+          <form id="searchFrm" action="<c:url value="/adinfo/search"/>" class="form-horizontal" method="post">
             <!-- box-body start -->
             <div class="box-body bg-gray">
               <!-- left col-md-6 start -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="sch_adtitle" class="col-sm-4 ">광고제목</label>
+                  <div class="col-sm-8">
+                    <input name="sch_adtitle"  id="sch_adtitle" placeholder="아이디" class="form-control" value="${sch_adtitle}">
+                  </div>
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="sch_memberid" class="col-sm-4 ">아이디</label>
+                  <label for="sch_adowner" class="col-sm-4 ">광고주명</label>
                   <div class="col-sm-6">
-                    <input name="sch_memberid"  id="sch_memberid" placeholder="아이디" class="form-control" value="${sch_memberid}">
+                    <input name="sch_adowner"  id="sch_adowner" placeholder="광고명" class="form-control" value="${sch_adowner}">
                   </div>
                 </div>
+
                 <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">광고명</label>
+                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
                   <div class="col-sm-6">
-                    <input name="sch_name"  id="sch_name" placeholder="광고명" class="form-control" value="${sch_name}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
-                  <div class="col-sm-6">
-                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sch_handphone" class="col-sm-4 ">휴대폰</label>
-                  <div class="col-sm-6">
-                    <input name="sch_handphone"  id="sch_handphone" placeholder="휴대폰" class="form-control" value="${sch_handphone}">
+                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${sch_usestartdate}">
                   </div>
                 </div>
               </div>
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
               <div class="col-md-6 right">
-                <%--<div class="form-group">--%>
-                  <%--<label for="sch_regtime" class="col-sm-4 ">가입일자</label>--%>
-                  <%--<div class="col-sm-6">--%>
-                    <%--<input name="sch_regtime"  id="sch_regtime" placeholder="가입일자" class="form-control datepicker" value="${sch_regtime}">--%>
-                  <%--</div>--%>
-                <%--</div>--%>
                 <div class="form-group">
-                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
+                  <label for="sch_telephone" class="col-sm-4 ">광고주연락처</label>
                   <div class="col-sm-6">
-                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${sch_usestartdate}">
+                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -83,12 +74,7 @@
                     <input name="sch_useenddate"  id="sch_useenddate" placeholder="사용종료일자" class="form-control datepicker" value="${sch_useenddate}">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="sch_introduce" class="col-sm-4 ">소개</label>
-                  <div class="col-sm-6">
-                    <input name="sch_introduce"  id="sch_introduce" placeholder="소개" class="form-control" value="${sch_introduce}">
-                  </div>
-                </div>
+
               </div>
               <!--// right col-md-6 end-->
             </div>
@@ -112,62 +98,46 @@
             <table class="table table-hover pointer">
               <colgroup>
                 <col width="1%"/><%--번호--%>
-                <col width="7%"/><%----%>
-                <col width="7%"/><%--광고명--%>
-                <col width="5%"/><%--구분--%>
-                <col width="10%"/><%--전화번호--%>
-                <col width="10%"/><%--위도--%>
-                <col width="10%"/><%--경도--%>
-                <col width="8%"/><%--사용시작일자--%>
-                <col width="8%"/><%--사용종료일자--%>
-                <col width="13%"/><%--폰번호--%>
-                <col width="5%"/><%--소개--%>
-                <col width="*"/><%--주소--%>
+                <col width="7%"/><%--광고제목--%>
+                <col width="7%"/><%--광고주명--%>
+                <col width="5%"/><%--광고주연락처--%>
+                <col width="10%"/><%--사용시작일자--%>
+                <col width="10%"/><%--사용종료일자--%>
+                <col width="10%"/><%--등록시간--%>
+                <col width="8%"/><%--동영상미리보기--%>
+                <col width="4%"/><%--플레이순서(위로이동)--%>
+                <col width="4%"/><%--플레이순서(위로이동)--%>
+
               </colgroup>
               <thead>
                 <tr class="bg-gray text-align-center">
                   <td>번호</td>
-                  <td>아이디</td>
-                  <td>광고명</td>
-                  <td>구분</td>
-                  <td>전화번호</td>
-                  <td>위도</td>
-                  <td>경도</td>
+                  <td>광고제목</td>
+                  <td>광고주명</td>
+                  <td>광고주연락처</td>
                   <td>사용시작일자</td>
                   <td>사용종료일자</td>
-                  <td>폰번호</td>
-                  <td>소개</td>
-                  <td>주소</td>
+                  <td>등록시간</td>
+                  <td>동영상미리보기</td>
+                  <td>플레이순서(위로이동)</td>
+                  <td>플레이순서(위로이동)</td>
                 </tr>
               </thead>
               <tbody>
               <c:if test="${not empty rows}">
                 <c:forEach items="${rows}" var="items" varStatus="idx">
                   <input type="hidden" id="isClicked"/>
-                  <tr class="clickTr" idx="${items.memberid}">
-                    <td>${total-(pageTimes)-idx.count+1}</td>
-                    <td>${items.memberid}</td>
-                    <td>${items.name}</td>
-                    <td><c:if test="${items.gubun eq 1}">약국</c:if><c:if test="${items.gubun eq 2}">병원</c:if></td>
-                    <td>${items.telephone}</td>
-                    <td>
-                    ${items.latitude}
-                    </td>
-                    <td>
-                    ${items.longitude}
-                    </td>
-                    <td>${items.usestartdate}</td>
-                    <td>${items.useenddate}</td>
-                    <td>${items.handphone}</td>
-                    <td>
-                      ${fn:substring(items.introduce, 0, 8)}
-                      <c:if test="${fn:length(items.introduce)>8}">...</c:if>
-
-                    </td>
-                    <td>
-                        ${fn:substring(items.address, 0, 8)}
-                      <c:if test="${fn:length(items.address)>8}">...</c:if>
-                    </td>
+                  <tr class="clickTr" idx="${items.adindex}">
+                    <td>${total-(pageTimes)-idx.count+1}</td><%--번호--%>
+                    <td>${items.adtitle}</td><%--광고제목--%>
+                    <td>${items.adowner}</td><%--광고주명--%>
+                    <td>${items.telephone}</td><%--광고주연락처--%>
+                    <td>${items.usestartdate}</td><%--사용시작일자--%>
+                    <td>${items.useenddate}</td><%--사용종료일자--%>
+                    <td>${items.regtime}</td><%--등록시간--%>
+                    <td><a href="#">보기</a></td><%--동영상미리보기--%>
+                    <td>${items.playorder}</td><%--플레이순서(위로이동)--%>
+                    <td>${items.playorder}</td><%--플레이순서(위로이동)--%>
                   </tr>
                 </c:forEach>
               </c:if>
@@ -197,7 +167,7 @@
   <!-- /.content -->
 <center>
   <div class="btn-box">
-    <a id="addBtn" class="pointer btn btn-blue-green btn-flat md-height" href="<c:url value="/member/detail"/>">등록</a>
+    <a id="addBtn" class="pointer btn btn-blue-green btn-flat md-height" href="<c:url value="/adinfo/detail"/>">등록</a>
     <a id="selectBtn" class="pointer btn btn-default btn-flat md-height" > 수정</a>
   </div>
 </center>
@@ -249,17 +219,17 @@
 
     $('.clickTr').on('dblclick',function(){
       var idx = $(this).attr('idx');
-      location.href = '/member/detail/' + idx;
+      location.href = '/adinfo/detail/' + idx;
     });
 
 
     $('#selectBtn').click(function(){
       var idx = $('#isClicked').val();
       console.log('idx : '+idx);
-      location.href = '/member/detail/' + idx;
+      location.href = '/adinfo/detail/' + idx;
 
       <%--var change_uid = $('#isClicked').val();--%>
-      <%--location.href = '<c:url value="/member/change/"/>'+change_uid;--%>
+      <%--location.href = '<c:url value="/adinfo/change/"/>'+change_uid;--%>
     });
 
     $('#searchClear').click(function(){
@@ -268,7 +238,7 @@
 
     $('.page').click(function(){
       var page = $(this).attr('page');
-      location.href = '/member/list/' + page;
+      location.href = '/adinfo/list/' + page;
     });
 
   });

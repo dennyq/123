@@ -5,14 +5,17 @@
 
   <sql id="listConditions">
     WHERE 1=1
-    <if test='sch_memberid != null and sch_memberid != ""'>
-      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    <if test='sch_adindex != null and sch_adindex != ""'>
+      AND A.adindex  LIKE CONCAT('%', #{sch_adindex},'%')
     </if>
-    <if test='sch_address != null and sch_address != ""'>
-      AND A.address  LIKE CONCAT('%', #{sch_address},'%')
+    <if test='sch_adtitle != null and sch_adtitle != ""'>
+      AND A.adtitle  LIKE CONCAT('%', #{sch_adtitle},'%')
     </if>
-    <if test='sch_name != null and sch_name != ""'>
-      AND A.name  LIKE CONCAT('%', #{sch_name},'%')
+    <if test='sch_adowner != null and sch_adowner != ""'>
+      AND A.adowner  LIKE CONCAT('%', #{sch_adowner},'%')
+    </if>
+    <if test='sch_telephone != null and sch_telephone != ""'>
+      AND A.telephone  LIKE CONCAT('%', #{sch_telephone},'%')
     </if>
     <if test='sch_usestartdate != null and sch_usestartdate != ""'>
       AND A.usestartdate  LIKE CONCAT('%', #{sch_usestartdate},'%')
@@ -20,18 +23,13 @@
     <if test='sch_useenddate != null and sch_useenddate != ""'>
       AND A.useenddate  LIKE CONCAT('%', #{sch_useenddate},'%')
     </if>
-    <if test='sch_regtime != null and sch_regtime != ""'>
-      AND A.regtime  LIKE CONCAT('%', #{sch_regtime},'%')
+    <if test='sch_playorder != null and sch_playorder != ""'>
+      AND A.playorder  LIKE CONCAT('%', #{sch_playorder},'%')
     </if>
-    <if test='sch_handphone != null and sch_handphone != ""'>
-      AND A.handphone  LIKE CONCAT('%', #{sch_handphone},'%')
+    <if test='sch_filename != null and sch_filename != ""'>
+      AND A.filename  LIKE CONCAT('%', #{sch_filename},'%')
     </if>
-    <if test='sch_telephone != null and sch_telephone != ""'>
-      AND A.telephone  LIKE CONCAT('%', #{sch_telephone},'%')
-    </if>
-    <if test='sch_introduce != null and sch_introduce != ""'>
-      AND A.introduce  LIKE CONCAT('%', #{sch_introduce},'%')
-    </if>
+
   </sql>
 
   <select id="list" parameterType="dbmap" resultType="dbmap">
