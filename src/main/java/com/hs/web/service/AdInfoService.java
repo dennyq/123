@@ -38,9 +38,12 @@ public class AdInfoService extends ServiceBase {
 
     DbList list = mapper.list(req);
     int total = mapper.listCnt(req);
-    DbMap playOrderMinMax = mapper.getPlayOrderMinMax(req);
-    res.put("playordermin",playOrderMinMax.get("playordermin"));
-    res.put("playordermax",playOrderMinMax.get("playordermax"));
+    if(total>=1){
+      DbMap playOrderMinMax = mapper.getPlayOrderMinMax(req);
+      res.put("playordermin",playOrderMinMax.get("playordermin"));
+      res.put("playordermax",playOrderMinMax.get("playordermax"));
+
+    }
 
     res.put("total", total);
     res.put("rows", list);
