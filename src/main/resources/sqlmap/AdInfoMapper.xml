@@ -38,8 +38,8 @@
     A.adtitle,
     A.adowner,
     A.telephone,
-    A.usestartdate,
-    A.useenddate,
+    DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+    DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
     A.playorder,
     A.filename,
     DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
@@ -61,8 +61,8 @@
       A.adtitle,
       A.adowner,
       A.telephone,
-      A.usestartdate,
-      A.useenddate,
+      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       A.playorder,
       A.filename,
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
@@ -129,6 +129,14 @@
     WHERE 1=1
     AND adindex = #{adindex}
   </update>
+
+  <update id="upPlayOrderOther" parameterType="dbmap">
+    UPDATE adinfo
+    SET playorder = #{playorder}+1
+    WHERE 1=1
+    AND playorder = #{playorder1}-1
+  </update>
+
   <update id="downPlayOrder" parameterType="dbmap">
     UPDATE adinfo
     SET playorder = #{playorder}+1
@@ -136,5 +144,15 @@
     AND adindex = #{adindex}
   </update>
 
+  <update id="downPlayOrderOther" parameterType="dbmap">
+    UPDATE adinfo
+    SET playorder = #{playorder}-1
+    WHERE 1=1
+    AND playorder = #{playorder}+1
+  </update>
+
+  <select id="getPlayOrderMinMax" parameterType="dbmap" resultType="dbmap">
+    SELECT min(playorder) "playordermin", max(playorder) "playordermax" from adinfo
+  </select>
 
 </mapper>

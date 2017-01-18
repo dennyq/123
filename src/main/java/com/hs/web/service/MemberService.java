@@ -30,7 +30,7 @@ public class MemberService extends ServiceBase {
   public ResultMap list(RequestMap req) {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[main list] recv:{}", req);
-    req.put("rows", "3");
+    req.put("rows", "10");
     setPaging(req);
     if (Global.isDev) logger.debug("[list] recv:{}", req);
 

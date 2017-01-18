@@ -744,7 +744,7 @@ function swapOverImg(thisObj,addStr){
 }
 function swapOutImg(thisObj,addStr){
     var src =$(thisObj).attr('src').split('.')[0];
-    console.log(src.indexOf(addStr));
+
     src = src.substring(0,src.indexOf(addStr));
     var ext =$(thisObj).attr('src').split('.')[1];
     $(thisObj).attr('src', src  +'.'+ ext);

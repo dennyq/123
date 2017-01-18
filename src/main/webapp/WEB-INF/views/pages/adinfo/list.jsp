@@ -128,16 +128,16 @@
                 <c:forEach items="${rows}" var="items" varStatus="idx">
                   <input type="hidden" id="isClicked"/>
                   <tr class="clickTr" idx="${items.adindex}">
-                    <td>${total-(pageTimes)-idx.count+1}</td><%--번호--%>
+                    <td>${(pageTimes)+idx.count}</td><%--번호--%>
                     <td>${items.adtitle}</td><%--광고제목--%>
                     <td>${items.adowner}</td><%--광고주명--%>
                     <td>${items.telephone}</td><%--광고주연락처--%>
                     <td>${items.usestartdate}</td><%--사용시작일자--%>
                     <td>${items.useenddate}</td><%--사용종료일자--%>
                     <td>${items.regtime}</td><%--등록시간--%>
-                    <td><a href="#">보기</a></td><%--동영상미리보기--%>
-                    <td><a href="/adinfo/upPlayOrder/${items.adindex}/${items.playorder}"><img src="/imgs/bt_up.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
-                    <td><a href="/adinfo/downPlayOrder/${items.adindex}/${items.playorder}"><img src="/imgs/bt_down.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
+                    <td><a href="#">보기</a></td><%--동영상미리보기--%><%--/adinfo/upPlayOrder/${items.adindex}/${items.playorder}--%>
+                    <td><a class="upPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}"><img src="/imgs/bt_up.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
+                    <td><a class="downPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}"><img src="/imgs/bt_down.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
                   </tr>
                 </c:forEach>
               </c:if>
@@ -177,11 +177,65 @@
     $("#page").val(page);
     fn_search();
   };
+  <%--/adinfo/upPlayOrder/${items.adindex}/${items.playorder}--%>
+  <%--<td><a id="upPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}">--%>
+  <%--<td><a id="downPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}">--%>
+
 
   function fn_search(){
     $('#searchFrm').submit();
   }
   $(function() {
+
+      $('.upPlayOrder').click(function(){
+          var playordermax = '${playordermax}';
+          var playordermin = '${playordermin}';
+
+          var adindex = $(this).attr('adindex');
+          var playorder = $(this).attr('playorder');
+
+          if (playordermin == adindex) {
+              alert('위로 이동할수없습니다.');
+              return;
+          }
+
+          var req = {};
+          req = $(this).closest('form').serialize();
+          $als.execute('/adinfo/upPlayOrder/'+adindex+'/'+playorder+'/', req, function (data) {
+              if (data.result_message == 'success') {
+                  alert('순서가 변경되었습니다.');
+                  location.href='/adinfo/list';
+              }
+          }, function (err) {
+              alert(err.result_message);
+          });
+      });
+      $('.downPlayOrder').click(function(){
+          var playordermax = '${playordermax}';
+          var playordermin = '${playordermin}';
+
+          var adindex = $(this).attr('adindex');
+          var playorder = $(this).attr('playorder');
+
+
+          if (playordermax <= adindex) {
+              alert('아래로 이동할수없습니다.');
+              return;
+          }
+          var req = {};
+          req = $(this).closest('form').serialize();
+          $als.execute('/adinfo/downPlayOrder/'+adindex+'/'+playorder+'/', req, function (data) {
+              if (data.result_message == 'success') {
+                  alert('순서가 변경되었습니다..');
+                  location.href='/adinfo/list';
+              }
+          }, function (err) {
+              alert(err.result_message);
+          });
+      });
+
+
+
     $('.datepicker').datepicker({
       format: "yyyy.mm.dd",
 //      startDate: '+0d',

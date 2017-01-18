@@ -2,6 +2,7 @@ package com.hs.web.service;
 
 import com.hs.BizException;
 import com.hs.DbList;
+import com.hs.DbMap;
 import com.hs.ResultMap;
 import com.hs.util.PageUtil;
 import com.hs.web.Global;
@@ -31,12 +32,15 @@ public class AdInfoService extends ServiceBase {
   public ResultMap list(RequestMap req) {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[main list] recv:{}", req);
-    req.put("rows", "3");
+    req.put("rows", "10");
     setPaging(req);
     if (Global.isDev) logger.debug("[list] recv:{}", req);
 
     DbList list = mapper.list(req);
     int total = mapper.listCnt(req);
+    DbMap playOrderMinMax = mapper.getPlayOrderMinMax(req);
+    res.put("playordermin",playOrderMinMax.get("playordermin"));
+    res.put("playordermax",playOrderMinMax.get("playordermax"));
 
     res.put("total", total);
     res.put("rows", list);
@@ -50,6 +54,7 @@ public class AdInfoService extends ServiceBase {
     res.put("pageTimes", (Integer.parseInt(req.get("page")+"")-1)*Integer.parseInt(req.get("rows")+""));
 
     res.put("paging", PageUtil.getPaging(req, total));
+
 
     if (Global.isDev) logger.debug("[main list] send:{}", res);
     return res;
@@ -238,6 +243,7 @@ public class AdInfoService extends ServiceBase {
     if (Global.isDev) logger.debug("[adinfo upPlayOrder] recv:{}", req);
 
     mapper.upPlayOrder(req);
+    mapper.upPlayOrderOther(req);
 
     if (Global.isDev) logger.debug("[adinfo upPlayOrder] send:{}", res);
     return res;
@@ -248,6 +254,7 @@ public class AdInfoService extends ServiceBase {
     if (Global.isDev) logger.debug("[adinfo downPlayOrder] recv:{}", req);
 
     mapper.downPlayOrder(req);
+    mapper.downPlayOrderOther(req);
 
     if (Global.isDev) logger.debug("[adinfo downPlayOrder] send:{}", res);
     return res;
