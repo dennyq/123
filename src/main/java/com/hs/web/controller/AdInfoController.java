@@ -177,20 +177,21 @@ public class AdInfoController extends ControllerPageBase {
     return service.delete(req);
   }
 
-  //비밀번호 변경
-  @RequestMapping(value = "initailizePwd")
+  //  upPlayOrder
+  @RequestMapping(value = "upPlayOrder/{adindex}/{playorder}")
   @ResponseBody
-  public ResultMap initailizePwd(HttpServletRequest request) throws Exception {
+  public ResultMap upPlayOrder(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
-    return service.initailizePwd(req);
+    putPathVariable(request, req);
+    return service.upPlayOrder(req);
   }
 
-  //아이디체크
-  @RequestMapping(value = "idCheck")
+  //  downPlayOrder
+  @RequestMapping(value = "downPlayOrder/{adindex}/{playorder}")
   @ResponseBody
-  public ResultMap idCheck(HttpServletRequest request) throws Exception {
+  public ResultMap downPlayOrder(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
-    return service.idCheck(req);
+    putPathVariable(request, req);
+    return service.downPlayOrder(req);
   }
-
 }

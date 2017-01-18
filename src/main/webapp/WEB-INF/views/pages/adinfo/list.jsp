@@ -38,9 +38,9 @@
               <!-- left col-md-6 start -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="sch_adtitle" class="col-sm-4 ">광고제목</label>
-                  <div class="col-sm-8">
-                    <input name="sch_adtitle"  id="sch_adtitle" placeholder="아이디" class="form-control" value="${sch_adtitle}">
+                  <label for="sch_adtitle" class="col-sm-2 ">광고제목</label>
+                  <div class="col-sm-9">
+                    <input name="sch_adtitle"  id="sch_adtitle" placeholder="광고제목" class="form-control" value="${sch_adtitle}">
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                   <label for="sch_adowner" class="col-sm-4 ">광고주명</label>
                   <div class="col-sm-6">
-                    <input name="sch_adowner"  id="sch_adowner" placeholder="광고명" class="form-control" value="${sch_adowner}">
+                    <input name="sch_adowner"  id="sch_adowner" placeholder="광고주명" class="form-control" value="${sch_adowner}">
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label for="sch_telephone" class="col-sm-4 ">광고주연락처</label>
                   <div class="col-sm-6">
-                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
+                    <input name="sch_telephone"  id="sch_telephone" placeholder="광고주연락처" class="form-control" value="${sch_telephone}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -136,8 +136,8 @@
                     <td>${items.useenddate}</td><%--사용종료일자--%>
                     <td>${items.regtime}</td><%--등록시간--%>
                     <td><a href="#">보기</a></td><%--동영상미리보기--%>
-                    <td>${items.playorder}</td><%--플레이순서(위로이동)--%>
-                    <td>${items.playorder}</td><%--플레이순서(위로이동)--%>
+                    <td><a href="/adinfo/upPlayOrder/${items.adindex}/${items.playorder}"><img src="/imgs/bt_up.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
+                    <td><a href="/adinfo/downPlayOrder/${items.adindex}/${items.playorder}"><img src="/imgs/bt_down.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
                   </tr>
                 </c:forEach>
               </c:if>

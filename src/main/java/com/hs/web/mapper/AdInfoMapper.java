@@ -24,4 +24,6 @@ public interface AdInfoMapper extends CrudMapper{
   void changePwd(DbMap req);
   int getNextAdindex(DbMap req);
 
+  void upPlayOrder(DbMap req);
+  void downPlayOrder(DbMap req);
 }

@@ -232,18 +232,24 @@ public class AdInfoService extends ServiceBase {
     return res;
   }
 
-  //아이디체크
-  public ResultMap idCheck(RequestMap req) {
+  //upPlayOrder
+  public ResultMap upPlayOrder(RequestMap req) {
     ResultMap res = ResultMap.create();
-    if (Global.isDev) logger.debug("[main idCheck] recv:{}", req);
+    if (Global.isDev) logger.debug("[adinfo upPlayOrder] recv:{}", req);
 
-    int cnt = mapper.idCheck(req);
+    mapper.upPlayOrder(req);
 
-    if(cnt > 0){
-      res.put("result_message", "fail");
-    }
+    if (Global.isDev) logger.debug("[adinfo upPlayOrder] send:{}", res);
+    return res;
+  }
 
-    if (Global.isDev) logger.debug("[main idCheck] send:{}", res);
+  public ResultMap downPlayOrder(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[adinfo downPlayOrder] recv:{}", req);
+
+    mapper.downPlayOrder(req);
+
+    if (Global.isDev) logger.debug("[adinfo downPlayOrder] send:{}", res);
     return res;
   }
 
@@ -251,4 +257,6 @@ public class AdInfoService extends ServiceBase {
 
     return mapper.getNextAdindex(req);
   }
+
+
 }
