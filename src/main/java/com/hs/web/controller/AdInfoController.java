@@ -55,7 +55,7 @@ public class AdInfoController extends ControllerPageBase {
   }
 
   //상세
-  @RequestMapping(value = "info/{memberid}")
+  @RequestMapping(value = "info/{adindex}")
   public String infoById(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
@@ -64,7 +64,7 @@ public class AdInfoController extends ControllerPageBase {
   }
 
   //상세
-  @RequestMapping(value = "detail/{memberid}")
+  @RequestMapping(value = "detail/{adindex}")
   public String detail(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
@@ -83,7 +83,7 @@ public class AdInfoController extends ControllerPageBase {
   }
 
   //상세
-  @RequestMapping(value = "changePwdPage/{memberid}")
+  @RequestMapping(value = "changePwdPage/{adindex}")
   public String changePwdPageById(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
@@ -139,7 +139,7 @@ public class AdInfoController extends ControllerPageBase {
 
     service.save(req);
 
-    return "redirect:/" + rootKey + "/info/"+req.get("memberid");
+    return "redirect:/" + rootKey + "/info/"+req.get("adindex");
   }
 
   //수정

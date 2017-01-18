@@ -10,15 +10,13 @@
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/adinfo/save"/>" method="post" enctype="multipart/form-data" >
 <section class="content-header">
   <h1>
-    <c:if test="${empty data && changePwd ne 'Y'}">
+    <c:if test="${empty data}">
       광고등록
     </c:if>
-    <c:if test="${not empty data && changePwd ne 'Y'}">
+    <c:if test="${not empty data}">
       광고상세
     </c:if>
-    <c:if test="${changePwd eq 'Y'}">
-      비밀번호변경
-    </c:if>
+
   </h1>
 
 
@@ -38,17 +36,14 @@
           <div id="progressIndicator" style="display: none"></div>
           <div class="box-body">
             <!-- input start -->
-            <c:if test="${empty data && changePwd ne 'Y'}">
+            <c:if test="${empty data}">
               <%@include file="new.jsp"%>
             </c:if>
 
-            <c:if test="${not empty data && changePwd ne 'Y'}">
+            <c:if test="${not empty data}">
               <%@include file="update.jsp"%>
             </c:if>
 
-            <c:if test="${changePwd eq 'Y'}">
-              <%@include file="changePwd.jsp"%>
-            </c:if>
 
         </div><!-- //.box -->
       </div><!-- //.col-md-12 -->
@@ -68,7 +63,7 @@
   <center>
     <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
     <a id="delBtn" class="btn btn-green btn-flat md-height showEditor">삭제</a>
-    <a id="changePagePwdBtn" class="btn btn-blue-green btn-flat md-height">비밀번호 변경</a>
+
   </center>
 </c:if>
   <c:if test="${not empty data && changePwd eq 'Y'}">
