@@ -242,8 +242,10 @@ public class AdInfoService extends ServiceBase {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[adinfo upPlayOrder] recv:{}", req);
 
-    mapper.upPlayOrder(req);
     mapper.upPlayOrderOther(req);
+
+
+    mapper.upPlayOrder(req);
 
     if (Global.isDev) logger.debug("[adinfo upPlayOrder] send:{}", res);
     return res;
@@ -253,8 +255,9 @@ public class AdInfoService extends ServiceBase {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[adinfo downPlayOrder] recv:{}", req);
 
-    mapper.downPlayOrder(req);
     mapper.downPlayOrderOther(req);
+
+    mapper.downPlayOrder(req);
 
     if (Global.isDev) logger.debug("[adinfo downPlayOrder] send:{}", res);
     return res;

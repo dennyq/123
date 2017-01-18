@@ -98,15 +98,15 @@
             <table class="table table-hover pointer">
               <colgroup>
                 <col width="1%"/><%--번호--%>
-                <col width="7%"/><%--광고제목--%>
-                <col width="7%"/><%--광고주명--%>
-                <col width="5%"/><%--광고주연락처--%>
-                <col width="10%"/><%--사용시작일자--%>
-                <col width="10%"/><%--사용종료일자--%>
-                <col width="10%"/><%--등록시간--%>
+                <col width="*"/><%--광고제목--%>
+                <col width="10%"/><%--광고주명--%>
+                <col width="13%"/><%--광고주연락처--%>
+                <col width="5%"/><%--사용시작일자--%>
+                <col width="5%"/><%--사용종료일자--%>
+                <col width="5%"/><%--등록시간--%>
                 <col width="8%"/><%--동영상미리보기--%>
-                <col width="4%"/><%--플레이순서(위로이동)--%>
-                <col width="4%"/><%--플레이순서(위로이동)--%>
+                <col width="9%"/><%--플레이순서(위로이동)--%>
+                <col width="9%"/><%--플레이순서(위로이동)--%>
 
               </colgroup>
               <thead>
@@ -118,9 +118,9 @@
                   <td>사용시작일자</td>
                   <td>사용종료일자</td>
                   <td>등록시간</td>
-                  <td>동영상미리보기</td>
-                  <td>플레이순서(위로이동)</td>
-                  <td>플레이순서(위로이동)</td>
+                  <td>동영상<br>미리보기</td>
+                  <td>플레이순서<br>(위로)</td>
+                  <td>플레이순서<br>(아래로)</td>
                 </tr>
               </thead>
               <tbody>
@@ -194,7 +194,7 @@
           var adindex = $(this).attr('adindex');
           var playorder = $(this).attr('playorder');
 
-          if (playordermin == adindex) {
+          if (eval(playordermin) == eval(adindex)) {
               alert('위로 이동할수없습니다.');
               return;
           }
@@ -218,7 +218,7 @@
           var playorder = $(this).attr('playorder');
 
 
-          if (playordermax <= adindex) {
+          if (eval(playordermax) <= eval(adindex)) {
               alert('아래로 이동할수없습니다.');
               return;
           }

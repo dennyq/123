@@ -125,34 +125,34 @@
 
   <update id="upPlayOrder" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = #{playorder}-1
+    SET playorder =playorder-1
     WHERE 1=1
     AND adindex = #{adindex}
   </update>
 
   <update id="upPlayOrderOther" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = #{playorder}+1
+    SET playorder = playorder+1
     WHERE 1=1
-    AND playorder = #{playorder1}-1
+    AND playorder = #{playorder}-1
   </update>
 
   <update id="downPlayOrder" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = #{playorder}+1
+    SET playorder = playorder+1
     WHERE 1=1
     AND adindex = #{adindex}
   </update>
 
   <update id="downPlayOrderOther" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = #{playorder}-1
+    SET playorder = playorder-1
     WHERE 1=1
     AND playorder = #{playorder}+1
   </update>
 
   <select id="getPlayOrderMinMax" parameterType="dbmap" resultType="dbmap">
-    SELECT min(playorder) "playordermin", max(playorder) "playordermax" from adinfo
+    SELECT MIN(playorder) "playordermin", MAX(playorder) "playordermax" from adinfo
   </select>
 
 </mapper>
