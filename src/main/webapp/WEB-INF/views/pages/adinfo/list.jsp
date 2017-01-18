@@ -112,7 +112,7 @@
             <table class="table table-hover pointer">
               <colgroup>
                 <col width="1%"/><%--번호--%>
-                <col width="7%"/><%--아이디--%>
+                <col width="7%"/><%----%>
                 <col width="7%"/><%--광고명--%>
                 <col width="5%"/><%--구분--%>
                 <col width="10%"/><%--전화번호--%>

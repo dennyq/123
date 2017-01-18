@@ -44,6 +44,19 @@ public class PathManager {
         return tempFile;
     }
 
+  public static File getPageFileNotByDate(String adindex,String randomName) {
+
+
+    String pagePath = Global.UPLOAD_PATH + "/" +adindex ;
+
+    File pagePathFile = new File(pagePath);
+    if (!pagePathFile.exists()) pagePathFile.mkdirs();
+
+    String pageFileName = pagePath + "/" + randomName;
+    File pageFile = new File(pageFileName);
+
+    return pageFile;
+  }
   public static File getPageFile(String memberid, String now, String fileName) {
 
     String year = now.substring(0, 4);

@@ -2,6 +2,7 @@ package com.hs.web.mapper;
 
 
 import com.hs.DbMap;
+import com.hs.web.RequestMap;
 
 public interface AdInfoMapper extends CrudMapper{
   void initailizePwd(DbMap map);
@@ -12,6 +13,7 @@ public interface AdInfoMapper extends CrudMapper{
   void updateHitcount(DbMap req);
 
   int idCheck(DbMap req);
+  int getNextPlayOrder(DbMap req);
 
   int idPwCheck(DbMap req);
 
@@ -20,4 +22,6 @@ public interface AdInfoMapper extends CrudMapper{
   void restore(DbMap req);
 
   void changePwd(DbMap req);
+  int getNextAdindex(DbMap req);
+
 }

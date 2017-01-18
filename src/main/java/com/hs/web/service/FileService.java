@@ -35,7 +35,7 @@ public class FileService {
   @Autowired private PathManager pathManager;
 
   //업로드
-  public RequestMap uploadFile(HttpServletRequest request, RequestMap req) throws Exception {
+  public String uploadFile(HttpServletRequest request, RequestMap req) throws Exception {
     String inputName = req.get("inputName") + "";
     File pageFile;
     String dbFilePath;
@@ -63,8 +63,8 @@ public class FileService {
 
     //파일용량 체크 뒤에 제한숫자
     fileSizeCheck(fileSize, 3200000);
-    String now = req.get("scantime") + "";
-    String nowtime = req.get("scantime") + "";
+//    String now = req.get("scantime") + "";
+//    String nowtime = req.get("scantime") + "";
 
     String fileExtention = getFileExtention(originalFilename);
 
@@ -72,14 +72,21 @@ public class FileService {
     //임시저장위치
     File tempFile = pathManager.getTempFile();
 
-    String year = now.substring(0, 4);
-    String month = now.substring(4, 6);
-    String date = now.substring(6, 8);
+//    String year = now.substring(0, 4);
+//    String month = now.substring(4, 6);
+//    String date = now.substring(6, 8);
 //    String middleName =  req.get("uploadDir")+"";
-    String memberid = req.get("memberid") + "";
+    int adindex =Integer.parseInt((req.get("adindex") + "")) ;
+   String adindexStr = String.format("%010d",adindex);
+
     //디비 저장위치
 //    dbFilePath ="/"+ middleName+"/"+ year + "/" + date + "/";
-    dbFilePath = "/" + year + "/" + month + "/" + date + "/" + memberid + "/";
+//    dbFilePath = "/" + year + "/" + month + "/" + date + "/" + memberid + "/";
+//    dbFilePath = "/" + year + "/" + month + "/" + date + "/" + adindex + "/";
+    //dbFilePath = "/" + adindexStr + "/";
+    String middleName ="adinfo";
+
+    dbFilePath = "/" + middleName + "/";
 
 //    randomName = randomStr[0] +"_"+now.substring(8,now.length())+ "." + fileExtention;
     String name = "";
@@ -90,11 +97,12 @@ public class FileService {
     } else {
       name = "S";
     }
-    randomName = memberid + "_" + name + "_" + randomStr[0] + "_" + nowtime + "." + fileExtention;
+//    randomName = adindex + "_" + name + "_" + randomStr[0] + "_" + nowtime + "." + fileExtention;
+    randomName = adindexStr +"." + fileExtention;
 
 
     //실제 저장위치
-    pageFile = pathManager.getPageFile(memberid, now, randomName);
+    pageFile = pathManager.getPageFileNotByDate(middleName,randomName);
 
     //파일 폴더에 저장
     saveFiles(file, tempFile, pageFile);
@@ -112,10 +120,10 @@ public class FileService {
 
 
     //등록된 FILE_ID 조회 :랜덤문자열
-    file_id = RandomStringUtils.randomAlphanumeric(15);
-
+//    file_id = RandomStringUtils.randomAlphanumeric(15);
+    file_id = randomName;
     //FILE_INFO 에 등록
-    req.put("file_id", file_id);
+    req.put("filename", file_id);
     req.put("file_path", "/upload" + dbFilePath);
     req.put("file_name", randomName);
     req.put("file_original_name", originalFilename);
@@ -137,7 +145,7 @@ public class FileService {
       logger.info("[FileService fileInfo] file_id={}", file_id);
     }
 
-    return req;
+    return file_id;
   }
 
   //썸네일만들기
@@ -269,4 +277,19 @@ public class FileService {
   }
 
 
+  public void uploadFiles(HttpServletRequest request, RequestMap req) throws Exception {
+    String filename = req.get("filename")+"";
+
+    if(request instanceof MultipartHttpServletRequest){
+//      if(filename != null && !filename.equals("")){
+        req.put("inputName","filename");
+        req.put("filename", uploadFile(request,req));
+//      }
+
+//      if(img_file_name != null && !img_file_name.equals("")){
+//        req.put("inputName","img_file");
+//        req.put("image_file_id", uploadFile(request, req));
+//      }
+    }
+  }
 }

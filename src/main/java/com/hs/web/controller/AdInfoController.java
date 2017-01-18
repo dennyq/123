@@ -5,6 +5,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 import com.hs.web.service.AdInfoService;
+import com.hs.web.service.FileService;
 import com.hs.web.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpSession;
 public class AdInfoController extends ControllerPageBase {
   @Autowired
   private AdInfoService service;
+  @Autowired
+  private FileService fileService;
   private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
   private String rootKey = "adinfo";
   private String rootPath = "pages/" + rootKey + "/";
@@ -49,22 +52,6 @@ public class AdInfoController extends ControllerPageBase {
     RequestMap req = RequestMap.create(request);
     model.addAllAttributes(service.list(req));
     return rootPath + "list";
-  }
-
-
-  //상세
-  @RequestMapping(value = "info")
-  public String info(HttpServletRequest request, Model model) throws Exception {
-    RequestMap req = RequestMap.create(request);
-//    putPathVariable(request, req);
-//    model.addAllAttributes(service.detail(req));
-    if (req.get("login_uid") == null) {
-      throw new BizException("9009", "need_login");
-    }
-//      return redirect:rootPath + "info"+;
-
-    return "redirect:/" + rootKey + "/info/" + req.get("login_uid");
-//    return rootPath + "info";
   }
 
   //상세
@@ -94,6 +81,7 @@ public class AdInfoController extends ControllerPageBase {
     model.addAttribute("changePwd","Y");
     return rootPath + "detail";
   }
+
   //상세
   @RequestMapping(value = "changePwdPage/{memberid}")
   public String changePwdPageById(HttpServletRequest request, Model model) throws Exception {
@@ -138,7 +126,8 @@ public class AdInfoController extends ControllerPageBase {
   @RequestMapping(value = "save")
   public String save(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
-
+    req.put("adindex",service.getNextAdindex(req));
+    fileService.uploadFiles(request, req);
     service.save(req);
 
     return "redirect:/" + rootKey + "/list";

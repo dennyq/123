@@ -7,7 +7,7 @@
   <title>광고 관리</title>
 </head>
 <body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/adinfo/save"/>" method="post">
+<form id="detailFrm" class="form-horizontal" action="<c:url value="/adinfo/save"/>" method="post" enctype="multipart/form-data" >
 <section class="content-header">
   <h1>
     <c:if test="${empty data && changePwd ne 'Y'}">

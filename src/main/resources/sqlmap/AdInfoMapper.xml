@@ -75,32 +75,42 @@
 
   <insert id="insert" parameterType="dbmap">
     INSERT INTO adinfo (
-    adindex,
-    adtitle,
-    adowner,
-    telephone,
-    usestartdate,
-    useenddate,
-    playorder,
-    filename,   
-    regtime
+      adindex,
+      adtitle,
+      adowner,
+      telephone,
+      usestartdate,
+      useenddate,
+      playorder,
+      filename,
+      regtime
     )
     VALUES (
-    #{adindex},
-    #{adtitle},
-    #{adowner},
-    #{telephone},
-    #{usestartdate},
-    #{useenddate},
-    #{playorder},
-    #{filename},    
-    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+      #{adindex},
+      #{adtitle},
+      #{adowner},
+      #{telephone},
+      #{usestartdate},
+      #{useenddate},
+      #{playorder},
+      #{filename},
+      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
-    <selectKey resultType="int" keyProperty="memberid" order="AFTER">
-      SELECT LAST_INSERT_ID()
+    <selectKey resultType="int" keyProperty="adindex" order="BEFORE">
+      SELECT IFNULL((MAX(adindex)+1),1) FROM adinfo
     </selectKey>
+    <!--<selectKey resultType="int" keyProperty="playorder" order="BEFORE">-->
+      <!--SELECT IFNULL((MAX(playorder)+1),1) FROM adinfo-->
+    <!--</selectKey>-->
   </insert>
 
+  <select id="getNextPlayOrder" resultType="int">
+    SELECT IFNULL((MAX(playorder)+1),1) FROM adinfo
+  </select>
+
+  <select id="getNextAdindex" resultType="int">
+    SELECT IFNULL((MAX(adindex)+1),1) FROM adinfo
+  </select>
 
   <update id="update" parameterType="dbmap">
     UPDATE adinfo

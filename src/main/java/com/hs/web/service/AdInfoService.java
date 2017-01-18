@@ -85,15 +85,15 @@ public class AdInfoService extends ServiceBase {
     String usestartdate =  req.get("usestartdate")+"";
     String useenddate =  req.get("useenddate")+"";
 
-
-
-
     req.put("usestartdate",usestartdate.replace(".",""));
     req.put("useenddate",useenddate.replace(".",""));
 
 
 
     if(req.get("isNew").equals("Y")){
+
+        int nextPlayOrder = mapper.getNextPlayOrder(req);
+        req.put("playorder",nextPlayOrder);
 
         mapper.insert(req);
 
@@ -245,5 +245,10 @@ public class AdInfoService extends ServiceBase {
 
     if (Global.isDev) logger.debug("[main idCheck] send:{}", res);
     return res;
+  }
+
+  public int getNextAdindex(RequestMap req) {
+
+    return mapper.getNextAdindex(req);
   }
 }
