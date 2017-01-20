@@ -135,7 +135,7 @@
                     <td>${items.usestartdate}</td><%--사용시작일자--%>
                     <td>${items.useenddate}</td><%--사용종료일자--%>
                     <td>${items.regtime}</td><%--등록시간--%>
-                    <td><a href="#">보기</a></td><%--동영상미리보기--%><%--/adinfo/upPlayOrder/${items.adindex}/${items.playorder}--%>
+                    <td><a href="javascript:popupOpen('/adinfo/popup/${items.adindex}',600,500);">미리보기</a></td><%--동영상미리보기--%><%--/adinfo/upPlayOrder/${items.adindex}/${items.playorder}--%>
                     <td><a class="upPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}"><img src="/imgs/bt_up.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
                     <td><a class="downPlayOrder" adindex="${items.adindex}" playorder="${items.playorder}"><img src="/imgs/bt_down.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
                   </tr>

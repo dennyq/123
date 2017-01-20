@@ -39,7 +39,7 @@
   <div class="form-group">
     <label for="telephone" class="col-sm-4 ">광고주연락처</label>
     <div class="col-sm-6">
-      <input name="telephone"  id="telephone" placeholder="회원명" class="form-control">
+      <input name="telephone"  id="telephone" placeholder="광고주연락처" class="form-control">
     </div>
   </div>
 

@@ -749,3 +749,10 @@ function swapOutImg(thisObj,addStr){
     var ext =$(thisObj).attr('src').split('.')[1];
     $(thisObj).attr('src', src  +'.'+ ext);
 }
+
+
+function popupOpen(popUrl, width, height) {
+	var popUrl = popUrl;//"popup.jsp";	//팝업창에 출력될 페이지 URL
+	var popOption = "width="+width+", height="+height+", resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	window.open(popUrl,"",popOption);
+}

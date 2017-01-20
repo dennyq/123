@@ -39,7 +39,7 @@
   <div class="form-group">
     <label for="telephone" class="col-sm-4 ">광고주연락처</label>
     <div class="col-sm-6">
-      <input name="telephone"  id="telephone" placeholder="회원명" class="form-control" value="${data.telephone}">
+      <input name="telephone"  id="telephone" placeholder="광고주연락처" class="form-control" value="${data.telephone}">
     </div>
   </div>
 
@@ -55,7 +55,8 @@
   <div class="form-group">
     <label for="filename" class="col-sm-2 ">광고 파일</label>
     <div class="col-sm-9">
-      <input name="filename"  id="filename" placeholder="광고 파일" class="form-control" value="${data.filename}"  type="file">
+      <c:if test="${not data.filename}">${data.filename}</c:if>
+      <input name="filename"  id="filename" placeholder="광고 파일" class="form-control" value="${data.filename}"  type="file"/>
     </div>
   </div>
 </div>

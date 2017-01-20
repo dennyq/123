@@ -62,7 +62,7 @@ public class FileService {
     String[] randomStr = getRandomString();
 
     //파일용량 체크 뒤에 제한숫자
-    fileSizeCheck(fileSize, 3200000);
+    fileSizeCheck(fileSize, 320000000);
 //    String now = req.get("scantime") + "";
 //    String nowtime = req.get("scantime") + "";
 
@@ -281,10 +281,10 @@ public class FileService {
     String filename = req.get("filename")+"";
 
     if(request instanceof MultipartHttpServletRequest){
-//      if(filename != null && !filename.equals("")){
+      if(filename != null && !filename.equals("")){
         req.put("inputName","filename");
         req.put("filename", uploadFile(request,req));
-//      }
+      }
 
 //      if(img_file_name != null && !img_file_name.equals("")){
 //        req.put("inputName","img_file");

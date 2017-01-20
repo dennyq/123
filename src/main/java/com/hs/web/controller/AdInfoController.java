@@ -55,12 +55,12 @@ public class AdInfoController extends ControllerPageBase {
   }
 
   //상세
-  @RequestMapping(value = "info/{adindex}")
+  @RequestMapping(value = "popup/{adindex}")
   public String infoById(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
     model.addAllAttributes(service.detail(req));
-    return rootPath + "info";
+    return rootPath + "popup";
   }
 
   //상세
