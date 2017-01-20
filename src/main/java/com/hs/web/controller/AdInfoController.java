@@ -126,8 +126,13 @@ public class AdInfoController extends ControllerPageBase {
   @RequestMapping(value = "save")
   public String save(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
-    req.put("adindex",service.getNextAdindex(req));
-    fileService.uploadFiles(request, req);
+    if(req.get("isNew").equals("Y")){
+      req.put("adindex",service.getNextAdindex(req));
+      fileService.uploadFiles(request, req);
+    }else{
+
+    }
+
     service.save(req);
 
     return "redirect:/" + rootKey + "/list";

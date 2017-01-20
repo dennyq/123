@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <input type="hidden"  name="isNew" value="N"/>
-
+<input id="adindex" name="adindex" type="hidden" value="${data.adindex}">
 <!-- left input start -->
 <div class="col-md-12">
   <div class="form-group">
@@ -56,7 +56,7 @@
     <label for="filename" class="col-sm-2 ">광고 파일</label>
     <div class="col-sm-9">
       <c:if test="${not data.filename}">${data.filename}</c:if>
-      <input name="filename"  id="filename" placeholder="광고 파일" class="form-control" value="${data.filename}"  type="file"/>
+      <%--<input name="filename"  id="filename" placeholder="광고 파일" class="form-control" value="${data.filename}"  type="file"/>--%>
     </div>
   </div>
 </div>

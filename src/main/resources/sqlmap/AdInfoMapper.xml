@@ -109,7 +109,6 @@
   <update id="update" parameterType="dbmap">
     UPDATE adinfo
     <set>
-      <if test='adindex != null and adindex != ""'>adindex = #{adindex},</if>
       <if test='adtitle != null and adtitle != ""'>adtitle = #{adtitle},</if>
       <if test='adowner != null and adowner != ""'>adowner = #{adowner},</if>
       <if test='telephone != null and telephone != ""'>telephone = #{telephone},</if>
@@ -139,14 +138,14 @@
 
   <update id="downPlayOrder" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = playorder+1
+    SET playorder = playorder + 1
     WHERE 1=1
     AND adindex = #{adindex}
   </update>
 
   <update id="downPlayOrderOther" parameterType="dbmap">
     UPDATE adinfo
-    SET playorder = playorder-1
+    SET playorder = playorder - 1
     WHERE 1=1
     AND playorder = #{playorder}+1
   </update>

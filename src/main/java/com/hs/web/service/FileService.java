@@ -281,7 +281,7 @@ public class FileService {
     String filename = req.get("filename")+"";
 
     if(request instanceof MultipartHttpServletRequest){
-      if(filename != null && !filename.equals("")){
+      if(filename != null && !filename.equals("") && !filename.equals("null")){
         req.put("inputName","filename");
         req.put("filename", uploadFile(request,req));
       }
