@@ -61,7 +61,7 @@ public class FileService {
 
     String[] randomStr = getRandomString();
 
-    //파일용량 체크 뒤에 제한숫자
+    //todo: 파일용량 체크 뒤에 제한숫자
     fileSizeCheck(fileSize, 320000000);
 //    String now = req.get("scantime") + "";
 //    String nowtime = req.get("scantime") + "";
@@ -101,9 +101,11 @@ public class FileService {
     randomName = adindexStr +"." + fileExtention;
 
 
+
     //실제 저장위치
     pageFile = pathManager.getPageFileNotByDate(middleName,randomName);
 
+    existFiles(adindexStr,file, tempFile, pageFile);
     //파일 폴더에 저장
     saveFiles(file, tempFile, pageFile);
 
@@ -167,6 +169,22 @@ public class FileService {
     IOUtils.copy(file.getInputStream(), pageOut);
     IOUtils.closeQuietly(pageOut);
     FileUtils.moveFile(tempFile, pageFile);
+  }
+
+  private void existFiles(String filename,MultipartFile file, File tempFile, File pageFile) throws IOException {
+
+    logger.info("exist={}",pageFile.isFile());
+    // 파일 존재 여부 판단
+    if (pageFile.isFile()) {
+
+//      FileOutputStream oriFile = new FileOutputStream(""+filename);
+//      FileOutputStream pageOut = new FileOutputStream(pageFile);
+//      IOUtils.copy(file.getInputStream(), pageOut);
+//      IOUtils.closeQuietly(pageOut);
+//      FileUtils.moveFile(pageFile, tempFile);
+      FileUtils.deleteQuietly(pageFile);
+    }
+
   }
 
   private String getFileExtention(String originalFilename) {

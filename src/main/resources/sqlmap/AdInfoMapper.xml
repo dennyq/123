@@ -78,7 +78,9 @@
       telephone,
       usestartdate,
       useenddate,
+    <if test = "playorder != null and playorder != ''">
       playorder,
+    </if>
       filename,
       regtime
     )
@@ -89,7 +91,9 @@
       #{telephone},
       #{usestartdate},
       #{useenddate},
+    <if test = "playorder != null and playorder != ''">
       #{playorder},
+    </if>
       #{filename},
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
