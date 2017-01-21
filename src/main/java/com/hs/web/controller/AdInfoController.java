@@ -38,6 +38,7 @@ public class AdInfoController extends ControllerPageBase {
     model.addAllAttributes(service.list(req));
     return rootPath + "list";
   }
+
   //목록
   @RequestMapping(value = "list")
   public String list(HttpServletRequest request,Model model) throws Exception {
@@ -198,5 +199,13 @@ public class AdInfoController extends ControllerPageBase {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
     return service.downPlayOrder(req);
+  }
+
+  //광고제목체크
+  @RequestMapping(value = "adCheck")
+  @ResponseBody
+  public ResultMap adCheck(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    return service.adCheck(req);
   }
 }

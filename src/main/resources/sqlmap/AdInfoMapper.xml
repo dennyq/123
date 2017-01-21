@@ -106,6 +106,12 @@
     SELECT IFNULL((MAX(adindex)+1),1) FROM adinfo
   </select>
 
+  <select id="adCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM adinfo A
+    WHERE 1=1 AND A.adtitle  = #{adtitle}
+  </select>
+
   <update id="update" parameterType="dbmap">
     UPDATE adinfo
     <set>

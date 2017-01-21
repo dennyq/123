@@ -271,5 +271,18 @@ public class AdInfoService extends ServiceBase {
     return mapper.getNextAdindex(req);
   }
 
+  //광고체크
+  public ResultMap adCheck(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[main adCheck] recv:{}", req);
 
+    int cnt = mapper.adCheck(req);
+
+    if(cnt > 0){
+      res.put("result_message", "fail");
+    }
+
+    if (Global.isDev) logger.debug("[main adCheck] send:{}", res);
+    return res;
+  }
 }

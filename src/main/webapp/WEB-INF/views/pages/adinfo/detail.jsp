@@ -119,20 +119,20 @@
 
     });
 
-    $('#id_check').click(function(){
-      if($('#memberid').val() ==''){
-        alert('아이디를 입력해주세요');
-        $('#memberid').focus();
+    $('#ad_check').click(function(){
+      if($('#adtitle').val() ==''){
+        alert('광고제목을 입력해주세요');
+        $('#adtitle').focus();
         return false;
       }
       var req = {};
       req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/adinfo/idCheck"/>', req, function (data) {
+      $als.execute('<c:url value="/adinfo/adCheck"/>', req, function (data) {
         if (data.result_message == 'success') {
-          alert('사용할수 있는 아이디입니다.');
+          alert('사용할수 있는 광고제목입니다.');
           $('#idCheck').val("Y");
         }else{
-          alert('이미 존재하는 아이디입니다.');
+          alert('이미 존재하는 광고제목입니다.');
         }
       }, function (err) {
         alert(err.result_message);

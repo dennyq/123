@@ -30,4 +30,6 @@ public interface AdInfoMapper extends CrudMapper{
   void downPlayOrderOther(DbMap req);
 
   DbMap getPlayOrderMinMax(DbMap req);
+
+  int adCheck(DbMap req);
 }
