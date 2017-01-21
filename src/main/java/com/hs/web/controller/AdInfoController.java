@@ -130,22 +130,15 @@ public class AdInfoController extends ControllerPageBase {
     if(req.get("isNew").equals("Y")){
       req.put("adindex",service.getNextAdindex(req));
       fileService.uploadFiles(request, req);
+      service.insert(req);
     }else{
-
+      fileService.uploadFiles(request, req);
+      service.update(req);
     }
 
-    service.save(req);
+
 
     return "redirect:/" + rootKey + "/list";
-  }
-  //쓰기
-  @RequestMapping(value = "saveInfo")
-  public String saveInfo(HttpServletRequest request) throws Exception {
-    RequestMap req = RequestMap.create(request);
-
-    service.save(req);
-
-    return "redirect:/" + rootKey + "/info/"+req.get("adindex");
   }
 
   //수정

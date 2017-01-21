@@ -86,9 +86,9 @@ public class AdInfoService extends ServiceBase {
   }
 
   //저장
-  public ResultMap save(RequestMap req) throws IOException {
+  public ResultMap insert(RequestMap req) throws IOException {
     ResultMap res = ResultMap.create();
-    if (Global.isDev) logger.debug("[main save] recv:{}", req);
+    if (Global.isDev) logger.debug("[main insert] recv:{}", req);
 
     String usestartdate =  req.get("usestartdate")+"";
     String useenddate =  req.get("useenddate")+"";
@@ -96,25 +96,32 @@ public class AdInfoService extends ServiceBase {
     req.put("usestartdate",usestartdate.replace(".",""));
     req.put("useenddate",useenddate.replace(".",""));
 
+    int nextPlayOrder = mapper.getNextPlayOrder(req);
+    req.put("playorder",nextPlayOrder);
 
+    mapper.insert(req);
 
-    if(req.get("isNew").equals("Y")){
-
-        int nextPlayOrder = mapper.getNextPlayOrder(req);
-        req.put("playorder",nextPlayOrder);
-
-        mapper.insert(req);
-
-    }else{
-
-      mapper.update(req);
-    }
-
-
-
-    if (Global.isDev) logger.debug("[main save] send:{}", res);
+    if (Global.isDev) logger.debug("[main insert] send:{}", res);
     return res;
   }
+  //저장
+  public ResultMap update(RequestMap req) throws IOException {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[main update] recv:{}", req);
+
+    String usestartdate =  req.get("usestartdate")+"";
+    String useenddate =  req.get("useenddate")+"";
+
+    req.put("usestartdate",usestartdate.replace(".",""));
+    req.put("useenddate",useenddate.replace(".",""));
+
+    mapper.update(req);
+    if (Global.isDev) logger.debug("[main update] send:{}", res);
+    return res;
+  }
+
+
+
   //저장
   public ResultMap changePwd(RequestMap req) throws IOException {
     ResultMap res = ResultMap.create();
