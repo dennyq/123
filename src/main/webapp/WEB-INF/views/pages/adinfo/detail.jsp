@@ -5,19 +5,7 @@
 <head>
   <meta charset="utf-8">
   <title>광고 관리</title>
-  <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <!-- Generic page styles -->
-  <link rel="stylesheet" href="/css/filecss/style.css">
-  <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-  <link rel="stylesheet" href="/css/filecss/jquery.fileupload.css">
-  <script src="/js/vendor/jquery.ui.widget.js"></script>
-  <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-  <script src="/js/jquery.iframe-transport.js"></script>
-  <!-- The basic File Upload plugin -->
-  <script src="/js/jquery.fileupload.js"></script>
-  <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/adinfo/save"/>" method="post" enctype="multipart/form-data" >
@@ -87,25 +75,25 @@
   var saveFunction = function(){
 
 
-//    $('#detailFrm').submit();
+    $('#detailFrm').submit();
 
-    $('#filename').fileupload({
-      url: $('#detailFrm').attr('action'),
-      dataType: 'json',
-      done: function (e, data) {
-        $.each(data.result.files, function (index, file) {
-          $('<p/>').text(file.name).appendTo('#files');
-        });
-      },
-      progressall: function (e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar').css(
-                'width',
-                progress + '%'
-        );
-      }
-    }).prop('disabled', !$.support.fileInput)
-            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+//    $('#filename').fileupload({
+//      url: $('#detailFrm').attr('action'),
+//      dataType: 'json',
+//      done: function (e, data) {
+//        $.each(data.result.files, function (index, file) {
+//          $('<p/>').text(file.name).appendTo('#files');
+//        });
+//      },
+//      progressall: function (e, data) {
+//        var progress = parseInt(data.loaded / data.total * 100, 10);
+//        $('#progress .progress-bar').css(
+//                'width',
+//                progress + '%'
+//        );
+//      }
+//    }).prop('disabled', !$.support.fileInput)
+//            .parent().addClass($.support.fileInput ? undefined : 'disabled');
 //
 //    var bar = $('.bar');
 //    var percent = $('.percent');
