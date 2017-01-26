@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -127,12 +129,21 @@ public class AdInfoController extends ControllerPageBase {
   @RequestMapping(value = "save")
   public String save(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
+
+    MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+
+    MultipartFile file = mrequest.getFile("filename");
+
+    if(file.getSize() > 0) {
+      fileService.uploadFiles(request, req);
+    }else{
+      req.put("filename",null);
+    }
     if(req.get("isNew").equals("Y")){
       req.put("adindex",service.getNextAdindex(req));
-      fileService.uploadFiles(request, req);
       service.insert(req);
     }else{
-      fileService.uploadFiles(request, req);
+
       service.update(req);
     }
 

@@ -36,6 +36,10 @@
     <pattern>/*/*</pattern>
   </decorator>
 
+  <decorator name="pcbase" page="/WEB-INF/views/decorators/pcbase.jsp">
+    <pattern>/pc/*</pattern>
+  </decorator>
+
   <decorator name="login" page="/WEB-INF/views/decorators/login.jsp">
     <pattern>/</pattern>
   </decorator>
@@ -43,7 +47,11 @@
   <decorator name="m_login" page="/WEB-INF/views/decorators/m_login.jsp">
     <pattern>/m_login/</pattern>
     <pattern>/m_login</pattern>
+  </decorator>
 
+  <decorator name="pc_login" page="/WEB-INF/views/decorators/pc_login.jsp">
+    <pattern>/pc_login/</pattern>
+    <pattern>/pc_login</pattern>
   </decorator>
 
   <decorator name="m_base" page="/WEB-INF/views/decorators/m_base.jsp">

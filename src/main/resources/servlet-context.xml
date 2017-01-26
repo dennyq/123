@@ -29,7 +29,9 @@
 			<exclude-mapping path="/notice/*/*"/>
 			<exclude-mapping path="/m_login/*"/>
 			<exclude-mapping path="/m_login/*/*"/>
-
+			<exclude-mapping path="/pc_login"/>
+			<exclude-mapping path="/pc_login/*"/>
+			<exclude-mapping path="/pc_login/*/*"/>
 			<exclude-mapping path="/member/memberLogin"/>
 			<exclude-mapping path="/member/memberLogout"/>
 

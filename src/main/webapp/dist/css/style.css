@@ -138,6 +138,7 @@ section.content-header > h1{
 .m-upper-logo{
 
 }
+
 .lower-logo{
 text-align: center;
   padding: 15px;
@@ -147,6 +148,11 @@ height: 10px;
   color: #fff;
   font-weight: 400;
   font-size: 14px;
+  /*background-image:url("/imgs/img_mbg-illust.png") ;*/
+}
+
+.lower-logo-gray{
+
   /*background-image:url("/imgs/img_mbg-illust.png") ;*/
 }
 .btn-light-green {
@@ -812,6 +818,13 @@ div#loadingDiv{
 }
 .bg-farm{
   background: #1d8eae;
+  /*background-image:url("/imgs/bg_main.png");*/
+  background-position: top center;
+  /*background-position: bottom right;*/
+  background-repeat: no-repeat;
+}
+.bg-farm-dark{
+  background: #063e4f;
   /*background-image:url("/imgs/bg_main.png");*/
   background-position: top center;
   /*background-position: bottom right;*/

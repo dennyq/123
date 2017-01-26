@@ -58,6 +58,13 @@ public class MainController extends ControllerPageBase  {
 
         return "pages/login/m_login";
     }
+    //첫화면
+    @RequestMapping(value = "/pc_login")
+    public String pc_login(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+        return "pages/login/pc_login";
+    }
 
     //로그인
     @RequestMapping(value = "/login", method = RequestMethod.POST)

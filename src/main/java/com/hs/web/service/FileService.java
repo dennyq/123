@@ -296,18 +296,13 @@ public class FileService {
 
 
   public void uploadFiles(HttpServletRequest request, RequestMap req) throws Exception {
-    String filename = req.get("filename")+"";
+
 
     if(request instanceof MultipartHttpServletRequest){
-//      if(filename != null && !filename.equals("") && !filename.equals("null")){
+
         req.put("inputName","filename");
         req.put("filename", uploadFile(request,req));
-//      }
 
-//      if(img_file_name != null && !img_file_name.equals("")){
-//        req.put("inputName","img_file");
-//        req.put("image_file_id", uploadFile(request, req));
-//      }
     }
   }
 }
