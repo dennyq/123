@@ -1122,3 +1122,19 @@ padding: 10px 10px 10px 15px;
 .progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
 .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
 .percent { position:absolute; display:inline-block; top:3px; left:48%; }
+.marinblue{
+  color: #0f83a5;
+}
+ul.all-tab{
+  width: 100%;background-color: #eff3f6;border-top:1px solid  #dddfe1;list-style: none;
+  margin: 0 auto;
+  position: relative;
+  height: 127px;
+}
+.all-tab li{
+  float:left;
+  width: 127px;
+position: relative;
+  left: 30%;
+  /*width: 100%;background-color: #eff3f6;border-top:1px solid  #dddfe1;list-style: none;*/
+}

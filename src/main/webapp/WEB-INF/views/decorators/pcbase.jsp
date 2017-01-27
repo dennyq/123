@@ -15,7 +15,7 @@
 </head>
 <body class="skin-white layout-top-nav" style="height: auto;">
 <div class="wrapper" style="height: auto;">
-    <page:applyDecorator name="header"/>
+    <%--<page:applyDecorator name="header"/>--%>
       <div class="container">
 
         <decorator:body/>

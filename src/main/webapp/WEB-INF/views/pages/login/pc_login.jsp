@@ -19,26 +19,12 @@
       <div class="login-box-body">
         <form method="post">
           <div style="margin-left: 0px;margin-top: 25px;">
-            <a href="/pc/searchmap"> <img src="/imgs/bt_selec_local.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
+            <a href="/pc/list"> <img src="/imgs/bt_selec_local.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
           </div>
           <div style="margin-left: 0px;margin-top: 25px;">
-            <a href="/pc/searchmap"> <img src="/imgs/bt_selec_name.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
+            <a href="/pc/list"> <img src="/imgs/bt_selec_name.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
           </div>
 
-          <%--<img src="/imgs/bt_selec_local_on.png" style="margin-left: 30px;"/>--%>
-          <%--<label for="famers-id"><img src="/imgs/img_m_id.png" class="img-margin"/>아이디</label>--%>
-          <%--<div class="form-group has-icon non-bottom">--%>
-            <%--<input id="famers-id" name="famersId" class="form-control" placeholder="UserID">--%>
-          <%--</div>--%>
-          <%--<div style="height: 10px;"></div>--%>
-          <%--<label for="famers-pw"><img src="/imgs/img_m_id-04.png" class="img-margin"/>패스워드</label>--%>
-          <%--<div class="form-group has-icon">--%>
-            <%--<input id="famers-pw" name="famersPw" type="password" class="form-control" placeholder="Password">--%>
-
-          <%--</div>--%>
-          <%--<div class="row">--%>
-              <%--<a id="famersLogin" class="btn "><img src="/imgs/bt_login.png"></a>--%>
-          <%--</div>--%>
         </form>
 
       </div>
