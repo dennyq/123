@@ -212,6 +212,16 @@ height: 10px;
   color: #fff!important;
   padding: 7px 10px 10px 9px!important;
 }
+.btn-right-green{
+  background-color: #7fac44 !important;
+  color: #fff!important;
+  padding: 7px 10px 10px 9px!important;
+}
+.btn-pink-red{
+  background-color: #ed5460 !important;
+  color: #fff!important;
+  padding: 7px 10px 10px 9px!important;
+}
 .md-height{
   line-height: 1.4;
   height: 34px!important;
@@ -1137,4 +1147,7 @@ ul.all-tab{
 position: relative;
   left: 30%;
   /*width: 100%;background-color: #eff3f6;border-top:1px solid  #dddfe1;list-style: none;*/
+}
+.marginright3select{
+  margin-right:50px !important;
 }

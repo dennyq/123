@@ -5,6 +5,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 import com.hs.web.service.MemberService;
+import com.hs.web.service.PCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/pc/")
 public class PCController extends ControllerPageBase {
   @Autowired
-  private MemberService service;
+  private PCService service;
   private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
   private String rootKey = "pc";
   private String rootPath = "pages/" + rootKey + "/";
@@ -36,6 +37,11 @@ public class PCController extends ControllerPageBase {
     }
 
     model.addAllAttributes(service.list(req));
+    req.put("sch_codegroup","sido");
+    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
+
+
+
     return rootPath + "list";
   }
   //목록
@@ -46,6 +52,8 @@ public class PCController extends ControllerPageBase {
       model.addAttribute("tab","2");
     }
     model.addAllAttributes(service.list(req));
+    req.put("sch_codegroup","sido");
+    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
     return rootPath + "list";
   }
 
@@ -57,6 +65,8 @@ public class PCController extends ControllerPageBase {
       model.addAttribute("tab","2");
     }
     model.addAllAttributes(service.list(req));
+//    req.put("sch_codegroup","sido");
+    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
     return rootPath + "list";
   }
 
@@ -103,6 +113,7 @@ public class PCController extends ControllerPageBase {
     model.addAttribute("changePwd","Y");
     return rootPath + "detail";
   }
+
   //상세
   @RequestMapping(value = "changePwdPage/{memberid}")
   public String changePwdPageById(HttpServletRequest request, Model model) throws Exception {
@@ -131,17 +142,7 @@ public class PCController extends ControllerPageBase {
     return rootPath + "detail";
   }
 
-  //쓰기
-  @RequestMapping(value = "write")
-  public String write(HttpServletRequest request) throws Exception {
-    RequestMap req = RequestMap.create(request);
 
-    req.put("uploadDir", rootKey);
-    req.putAll(service.uploadImage(request));
-    service.write(req);
-
-    return "redirect:/" + rootKey + "/list";
-  }
 
   //쓰기
   @RequestMapping(value = "save")
@@ -160,6 +161,16 @@ public class PCController extends ControllerPageBase {
     service.save(req);
 
     return "redirect:/" + rootKey + "/info/"+req.get("memberid");
+  }
+
+  //코드/pc/search/ajax
+  @RequestMapping(value = "searchCodeList")
+  @ResponseBody
+  public ResultMap searchCodeList(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    ResultMap res = ResultMap.create();
+    res.put("codeList", service.getCodeList(req).get("rows"));
+    return res;
   }
 
   //수정

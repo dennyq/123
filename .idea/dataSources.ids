@@ -1107,6 +1107,23 @@
       <column name="max_size" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
       <column name="curr_size" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
     </table>
+    <table name="address" schema="" catalog="kippa" type="TABLE">
+      <column name="index" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="codegroup" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="code" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="codename" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="uppercode" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ord" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="index"/>
+    </table>
+    <table name="addressinfo" schema="" catalog="kippa" type="TABLE">
+      <column name="sidocode" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="sidoname" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="guguncode" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gugunname" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="dongrocode" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="dongroname" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+    </table>
     <table name="adinfo" schema="" catalog="kippa" type="TABLE">
       <column name="adindex" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="adtitle" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
