@@ -108,3 +108,8 @@ Handlebars.registerHelper("foreach",function(arr,options) {
     return options.fn(item);
   }).join('');
 });
+
+Handlebars.registerHelper("inc", function(value, options)
+{
+  return parseInt(value) + 1;
+});

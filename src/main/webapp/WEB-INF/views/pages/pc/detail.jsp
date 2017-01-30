@@ -7,29 +7,14 @@
   <title>회원 관리</title>
 </head>
 <body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
-<section class="content-header">
-  <h1>
-    <c:if test="${empty data && changePwd ne 'Y'}">
-      회원등록
-    </c:if>
-    <c:if test="${not empty data && changePwd ne 'Y'}">
-      회원상세
-    </c:if>
-    <c:if test="${changePwd eq 'Y'}">
-      비밀번호변경
-    </c:if>
-  </h1>
-
-
-  <ol class="breadcrumb">
-    <li><a href="<c:url value="/"/>">HOME</a></li>
-    <li><a href="<c:url value="/member/list"/>">회원</a></li>
-    <li>
-      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
-    </li>
-  </ol>
-</section>
+<form id="detailFrm" class="form-horizontal" action="<c:url value="/pc/save"/>" method="post">
+    <center>
+        <section class="content-header">
+            <h1 class="big-font">
+                <span class="marinblue">세부정보</span>보기
+            </h1>
+        </section>
+    </center>
 <!-- Main content -->
 <section class="content">
   <div class="paddingInside">
@@ -57,25 +42,10 @@
   </div><!-- //.paddingInside -->
 </section>
   <div id="map" style="width:100%;height:350px;display: none"></div>
-<c:if test="${empty data}">
-  <center>
-    <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">가입하기</a>
-    <a href="<c:url value="/member/list"/>" class="btn btn-blue-green btn-flat md-height">목록</a>
-  </center>
-
-</c:if>
-<c:if test="${not empty data && changePwd ne 'Y'}">
-  <center>
-    <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
-    <a id="delBtn" class="btn btn-green btn-flat md-height showEditor">삭제</a>
-    <a id="changePagePwdBtn" class="btn btn-blue-green btn-flat md-height">비밀번호 변경</a>
-  </center>
-</c:if>
-  <c:if test="${not empty data && changePwd eq 'Y'}">
     <center>
-      <a id="changePwdBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+        <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">내 영업소로 지정</a>
+
     </center>
-  </c:if>
 </form>
 
 <script>
@@ -181,61 +151,61 @@
       return false;
     }
 
-    if($('#memberid').val() ==''){
-      alert('아이디를 입력해주세요');
-      $('#memberid').focus();
-      return false;
-    }
-    <c:if test="${empty data}">
-    if($('#password').val() ==''){
-      alert('비밀번호를 입력해주세요');
-      $('#password').focus();
-      return false;
-    }
-    if($('#cfrm_password').val() ==''){
-      alert('비밀번호확인을 입력해주세요');
-      $('#cfrm_password').focus();
-      return false;
-    }
-    </c:if>
-    if($('#name').val() ==''){
-      alert('이름을 입력해주세요');
-      $('#name').focus();
-      return false;
-    }
-    if($('#gubun').val() ==''){
-      alert('약국/병원 구분을 입력해주세요');
-      $('#gubun').focus();
-      return false;
-    }
+    <%--if($('#memberid').val() ==''){--%>
+      <%--alert('아이디를 입력해주세요');--%>
+      <%--$('#memberid').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
+    <%--<c:if test="${empty data}">--%>
+    <%--if($('#password').val() ==''){--%>
+      <%--alert('비밀번호를 입력해주세요');--%>
+      <%--$('#password').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
+    <%--if($('#cfrm_password').val() ==''){--%>
+      <%--alert('비밀번호확인을 입력해주세요');--%>
+      <%--$('#cfrm_password').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
+    <%--</c:if>--%>
+    <%--if($('#name').val() ==''){--%>
+      <%--alert('이름을 입력해주세요');--%>
+      <%--$('#name').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
+    <%--if($('#gubun').val() ==''){--%>
+      <%--alert('약국/병원 구분을 입력해주세요');--%>
+      <%--$('#gubun').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
 
-    if($('#usestartdate').val() ==''){
-      alert('사용시작일자를 입력해주세요');
-      $('#usestartdate').focus();
-      return false;
-    }
-    if($('#useenddate').val() ==''){
-      alert('사용종료일자를 입력해주세요');
-      $('#useenddate').focus();
-      return false;
-    }
+    <%--if($('#usestartdate').val() ==''){--%>
+      <%--alert('사용시작일자를 입력해주세요');--%>
+      <%--$('#usestartdate').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
+    <%--if($('#useenddate').val() ==''){--%>
+      <%--alert('사용종료일자를 입력해주세요');--%>
+      <%--$('#useenddate').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
 
-    <c:if test="${empty data}">
-    if($('#password').val() != $('#cfrm_password').val()){
-      alert('비밀번호가 일치하지 않습니다.');
-      $('#password').focus();
-      return false;
-    }
+    <%--<c:if test="${empty data}">--%>
+    <%--if($('#password').val() != $('#cfrm_password').val()){--%>
+      <%--alert('비밀번호가 일치하지 않습니다.');--%>
+      <%--$('#password').focus();--%>
+      <%--return false;--%>
+    <%--}--%>
 
-    if($('#idCheck').val() != 'Y'){
-      alert('아이디 중복검사를 해주세요.');
+    <%--if($('#idCheck').val() != 'Y'){--%>
+      <%--alert('아이디 중복검사를 해주세요.');--%>
 
-      return false;
-    }
-    </c:if>
-    <c:if test="${empty data}">
+      <%--return false;--%>
+    <%--}--%>
+    <%--</c:if>--%>
+    <%--<c:if test="${empty data}">--%>
 
-    </c:if>
+    <%--</c:if>--%>
     $('#detailFrm').submit();
 
   }

@@ -738,16 +738,26 @@ function chageImgSrc(thisObj){
 }
 
 function swapOverImg(thisObj,addStr){
-	var src =$(thisObj).attr('src').split('.')[0];
-	var ext =$(thisObj).attr('src').split('.')[1];
-    $(thisObj).attr('src', src + addStr +'.'+ ext);
+	var srcStr = $(thisObj).attr('src');
+
+	if (srcStr.indexOf(addStr) == -1) {
+		var src =$(thisObj).attr('src').split('.')[0];
+		var ext =$(thisObj).attr('src').split('.')[1];
+		$(thisObj).attr('src', src + addStr +'.'+ ext);
+	}
+
 }
 function swapOutImg(thisObj,addStr){
-    var src =$(thisObj).attr('src').split('.')[0];
+	var srcStr = $(thisObj).attr('src');
 
-    src = src.substring(0,src.indexOf(addStr));
-    var ext =$(thisObj).attr('src').split('.')[1];
-    $(thisObj).attr('src', src  +'.'+ ext);
+	if (srcStr.indexOf(addStr) > -1) {
+		var src =$(thisObj).attr('src').split('.')[0];
+
+		src = src.substring(0,src.indexOf(addStr));
+		var ext =$(thisObj).attr('src').split('.')[1];
+		$(thisObj).attr('src', src  +'.'+ ext);
+	}
+
 }
 
 

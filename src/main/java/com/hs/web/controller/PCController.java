@@ -1,10 +1,11 @@
 package com.hs.web.controller;
 
 import com.hs.BizException;
+import com.hs.DbMap;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
-import com.hs.web.service.MemberService;
+
 import com.hs.web.service.PCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-// 머신
+
 @Controller
 @RequestMapping(value = "/pc/")
 public class PCController extends ControllerPageBase {
   @Autowired
   private PCService service;
-  private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+  private static final Logger logger = LoggerFactory.getLogger(PCController.class);
   private String rootKey = "pc";
   private String rootPath = "pages/" + rootKey + "/";
 
@@ -32,28 +33,14 @@ public class PCController extends ControllerPageBase {
   public String listPage(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
-    if(req.get("tab")==null){
-      model.addAttribute("tab","2");
-    }
-
-    model.addAllAttributes(service.list(req));
-    req.put("sch_codegroup","sido");
-    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
-
-
-
+    getListModel(model, req);
     return rootPath + "list";
   }
   //목록
   @RequestMapping(value = "list")
   public String list(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
-    if(req.get("tab")==null){
-      model.addAttribute("tab","2");
-    }
-    model.addAllAttributes(service.list(req));
-    req.put("sch_codegroup","sido");
-    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
+    getListModel(model, req);
     return rootPath + "list";
   }
 
@@ -61,29 +48,29 @@ public class PCController extends ControllerPageBase {
   @RequestMapping(value = "search")
   public String search(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
-    if(req.get("tab")==null){
-      model.addAttribute("tab","2");
-    }
-    model.addAllAttributes(service.list(req));
-//    req.put("sch_codegroup","sido");
-    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
+    getListModel(model, req);
     return rootPath + "list";
   }
 
+  private void getListModel(Model model, RequestMap req) {
+    model.addAttribute("tab",(req.get("tab")==null)?"2":req.get("tab")+"");
+    model.addAllAttributes(service.list(req));
+    req.put("sch_codegroup","sido");
+    model.addAttribute("codeList", service.getCodeList(req).get("rows"));
+  }
 
   //상세
   @RequestMapping(value = "info")
   public String info(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
-//    putPathVariable(request, req);
-//    model.addAllAttributes(service.detail(req));
+
     if (req.get("login_uid") == null) {
       throw new BizException("9009", "need_login");
     }
-//      return redirect:rootPath + "info"+;
+
 
     return "redirect:/" + rootKey + "/info/" + req.get("login_uid");
-//    return rootPath + "info";
+
   }
 
   //상세
@@ -96,8 +83,18 @@ public class PCController extends ControllerPageBase {
   }
 
   //상세
+  @RequestMapping(value = "detail")
+  public String details(HttpServletRequest request, Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+
+
+    model.addAttribute("data",req);
+    return rootPath + "detail";
+  }
+
+  //상세
   @RequestMapping(value = "detail/{memberid}")
-  public String detail(HttpServletRequest request, Model model) throws Exception {
+  public String detailById(HttpServletRequest request, Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
     model.addAllAttributes(service.detail(req));
@@ -135,15 +132,6 @@ public class PCController extends ControllerPageBase {
   }
 
 
-  //쓰기페이지
-  @RequestMapping(value = "detail")
-  public String input(HttpServletRequest request, Model model) throws Exception {
-    RequestMap req = RequestMap.create(request);
-    return rootPath + "detail";
-  }
-
-
-
   //쓰기
   @RequestMapping(value = "save")
   public String save(HttpServletRequest request) throws Exception {
@@ -153,6 +141,7 @@ public class PCController extends ControllerPageBase {
 
     return "redirect:/" + rootKey + "/list";
   }
+
   //쓰기
   @RequestMapping(value = "saveInfo")
   public String saveInfo(HttpServletRequest request) throws Exception {
