@@ -180,20 +180,20 @@
 
         <td class="text-align-center">
             <form id="datailFrm{{@index}}" action="<c:url value="/pc/detail"/>" class="form-horizontal" method="post">
-            <input id="address" name="address" value="{{address}}"/>
-            <input id="addressBCode" name="addressBCode" value="{{addressBCode}}"/>
-            <input id="category2" name="category" value="{{category}}"/>
-            <input id="direction" name="direction" value="{{direction}}"/>
-            <input id="distance" name="distance" value="{{distance}}"/>
-            <input id="id" name="id" value="{{id}}"/>
-            <input id="imageUrl" name="imageUrl" value="{{imageUrl}}"/>
-            <input id="latitude" name="latitude" value="{{latitude}}"/>
-            <input id="longitude" name="longitude" value="{{longitude}}"/>
-            <input id="newAddress" name="newAddress" value="{{newAddress}}"/>
-            <input id="phone" name="phone" value="{{phone}}"/>
-            <input id="placeUrl" name="placeUrl" value="{{placeUrl}}"/>
-            <input id="title" name="title" value="{{title}}"/>
-            <input id="zipcode" name="zipcode" value="{{zipcode}}"/>
+            <input type="hidden" id="address" name="address" value="{{address}}"/>
+            <input type="hidden" id="addressBCode" name="addressBCode" value="{{addressBCode}}"/>
+            <input type="hidden" id="category2" name="category" value="{{category}}"/>
+            <input type="hidden" id="direction" name="direction" value="{{direction}}"/>
+            <input type="hidden" id="distance" name="distance" value="{{distance}}"/>
+            <input type="hidden" id="id" name="id" value="{{id}}"/>
+            <input type="hidden" id="imageUrl" name="imageUrl" value="{{imageUrl}}"/>
+            <input type="hidden" id="latitude" name="latitude" value="{{latitude}}"/>
+            <input type="hidden" id="longitude" name="longitude" value="{{longitude}}"/>
+            <input type="hidden" id="newAddress" name="newAddress" value="{{newAddress}}"/>
+            <input type="hidden" id="phone" name="phone" value="{{phone}}"/>
+            <input type="hidden" id="placeUrl" name="placeUrl" value="{{placeUrl}}"/>
+            <input type="hidden" id="title" name="title" value="{{title}}"/>
+            <input type="hidden" id="zipcode" name="zipcode" value="{{zipcode}}"/>
 
             <a class="showInfo pointer btn btn-right-green btn-flat md-height" >정보보기</a>
             </form>
