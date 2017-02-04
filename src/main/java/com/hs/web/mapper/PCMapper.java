@@ -3,6 +3,7 @@ package com.hs.web.mapper;
 
 import com.hs.DbList;
 import com.hs.DbMap;
+import com.hs.web.RequestMap;
 
 public interface PCMapper extends CrudMapper{
   void initailizePwd(DbMap map);
@@ -21,4 +22,9 @@ public interface PCMapper extends CrudMapper{
   void restore(DbMap req);
 
   void changePwd(DbMap req);
+
+  DbList codeListBig(DbMap req);
+  DbList codeListMid(DbMap req);
+  DbList codeListDong(DbMap req);
+  DbList codeListRo(DbMap req);
 }

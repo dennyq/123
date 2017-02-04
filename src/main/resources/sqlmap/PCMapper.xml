@@ -22,15 +22,14 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-      A.index,
-      A.codegroup,
-      A.code,
-      A.codename,
-      A.uppercode,
-      A.ord
-    FROM address A
+      A.big_addr,
+      A.middle_addr,
+      A.small_addr,
+      A.road_addr,
+      A.dong_addr
+    FROM addressrange A
     <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
-    ORDER BY A.ord
+    ORDER BY A.big_addr
     <include refid="com.hs.web.mapper.paging_end"/>
   </select>
 
@@ -43,33 +42,68 @@
       A.codename,
       A.uppercode,
       A.ord
-    FROM address A
+    FROM addressrange A
     <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
     ORDER BY A.ord
 
   </select>
 
+  <!--시도 셀렉트-->
+  <select id="codeListBig" parameterType="dbmap" resultType="dbmap">
+    SELECT big_addr
+    FROM addressrange
+    GROUP BY big_addr
+    ORDER BY big_addr
+  </select>
+
+  <!--군구 셀렉트-->
+  <select id="codeListMid" parameterType="dbmap" resultType="dbmap">
+    SELECT middle_addr
+    FROM addressrange
+    WHERE big_addr LIKE CONCAT('%', #{big_addr},'%')
+    GROUP BY middle_addr
+    ORDER BY middle_addr
+  </select>
+
+  <!--읍면동 셀렉트-->
+  <select id="codeListDong" parameterType="dbmap" resultType="dbmap">
+    SELECT A.small_addr,A.dong_addr
+    FROM addressrange A
+    WHERE A.big_addr LIKE CONCAT('%',  #{big_addr},'%') AND A.middle_addr LIKE CONCAT('%',  #{middle_addr},'%')
+          AND A.small_addr is not NULL
+    GROUP BY A.small_addr,A.dong_addr
+  </select>
+
+  <!--도로명 셀렉트-->
+  <select id="codeListRo" parameterType="dbmap" resultType="dbmap">
+    SELECT A.road_addr
+    FROM addressrange A
+    WHERE A.big_addr LIKE CONCAT('%', #{big_addr},'%') AND middle_addr LIKE CONCAT('%', #{middle_addr},'%')
+    GROUP BY A.road_addr
+    ORDER BY A.road_addr
+  </select>
+
   <select id="listCnt" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM address A
+    FROM addressrange A
     <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
   </select>
 
   <select id="idCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM address A
+    FROM addressrange A
       WHERE 1=1 AND deleteyn = 0 AND A.memberid  = #{memberid}
   </select>
 
   <select id="idPwCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM address A
+    FROM addressrange A
     WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
   </select>
 
     <select id="idPwDelChk" parameterType="dbmap" resultType="int">
         SELECT COUNT(*) AS cnt
-        FROM address A
+        FROM addressrange A
         WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
     </select>
 
@@ -93,7 +127,7 @@
         A.deleteyn,
         A.lastconnecttime,
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
-    FROM address A
+    FROM addressrange A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>
 
@@ -161,7 +195,7 @@
       <if test='name != null and name != ""'>name= #{name},</if>
       <if test='telephone != null and telephone != ""'>telephone= #{telephone},</if>
       <if test='handphone != null and handphone != ""'>handphone= #{handphone},</if>
-      <if test='address != null and address != ""'>address= #{address},</if>
+      <if test='addressrange != null and addressrange != ""'>address= #{address},</if>
       <if test='address_etc != null and address_etc != ""'>address_etc= #{address_etc},</if>
       <if test='introduce != null and introduce != ""'>introduce= #{introduce},</if>
       <if test='latitude != null and latitude != ""'>latitude= #{latitude},</if>

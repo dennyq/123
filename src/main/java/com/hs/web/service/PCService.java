@@ -59,8 +59,23 @@ public class PCService extends ServiceBase {
   public ResultMap getCodeList(RequestMap req) {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[getCodeList list] recv:{}", req);
-
-    DbList list = mapper.codeList(req);
+    int searchCode = Integer.parseInt(req.get("searchCode") + "");
+    DbList list = null;
+    DbList listRo = null;
+    switch (searchCode){
+      case 1:
+        list = mapper.codeListBig(req);break;
+      case 2:
+        list = mapper.codeListMid(req);break;
+      case 3:
+        list = mapper.codeListDong(req);
+        listRo = mapper.codeListRo(req);
+        res.put("rowsRo", listRo);
+        break;
+      default:
+        list = mapper.codeListBig(req);
+    }
+//    DbList list = mapper.codeList(req);
     res.put("rows", list);
 
     if (Global.isDev) logger.debug("[getCodeList list] send:{}", res);

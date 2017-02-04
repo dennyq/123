@@ -1,6 +1,7 @@
 package com.hs.web.controller;
 
 import com.hs.BizException;
+import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
@@ -43,6 +44,13 @@ public class PCController extends ControllerPageBase {
     getListModel(model, req);
     return rootPath + "list";
   }
+  //목록
+  @RequestMapping(value = "listSearchRegion")
+  public String listSearchRegion(HttpServletRequest request,Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    getListModel(model, req);
+    return rootPath + "listSearchRegion";
+  }
 
   //목록
   @RequestMapping(value = "search")
@@ -55,7 +63,7 @@ public class PCController extends ControllerPageBase {
   private void getListModel(Model model, RequestMap req) {
     model.addAttribute("tab",(req.get("tab")==null)?"2":req.get("tab")+"");
     model.addAllAttributes(service.list(req));
-    req.put("sch_codegroup","sido");
+    req.put("searchCode","1");
     model.addAttribute("codeList", service.getCodeList(req).get("rows"));
   }
 
@@ -158,7 +166,13 @@ public class PCController extends ControllerPageBase {
   public ResultMap searchCodeList(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
     ResultMap res = ResultMap.create();
-    res.put("codeList", service.getCodeList(req).get("rows"));
+    int searchCode = Integer.parseInt(req.get("searchCode") + "");
+    DbMap resultMap = service.getCodeList(req);
+    res.put("codeList", resultMap.get("rows"));
+    if (searchCode == 3) {
+      res.put("codeListRo", resultMap.get("rowsRo"));
+    }
+
     return res;
   }
 
