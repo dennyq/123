@@ -1,25 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <input type="hidden"  name="isNew" value="N"/>
-<%--address:--%>
-<%--addressBCode:--%>
-<%--category:--%>
-<%--direction:--%>
-<%--distance:--%>
-<%--id:--%>
-<%--imageUrl:--%>
-<%--latitude:--%>
-<%--longitude:--%>
-<%--newAddress:--%>
-<%--phone:--%>
-<%--placeUrl:--%>
-<%--title:--%>
-<%--zipcode:--%>
+<input type="hidden"  name="memberid" id="memberid" value="${data.memberid}"/>
+
 <div class="col-md-6">
   <div class="form-group">
-    <label for="title" class="col-sm-4 ">이름</label>
+    <label for="name" class="col-sm-4 ">이름</label>
     <div class="col-sm-6">
-      <input name="title"  id="title" placeholder="이름" class="form-control" value="${data.title}" readonly>
+      <input name="name"  id="name" placeholder="이름" class="form-control" value="${data.name}" readonly>
     </div>
   </div>
   <div class="form-group">
@@ -31,7 +19,7 @@
   <div class="form-group">
     <label for="telephone" class="col-sm-4 ">전화번호</label>
     <div class="col-sm-6">
-      <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control" value="${data.phone}">
+      <input name="telephone"  id="telephone" placeholder="전화번호" class="form-control" value="${data.telephone}">
     </div>
   </div>
   <div class="form-group" style="display: none">

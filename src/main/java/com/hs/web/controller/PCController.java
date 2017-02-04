@@ -176,6 +176,15 @@ public class PCController extends ControllerPageBase {
     return res;
   }
 
+
+  ///searchByAddr
+  @RequestMapping(value = "searchByAddr")
+  @ResponseBody
+  public ResultMap searchByAddr(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    return  service.searchMember(req);
+  }
+
   //수정
   @RequestMapping(value = "modify")
   @ResponseBody

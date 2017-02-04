@@ -5,6 +5,43 @@
 <head>
   <meta charset="utf-8">
   <title>회원 관리</title>
+    <script>
+        //// 레지스트리 등록
+        function OnRegisterID()
+        {
+            var userid = $('#memberid').val();
+            alert(userid);
+            var ret = KC7Ax.RegisterID(userid);
+            if	( ret == 1 )
+            {
+                alert('성공');
+            }
+            else if  ( ret == -1 )
+            {
+                alert('실패');
+            }
+            else if  ( ret == 2 )
+            {
+                alert('아이디가 널값입니다');
+            }
+            else if  ( ret == 3 )
+            {
+                alert('아이디가 10자리 이하여야 합니다');
+            }
+            else if  ( ret == 4 )
+            {
+                alert('아이디는 영문자와 숫자여야만 합니다');
+            }
+        }
+
+        //// 아이디 얻기
+        function OnGetRegID()
+        {
+            getid.value = "";
+            var userid = KC7Ax.GetRegID();
+            getid.value = userid;
+        }
+    </script>
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/pc/save"/>" method="post">
@@ -23,16 +60,12 @@
           <div id="progressIndicator" style="display: none"></div>
           <div class="box-body">
             <!-- input start -->
-            <c:if test="${empty data && changePwd ne 'Y'}">
+            <c:if test="${empty data}">
               <%@include file="new.jsp"%>
             </c:if>
 
-            <c:if test="${not empty data && changePwd ne 'Y'}">
+            <c:if test="${not empty data}">
               <%@include file="update.jsp"%>
-            </c:if>
-
-            <c:if test="${changePwd eq 'Y'}">
-              <%@include file="changePwd.jsp"%>
             </c:if>
 
         </div><!-- //.box -->
@@ -43,12 +76,17 @@
 </section>
   <div id="map" style="width:100%;height:350px;display: none"></div>
     <center>
+        <OBJECT ID="KC7Ax" CLASSID="CLSID:DBFC0953-8254-46A8-A034-0E674E74D932" STYLE="WIDTH:0px; HEIGHT:0px; ">
+        </OBJECT>
         <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">내 영업소로 지정</a>
 
     </center>
 </form>
 
 <script>
+
+
+
   var searchAddressAndSave = function(){
    var address = $('#address').val();
     if (address != null && address != ''){
@@ -253,70 +291,26 @@
 
     //저장
     $('#saveBtn').click(function(){
-
-
-      var latitude = $('#latitude').val();
-      var oldlatitude = $('#oldlatitude').val();
-      var longitude = $('#longitude').val();
-      var oldlongitude = $('#oldlongitude').val();
-      var address = $('#address').val();
-//      console.log(latitude);
-//      console.log(oldlatitude);
-      if ((latitude != oldlatitude || longitude != oldlongitude )){
-        saveFunction();
-      }else{
-        searchAddressAndSave();
-      }
-
-
-    });
-
-    $('#id_check').click(function(){
-      if($('#memberid').val() ==''){
-        alert('아이디를 입력해주세요');
-        $('#memberid').focus();
-        return false;
-      }
-      var req = {};
-      req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/idCheck"/>', req, function (data) {
-        if (data.result_message == 'success') {
-          alert('사용할수 있는 아이디입니다.');
-          $('#idCheck').val("Y");
-        }else{
-          alert('이미 존재하는 아이디입니다.');
-        }
-      }, function (err) {
-        alert(err.result_message);
-      });
-
-
+        OnRegisterID()
+//
+//      var latitude = $('#latitude').val();
+//      var oldlatitude = $('#oldlatitude').val();
+//      var longitude = $('#longitude').val();
+//      var oldlongitude = $('#oldlongitude').val();
+//      var address = $('#address').val();
+////      console.log(latitude);
+////      console.log(oldlatitude);
+//      if ((latitude != oldlatitude || longitude != oldlongitude )){
+//        saveFunction();
+//      }else{
+//        searchAddressAndSave();
+//      }
+//
 
     });
+});
 
-    $('#changePagePwdBtn').click(function(){
-      var id = $('#memberid').val();
-      console.log(id);
-      location.href='/member/changePwdPage/'+id;
 
-    });
-
-    $('#changePwdBtn').click(function(){
-
-      var req = {};
-      req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/changePwd"/>', req, function (data) {
-        if (data.result_message == 'success') {
-          alert('비밀번호가 변경되었습니다.');
-          location.href='/member/list';
-        }else if (data.result_message == 'fail') {
-          alert('비밀번호가 맞지 않습니다.');
-        }
-      }, function (err) {
-        alert(err.result_message);
-      });
-    });
-  });
   <!-- bind end -->
 
 </script>

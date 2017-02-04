@@ -179,6 +179,28 @@ public class PCService extends ServiceBase {
     return res;
   }
 
+  //searchMember
+  public ResultMap searchMember(RequestMap req) throws IOException {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[member searchMember] recv:{}", req);
+    String addrSidoStr = req.get("addrSidoStr")+"";
+
+    if(!addrSidoStr.equals("")){
+      if(addrSidoStr.indexOf("특별시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별시"));
+      }else if(addrSidoStr.indexOf("시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("시"));
+
+      }
+    }
+
+    req.put("addrSidoStr",addrSidoStr);
+    DbList list = mapper.searchMember(req);
+    res.put("rows", list);
+    if (Global.isDev) logger.debug("[member searchMember] send:{}", res);
+    return res;
+  }
+
   //수정
   public ResultMap modify(RequestMap req) {
     ResultMap res = ResultMap.create();

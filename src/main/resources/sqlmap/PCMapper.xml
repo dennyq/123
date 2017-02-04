@@ -122,12 +122,12 @@
         A.introduce,
         A.latitude,
         A.longitude,
-      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
         A.deleteyn,
         A.lastconnecttime,
+      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
-    FROM addressrange A
+    FROM member A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>
 
@@ -243,6 +243,30 @@
     AND memberid = #{memberid}
   </update>
 
+  <select id="searchMember" parameterType="dbmap" resultType="dbmap">
+    SELECT
+        memberid,
+        password,
+        grade,
+        gubun,
+        openflag,
+        name,
+        telephone,
+        handphone,
+        address,
+        address_etc,
+        introduce,
+        latitude,
+        longitude,
+        usestartdate,
+        useenddate,
+        deleteyn,
+        lastconnecttime,
+        regtime
+    FROM member
+    WHERE LEFT(address, LOCATE(' ',address) -1) LIKE CONCAT('%', #{addrSidoStr}, '%')
+    AND SUBSTRING(address, LOCATE(' ',address) + 1) LIKE CONCAT('%', #{addrLastStr}, '%')
+  </select>
 
 
 

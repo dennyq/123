@@ -1160,10 +1160,12 @@ ul.all-tab{
 #category li:hover {background: #ffe6e6;border-left:1px solid #acacac;margin-left: -1px;}
 #category li:last-child{margin-right:0;border-right:0;}
 #category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-#category li .category_bg {background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;}
+#category li .category_bg {background:url(/imgs/places_category.png) no-repeat;}
 #category li .bank {background-position: -10px 0;}
-#category li .mart {background-position: -10px -36px;}
-#category li .pharmacy {background-position: -10px -72px;}
+/*#category li .mart {background-position: -10px -36px;}*/
+/*#category li .pharmacy {background-position: -10px -72px;}*/
+#category li .mart {background-position: -10px -72px;}
+#category li .pharmacy {background-position: -10px -36px;}
 #category li .oil {background-position: -10px -108px;}
 #category li .cafe {background-position: -10px -144px;}
 #category li .store {background-position: -10px -180px;}
