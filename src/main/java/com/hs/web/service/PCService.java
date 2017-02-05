@@ -184,6 +184,7 @@ public class PCService extends ServiceBase {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[member searchMember] recv:{}", req);
     String addrSidoStr = req.get("addrSidoStr")+"";
+    String addrLastStr = req.get("addrLastStr")+"";
 
     if(!addrSidoStr.equals("")){
       if(addrSidoStr.indexOf("특별시")>-1){
@@ -192,6 +193,9 @@ public class PCService extends ServiceBase {
         addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("시"));
 
       }
+    }
+    if(addrLastStr.indexOf("선택하세요.")>-1){
+      req.put("addrLastStr",null);
     }
 
     req.put("addrSidoStr",addrSidoStr);
