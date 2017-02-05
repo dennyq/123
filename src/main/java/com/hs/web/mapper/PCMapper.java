@@ -29,4 +29,5 @@ public interface PCMapper extends CrudMapper{
   DbList codeListRo(DbMap req);
 
   DbList searchMember(DbMap req);
+  DbList searchByName(DbMap req);
 }

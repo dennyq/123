@@ -35,21 +35,31 @@ public class PCController extends ControllerPageBase {
     RequestMap req = RequestMap.create(request);
     putPathVariable(request, req);
     getListModel(model, req);
-    return rootPath + "list";
+    return rootPath + "listSearchRegion";
   }
   //목록
   @RequestMapping(value = "list")
   public String list(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     getListModel(model, req);
-    return rootPath + "list";
+    return rootPath + "listSearchRegion";
   }
-  //목록
+
+  //지역검색목록
   @RequestMapping(value = "listSearchRegion")
   public String listSearchRegion(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
     getListModel(model, req);
     return rootPath + "listSearchRegion";
+  }
+
+
+  //이름검색목록
+  @RequestMapping(value = "listSearchName")
+  public String listSearchName(HttpServletRequest request,Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    getListModel(model, req);
+    return rootPath + "listSearchName";
   }
 
   //목록
@@ -176,6 +186,15 @@ public class PCController extends ControllerPageBase {
     return res;
   }
 
+
+  ///searchByAddr
+  @RequestMapping(value = "searchByName")
+  @ResponseBody
+  public ResultMap searchByName(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+
+    return  service.searchByName(req);
+  }
 
   ///searchByAddr
   @RequestMapping(value = "searchByAddr")

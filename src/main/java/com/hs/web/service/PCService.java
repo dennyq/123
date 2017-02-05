@@ -204,6 +204,31 @@ public class PCService extends ServiceBase {
     if (Global.isDev) logger.debug("[member searchMember] send:{}", res);
     return res;
   }
+  //searchMember
+  public ResultMap searchByName(RequestMap req) throws IOException {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[member searchByName] recv:{}", req);
+    String addrSidoStr = req.get("addrSidoStr")+"";
+    String addrLastStr = req.get("addrLastStr")+"";
+
+    if(!addrSidoStr.equals("")){
+      if(addrSidoStr.indexOf("특별시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별시"));
+      }else if(addrSidoStr.indexOf("시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("시"));
+
+      }
+    }
+    if(addrLastStr.indexOf("선택하세요.")>-1){
+      req.put("addrLastStr",null);
+    }
+
+    req.put("addrSidoStr",addrSidoStr);
+    DbList list = mapper.searchByName(req);
+    res.put("rows", list);
+    if (Global.isDev) logger.debug("[member searchByName] send:{}", res);
+    return res;
+  }
 
   //수정
   public ResultMap modify(RequestMap req) {
