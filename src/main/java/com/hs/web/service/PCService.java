@@ -192,8 +192,16 @@ public class PCService extends ServiceBase {
       }else if(addrSidoStr.indexOf("시")>-1){
         addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("시"));
 
+      }else if(addrSidoStr.indexOf("특별자치도")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별자치도"));
+      }else if(addrSidoStr.indexOf("특별자치시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별자치시"));
+      }else if(addrSidoStr.indexOf("광역시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("광역시"));
       }
     }
+
+
     if(addrLastStr.indexOf("선택하세요.")>-1){
       req.put("addrLastStr",null);
     }
@@ -217,6 +225,12 @@ public class PCService extends ServiceBase {
       }else if(addrSidoStr.indexOf("시")>-1){
         addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("시"));
 
+      }else if(addrSidoStr.indexOf("특별자치도")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별자치도"));
+      }else if(addrSidoStr.indexOf("특별자치시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("특별자치시"));
+      }else if(addrSidoStr.indexOf("광역시")>-1){
+        addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("광역시"));
       }
     }
     if(addrLastStr.indexOf("선택하세요.")>-1){

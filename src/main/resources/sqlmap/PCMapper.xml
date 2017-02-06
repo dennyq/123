@@ -58,7 +58,15 @@
 
   <!--군구 셀렉트-->
   <select id="codeListMid" parameterType="dbmap" resultType="dbmap">
-    SELECT middle_addr
+    SELECT
+        big_addr,
+        middle_addr,
+        small_addr,
+        road_addr,
+        dong_addr,
+        post_number,
+        road_code,
+        dong_code
     FROM addressrange
     WHERE big_addr LIKE CONCAT('%', #{big_addr},'%')
     GROUP BY middle_addr
@@ -67,7 +75,15 @@
 
   <!--읍면동 셀렉트-->
   <select id="codeListDong" parameterType="dbmap" resultType="dbmap">
-    SELECT A.small_addr,A.dong_addr
+    SELECT
+        A.big_addr,
+        A.middle_addr,
+        A.small_addr,
+        A.road_addr,
+        A.dong_addr,
+        A.post_number,
+        A.road_code,
+        A.dong_code
     FROM addressrange A
     WHERE A.big_addr LIKE CONCAT('%',  #{big_addr},'%') AND A.middle_addr LIKE CONCAT('%',  #{middle_addr},'%')
           AND A.small_addr is not NULL
@@ -76,7 +92,15 @@
 
   <!--도로명 셀렉트-->
   <select id="codeListRo" parameterType="dbmap" resultType="dbmap">
-    SELECT A.road_addr
+    SELECT
+        A.big_addr,
+        A.middle_addr,
+        A.small_addr,
+        A.road_addr,
+        A.dong_addr,
+        A.post_number,
+        A.road_code,
+        A.dong_code
     FROM addressrange A
     WHERE A.big_addr LIKE CONCAT('%', #{big_addr},'%') AND middle_addr LIKE CONCAT('%', #{middle_addr},'%')
     GROUP BY A.road_addr

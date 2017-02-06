@@ -19,10 +19,10 @@
       <div class="login-box-body">
         <form method="post">
           <div style="margin-left: 0px;margin-top: 25px;">
-            <a href="/pc/list"> <img src="/imgs/bt_selec_local.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
+            <a href="/pc/listSearchRegion"> <img src="/imgs/bt_selec_local.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
           </div>
           <div style="margin-left: 0px;margin-top: 25px;">
-            <a href="/pc/list"> <img src="/imgs/bt_selec_name.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
+            <a href="/pc/listSearchName"> <img src="/imgs/bt_selec_name.png" style="margin-left: 0px;" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
           </div>
 
         </form>
