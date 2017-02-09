@@ -24,7 +24,7 @@
 	<!--</bean>-->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver"/>
-		<!--<property name="url" value="jdbc:mysql://iriwa.iptime.org:3306/PHARMACY4U"/>-->
+		<!--<property name="url" value="jdbc:mysql://iriwa.iptime.org:3306/kippa"/>-->
 		<!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/PHARMACY4U"/>-->
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/kippa"/>
 		<!--validationQuery="SELECT 1"-->
@@ -38,6 +38,7 @@
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 		<property name="username" value="root"/>
 		<property name="password" value="kippakippa1226"/>
+		<!--<property name="password" value="1234"/>-->
 		<!--<property name="password" value="9531nano@"/>-->
 		<!--<property name="username" value="root"/>-->
 		<!--<property name="password" value="9531nano@"/>-->

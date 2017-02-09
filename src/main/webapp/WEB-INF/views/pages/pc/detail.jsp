@@ -44,7 +44,8 @@
     </script>
 </head>
 <body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/pc/save"/>" method="post">
+<form id="detailFrm" class="form-horizontal" action="<c:url value="/pc/detail"/>" method="post">
+    <input type="hidden" id="setmystore" name="setmystore" value="${param['setmystore']}">
     <center>
         <section class="content-header">
             <h1 class="big-font">
@@ -84,9 +85,6 @@
 </form>
 
 <script>
-
-
-
   var searchAddressAndSave = function(){
    var address = $('#address').val();
     if (address != null && address != ''){
@@ -291,7 +289,16 @@
 
     //저장
     $('#saveBtn').click(function(){
-        OnRegisterID()
+
+        var frm = $('#detailFrm');
+        var getAction = frm.attr('action');
+        var memberId = $('#memberid').val();
+        //alert(memberId);
+        //location.href = getAction+'/'+memberId  + '?setmystore='+memberId;
+        $('#setmystore').val(memberId);
+        frm.attr('action',getAction+'/'+memberId);
+        frm.submit();
+//        OnRegisterID()
 //
 //      var latitude = $('#latitude').val();
 //      var oldlatitude = $('#oldlatitude').val();

@@ -11,6 +11,9 @@
     <pattern>/download/*</pattern>
     <pattern>/download</pattern>
     <pattern>/login/*</pattern>
+    <!--<pattern>/pc/sample</pattern>-->
+    <!--<pattern>/pc/sample/</pattern>-->
+    <!--<pattern>/pc/sample/*</pattern>-->
     <!--<pattern>/m_login/*</pattern>-->
     <!--<pattern>/m_login/*</pattern>-->
     <!-- nice name chk -->
@@ -38,6 +41,13 @@
 
   <decorator name="pcbase" page="/WEB-INF/views/decorators/pcbase.jsp">
     <pattern>/pc/*</pattern>
+  </decorator>
+
+  <decorator name="pcdetail" page="/WEB-INF/views/decorators/pcdetail.jsp">
+    <!--<pattern>/pc/detail/*</pattern>-->
+    <pattern>/pc/sample/*</pattern>
+    <pattern>/pc/sample/</pattern>
+    <pattern>/pc/sample</pattern>
   </decorator>
 
   <decorator name="login" page="/WEB-INF/views/decorators/login.jsp">

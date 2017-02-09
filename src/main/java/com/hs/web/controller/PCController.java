@@ -62,6 +62,14 @@ public class PCController extends ControllerPageBase {
     return rootPath + "listSearchName";
   }
 
+  //이름검색목록
+  @RequestMapping(value = "listSearchNameAuto")
+  public String listSearchNameAuto(HttpServletRequest request,Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    getListModel(model, req);
+    return rootPath + "listSearchNameAuto";
+  }
+
   //목록
   @RequestMapping(value = "search")
   public String search(HttpServletRequest request,Model model) throws Exception {
@@ -118,6 +126,14 @@ public class PCController extends ControllerPageBase {
     model.addAllAttributes(service.detail(req));
     return rootPath + "detail";
   }
+
+  //상세
+  @RequestMapping(value = "sample")
+  public String ActiveX_Sample_1() throws Exception {
+
+    return rootPath + "sample";
+  }
+
 
   //상세
   @RequestMapping(value = "changePwdPage")

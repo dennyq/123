@@ -3,6 +3,7 @@
 <input type="hidden"  name="isNew" value="N"/>
 <input type="hidden"  name="memberid" id="memberid" value="${data.memberid}"/>
 
+
 <div class="col-md-6">
   <div class="form-group">
     <label for="name" class="col-sm-4 ">이름</label>
