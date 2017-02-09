@@ -452,6 +452,12 @@
       setClickedMenuBold(1);
       searchBigAddr();
 
+      var namestr = $('#nameStr').val();
+      if(namestr != null){
+          //$('#searchList').trigger('click');
+          searchByAddr();
+      }
+
       $('#sido').change(function () {
           searchMidAddr(this);
       });
