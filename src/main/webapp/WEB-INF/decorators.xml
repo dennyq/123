@@ -11,11 +11,11 @@
     <pattern>/download/*</pattern>
     <pattern>/download</pattern>
     <pattern>/login/*</pattern>
-    <!--<pattern>/pc/sample</pattern>-->
-    <!--<pattern>/pc/sample/</pattern>-->
-    <!--<pattern>/pc/sample/*</pattern>-->
-    <!--<pattern>/m_login/*</pattern>-->
-    <!--<pattern>/m_login/*</pattern>-->
+    <pattern>/pc/sample</pattern>
+    <pattern>/pc/sample/</pattern>
+    <pattern>/pc/sample/*</pattern>
+    <pattern>/m_login/*</pattern>
+    <pattern>/m_login/*</pattern>
     <!-- nice name chk -->
     <pattern>/common/nameNiceChk*</pattern>
 
@@ -41,13 +41,15 @@
 
   <decorator name="pcbase" page="/WEB-INF/views/decorators/pcbase.jsp">
     <pattern>/pc/*</pattern>
+    <pattern>/pc/</pattern>
+    <pattern>/pc</pattern>
   </decorator>
 
-  <decorator name="pcdetail" page="/WEB-INF/views/decorators/pcdetail.jsp">
+  <decorator name="appbase" page="/WEB-INF/views/decorators/appbase.jsp">
     <!--<pattern>/pc/detail/*</pattern>-->
-    <pattern>/pc/sample/*</pattern>
-    <pattern>/pc/sample/</pattern>
-    <pattern>/pc/sample</pattern>
+    <pattern>/app/*</pattern>
+    <pattern>/app/</pattern>
+    <pattern>/app</pattern>
   </decorator>
 
   <decorator name="login" page="/WEB-INF/views/decorators/login.jsp">

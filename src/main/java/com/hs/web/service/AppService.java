@@ -97,9 +97,9 @@ public class AppService extends ServiceBase {
     if (Global.isDev) logger.debug("[main mapview] recv:{}", req);
     //gubun=1&latitude=37.5803715762&longitude=127.0876615908
     //todo : 하드코딩 걷어내기
-    res.put("gubun",1);
-    res.put("latitude",37.5803715762);
-    res.put("longitude",127.0876615908);
+    res.put("gubun",req.get("gubun"));
+    res.put("latitude",req.get("latitude"));
+    res.put("longitude",req.get("longitude"));
 //
 //    res.put("data", mapper.mapview(req));
 
