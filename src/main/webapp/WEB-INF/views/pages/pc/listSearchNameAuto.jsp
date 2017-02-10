@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <c:set var="isAdmin" value="${sessionScope.memberid eq 'admin'}"/>
+<%
+    String strName = java.net.URLDecoder.decode(request.getParameter("name"),"UTF-8");
+//    String strName = new String(request.getParameter("strName").getBytes("8859_1"), "UTF-8");
+
+%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -54,7 +59,8 @@
                 <div class="form-group left marginright3select">
                   <label for="nameStr" class="col-sm-3">이름</label>
                   <div class="col-sm-9">
-                    <input id="nameStr" name="nameStr" value="${param['name']}"/>
+                    <%--<input id="nameStr" name="nameStr" value="${param['name']}"/>--%>
+                    <input id="nameStr" name="nameStr" value="<%=strName%>"/>
                   </div>
                 </div>
               </center>
