@@ -37,7 +37,9 @@
 			<exclude-mapping path="/pc/*/*"/>
 			<exclude-mapping path="/member/memberLogin"/>
 			<exclude-mapping path="/member/memberLogout"/>
-
+			<exclude-mapping path="/app"/>
+			<exclude-mapping path="/app/*"/>
+			<exclude-mapping path="/app/*/*"/>
 			<exclude-mapping path="/history/detail"/>
 			<exclude-mapping path="/history/write"/>
 
