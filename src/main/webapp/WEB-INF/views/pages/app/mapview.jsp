@@ -12,13 +12,7 @@
 
 </head>
 <body>
-<center>
-  <section class="content-header">
-    <h1 class="big-font">
-        맵뷰
-    </h1>
-  </section>
-</center>
+
   <!-- Main content -->
 <section class="content">
 
