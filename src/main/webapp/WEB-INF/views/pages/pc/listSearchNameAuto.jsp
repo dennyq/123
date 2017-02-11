@@ -3,7 +3,7 @@
 <c:set var="isAdmin" value="${sessionScope.memberid eq 'admin'}"/>
 <%
     String strName = java.net.URLDecoder.decode(request.getParameter("name"),"UTF-8");
-//    String strName = new String(request.getParameter("strName").getBytes("8859_1"), "UTF-8");
+//    String strName = new String(request.getParameter("strName").getBytes("8859_1"), "UTF-8");서울특별시 금천구 독산로96길 32-4
 
 %>
 <!doctype html>
@@ -342,7 +342,7 @@
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div
               mapOption = {
                   center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-                  level: 6 // 지도의 확대 레벨
+                  level: 3 // 지도의 확대 레벨
               };
       // 지도를 생성합니다
       var map = new daum.maps.Map(mapContainer, mapOption);
@@ -350,8 +350,15 @@
       console.log(result);
 
       var imageSrc = "/imgs/picker_h_open.png";
-      var latSum = 0;
-      var lngSum = 0;
+//      var latSum = 0;
+//      var lngSum = 0;
+      var points=[];
+      for (var i = 0; i < result.rows.length; i ++) {
+          var items = result.rows[i];
+          points.push(new daum.maps.LatLng(items.latitude, items.longitude));
+      }
+
+      var bounds = new daum.maps.LatLngBounds();
       for (var i = 0; i < result.rows.length; i ++) {
           var items = result.rows[i];
 
@@ -373,56 +380,72 @@
               imgGubun='h';
           }
           imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
+
           // 마커 이미지를 생성합니다
           var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
 
           // 마커를 생성합니다
           var marker = new daum.maps.Marker({
               map: map, // 마커를 표시할 지도
-//              position: positions[i].latlng, // 마커를 표시할 위치
               position: new daum.maps.LatLng(items.latitude, items.longitude), // 마커를 표시할 위치
               name : items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
               image : markerImage // 마커 이미지
           });
-          latSum  += items.latitude;
-          lngSum  += items.longitude;
 
+
+          // LatLngBounds 객체에 좌표를 추가합니다
+          bounds.extend(points[i]);
 
           var iwContent = '<div class="placeinfo">' +
-                  '   <a class="title" href="/pc/detail/' + items.memberid + '" target="_blank" title="' + items.name + '">' + items.name + '</a>';
-
-//          if (items.newAddress) {
-//              content += '    <span title="' + items.newAddress + '">' + items.newAddress + '</span>' +
-//                      '  <span class="jibun" title="' + items.address + '">(지번 : ' + items.address + ')</span>';
-//          }  else {
-              iwContent += '    <span title="' + items.address + '">' + items.address + '</span>';
-//          }
-
-          iwContent += '    <span class="tel">' + items.telephone + '</span>' +
-                  '</div>' +
-                  '<div class="after"></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-//          var iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+                            '<a class="title" href="/pc/detail/' + items.memberid + '" target="_blank" title="' + items.name + '">' + items.name + '</a>';
+                            iwContent += '<span title="' + items.address + '">' + items.address + '</span>';
+                            iwContent += '<span class="tel">' + ((items.telephone!=null)&&items.telephone)?items.telephone:"" + '</span>' +
+                            '</div>' +
+                            '<div class="after"></div>';
 
           // 인포윈도우를 생성합니다
           var infowindow = new daum.maps.InfoWindow({
-              content : iwContent,
+              content : iwContent
+
+          });
+
+//          var iwContentSimple = '<div class="">' +
+//                            '<a class="title" href="/pc/detail/' + items.memberid + '" target="_blank" title="' + items.name + '">' + items.name + '</a>'+
+//
+//                            '</div>'
+//                            ;
+//
+//          // 인포윈도우를 생성합니다
+//          var infowindowSimple = new daum.maps.InfoWindow({
+//              content : iwContentSimple,
 //              removable : iwRemoveable
-          });
+//          });
 
-          // 마커에 클릭이벤트를 등록합니다
-          daum.maps.event.addListener(marker, 'click', function() {
-              // 마커 위에 인포윈도우를 표시합니다
-              infowindow.open(map, marker);
-          });
+          // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+          // 이벤트 리스너로는 클로저를 만들어 등록합니다
+          // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 
+          daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+          //daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
       }
-      var moveLatLon = new daum.maps.LatLng(latSum/result.rows.length, lngSum/result.rows.length);
-
-      // 지도 중심을 이동 시킵니다
-      map.setCenter(moveLatLon);
 
 
+      map.setBounds(bounds);
 
+
+        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+      function makeOverListener(map, marker, infowindow) {
+          return function() {
+              infowindow.open(map, marker);
+          };
+      }
+
+// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+      function makeOutListener(infowindow) {
+          return function() {
+              infowindow.close();
+          };
+      }
 
   }
 
@@ -439,8 +462,13 @@
       $als.execute('/pc/searchByName', req, function (data) {
           console.log(data);
           if (data.result_message == 'success') {
+if(data.rows.length>0){
+    setDataToMap(data);
+}else{
+    $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
 
-              setDataToMap(data);
+}
+
           }
       }, function (err) {
           alert(err.result_message);
