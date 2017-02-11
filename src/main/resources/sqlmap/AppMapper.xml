@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.AppMapper">
+
+    <select id="search" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        memberid,
+        password,
+        grade,
+        gubun,
+        openflag,
+        name,
+        telephone,
+        handphone,
+        address,
+        address_etc,
+        introduce,
+        latitude,
+        longitude,
+        usestartdate,
+        useenddate,
+        deleteyn,
+        lastconnecttime,
+        regtime
+        FROM member
+        WHERE deleteyn = 0
+        <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
+        <if test='latitude != null and latitude != "" and latitude != "0"'>AND latitude = #{latitude}</if>
+        <if test='longitude != null and longitude != "" and longitude != "0"'>AND longitude = #{longitude}</if>
+        <if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>
+        <if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>
+    </select>
+</mapper>

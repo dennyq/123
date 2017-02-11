@@ -21,7 +21,24 @@
         <decorator:body/>
       </div>
 </div>
-
+<page:applyDecorator name="footer"/>
+<script>
+  $(function(){
+    var minH = $('.main-sidebar').outerHeight()-356;
+    $('.sidebar-menu').css('minHeight',minH);
+    $('.sub-logo').click(function(){
+      location.href='/';
+    })
+  });
+  $(function () {
+    $('.sidebar-menu li a').click(function(){
+      if(monitorSetTimeOut!=null){
+        clearTimeout(monitorSetTimeOut);
+      }
+      location.href = $(this).attr('gotourl');
+    })
+  });
+</script>
 </body>
 </html>
 
