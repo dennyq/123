@@ -28,7 +28,7 @@ public class AdInfoController extends ControllerPageBase {
   private AdInfoService service;
   @Autowired
   private FileService fileService;
-  private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+  private static final Logger logger = LoggerFactory.getLogger(AdInfoController.class);
   private String rootKey = "adinfo";
   private String rootPath = "pages/" + rootKey + "/";
 

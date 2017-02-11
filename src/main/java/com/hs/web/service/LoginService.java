@@ -25,8 +25,7 @@ public class LoginService extends ServiceBase{
 
   private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
   @Autowired private LoginMapper mapper;
-  @Autowired private RemoteService remoteService;
-  private EasySocket[] m_eSocketReader = null;
+
   public boolean isLogin(RequestMap req) throws Exception {
 
     boolean isLogin = false;
@@ -63,14 +62,6 @@ public class LoginService extends ServiceBase{
     }
     logger.info("reader new");
 
-//    if(m_eSocketReader==null){
-//      if ( m_eSocketReader[0] == null )
-//      {
-        m_eSocketReader = new EasySocket[1];
-        session.setAttribute("socket",m_eSocketReader);
-
-//      }
-//    }
 
 
   }
@@ -100,22 +91,7 @@ public class LoginService extends ServiceBase{
 
 
   public void logout(RequestMap req,HttpSession session) {
-    remoteService.closeSocket(req);
-//			remoteService.closeSocket();
-//    m_eSocketReader = (EasySocket[]) session.getAttribute("socket");
-//
-//    if(m_eSocketReader !=null){
-//      if(m_eSocketReader[0] !=null){
-//        if   ( m_eSocketReader[0].isConnectedSocket() == true ){
-//          m_eSocketReader[0].disconnectionSocket();
-//        }
-//
-//        try { Thread.sleep(100); } catch (InterruptedException e) { e.printStackTrace(); }
-//
-//        m_eSocketReader[0] = null;
-//
-//      }
-//    }
+
 
 
   }

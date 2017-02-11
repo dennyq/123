@@ -31,8 +31,7 @@ public class MainController extends ControllerPageBase  {
     private MainService service;
     @Autowired
     private LoginService loginService;
-    @Autowired
-    private RemoteService remoteService;
+
 
     //첫화면
     @RequestMapping(value = "/")

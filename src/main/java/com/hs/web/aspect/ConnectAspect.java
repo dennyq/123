@@ -5,7 +5,7 @@ import com.hs.BizException;
 import com.hs.ResultMap;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
-import com.hs.web.service.RemoteService;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,8 +30,7 @@ import javax.servlet.http.HttpSession;
 public class ConnectAspect {
     private static final Logger logger = LoggerFactory.getLogger(ConnectAspect.class);
 
-    @Autowired
-    private RemoteService service;
+
     private Object resultArr;
     private String logMsg;
     private Object[] thisObjArr;
@@ -75,11 +74,7 @@ public class ConnectAspect {
                 HttpServletRequest request = (HttpServletRequest) obj;
                 RequestMap req = RequestMap.create(request);
                 HttpSession session = request.getSession();
-                if(session.getAttribute("login_sockect")!=null){
 
-                    service.closeSocket(req);
-
-                }
 
             } else if (obj instanceof RequestMap) {
                 RequestMap req = (RequestMap) obj;

@@ -1,6 +1,6 @@
 package com.hs.web.controller;
 
-import com.hs.web.service.EasySocket;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSessionListener;
  * Created by bonbu on 2016-12-25.
  */
 public class SessionListner implements HttpSessionListener {
-    private EasySocket[] m_eSocketReader = null;private static final Logger logger = LoggerFactory.getLogger(SessionListner.class);
+   private static final Logger logger = LoggerFactory.getLogger(SessionListner.class);
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         // 세션 생성시 호출

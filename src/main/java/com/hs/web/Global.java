@@ -1,7 +1,7 @@
 package com.hs.web;
 
 import com.hs.util.HttpUtil;
-import com.hs.web.service.EasySocket;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class Global {
   public static String SERVER_IP_ADDRESS;
   public static String SERVERENCODING ;
   public static int socketcnt=0;
-  public static EasySocket[] m_eSocketReader;
+
 
   
   public final static String FONT_NAME = "굴림";// "백묵 굴림";//"맑은 고딕";//"돋움";// = "백묵 굴림";

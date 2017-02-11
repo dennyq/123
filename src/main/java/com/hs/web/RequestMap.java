@@ -2,7 +2,7 @@ package com.hs.web;
 
 import com.google.gson.Gson;
 import com.hs.DbMap;
-import com.hs.web.service.EasySocket;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class RequestMap extends DbMap {
     private static final Logger logger = LoggerFactory.getLogger(RequestMap.class);
     private static final long serialVersionUID = -1840941644262834923L;
-    private static EasySocket[] m_eSocketReader = null;
+
     private static Gson _gson = new Gson();
     public static RequestMap create(HttpServletRequest request) throws IOException {
 
@@ -63,13 +63,9 @@ public class RequestMap extends DbMap {
 
         req.put("login_uid", session.getAttribute("memberid"));
         req.put("login_name", session.getAttribute("name"));
-        req.put("login_contactpoint", session.getAttribute("contactpoint"));
-        req.put("login_note", session.getAttribute("note"));
-        req.put("login_memberid", session.getAttribute("memberid"));
-        req.put("login_uip", session.getAttribute("ipaddress"));
-        req.put("login_uport", session.getAttribute("listenport"));
 
-        req.put("login_socket", session.getAttribute("socket"));
+
+
 
 
 

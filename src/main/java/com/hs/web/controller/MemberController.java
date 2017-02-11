@@ -5,7 +5,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 import com.hs.web.service.MemberService;
-import com.hs.web.service.NoticeService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class MemberController extends ControllerPageBase {
   @Autowired
   private MemberService service;
-  private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+  private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
   private String rootKey = "member";
   private String rootPath = "pages/" + rootKey + "/";
 
