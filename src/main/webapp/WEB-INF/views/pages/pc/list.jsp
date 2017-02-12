@@ -346,7 +346,10 @@
     };
 
 
+
     var setDataToMap = function (result) {
+        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+
         // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
         var placeOverlay = new daum.maps.CustomOverlay({zIndex:1}),
                 contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
@@ -372,7 +375,7 @@
         }
 
         var bounds = new daum.maps.LatLngBounds();
-        for (var i = 0; i < result.rows.length; i ++) {
+        for (var i = 0; i < result.rows.length; i++) {
             var items = result.rows[i];
 
             // 마커 이미지의 이미지 크기 입니다
@@ -381,16 +384,16 @@
             var imgGubun = '';
             var imgOpen = '';
 
-            if(result.rows[i].openflag==1){
+            if (result.rows[i].openflag == 1) {
                 imgOpen = 'open';
-            }else{
+            } else {
                 imgOpen = 'close';
             }
 
-            if(result.rows[i].gubun==1){
-                imgGubun='p';
-            }else{
-                imgGubun='h';
+            if (result.rows[i].gubun == 1) {
+                imgGubun = 'p';
+            } else {
+                imgGubun = 'h';
             }
             imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
 
@@ -401,45 +404,30 @@
             var marker = new daum.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: new daum.maps.LatLng(items.latitude, items.longitude), // 마커를 표시할 위치
-                name : items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image : markerImage // 마커 이미지
+                name: items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                image: markerImage, // 마커 이미지
+                clickable: true
             });
 
 
             // LatLngBounds 객체에 좌표를 추가합니다
             bounds.extend(points[i]);
+            // 인포윈도우를 생성합니다
+
 
             var iwContent = '<div class="placeinfo">' +
-                    '<a class="title" href="/pc/detail/' + items.memberid + '" target="_blank" title="' + items.name + '">' + items.name + '</a>';
+                    '<span class="closeOverlay" style=" float: right; width: 23px; text-align: center; line-height: 2.5;cursor: pointer ">x</span>' +
+                    '<a class="title" href="/pc/detail/' + items.memberid + '"   title="' + items.name + '">' + items.name + '</a>';
             iwContent += '<span title="' + items.address + '">' + items.address + '</span>';
-            iwContent += '<span class="tel">' + ((items.telephone!=null)&&items.telephone)?items.telephone:"" + '</span>' +
+            iwContent += '<span class="tel">' + ((items.telephone != null) && items.telephone) ? items.telephone : "" + '</span>' +
             '</div>' +
             '<div class="after"></div>';
 
-            // 인포윈도우를 생성합니다
             var infowindow = new daum.maps.InfoWindow({
-                content : iwContent
-
+                content: iwContent
             });
 
-//          var iwContentSimple = '<div class="">' +
-//                            '<a class="title" href="/pc/detail/' + items.memberid + '" target="_blank" title="' + items.name + '">' + items.name + '</a>'+
-//
-//                            '</div>'
-//                            ;
-//
-//          // 인포윈도우를 생성합니다
-//          var infowindowSimple = new daum.maps.InfoWindow({
-//              content : iwContentSimple,
-//              removable : iwRemoveable
-//          });
-
-            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-            // 이벤트 리스너로는 클로저를 만들어 등록합니다
-            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-
             daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
-            //daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
         }
 
 
@@ -448,12 +436,17 @@
 
         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
         function makeOverListener(map, marker, infowindow) {
+            var iw = infowindow;
+
             return function() {
                 infowindow.open(map, marker);
+                $('.closeOverlay').click(function(){
+                    iw.close();
+                })
             };
         }
 
-// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다
         function makeOutListener(infowindow) {
             return function() {
                 infowindow.close();
