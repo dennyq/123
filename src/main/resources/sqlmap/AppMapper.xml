@@ -26,10 +26,10 @@
         FROM member
         WHERE deleteyn = 0
         <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
-        <if test='latitude != null and latitude != "" and latitude != "0"'>AND latitude = #{latitude}</if>
-        <if test='longitude != null and longitude != "" and longitude != "0"'>AND longitude = #{longitude}</if>
-        <if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>
-        <if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>
+        <!--<if test='latitude != null and latitude != "" and latitude != "0"'>AND latitude = #{latitude}</if>-->
+        <!--<if test='longitude != null and longitude != "" and longitude != "0"'>AND longitude = #{longitude}</if>-->
+        <!--<if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>-->
+        <!--<if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>-->
     </select>
 
     <select id="detail" parameterType="dbmap" resultType="dbmap">

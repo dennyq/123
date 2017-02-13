@@ -448,6 +448,7 @@
               placeinfoParent.css('width','155px');
               placeinfoParentParent.css('border','1px solid #fff');
               placeinfoParentParent.css('border-radius','6px');
+              placeinfoParentParent.css('width','100%');
           };
       }
 
@@ -472,12 +473,12 @@
       $als.execute('/pc/searchByAddr', req, function (data) {
           console.log(data);
           if (data.result_message == 'success') {
-if(data.rows.length>0){
-    setDataToMap(data);
-}else{
-    $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
+              if (data.rows.length > 0) {
+                  setDataToMap(data);
+              } else {
+                  $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
 
-}
+              }
 
           }
       }, function (err) {

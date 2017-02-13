@@ -435,6 +435,7 @@
               placeinfoParent.css('width','155px');
               placeinfoParentParent.css('border','1px solid #fff');
               placeinfoParentParent.css('border-radius','6px');
+              placeinfoParentParent.css('width','100%');
           };
       }
 

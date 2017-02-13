@@ -33,13 +33,38 @@
             currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
-              center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-              level: 3 // 지도의 확대 레벨
+              center: new daum.maps.LatLng('${param['latitude']}', '${param['longitude']}'), // 지도의 중심좌표
+              level: 4 // 지도의 확대 레벨
             };
+
+
     // 지도를 생성합니다
     var map = new daum.maps.Map(mapContainer, mapOption);
     // 마커 이미지의 이미지 주소입니다
     console.log(result);
+    var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
+            imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
+            imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var currMarkerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new daum.maps.LatLng('${param['latitude']}', '${param['longitude']}');
+
+    // 마커를 생성합니다
+    var currMarker = new daum.maps.Marker({
+      position: markerPosition,
+      image: currMarkerImage // 마커이미지 설정
+
+    });
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    currMarker.setPosition(markerPosition);
+
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    currMarker.setMap(map);
+
 
     var imageSrc = "/imgs/picker_h_open.png";
 //      var latSum = 0;
@@ -55,7 +80,8 @@
       var items = result.rows[i];
 
       // 마커 이미지의 이미지 크기 입니다
-      var imageSize = new daum.maps.Size(24, 35);
+      //var imageSize = new daum.maps.Size(24, 35);
+      var imageSize = new daum.maps.Size(47, 69);
 
       var imgGubun = '';
       var imgOpen = '';
@@ -107,7 +133,7 @@
     }
 
 
-    map.setBounds(bounds);
+    //map.setBounds(bounds);
 
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -125,6 +151,7 @@
         placeinfoParent.css('width','155px');
         placeinfoParentParent.css('border','1px solid #fff');
         placeinfoParentParent.css('border-radius','6px');
+        placeinfoParentParent.css('width','100%');
       };
     }
 
