@@ -42,8 +42,16 @@ public class AppController extends ControllerPageBase {
   @ResponseBody
   public ResultMap search(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
-
-    return   service.search(req);
+    return service.search(req);
   }
 
+
+  //상세
+  @RequestMapping(value = "detail/{memberid}")
+  public String detailById(HttpServletRequest request, Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    putPathVariable(request, req);
+    model.addAllAttributes(service.detail(req));
+    return rootPath + "detail";
+  }
 }

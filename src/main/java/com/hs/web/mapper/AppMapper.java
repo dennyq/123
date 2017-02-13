@@ -8,4 +8,5 @@ import com.hs.web.RequestMap;
 public interface AppMapper {
 
   DbList search(DbMap req);
+  DbMap detail(DbMap req);
 }

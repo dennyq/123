@@ -435,13 +435,19 @@
 
       // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
       function makeOverListener(map, marker, infowindow) {
-        var iw = infowindow;
+          var iw = infowindow;
 
           return function() {
               infowindow.open(map, marker);
               $('.closeOverlay').click(function(){
                   iw.close();
               })
+              var placeinfo= $('.placeinfo');
+              var placeinfoParent = placeinfo.parent();
+              var placeinfoParentParent = placeinfoParent.parent();
+              placeinfoParent.css('width','155px');
+              placeinfoParentParent.css('border','1px solid #fff');
+              placeinfoParentParent.css('border-radius','6px');
           };
       }
 

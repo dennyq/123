@@ -31,4 +31,28 @@
         <if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>
         <if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>
     </select>
+
+    <select id="detail" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        A.memberid,
+        A.password,
+        A.grade,
+        A.gubun,
+        A.openflag,
+        A.name,
+        A.telephone,
+        A.handphone,
+        A.address,
+        A.address_etc,
+        A.introduce,
+        A.latitude,
+        A.longitude,
+        A.deleteyn,
+        A.lastconnecttime,
+        DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+        DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
+        DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+        FROM member A
+        WHERE 1=1 AND A.memberid = #{memberid}
+    </select>
 </mapper>

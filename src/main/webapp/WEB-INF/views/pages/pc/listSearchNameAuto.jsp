@@ -420,7 +420,6 @@
 
       map.setBounds(bounds);
 
-
       // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
       function makeOverListener(map, marker, infowindow) {
           var iw = infowindow;
@@ -430,6 +429,12 @@
               $('.closeOverlay').click(function(){
                   iw.close();
               })
+              var placeinfo= $('.placeinfo');
+              var placeinfoParent = placeinfo.parent();
+              var placeinfoParentParent = placeinfoParent.parent();
+              placeinfoParent.css('width','155px');
+              placeinfoParentParent.css('border','1px solid #fff');
+              placeinfoParentParent.css('border-radius','6px');
           };
       }
 
@@ -455,12 +460,12 @@
       $als.execute('/pc/searchByName', req, function (data) {
           console.log(data);
           if (data.result_message == 'success') {
-if(data.rows.length>0){
-    setDataToMap(data);
-}else{
-    $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
+              if (data.rows.length > 0) {
+                  setDataToMap(data);
+              } else {
+                  $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
 
-}
+              }
 
           }
       }, function (err) {

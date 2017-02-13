@@ -23,7 +23,7 @@ public class AppService extends ServiceBase {
   private static final Logger logger = LoggerFactory.getLogger(AppService.class);
   @Autowired private AppMapper mapper;
 
-  //상세
+
   public ResultMap search(RequestMap req) {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[main search] recv:{}", req);
@@ -33,6 +33,17 @@ public class AppService extends ServiceBase {
 
 
     if (Global.isDev) logger.debug("[main search] send:{}", res);
+    return res;
+  }
+
+
+  public ResultMap detail(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[main detail] recv:{}", req);
+
+    res.put("data", mapper.detail(req));
+
+    if (Global.isDev) logger.debug("[main detail] send:{}", res);
     return res;
   }
 
