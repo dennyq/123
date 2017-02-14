@@ -2,6 +2,7 @@ package com.hs.web.service;
 
 import com.hs.BizException;
 import com.hs.DbList;
+import com.hs.DbMap;
 import com.hs.ResultMap;
 import com.hs.util.PageUtil;
 import com.hs.web.Global;
@@ -26,24 +27,51 @@ public class AppService extends ServiceBase {
 
   public ResultMap search(RequestMap req) {
     ResultMap res = ResultMap.create();
-    if (Global.isDev) logger.debug("[main search] recv:{}", req);
+    if (Global.isDev) logger.debug("[app search] recv:{}", req);
 
      DbList list = mapper.search(req);
+     DbList playList = mapper.playList(req);
+
     res.put("rows", list);
 
+    if (Global.isDev) logger.debug("[app search] send:{}", res);
+    return res;
+  }
 
-    if (Global.isDev) logger.debug("[main search] send:{}", res);
+
+  public ResultMap playOne(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[app playOne] recv:{}", req);
+
+     DbMap map = mapper.playOne(req);
+
+    res.put("data", map);
+
+    if (Global.isDev) logger.debug("[app playOne] send:{}", res);
+    return res;
+  }
+
+
+  public ResultMap playList(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[app playList] recv:{}", req);
+
+     DbList list = mapper.playList(req);
+
+    res.put("rows", list);
+
+    if (Global.isDev) logger.debug("[app playList] send:{}", res);
     return res;
   }
 
 
   public ResultMap detail(RequestMap req) {
     ResultMap res = ResultMap.create();
-    if (Global.isDev) logger.debug("[main detail] recv:{}", req);
+    if (Global.isDev) logger.debug("[app detail] recv:{}", req);
 
     res.put("data", mapper.detail(req));
 
-    if (Global.isDev) logger.debug("[main detail] send:{}", res);
+    if (Global.isDev) logger.debug("[app detail] send:{}", res);
     return res;
   }
 

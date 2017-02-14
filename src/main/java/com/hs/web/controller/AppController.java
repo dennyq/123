@@ -34,6 +34,7 @@ public class AppController extends ControllerPageBase {
   @RequestMapping(value = "mapview")
   public String mapview(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
+    model.addAttribute("playOne",service.playOne(req).get("data"));
     return rootPath + "mapview";
   }
 
@@ -43,6 +44,14 @@ public class AppController extends ControllerPageBase {
   public ResultMap search(HttpServletRequest request) throws Exception {
     RequestMap req = RequestMap.create(request);
     return service.search(req);
+  }
+
+  ///playList
+  @RequestMapping(value = "playList")
+  @ResponseBody
+  public ResultMap playList(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    return service.playList(req);
   }
 
 

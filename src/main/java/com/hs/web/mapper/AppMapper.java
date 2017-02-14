@@ -9,4 +9,6 @@ public interface AppMapper {
 
   DbList search(DbMap req);
   DbMap detail(DbMap req);
+  DbList playList(DbMap req);
+  DbMap playOne(DbMap req);
 }

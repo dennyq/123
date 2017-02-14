@@ -59,4 +59,43 @@
         FROM member A
         WHERE 1=1 AND A.memberid = #{memberid}
     </select>
+
+    <select id="playOne" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT
+                adindex,
+                adtitle,
+                adowner,
+                telephone,
+                usestartdate,
+                useenddate,
+                playorder,
+                filename,
+                regtime
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        LIMIT 0,1
+        ]]>
+    </select>
+
+    <select id="playList" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT
+                adindex,
+                adtitle,
+                adowner,
+                telephone,
+                usestartdate,
+                useenddate,
+                playorder,
+                filename,
+                regtime
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        ]]>
+    </select>
 </mapper>
