@@ -42,7 +42,7 @@
     var map = new daum.maps.Map(mapContainer, mapOption);
     // 마커 이미지의 이미지 주소입니다
     console.log(result);
-    var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
+    var imageSrc = '/imgs/icon_mylocal.png', // 마커이미지의 주소입니다
             imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
             imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 

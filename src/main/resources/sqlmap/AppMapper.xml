@@ -5,53 +5,57 @@
 
     <select id="search" parameterType="dbmap" resultType="dbmap">
         SELECT
-        memberid,
-        password,
-        grade,
-        gubun,
-        openflag,
-        name,
-        telephone,
-        handphone,
-        address,
-        address_etc,
-        introduce,
-        latitude,
-        longitude,
-        usestartdate,
-        useenddate,
-        deleteyn,
-        lastconnecttime,
-        regtime
-        FROM member
+                memberid,
+                password,
+                grade,
+                gubun,
+                openflag,
+                name,
+                telephone,
+                handphone,
+                address,
+                address_etc,
+                introduce,
+                latitude,
+                longitude,
+                usestartdate,
+                useenddate,
+                deleteyn,
+                lastconnecttime,
+                regtime
+                FROM member
         WHERE deleteyn = 0
         <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
-        <!--<if test='latitude != null and latitude != "" and latitude != "0"'>AND latitude = #{latitude}</if>-->
-        <!--<if test='longitude != null and longitude != "" and longitude != "0"'>AND longitude = #{longitude}</if>-->
+        <if test='latitude != null and latitude != "" and latitude != "0"'>
+            AND latitude BETWEEN (#{latitude}-0.0090090090) AND (#{latitude}+0.0090090090)
+        </if>
+        <if test='longitude != null and longitude != "" and longitude != "0"'>
+            AND longitude  BETWEEN (#{longitude}-0.0112612612) AND (#{longitude}+0.0112612612)
+        </if>
         <!--<if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>-->
         <!--<if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>-->
     </select>
 
     <select id="detail" parameterType="dbmap" resultType="dbmap">
         SELECT
-        A.memberid,
-        A.password,
-        A.grade,
-        A.gubun,
-        A.openflag,
-        A.name,
-        A.telephone,
-        A.handphone,
-        A.address,
-        A.address_etc,
-        A.introduce,
-        A.latitude,
-        A.longitude,
-        A.deleteyn,
-        A.lastconnecttime,
-        DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-        DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-        DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+                A.memberid,
+                A.password,
+                A.grade,
+                A.gubun,
+                A.openflag,
+                A.name,
+                A.telephone,
+                A.handphone,
+                A.address,
+                A.address_etc,
+                A.introduce,
+                A.latitude,
+                A.longitude,
+                A.deleteyn,
+                A.lastconnecttime,
+                DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+                DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
+                DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
         FROM member A
         WHERE 1=1 AND A.memberid = #{memberid}
     </select>
