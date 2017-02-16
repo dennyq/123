@@ -198,12 +198,18 @@ console.log(list)
 
 
 
-    var curVideo = 1;
+    var curVideo = 0;
     var videoPlayer = document.getElementById('videoPlayer');
     videoPlayer.onended = function(){
       ++curVideo;
-      if(curVideo < list.length){
-        videoPlayer.src = '/upload/adinfo/'+list[curVideo+1].filename;
+      console.log('curVideo : '+curVideo);
+      var loopIndex = curVideo%list.length;
+      console.log('loopIndex : ' + loopIndex);
+      if (loopIndex < list.length) {
+        if(list[loopIndex].filename){
+          console.log('filename : '+list[loopIndex%list.length].filename);
+          videoPlayer.src = '/upload/adinfo/'+list[loopIndex%list.length].filename;
+        }
       }
     }
   }
