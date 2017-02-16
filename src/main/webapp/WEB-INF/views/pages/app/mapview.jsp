@@ -183,8 +183,8 @@
           setDataToMap(data);
 
         }else{
-          $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
-
+//          $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
+          setDataToMap(data);
         }
 
       }
