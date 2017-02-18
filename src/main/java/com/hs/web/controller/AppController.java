@@ -54,6 +54,14 @@ public class AppController extends ControllerPageBase {
     return service.playList(req);
   }
 
+  ///playList
+  @RequestMapping(value = "getPlayList")
+  @ResponseBody
+  public ResultMap getPlayList(HttpServletRequest request) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    return service.getPlayList(req);
+  }
+
 
   //상세
   @RequestMapping(value = "detail/{memberid}")
