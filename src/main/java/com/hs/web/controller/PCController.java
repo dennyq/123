@@ -78,6 +78,7 @@ public class PCController extends ControllerPageBase {
     return rootPath + "list";
   }
 
+
   private void getListModel(Model model, RequestMap req) {
     model.addAttribute("tab",(req.get("tab")==null)?"2":req.get("tab")+"");
     model.addAllAttributes(service.list(req));
@@ -203,7 +204,7 @@ public class PCController extends ControllerPageBase {
   }
 
 
-  ///searchByAddr
+  ///searchByName
   @RequestMapping(value = "searchByName")
   @ResponseBody
   public ResultMap searchByName(HttpServletRequest request) throws Exception {

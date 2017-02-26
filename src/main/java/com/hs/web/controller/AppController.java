@@ -34,16 +34,17 @@ public class AppController extends ControllerPageBase {
   @RequestMapping(value = "mapview")
   public String mapview(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
-    model.addAttribute("playOne",service.playOne(req).get("data"));
+//    model.addAttribute("playOne",service.playOne(req).get("data"));
     return rootPath + "mapview";
   }
-
 
   //안드로이드맵뷰
   @RequestMapping(value = "locationSelectmapview")
   public String locationSelectmapview(HttpServletRequest request,Model model) throws Exception {
     RequestMap req = RequestMap.create(request);
-    model.addAttribute("playOne",service.playOne(req).get("data"));
+
+
+    getListModel(model, req);
     return rootPath + "locationSelectmapview";
   }
 
@@ -80,4 +81,22 @@ public class AppController extends ControllerPageBase {
     model.addAllAttributes(service.detail(req));
     return rootPath + "detail";
   }
+
+    private void getListModel(Model model, RequestMap req) {
+        model.addAllAttributes(service.list(req));
+        String gubun = (String) req.get("gubun");
+        String putGubun = null;
+        if (gubun.equals("2")) {//약국-1
+            putGubun = "1";
+        } else if (gubun.equals("3")) {//병원-2
+            putGubun = "2";
+        } else {
+            putGubun = "0";
+        }
+        req.put("gubun", putGubun);
+        req.put("searchCode", "1");
+        model.addAttribute("codeList", service.getCodeList(req).get("rows"));
+        model.addAttribute("gubun", putGubun==null?"1":putGubun);
+    }
+
 }

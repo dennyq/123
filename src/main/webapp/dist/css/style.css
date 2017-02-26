@@ -1181,8 +1181,11 @@ ul.all-tab{
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
 .datepicker{z-index: 9999!important;}
-
-.margin-padding-none{
-  margin :0!important;
-  padding:0!important;
+.margin-padding-none{ margin :0!important; padding:0!important; }
+.right-inline{ float: right !important; display: inline-block !important; }
+.inline{display: inline-block !important; }
+.box-body-noline {
+  /*border-top: 1px solid #bcbcbc;*/
+  /*border-bottom: 1px solid #bcbcbc;*/
+  padding: 10px 10px 0px 10px;
 }

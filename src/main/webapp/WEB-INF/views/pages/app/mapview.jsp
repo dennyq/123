@@ -16,7 +16,7 @@
   <!-- Main content -->
 <section class="content">
 
-  <div id="map" style="width:100%;height:500px;"></div>
+  <div id="map" style="width:100%;height:700px;"></div>
   <div id="list_wrap" style="width:100%;height:350px;"></div>
   <%--<video width="100%" height="150px" autoplay  id="videoPlayer">--%>
       <%--<source src="/upload/adinfo/${playOne.filename}" type="video/mp4">--%>
@@ -85,7 +85,7 @@
 
       // 마커 이미지의 이미지 크기 입니다
       //var imageSize = new daum.maps.Size(24, 35);
-      var imageSize = new daum.maps.Size(47/2, 69/2);
+      var imageSize = new daum.maps.Size(47, 69);
 
       var imgGubun = '';
       var imgOpen = '';

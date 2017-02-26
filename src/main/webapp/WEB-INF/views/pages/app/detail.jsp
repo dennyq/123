@@ -10,7 +10,7 @@
 <form id="detailFrm" class="form-horizontal margin-padding-none" action="<c:url value="/pc/detail"/>" method="post">
     <input type="hidden" id="setmystore" name="setmystore" value="${param['setmystore']}">
     <center>
-        <section class="content-header margin-padding-none" style="margin-top: -50px;">
+        <section class="content-header margin-padding-none" style="margin-top: -37px!important;">
             <h1 class="big-font">
                 <span class="marinblue">세부정보</span>보기
             </h1>
@@ -39,9 +39,10 @@
   </div><!-- //.paddingInside -->
 </section>
   <div id="map" style="width:100%;height:350px;display: none"></div>
+    <div id="buttons" style="margin-top: 20px"></div>
     <center>
-        <OBJECT ID="KC7Ax" CLASSID="CLSID:DBFC0953-8254-46A8-A034-0E674E74D932" STYLE="WIDTH:0px; HEIGHT:0px; ">
-        </OBJECT>
+        <%--<OBJECT ID="KC7Ax" CLASSID="CLSID:DBFC0953-8254-46A8-A034-0E674E74D932" STYLE="WIDTH:0px; HEIGHT:0px; ">
+        </OBJECT>--%>
         <c:if test="${not empty data.telephone}">
             <a href="tel:${data.telephone}" id="callBtn" class="btn btn-blue-green btn-flat md-height">전화걸기</a>
         </c:if>

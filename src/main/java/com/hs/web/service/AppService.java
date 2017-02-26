@@ -88,4 +88,60 @@ public class AppService extends ServiceBase {
   }
 
 
+  //목록
+  public ResultMap list(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[main list] recv:{}", req);
+    req.put("rows", "10");
+    setPaging(req);
+    if (Global.isDev) logger.debug("[list] recv:{}", req);
+
+    DbList list = mapper.list(req);
+    int total = mapper.listCnt(req);
+
+    res.put("total", total);
+    res.put("rows", list);
+    res.put("sch_memberid", req.get("sch_memberid"));
+    res.put("sch_joindate", req.get("sch_joindate"));
+    res.put("sch_name", req.get("sch_name"));
+    res.put("sch_usestartdate", req.get("sch_usestartdate"));
+    res.put("sch_useenddate", req.get("sch_useenddate"));
+    res.put("sch_handphone", req.get("sch_handphone"));
+
+    res.put("pageTimes", (Integer.parseInt(req.get("page")+"")-1)*Integer.parseInt(req.get("rows")+""));
+
+    res.put("paging", PageUtil.getPaging(req, total));
+
+    if (Global.isDev) logger.debug("[main list] send:{}", res);
+    return res;
+  }
+
+  //코드목록
+  public ResultMap getCodeList(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[getCodeList list] recv:{}", req);
+    int searchCode = Integer.parseInt(req.get("searchCode") + "");
+    DbList list = null;
+    DbList listRo = null;
+    switch (searchCode){
+      case 1:
+        list = mapper.codeListBig(req);break;
+      case 2:
+        list = mapper.codeListMid(req);break;
+      case 3:
+        list = mapper.codeListDong(req);
+        listRo = mapper.codeListRo(req);
+        res.put("rowsRo", listRo);
+        break;
+      default:
+        list = mapper.codeListBig(req);
+    }
+//    DbList list = mapper.codeList(req);
+    res.put("rows", list);
+
+    if (Global.isDev) logger.debug("[getCodeList list] send:{}", res);
+    return res;
+  }
+
+
 }

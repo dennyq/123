@@ -5,7 +5,7 @@ import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.web.RequestMap;
 
-public interface AppMapper {
+public interface AppMapper  extends CrudMapper{
 
   DbList search(DbMap req);
   DbMap detail(DbMap req);
@@ -13,4 +13,10 @@ public interface AppMapper {
   DbMap playOne(DbMap req);
 
   DbList getPlayList(DbMap req);
+  DbList codeList(DbMap req);
+
+  DbList codeListBig(DbMap req);
+  DbList codeListMid(DbMap req);
+  DbList codeListDong(DbMap req);
+  DbList codeListRo(DbMap req);
 }
