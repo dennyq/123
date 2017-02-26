@@ -4,23 +4,23 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>회원 관리</title>
+  <title>세부정보</title>
 </head>
-<body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/pc/detail"/>" method="post">
+<body class="margin-padding-none">
+<form id="detailFrm" class="form-horizontal margin-padding-none" action="<c:url value="/pc/detail"/>" method="post">
     <input type="hidden" id="setmystore" name="setmystore" value="${param['setmystore']}">
     <center>
-        <section class="content-header">
+        <section class="content-header margin-padding-none" style="margin-top: -50px;">
             <h1 class="big-font">
                 <span class="marinblue">세부정보</span>보기
             </h1>
         </section>
     </center>
 <!-- Main content -->
-<section class="content">
-  <div class="paddingInside">
+<section class="content margin-padding-none">
+  <div class="paddingInside margin-padding-none">
       <div class="row">
-        <div class="col-md-12">
+        <div>
           <div id="progressIndicator" style="display: none"></div>
           <div class="box-body">
             <!-- input start -->

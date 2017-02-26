@@ -25,9 +25,9 @@
                 regtime
                 FROM member
         WHERE deleteyn = 0
-        <if test='gubun != null and gubun != "" and gubun == "1"'>AND gubun in ("1","2")</if>/*all*/
-        <if test='gubun != null and gubun != "" and gubun == "2"'>AND gubun = "1"</if>/*약국('1')*/
-        <if test='gubun != null and gubun != "" and gubun == "3"'>AND gubun = "2"</if>/*병원('2')*/
+        <if test='gubun != null and gubun != "" and gubun == "1"'>AND gubun in ("1","2")/*all*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "2"'>AND gubun = "1"/*약국('1')*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "3"'>AND gubun = "2"/*병원('2')*/</if>
 
         <if test='latitude != null and latitude != "" and latitude != "0"'>
             AND latitude BETWEEN (#{latitude}-0.0090090090) AND (#{latitude}+0.0090090090)

@@ -1181,3 +1181,8 @@ ul.all-tab{
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
 .datepicker{z-index: 9999!important;}
+
+.margin-padding-none{
+  margin :0!important;
+  padding:0!important;
+}
