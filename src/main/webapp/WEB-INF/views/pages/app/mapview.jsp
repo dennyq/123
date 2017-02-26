@@ -16,7 +16,7 @@
   <!-- Main content -->
 <section class="content">
 
-  <div id="map" style="width:100%;height:700px;"></div>
+  <div id="map" style="width:100%;height:500px;"></div>
   <div id="list_wrap" style="width:100%;height:350px;"></div>
   <%--<video width="100%" height="150px" autoplay  id="videoPlayer">--%>
       <%--<source src="/upload/adinfo/${playOne.filename}" type="video/mp4">--%>
@@ -46,9 +46,9 @@
     var map = new daum.maps.Map(mapContainer, mapOption);
     // 마커 이미지의 이미지 주소입니다
     console.log(result);
-    var imageSrc = '/imgs/icon_mylocal.png', // 마커이미지의 주소입니다
-            imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-            imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    var imageSrc = '/imgs/pc/icon_mylocal2.png', // 마커이미지의 주소입니다
+            imageSize = new daum.maps.Size(64/2, 69/2), // 마커이미지의 크기입니다
+            imageOption = {offset: new daum.maps.Point(27/2, 69/2)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
     var currMarkerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
@@ -70,7 +70,7 @@
     currMarker.setMap(map);
 
 
-    var imageSrc = "/imgs/picker_h_open.png";
+    var imageSrc = "/imgs/pc/picker_h_open2_small.png";
 //      var latSum = 0;
 //      var lngSum = 0;
     var points=[];
@@ -85,7 +85,7 @@
 
       // 마커 이미지의 이미지 크기 입니다
       //var imageSize = new daum.maps.Size(24, 35);
-      var imageSize = new daum.maps.Size(47, 69);
+      var imageSize = new daum.maps.Size(47/2, 69/2);
 
       var imgGubun = '';
       var imgOpen = '';
@@ -101,7 +101,7 @@
       } else {
         imgGubun = 'h';
       }
-      imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
+      imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png";
 
       // 마커 이미지를 생성합니다
       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
