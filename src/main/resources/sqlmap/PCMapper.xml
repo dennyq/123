@@ -68,7 +68,7 @@
         road_code,
         dong_code
     FROM addressrange
-    WHERE big_addr LIKE CONCAT('%', #{big_addr},'%')
+    WHERE big_addr LIKE CONCAT(#{big_addr},'%')
     GROUP BY middle_addr
     ORDER BY middle_addr
   </select>
@@ -288,9 +288,9 @@
         lastconnecttime,
         regtime
     FROM member
-    WHERE  TRIM(LEFT(address, LOCATE(' ',address) -1)) LIKE CONCAT('%', #{addrSidoStr}, '%')
+    WHERE  TRIM(LEFT(address, LOCATE(' ',address) -1)) LIKE CONCAT(#{addrSidoStr}, '%')
     <if test='addrLastStr != null and addrLastStr != ""'>
-      AND SUBSTRING(address, LOCATE(' ',address) + 1) LIKE CONCAT('%', #{addrLastStr}, '%')
+      AND SUBSTRING(address, LOCATE(' ',address) + 1) LIKE CONCAT(#{addrLastStr}, '%')
     </if>
     <if test='addrLastStr == null or addrLastStr == ""'>
 
