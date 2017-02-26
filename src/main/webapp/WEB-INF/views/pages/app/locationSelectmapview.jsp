@@ -282,7 +282,7 @@
 
 
 
-        var imageSrc = "/imgs/picker_h_open.png";
+        var imageSrc = "/imgs/pc/picker_h_open2_small.png";
 //      var latSum = 0;
 //      var lngSum = 0;
         var points=[];
@@ -312,7 +312,8 @@
             } else {
                 imgGubun = 'h';
             }
-            imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
+            imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png";
+
 
             // 마커 이미지를 생성합니다
             var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);

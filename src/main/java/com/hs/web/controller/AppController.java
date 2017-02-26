@@ -1,12 +1,9 @@
 package com.hs.web.controller;
 
-import com.hs.BizException;
-import com.hs.DbMap;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 import com.hs.web.service.AppService;
-import com.hs.web.service.PCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 @Controller

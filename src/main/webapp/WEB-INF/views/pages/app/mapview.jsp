@@ -84,8 +84,8 @@
       var items = result.rows[i];
 
       // 마커 이미지의 이미지 크기 입니다
-      //var imageSize = new daum.maps.Size(24, 35);
-      var imageSize = new daum.maps.Size(47, 69);
+      var imageSize = new daum.maps.Size(24, 35);
+//      var imageSize = new daum.maps.Size(47, 69);
 
       var imgGubun = '';
       var imgOpen = '';
