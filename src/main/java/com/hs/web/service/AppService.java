@@ -68,7 +68,7 @@ public class AppService extends ServiceBase {
     ResultMap res = ResultMap.create();
     if (Global.isDev) logger.debug("[app getPlayList] recv:{}", req);
 
-     DbList list = mapper.playList(req);
+     DbList list = mapper.getPlayList(req);
 
     res.put("list", list);
 

@@ -42,8 +42,12 @@
     <center>
         <OBJECT ID="KC7Ax" CLASSID="CLSID:DBFC0953-8254-46A8-A034-0E674E74D932" STYLE="WIDTH:0px; HEIGHT:0px; ">
         </OBJECT>
-        <a id="callBtn" class="btn btn-blue-green btn-flat md-height">전화걸기</a>
-        <a id="sendMsgBtn" class="btn btn-blue-green btn-flat md-height">메시지보내기</a>
+        <c:if test="${not empty data.telephone}">
+            <a href="tel:${data.telephone}" id="callBtn" class="btn btn-blue-green btn-flat md-height">전화걸기</a>
+        </c:if>
+        <c:if test="${not empty data.handphone}">
+            <a href="sms:${data.handphone}" id="sendMsgBtn" class="btn btn-blue-green btn-flat md-height">메시지보내기</a>
+        </c:if>
         <a id="kakaoBtn" class="btn btn-blue-green btn-flat md-height">카톡실행</a>
 
     </center>

@@ -11,4 +11,6 @@ public interface AppMapper {
   DbMap detail(DbMap req);
   DbList playList(DbMap req);
   DbMap playOne(DbMap req);
+
+  DbList getPlayList(DbMap req);
 }

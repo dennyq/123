@@ -32,8 +32,6 @@
         <if test='longitude != null and longitude != "" and longitude != "0"'>
             AND longitude  BETWEEN (#{longitude}-0.0112612612) AND (#{longitude}+0.0112612612)
         </if>
-        <!--<if test='openflag != null and openflag != "" and openflag != "0"'>AND openflag = #{openflag}</if>-->
-        <!--<if test='memberid != null and memberid != "" and memberid != "0"'>AND memberid = #{memberid}</if>-->
     </select>
 
     <select id="detail" parameterType="dbmap" resultType="dbmap">
@@ -83,9 +81,17 @@
     <select id="playList" parameterType="dbmap" resultType="dbmap">
         <![CDATA[
         SELECT
-
                 filename
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        ]]>
+    </select>
 
+    <select id="getPlayList" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT CONCAT("/upload/adinfo/",filename) filename
         FROM adinfo
         WHERE usestartdate <= NOW()
         AND useenddate >= NOW()

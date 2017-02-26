@@ -38,6 +38,15 @@ public class AppController extends ControllerPageBase {
     return rootPath + "mapview";
   }
 
+
+  //안드로이드맵뷰
+  @RequestMapping(value = "locationSelectmapview")
+  public String locationSelectmapview(HttpServletRequest request,Model model) throws Exception {
+    RequestMap req = RequestMap.create(request);
+    model.addAttribute("playOne",service.playOne(req).get("data"));
+    return rootPath + "locationSelectmapview";
+  }
+
   ///search
   @RequestMapping(value = "search")
   @ResponseBody
