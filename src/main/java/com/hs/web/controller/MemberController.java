@@ -4,6 +4,8 @@ import com.hs.BizException;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
+import com.hs.web.service.ExcelFileService;
+import com.hs.web.service.FileService;
 import com.hs.web.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +26,8 @@ import javax.servlet.http.HttpSession;
 public class MemberController extends ControllerPageBase {
     @Autowired
     private MemberService service;
+    @Autowired
+    private ExcelFileService excelFileService;
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
     private String rootKey = "member";
     private String rootPath = "pages/" + rootKey + "/";
@@ -55,10 +61,35 @@ public class MemberController extends ControllerPageBase {
 
     //todo : excelSave
     @RequestMapping(value = "excelSave")
-    @ResponseBody
-    public ResultMap excelSave(HttpServletRequest request) throws Exception {
+//    @ResponseBody
+    public String excelSave(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
-        return service.excelSave(req);
+
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = mrequest.getFile("excelfile");
+        req.put("inputName","excelfile");
+
+        if(file.getSize() > 0) {
+
+            model.addAllAttributes(excelFileService.uploadFiles(request, req));
+        }
+//        else{
+//            req.put("filename",null);
+//        }
+//        if(req.get("isNew").equals("Y")){
+//            req.put("adindex",service.getNextAdindex(req));
+//            service.insert(req);
+//        }else{
+//
+//            service.update(req);
+//        }
+
+
+
+
+//        return "redirect:/"+rootPath + "popup";
+        return rootPath + "popup";
     }
 
 

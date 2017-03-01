@@ -9,6 +9,7 @@ public class BizException extends RuntimeException  {
 	protected ResultType _result;
     protected String _resultCode;
     protected String _url;
+    protected int _idx;
 
 	public BizException() {
 		_result = ResultType.UnknowError;
@@ -52,6 +53,19 @@ public class BizException extends RuntimeException  {
 		_url = url;
 	}
 
+	public BizException(String resultCode, String message,String url,int idx) {
+		this(message, (Throwable)null);
+		_resultCode = resultCode;
+		_url = url;
+		_idx = idx;
+	}
+
+	public BizException(String resultCode, String message,int idx) {
+		this(message, (Throwable)null);
+		_resultCode = resultCode;
+		_idx = idx;
+	}
+
 
 	public ResultType result() {
 		return _result;
@@ -62,5 +76,9 @@ public class BizException extends RuntimeException  {
 	}
 	public String url() {
 		return _url;
+	}
+
+	public int idx() {
+		return _idx;
 	}
 }

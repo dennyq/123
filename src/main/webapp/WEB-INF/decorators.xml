@@ -16,6 +16,9 @@
     <pattern>/pc/sample/*</pattern>
     <pattern>/m_login/*</pattern>
     <pattern>/m_login/*</pattern>
+    <pattern>/member/excelSave</pattern>
+    <pattern>/member/excelSave/</pattern>
+    <pattern>/member/excelSave/*</pattern>
     <!-- nice name chk -->
     <pattern>/common/nameNiceChk*</pattern>
 

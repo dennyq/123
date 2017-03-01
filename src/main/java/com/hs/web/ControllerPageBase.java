@@ -42,6 +42,7 @@ public abstract class ControllerPageBase {
         String str = "내부 시스템에 오류가 발생했습니다.";
 //        String str = "서버 접속 오류가 발생하였습니다.";
         String url = "";
+        int idx = 0;
         if(ex instanceof Exception) {
             if(ex.getMessage()!=null  && ex.getMessage()!="")
             str = ex.getMessage();
@@ -51,6 +52,7 @@ public abstract class ControllerPageBase {
             str = ex.getMessage();
             code = ((BizException)ex).resultCode();
             url = ((BizException)ex).url();
+            idx = ((BizException)ex).idx();
         }
 
         ModelAndView mv = new ModelAndView("common/error/error500");
@@ -102,6 +104,7 @@ public abstract class ControllerPageBase {
             }
             mvAlert.addObject("url", url);
             return mvAlert;
+
         }else if(code.equals("9009")){
 
             ModelAndView mvAlert = new ModelAndView("/common/error/alert");
@@ -109,6 +112,26 @@ public abstract class ControllerPageBase {
             mvAlert.addObject("result_message", str);
 
             mvAlert.addObject("url", url);
+            return mvAlert;
+
+        }else if(code.equals("9010")){
+
+            ModelAndView mvAlert = new ModelAndView("/common/error/alert");
+            mvAlert.addObject("result_code", code);
+            mvAlert.addObject("result_message", str);
+
+            mvAlert.addObject("url", url);
+            mvAlert.addObject("idx", idx);
+            return mvAlert;
+
+        }else if(code.equals("9011")){
+
+            ModelAndView mvAlert = new ModelAndView("/common/error/alert");
+            mvAlert.addObject("result_code", code);
+            mvAlert.addObject("result_message", str);
+
+            mvAlert.addObject("url", url);
+            mvAlert.addObject("idx", idx);
             return mvAlert;
         }
 

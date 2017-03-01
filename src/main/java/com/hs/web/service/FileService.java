@@ -76,15 +76,22 @@ public class FileService {
 //    String month = now.substring(4, 6);
 //    String date = now.substring(6, 8);
 //    String middleName =  req.get("uploadDir")+"";
-    int adindex =Integer.parseInt((req.get("adindex") + "")) ;
-   String adindexStr = String.format("%010d",adindex);
+    String middleName = null;
+    String adindexStr = null;
+    int adindex;
+    if(inputName.equals("filename")){
+      adindex =Integer.parseInt((req.get("adindex") + "")) ;
+      adindexStr = String.format("%010d",adindex);
+      middleName ="adinfo";
+    }
+
 
     //디비 저장위치
 //    dbFilePath ="/"+ middleName+"/"+ year + "/" + date + "/";
 //    dbFilePath = "/" + year + "/" + month + "/" + date + "/" + memberid + "/";
 //    dbFilePath = "/" + year + "/" + month + "/" + date + "/" + adindex + "/";
     //dbFilePath = "/" + adindexStr + "/";
-    String middleName ="adinfo";
+
 
     dbFilePath = "/" + middleName + "/";
 
@@ -296,11 +303,14 @@ public class FileService {
 
 
   public void uploadFiles(HttpServletRequest request, RequestMap req) throws Exception {
-
+//    req.putAll(RequestMap.create(request));
 
     if(request instanceof MultipartHttpServletRequest){
 
-        req.put("inputName","filename");
+      logger.debug("req={}",req);
+
+
+
         req.put("filename", uploadFile(request,req));
 
     }

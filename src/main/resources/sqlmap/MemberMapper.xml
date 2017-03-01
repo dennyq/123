@@ -79,6 +79,12 @@
     WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
   </select>
 
+  <select id="addressCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM member A
+    WHERE A.name  = #{name} AND  A.address  = #{address} AND deleteyn = 0
+  </select>
+
     <select id="idPwDelChk" parameterType="dbmap" resultType="int">
         SELECT COUNT(*) AS cnt
         FROM member A
