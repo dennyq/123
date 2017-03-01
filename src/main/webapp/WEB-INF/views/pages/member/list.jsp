@@ -93,10 +93,13 @@
               <!--// right col-md-6 end-->
             </div>
             <!--// box-body end -->
-            <div class="btn-box">
-              <center>
+            <div class="btn-box centeringContainer " >
+              <span class="centered ">
                   <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height" >조회</a>
-              </center>
+              </span>
+              <span class="right inline" >
+                <a id="insertFileBtn" class="pointer btn btn-blue-green btn-flat md-height" >일괄등록</a>
+              </span>
             </div>
           </form>
           <!--// form end-->
@@ -271,6 +274,10 @@
       location.href = '/member/list/' + page;
     });
 
+    $('#insertFileBtn').click(function(){
+      popupOpen('/member/popup/${items.adindex}',600,500);
+
+    });
   });
   <!-- bind end -->
 

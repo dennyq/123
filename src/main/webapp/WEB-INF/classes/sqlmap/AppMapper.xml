@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.AppMapper">
+
+    <sql id="listConditions">
+        WHERE 1=1
+        <if test='sch_codegroup != null and sch_codegroup != ""'>
+            AND A.codegroup  LIKE CONCAT('%', #{sch_codegroup},'%')
+        </if>
+        <if test='sch_uppercode != null and sch_uppercode != ""'>
+            AND A.uppercode  LIKE CONCAT('%', #{sch_uppercode},'%')
+        </if>
+        <if test='sch_code != null and sch_code != ""'>
+            AND A.code  LIKE CONCAT('%', #{sch_code},'%')
+        </if>
+        <if test='sch_codename != null and sch_codename != ""'>
+            AND A.codename  LIKE CONCAT('%', #{sch_codename},'%')
+        </if>
+    </sql>
+
+    <select id="list" parameterType="dbmap" resultType="dbmap">
+        <include refid="com.hs.web.mapper.paging_start"/>
+        SELECT
+        A.big_addr,
+        A.middle_addr,
+        A.small_addr,
+        A.road_addr,
+        A.dong_addr
+        FROM addressrange A
+        <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
+        ORDER BY A.big_addr
+        <include refid="com.hs.web.mapper.paging_end"/>
+    </select>
+
+    <select id="codeList" parameterType="dbmap" resultType="dbmap">
+
+        SELECT
+        A.index,
+        A.codegroup,
+        A.code,
+        A.codename,
+        A.uppercode,
+        A.ord
+        FROM addressrange A
+        <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
+        ORDER BY A.ord
+
+    </select>
+
+    <!--시도 셀렉트-->
+    <select id="codeListBig" parameterType="dbmap" resultType="dbmap">
+        SELECT big_addr
+        FROM addressrange
+        GROUP BY big_addr
+        ORDER BY big_addr
+    </select>
+
+    <!--군구 셀렉트-->
+    <select id="codeListMid" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        big_addr,
+        middle_addr,
+        small_addr,
+        road_addr,
+        dong_addr,
+        post_number,
+        road_code,
+        dong_code
+        FROM addressrange
+        WHERE big_addr LIKE CONCAT('%', #{big_addr},'%')
+        GROUP BY middle_addr
+        ORDER BY middle_addr
+    </select>
+
+    <!--읍면동 셀렉트-->
+    <select id="codeListDong" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        A.big_addr,
+        A.middle_addr,
+        A.small_addr,
+        A.road_addr,
+        A.dong_addr,
+        A.post_number,
+        A.road_code,
+        A.dong_code
+        FROM addressrange A
+        WHERE A.big_addr LIKE CONCAT('%',  #{big_addr},'%') AND A.middle_addr LIKE CONCAT('%',  #{middle_addr},'%')
+        AND A.small_addr is not NULL
+        GROUP BY A.small_addr,A.dong_addr
+    </select>
+
+    <!--도로명 셀렉트-->
+    <select id="codeListRo" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        A.big_addr,
+        A.middle_addr,
+        A.small_addr,
+        A.road_addr,
+        A.dong_addr,
+        A.post_number,
+        A.road_code,
+        A.dong_code
+        FROM addressrange A
+        WHERE A.big_addr LIKE CONCAT('%', #{big_addr},'%') AND middle_addr LIKE CONCAT('%', #{middle_addr},'%')
+        GROUP BY A.road_addr
+        ORDER BY A.road_addr
+    </select>
+
+    <select id="listCnt" parameterType="dbmap" resultType="int">
+        SELECT COUNT(*) AS cnt
+        FROM addressrange A
+        <include refid="com.hs.web.mapper.PCMapper.listConditions"/>
+    </select>
+
+    <select id="search" parameterType="dbmap" resultType="dbmap">
+        SELECT
+                memberid,
+                password,
+                grade,
+                gubun,
+                openflag,
+                name,
+                telephone,
+                handphone,
+                address,
+                address_etc,
+                introduce,
+                latitude,
+                longitude,
+                usestartdate,
+                useenddate,
+                deleteyn,
+                lastconnecttime,
+                regtime
+                FROM member
+        WHERE deleteyn = 0
+        <if test='gubun != null and gubun != "" and gubun == "1"'>AND gubun in ("1","2")/*all*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "2"'>AND gubun = "1"/*약국('1')*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "3"'>AND gubun = "2"/*병원('2')*/</if>
+
+        <if test='latitude != null and latitude != "" and latitude != "0"'>
+            AND latitude BETWEEN (#{latitude}-0.0090090090) AND (#{latitude}+0.0090090090)
+        </if>
+        <if test='longitude != null and longitude != "" and longitude != "0"'>
+            AND longitude  BETWEEN (#{longitude}-0.0112612612) AND (#{longitude}+0.0112612612)
+        </if>
+    </select>
+
+    <select id="detail" parameterType="dbmap" resultType="dbmap">
+        SELECT
+                A.memberid,
+                A.password,
+                A.grade,
+                A.gubun,
+                A.openflag,
+                A.name,
+                A.telephone,
+                A.handphone,
+                A.address,
+                A.address_etc,
+                A.introduce,
+                A.latitude,
+                A.longitude,
+                A.deleteyn,
+                A.lastconnecttime,
+                DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+                DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
+                DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
+        FROM member A
+        WHERE 1=1 AND A.memberid = #{memberid}
+    </select>
+
+    <select id="playOne" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT
+                adindex,
+                adtitle,
+                adowner,
+                telephone,
+                usestartdate,
+                useenddate,
+                playorder,
+                filename,
+                regtime
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        LIMIT 0,1
+        ]]>
+    </select>
+
+    <select id="playList" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT
+                filename
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        ]]>
+    </select>
+
+    <select id="getPlayList" parameterType="dbmap" resultType="dbmap">
+        <![CDATA[
+        SELECT CONCAT("/upload/adinfo/",filename) filename
+        FROM adinfo
+        WHERE usestartdate <= NOW()
+        AND useenddate >= NOW()
+        ORDER BY playorder ASC
+        ]]>
+    </select>
+</mapper>

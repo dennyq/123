@@ -65,6 +65,17 @@ public class MemberService extends ServiceBase {
     return res;
   }
 
+  //excelSave
+  public ResultMap excelSave(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[main excelSave] recv:{}", req);
+
+//    res.put("data", mapper.excelSave(req));
+
+    if (Global.isDev) logger.debug("[main excelSave] send:{}", res);
+    return res;
+  }
+
   //글쓰기
   public ResultMap write(RequestMap req) throws IOException {
     ResultMap res = ResultMap.create();
