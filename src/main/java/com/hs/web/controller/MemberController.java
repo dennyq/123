@@ -88,6 +88,16 @@ public class MemberController extends ControllerPageBase {
 
         return service.excelSave(req);
     }
+    //todo : excelDelete
+    @RequestMapping(value = "excelDelete")
+    @ResponseBody
+    public ResultMap excelDelete(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+
+
+        return service.excelDelete(req);
+    }
 
 
     //목록

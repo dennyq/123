@@ -67,6 +67,24 @@ public class MemberService extends ServiceBase {
         return res;
     }
 
+    //excelDelete
+    public ResultMap excelDelete(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[main excelDelete] recv:{}", req);
+
+//        String insertedArr = ;
+        String insertedArr[] =((String)req.get("insertedArr")).split(",");
+        for(int i=0;i<insertedArr.length;i++){
+
+            req.put("memberid",insertedArr[i]);
+            mapper.excelDelete(req);
+        }
+
+
+        if (Global.isDev) logger.debug("[main excelDelete] send:{}", res);
+        return res;
+    }
+
     //excelSave
     public ResultMap excelSave(RequestMap req) {
         ResultMap res = ResultMap.create();
@@ -93,16 +111,17 @@ public class MemberService extends ServiceBase {
         int addressCheck = mapper.addressCheck(req);
 
         String currMemberId = mapper.currMemberId(req);
-
+        String memberid = null;
         if (currMemberId.equals("0")) {
-            req.put("memberid", "B000000001");
+            memberid = "B000000001";
+            req.put("memberid", memberid);
 
         } else {
 //            logger.info("currMemberId.split(\"B\")[1]={}",currMemberId.split("B")[0]);
 
             int nextMemberId = Integer.parseInt(currMemberId.split("B")[1]) + 1;
             logger.info("nextMemberId = {}", nextMemberId);
-            String memberid = "B"+String.format("%09d", nextMemberId);
+            memberid = "B"+String.format("%09d", nextMemberId);
             logger.info("memberid = {}", memberid);
             req.put("memberid",memberid);
         }
@@ -112,13 +131,19 @@ public class MemberService extends ServiceBase {
         req.put("grade", "2");
         req.put("deleteyn", "0");
         int idx = Integer.parseInt(req.get("idx")+"");
+        res.put("result_idx",idx);
+        if (addressCheck > 0) {
+            res.put("result_message","already_exist");
 
-        if (addressCheck != 0) {
-            throw new BizException("9011", "already_exist","/member/popup",idx);
+//            throw new BizException("9011", "already_exist","/member/popup",idx);
+        }else {
+            mapper.insert(req);
+            res.put("insertedId",memberid);
+            logger.debug("[member insert] req:{}", req);
         }
 
 
-        mapper.insert(req);
+
 
 
 

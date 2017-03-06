@@ -5,6 +5,8 @@ import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.web.RequestMap;
 
+import java.util.Map;
+
 public interface MemberMapper extends CrudMapper{
   void initailizePwd(DbMap map);
   void updateMember(DbMap map);
@@ -26,4 +28,6 @@ public interface MemberMapper extends CrudMapper{
   int addressCheck(DbMap req);
 
   String currMemberId(DbMap req);
+
+  int excelDelete(DbMap req);
 }

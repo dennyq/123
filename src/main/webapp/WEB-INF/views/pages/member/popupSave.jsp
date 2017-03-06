@@ -18,10 +18,10 @@
     <%--<a id="saveFileBtn" class="pointer btn btn-blue-green btn-flat md-height" style="cursor:pointer">일괄등록</a>--%>
     <%--</span>--%>
     <%--</div>--%>
-        <div></div>
+        <div ><span id="percentTxt">0</span>%</div>
 
     <c:if test="${not empty list}">
-        <table>
+        <table style="display: none">
             <tr>
                 <td>idx</td>
                 <td>gubun</td>
@@ -36,18 +36,18 @@
             </tr>
             <c:forEach items="${list}" var="item" varStatus="index">
                 <tr>
-                    <td><input id="idx${index.index}" name="idx" value="${item.idx}"></td>
-                    <td><input id="gubun${index.index}" name="gubun" value="${item.gubun}"></td>
-                    <td><input id="no${index.index}" name="no" value="${item.no}"></td>
-                    <td><input id="openflag${index.index}" name="openflag" value="${item.openflag}"></td>
-                    <td><input id="name${index.index}" name="name" value="${item.name}"></td>
-                    <td><input id="password${index.index}" name="password" value="${item.password}"></td>
-                    <td><input id="telephone${index.index}" name="telephone" value="${item.telephone}"></td>
-                    <td><input id="zipcode${index.index}" name="zipcode" value="${item.zipcode}"></td>
-                    <td><input id="address${index.index}" name="address" value="${item.address}"></td>
-                    <td><input id="introduce${index.index}" name="introduce" value="${item.introduce}"></td>
-                    <td><input id="latitude${index.index}" name="latitude"></td>
-                    <td><input id="longitude${index.index}" name="longitude"></td>
+                    <td><input type="hidden" id="idx${index.index}" name="idx" value="${item.idx}"></td>
+                    <td><input type="hidden" id="gubun${index.index}" name="gubun" value="${item.gubun}"></td>
+                    <td><input type="hidden" id="no${index.index}" name="no" value="${item.no}"></td>
+                    <td><input type="hidden" id="openflag${index.index}" name="openflag" value="${item.openflag}"></td>
+                    <td><input type="hidden" id="name${index.index}" name="name" value="${item.name}"></td>
+                    <td><input type="hidden" id="password${index.index}" name="password" value="${item.password}"></td>
+                    <td><input type="hidden" id="telephone${index.index}" name="telephone" value="${item.telephone}"></td>
+                    <td><input type="hidden" id="zipcode${index.index}" name="zipcode" value="${item.zipcode}"></td>
+                    <td><input type="hidden" id="address${index.index}" name="address" value="${item.address}"></td>
+                    <td><input type="hidden" id="introduce${index.index}" name="introduce" value="${item.introduce}"></td>
+                    <td><input type="hidden" id="latitude${index.index}" name="latitude"></td>
+                    <td><input type="hidden" id="longitude${index.index}" name="longitude"></td>
                 </tr>
             </c:forEach>
         </table>
@@ -56,6 +56,8 @@
 </form>
 <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script>
+    var insertedArr = [];
+    var insertedStr;
     var searchAddressAndSave = function (idx,listLength) {
         var address = $('#address'+idx).val();
         if (address != null && address != '') {
@@ -131,32 +133,79 @@
 
         $als.execute('<c:url value="/member/excelSave"/>', req, function (data) {
             console.log(data);
+            console.log(data.insertedId);
             console.log('index : '+index);
             if (data.result_message == 'success') {
 //                return 'success';
 //        alert('삭제되었습니다.');
 //        location.href='/member/list';
+                insertedArr.push(data.insertedId);
+
+                $('#percentTxt').text(parseInt(insertedArr.length/listLength*100));
                 nextSave(index+1,listLength);
+
+            }else if (data.result_message == 'already_exist') {
+
+                alert(data.result_idx+'행이 중복된 자료입니다.');
+
+                deleteInserted(insertedArr)
+                return;
             }
         }, function (err) {
             alert(err.result_message);
         });
 
     }
-    var nextSave = function (index) {
-        console.log('nextSave index : ' + index);
-        if (listLength == index) {
-            alert('저장되었습니다.');
-        } else if (listLength > index) {
 
-            searchAddressAndSave(index);
+
+    var deleteInserted = function(paramArr){
+        var insertedStr="";
+        insertedStr = paramArr.join(',');
+        console.log(insertedStr)
+        if (paramArr.length) {
+            var req = {};
+            req.insertedArr = insertedStr;
+            console.log(insertedStr)
+            $als.execute('<c:url value="/member/excelDelete"/>', req, function (data) {
+                if (data.result_message == 'success') {
+                    location.href='/member/popup';
+
+                }
+            }, function (err) {
+                alert(err.result_message);
+            });
+        }else{
+            location.href='/member/popup';
+        }
+
+    }
+
+
+    var nextSave = function (index,listLength) {
+        console.log('nextSave index : ' + index);
+        console.log('nextSave listLength : ' + listLength);
+        console.log(insertedArr);
+        if (listLength <= index) {
+            $('#percentTxt').text('100');
+            setTimeout(function(){
+                alert('저장되었습니다.');
+                location.href='/member/popup';
+            },300);
+
+
+        } else  {
+
+            searchAddressAndSave(index,listLength);
         }
 
     }
 
 
     $(function () {
+
         <c:if test="${not empty list}">
+        insertedArr = [];
+
         var listLength = ${fn:length(list)}
         console.log(listLength);
 //        for (var i = 0; i < listLength; i++) {
