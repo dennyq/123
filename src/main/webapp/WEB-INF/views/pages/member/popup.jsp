@@ -8,7 +8,7 @@
         /*padding: 7px 10px 10px 9px!important;*/
     /*}*/
 </style>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/member/excelSave"/>" method="post" enctype="multipart/form-data">
+<form id="detailFrm" class="form-horizontal" action="<c:url value="/member/excelUpload"/>" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="excelfile" class="col-sm-4 ">일괄등록파일</label>
 
@@ -23,12 +23,14 @@
       </span>
     </div>
 
+
+
 </form>
 <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script>
     $(function(){
        $('#saveFileBtn').click(function(){
-           console.log('aaa');
+
            $('#detailFrm').submit();
        })
     });

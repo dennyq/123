@@ -228,6 +228,10 @@
   </update>
 
 
-
+  <select id="currMemberId" parameterType="dbmap" resultType="String">
+    SELECT IFNULL(MAX(memberid),0)
+    FROM member
+    WHERE SUBSTRING(memberid,1,1) = 'B' AND LENGTH(memberid)=10
+  </select>
 
 </mapper>

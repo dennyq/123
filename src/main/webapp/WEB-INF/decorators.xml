@@ -19,6 +19,13 @@
     <pattern>/member/excelSave</pattern>
     <pattern>/member/excelSave/</pattern>
     <pattern>/member/excelSave/*</pattern>
+    <pattern>/member/excelUpload</pattern>
+    <pattern>/member/excelUpload/</pattern>
+    <pattern>/member/excelUpload/*</pattern>
+
+    <pattern>/*/popup*</pattern>
+    <pattern>/*/popup*/</pattern>
+    <pattern>/*/popup*/*</pattern>
     <!-- nice name chk -->
     <pattern>/common/nameNiceChk*</pattern>
 

@@ -120,8 +120,8 @@
     }else{
       saveFunction();
     }
-
   }
+
   var searchAddress = function(){
     var address = $('#address').val();
     if (address != null && address != '') {

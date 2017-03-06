@@ -24,4 +24,6 @@ public interface MemberMapper extends CrudMapper{
   void changePwd(DbMap req);
 
   int addressCheck(DbMap req);
+
+  String currMemberId(DbMap req);
 }

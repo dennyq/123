@@ -92,30 +92,34 @@ public class MemberService extends ServiceBase {
 
         int addressCheck = mapper.addressCheck(req);
 
-        if (req.get("isNew").equals("Y")) {
-            req.put("grade", "2");
-            int idx = Integer.parseInt(req.get("idx")+"");
+        String currMemberId = mapper.currMemberId(req);
 
-            if (addressCheck != 0) {
-                throw new BizException("9011", "already_exist","/member/popup",idx);
-            }
-
-            int idPwDelChk = mapper.idPwDelChk(req);
-            logger.info("idPwDelChk={}", idPwDelChk);
-
-            if (idPwDelChk == 1) {
-                //삭제했으니 delyn 원복
-                mapper.restore(req);
-                mapper.update(req);
-            } else {
-                mapper.insert(req);
-            }
+        if (currMemberId.equals("0")) {
+            req.put("memberid", "B000000001");
 
         } else {
+//            logger.info("currMemberId.split(\"B\")[1]={}",currMemberId.split("B")[0]);
 
-
-            mapper.update(req);
+            int nextMemberId = Integer.parseInt(currMemberId.split("B")[1]) + 1;
+            logger.info("nextMemberId = {}", nextMemberId);
+            String memberid = "B"+String.format("%09d", nextMemberId);
+            logger.info("memberid = {}", memberid);
+            req.put("memberid",memberid);
         }
+
+
+
+        req.put("grade", "2");
+        req.put("deleteyn", "0");
+        int idx = Integer.parseInt(req.get("idx")+"");
+
+        if (addressCheck != 0) {
+            throw new BizException("9011", "already_exist","/member/popup",idx);
+        }
+
+
+        mapper.insert(req);
+
 
 
         if (Global.isDev) logger.debug("[member excelsave] send:{}", res);

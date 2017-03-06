@@ -18,65 +18,64 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/app/")
 public class AppController extends ControllerPageBase {
-  @Autowired
-  private AppService service;
-  private static final Logger logger = LoggerFactory.getLogger(AppController.class);
-  private String rootKey = "app";
-  private String rootPath = "pages/" + rootKey + "/";
+    @Autowired
+    private AppService service;
+    private static final Logger logger = LoggerFactory.getLogger(AppController.class);
+    private String rootKey = "app";
+    private String rootPath = "pages/" + rootKey + "/";
 
 
+    //안드로이드맵뷰
+    @RequestMapping(value = "mapview")
+    public String mapview(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
 
-  //안드로이드맵뷰
-  @RequestMapping(value = "mapview")
-  public String mapview(HttpServletRequest request,Model model) throws Exception {
-    RequestMap req = RequestMap.create(request);
+        return rootPath + "mapview";
+    }
 
-    return rootPath + "mapview";
-  }
-
-  //안드로이드맵뷰
-  @RequestMapping(value = "locationSelectmapview")
-  public String locationSelectmapview(HttpServletRequest request,Model model) throws Exception {
-    RequestMap req = RequestMap.create(request);
-
-
-    getListModel(model, req);
-    return rootPath + "locationSelectmapview";
-  }
-
-  ///search
-  @RequestMapping(value = "search")
-  @ResponseBody
-  public ResultMap search(HttpServletRequest request) throws Exception {
-    RequestMap req = RequestMap.create(request);
-    return service.search(req);
-  }
-
-  ///playList
-  @RequestMapping(value = "playList")
-  @ResponseBody
-  public ResultMap playList(HttpServletRequest request) throws Exception {
-    RequestMap req = RequestMap.create(request);
-    return service.playList(req);
-  }
-
-  ///playList
-  @RequestMapping(value = "getPlayList")
-  @ResponseBody
-  public ResultMap getPlayList(HttpServletRequest request) throws Exception {
-    RequestMap req = RequestMap.create(request);
-    return service.getPlayList(req);
-  }
+    //안드로이드맵뷰
+    @RequestMapping(value = "locationSelectmapview")
+    public String locationSelectmapview(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
 
 
-  //상세
-  @RequestMapping(value = "detail/{memberid}")
-  public String detailById(HttpServletRequest request, Model model) throws Exception {
-    RequestMap req = RequestMap.create(request);
-    putPathVariable(request, req);
-    model.addAllAttributes(service.detail(req));
-    return rootPath + "detail";
-  }
+        getListModel(model, req);
+        return rootPath + "locationSelectmapview";
+    }
+
+    ///search
+    @RequestMapping(value = "search")
+    @ResponseBody
+    public ResultMap search(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.search(req);
+    }
+
+    ///playList
+    @RequestMapping(value = "playList")
+    @ResponseBody
+    public ResultMap playList(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.playList(req);
+    }
+
+    ///playList
+    @RequestMapping(value = "getPlayList")
+    @ResponseBody
+    public ResultMap getPlayList(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.getPlayList(req);
+    }
+
+
+    //상세
+    @RequestMapping(value = "detail/{memberid}")
+    public String detailById(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        model.addAllAttributes(service.detail(req));
+        return rootPath + "detail";
+    }
 
     private void getListModel(Model model, RequestMap req) {
         model.addAllAttributes(service.list(req));
@@ -92,7 +91,7 @@ public class AppController extends ControllerPageBase {
         req.put("gubun", putGubun);
         req.put("searchCode", "1");
         model.addAttribute("codeList", service.getCodeList(req).get("rows"));
-        model.addAttribute("gubun", putGubun==null?"1":putGubun);
+        model.addAttribute("gubun", putGubun == null ? "1" : putGubun);
     }
 
 }

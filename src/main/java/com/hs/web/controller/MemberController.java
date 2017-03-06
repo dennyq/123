@@ -59,10 +59,9 @@ public class MemberController extends ControllerPageBase {
         return rootPath + "popup";
     }
 
-    //todo : excelSave
-    @RequestMapping(value = "excelSave")
-//    @ResponseBody
-    public String excelSave(HttpServletRequest request, Model model) throws Exception {
+    //todo : excelUpload
+    @RequestMapping(value = "excelUpload")
+    public String excelUpload(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
 
         MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
@@ -74,22 +73,20 @@ public class MemberController extends ControllerPageBase {
 
             model.addAllAttributes(excelFileService.uploadFiles(request, req));
         }
-//        else{
-//            req.put("filename",null);
-//        }
-//        if(req.get("isNew").equals("Y")){
-//            req.put("adindex",service.getNextAdindex(req));
-//            service.insert(req);
-//        }else{
-//
-//            service.update(req);
-//        }
+
+
+        return rootPath + "popupSave";
+    }
+
+    //todo : excelSave
+    @RequestMapping(value = "excelSave")
+    @ResponseBody
+    public ResultMap excelSave(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
 
 
 
-
-//        return "redirect:/"+rootPath + "popup";
-        return rootPath + "popup";
+        return service.excelSave(req);
     }
 
 
