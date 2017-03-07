@@ -18,7 +18,7 @@
     <%--<a id="saveFileBtn" class="pointer btn btn-blue-green btn-flat md-height" style="cursor:pointer">일괄등록</a>--%>
     <%--</span>--%>
     <%--</div>--%>
-        <div ><span id="percentTxt">0</span>%</div>
+        <div ><span id="percentTxt">0</span>번 라인 진행 중……        </div>
 
     <c:if test="${not empty list}">
         <table style="display: none">
@@ -141,7 +141,7 @@
 //        location.href='/member/list';
                 insertedArr.push(data.insertedId);
 
-                $('#percentTxt').text(parseInt(insertedArr.length/listLength*100));
+                $('#percentTxt').text(insertedArr.length+" / "+listLength);
                 nextSave(index+1,listLength);
 
             }else if (data.result_message == 'already_exist') {
