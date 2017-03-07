@@ -288,20 +288,23 @@
         var points=[];
         for (var i = 0; i < result.rows.length; i ++) {
             var items = result.rows[i];
-            points.push(new daum.maps.LatLng(items.latitude, items.longitude));
+            if(parseInt(items.latitude)!=0 && parseInt(items.longitude)!=0){
+                points.push(new daum.maps.LatLng(items.latitude, items.longitude));
+            }
+
         }
 
         var bounds = new daum.maps.LatLngBounds();
         for (var i = 0; i < result.rows.length; i++) {
             var items = result.rows[i];
-
+            if(parseInt(items.latitude)!=0 && parseInt(items.longitude)!=0){
             // 마커 이미지의 이미지 크기 입니다
             var imageSize = new daum.maps.Size(24, 35);
 
             var imgGubun = '';
             var imgOpen = '';
 
-            if (result.rows[i].openflag == 1) {
+            if (result.rows[i].openflag == 0) {
                 imgOpen = 'open';
             } else {
                 imgOpen = 'close';
@@ -346,6 +349,7 @@
             });
 
             daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+        }
         }
 
 
