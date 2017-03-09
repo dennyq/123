@@ -114,11 +114,8 @@ public class ExcelFileService {
                 String contents = openSheet.getCell(j, i).getContents();
                 if (j == 2) {
 
-                    if (contents.indexOf("병원") > -1) {
-                        value = "2";
-                    } else {
-                        value = "1";
-                    }
+
+                    value = req.get("gubun")+"";
 
                 } else {
                     value = contents;

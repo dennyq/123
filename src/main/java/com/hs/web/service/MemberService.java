@@ -89,9 +89,7 @@ public class MemberService extends ServiceBase {
     public ResultMap excelSave(RequestMap req) {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[member excelsave] recv:{}", req);
-        String joindate = req.get("joindate") + "";
-        String usestartdate = req.get("usestartdate") + "";
-        String useenddate = req.get("useenddate") + "";
+
         String longitude = req.get("longitude") + "";
         String latitude = req.get("latitude") + "";
         longitude = longitude.equals("") ? "0" : longitude;
@@ -104,9 +102,9 @@ public class MemberService extends ServiceBase {
         req.put("latitude", latitudeDouble);
 
 
-        req.put("joindate", joindate.replace(".", ""));
-        req.put("usestartdate", usestartdate.replace(".", ""));
-        req.put("useenddate", useenddate.replace(".", ""));
+        req.put("regtime", "20170101000000");
+        req.put("usestartdate", "20170101");
+        req.put("useenddate", "99991230");
 
         int addressCheck = mapper.addressCheck(req);
 
