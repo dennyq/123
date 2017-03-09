@@ -59,7 +59,7 @@
    var address = $('#address').val();
     if (address != null && address != ''){
       $.ajax({
-        url: "https://apis.daum.net/local/geo/addr2coord?apikey=3449b8f92183a8efbf5dafe9ceb3c430&q="+encodeURIComponent(address)+"&output=json",
+        url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q="+encodeURIComponent(address)+"&output=json",
         dataType: 'jsonp',
         jsonpCallback: "myCallback",
         success: function(data) {
@@ -102,7 +102,7 @@
     var address = $('#address').val();
     if (address != null && address != '') {
       $.ajax({
-        url: "https://apis.daum.net/local/geo/addr2coord?apikey=3449b8f92183a8efbf5dafe9ceb3c430&q="+encodeURIComponent(address)+"&output=json",
+        url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q="+encodeURIComponent(address)+"&output=json",
         dataType: 'jsonp',
         jsonpCallback: "myCallback",
         success: function (data) {

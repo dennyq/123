@@ -114,7 +114,7 @@ public class MemberController extends ControllerPageBase {
     public String info(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
 //    putPathVariable(request, req);
-//    model.addAllAttributes(service.detail(req));
+//    model.addAllAttributes(service.detail(req));member
         if (req.get("login_uid") == null) {
             throw new BizException("9009", "need_login");
         }

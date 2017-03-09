@@ -8,8 +8,20 @@
         /*padding: 7px 10px 10px 9px!important;*/
     /*}*/
 </style>
+
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/excelUpload"/>" method="post" enctype="multipart/form-data">
     <div class="form-group">
+
+        <label for="gubun" class="col-sm-4 ">구분</label>
+
+        <div class="col-sm-6">
+            <input type="radio" name="gubun" id="gubun" placeholder="구분" class="form-control" value="1" checked>
+            약국
+            <input type="radio" name="gubun" id="gubun1" placeholder="구분" class="form-control" value="2">
+            병원
+        </div>
+    </div><div class="form-group">
+
         <label for="excelfile" class="col-sm-4 ">일괄등록파일</label>
 
         <div class="col-sm-6">

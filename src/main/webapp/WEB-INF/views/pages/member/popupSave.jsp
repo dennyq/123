@@ -18,7 +18,7 @@
     <%--<a id="saveFileBtn" class="pointer btn btn-blue-green btn-flat md-height" style="cursor:pointer">일괄등록</a>--%>
     <%--</span>--%>
     <%--</div>--%>
-        <div ><span id="percentTxt">0</span>%</div>
+        <div ><span id="percentTxt">0</span>번 라인 진행 중……        </div>
 
     <c:if test="${not empty list}">
         <table style="display: none">
@@ -62,7 +62,7 @@
         var address = $('#address'+idx).val();
         if (address != null && address != '') {
             $.ajax({
-                url: "https://apis.daum.net/local/geo/addr2coord?apikey=3449b8f92183a8efbf5dafe9ceb3c430&q=" + encodeURIComponent(address) + "&output=json",
+                url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q=" + encodeURIComponent(address) + "&output=json",
                 dataType: 'jsonp',
                 jsonpCallback: "myCallback",
                 success: function (data) {
@@ -141,7 +141,7 @@
 //        location.href='/member/list';
                 insertedArr.push(data.insertedId);
 
-                $('#percentTxt').text(parseInt(insertedArr.length/listLength*100));
+                $('#percentTxt').text(insertedArr.length+" / "+listLength);
                 nextSave(index+1,listLength);
 
             }else if (data.result_message == 'already_exist') {

@@ -23,7 +23,7 @@
       <%--Your browser does not support the video tag.--%>
   <%--</video>--%>
 </section>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=3449b8f92183a8efbf5dafe9ceb3c430&libraries=services"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&libraries=services"></script>
 <script>
 
 

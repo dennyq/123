@@ -42,7 +42,7 @@
         document.location.href = returnUrl;
 
     } else if (idx != '' && idx != 'null' && result_code=='9010') {
-//        document.location.href = returnUrl;
+        document.location.href = returnUrl;
 
 
     } else if (idx != '' && idx != 'null' && result_code=='9011' && result_code=='9011') {
