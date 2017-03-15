@@ -131,7 +131,7 @@ public class MemberService extends ServiceBase {
         int idx = Integer.parseInt(req.get("idx")+"");
         res.put("result_idx",idx);
         if (addressCheck > 0) {
-            res.put("result_message","already_exist");
+            //res.put("result_message","already_exist");
 
 //            throw new BizException("9011", "already_exist","/member/popup",idx);
         }else {

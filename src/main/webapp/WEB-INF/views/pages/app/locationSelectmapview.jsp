@@ -295,61 +295,65 @@
         }
 
         var bounds = new daum.maps.LatLngBounds();
+        var index = 0;
         for (var i = 0; i < result.rows.length; i++) {
             var items = result.rows[i];
-            if(parseInt(items.latitude)!=0 && parseInt(items.longitude)!=0){
-            // 마커 이미지의 이미지 크기 입니다
-            var imageSize = new daum.maps.Size(24, 35);
+            if (parseInt(items.latitude) != 0 && parseInt(items.longitude) != 0) {
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new daum.maps.Size(24, 35);
 
-            var imgGubun = '';
-            var imgOpen = '';
+                var imgGubun = '';
+                var imgOpen = '';
 
-            if (result.rows[i].openflag == 0) {
-                imgOpen = 'open';
-            } else {
-                imgOpen = 'close';
+                if (result.rows[i].openflag == 1) {
+                    imgOpen = 'open';
+                } else {
+                    imgOpen = 'close';
+                }
+
+                if (result.rows[i].gubun == 1) {
+                    imgGubun = 'p';
+                } else {
+                    imgGubun = 'h';
+                }
+                imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png";
+
+
+                // 마커 이미지를 생성합니다
+                var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+
+                // 마커를 생성합니다
+                var marker = new daum.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: new daum.maps.LatLng(items.latitude, items.longitude), // 마커를 표시할 위치
+                    name: items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    image: markerImage, // 마커 이미지
+                    clickable: true
+                });
+
+
+console.log('point : '+index);
+                console.log(points[index]);
+                // LatLngBounds 객체에 좌표를 추가합니다
+                bounds.extend(points[index]);
+//                bounds.extend(points[index]);
+                // 인포윈도우를 생성합니다
+
+                index++;
+                var iwContent = '<div class="placeinfo">' +
+                        '<span class="closeOverlay" style=" float: right; width: 23px; text-align: center; line-height: 2.5;cursor: pointer ">x</span>' +
+                        '<a class="title" href="/app/detail/' + items.memberid + '"   title="' + items.name + '">' + items.name + '</a>';
+                iwContent += '<span title="' + items.address + '">' + items.address + '</span>';
+                iwContent += '<span class="tel">' + ((items.telephone != null) && items.telephone) ? items.telephone : "" + '</span>' +
+                '</div>' +
+                '<div class="after"></div>';
+
+                var infowindow = new daum.maps.InfoWindow({
+                    content: iwContent
+                });
+
+                daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
             }
-
-            if (result.rows[i].gubun == 1) {
-                imgGubun = 'p';
-            } else {
-                imgGubun = 'h';
-            }
-            imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png";
-
-
-            // 마커 이미지를 생성합니다
-            var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
-
-            // 마커를 생성합니다
-            var marker = new daum.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: new daum.maps.LatLng(items.latitude, items.longitude), // 마커를 표시할 위치
-                name: items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image: markerImage, // 마커 이미지
-                clickable: true
-            });
-
-
-            // LatLngBounds 객체에 좌표를 추가합니다
-            bounds.extend(points[i]);
-            // 인포윈도우를 생성합니다
-
-
-            var iwContent = '<div class="placeinfo">' +
-                    '<span class="closeOverlay" style=" float: right; width: 23px; text-align: center; line-height: 2.5;cursor: pointer ">x</span>' +
-                    '<a class="title" href="/app/detail/' + items.memberid + '"   title="' + items.name + '">' + items.name + '</a>';
-            iwContent += '<span title="' + items.address + '">' + items.address + '</span>';
-            iwContent += '<span class="tel">' + ((items.telephone != null) && items.telephone) ? items.telephone : "" + '</span>' +
-            '</div>' +
-            '<div class="after"></div>';
-
-            var infowindow = new daum.maps.InfoWindow({
-                content: iwContent
-            });
-
-            daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
-        }
         }
 
 
