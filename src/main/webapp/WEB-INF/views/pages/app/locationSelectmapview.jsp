@@ -333,6 +333,30 @@ console.log('point : '+index);
         map.setBounds(bounds);
 
 
+        var imageSrc = '/imgs/pc/icon_mylocal2.png', // 마커이미지의 주소입니다
+                imageSize = new daum.maps.Size(64/3, 69/3), // 마커이미지의 크기입니다
+                imageOption = {offset: new daum.maps.Point(27/3, 69/3)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var currMarkerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
+        // 마커가 표시될 위치입니다
+        var markerPosition  = new daum.maps.LatLng('${param['latitude']}', '${param['longitude']}');
+
+        // 마커를 생성합니다
+        var currMarker = new daum.maps.Marker({
+            position: markerPosition,
+            image: currMarkerImage // 마커이미지 설정
+
+        });
+        // 마커 위치를 클릭한 위치로 옮깁니다
+        currMarker.setPosition(markerPosition);
+
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        currMarker.setMap(map);
+
+
         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
         function makeOverListener(map, marker, infowindow) {
             var iw = infowindow;
@@ -406,7 +430,28 @@ console.log('point : '+index);
                                 // 마커 이미지의 이미지 주소입니다
                                 console.log(result);
 
+                                var imageSrc = '/imgs/pc/icon_mylocal2.png', // 마커이미지의 주소입니다
+                                        imageSize = new daum.maps.Size(64/3, 69/3), // 마커이미지의 크기입니다
+                                        imageOption = {offset: new daum.maps.Point(27/3, 69/3)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
+                                // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+                                var currMarkerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
+                                // 마커가 표시될 위치입니다
+                                var markerPosition  = new daum.maps.LatLng('${param['latitude']}', '${param['longitude']}');
+
+                                // 마커를 생성합니다
+                                var currMarker = new daum.maps.Marker({
+                                    position: markerPosition,
+                                    image: currMarkerImage // 마커이미지 설정
+
+                                });
+                                // 마커 위치를 클릭한 위치로 옮깁니다
+                                currMarker.setPosition(markerPosition);
+
+
+                                // 마커가 지도 위에 표시되도록 설정합니다
+                                currMarker.setMap(map);
                             }
 
                         }
