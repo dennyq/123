@@ -261,6 +261,7 @@
 
 
     var setDataToMap = function (result) {
+        console.log('setDataToMap');
         // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
 
         // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
@@ -389,6 +390,7 @@ console.log('point : '+index);
     }
 
     var searchByAddrMap = function () {
+        console.log('searchByAddrMap');
         $('#map').show();
         $('#list_wrap').hide();
         var req = {};
