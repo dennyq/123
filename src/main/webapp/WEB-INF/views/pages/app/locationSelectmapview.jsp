@@ -231,34 +231,6 @@
 
 
 
-    /*var searchByAddr = function () {
-        $('#map').hide();
-        $('#list_wrap').show();
-        // 주소로 좌표를 검색합니다
-        var searchText = $('#sido').find(':selected').text()+' '+$('#gungu').find(':selected').text()+' '+$('#dongro').find(':selected').text();
-        console.log('searchText : '+searchText);
-
-        var req = {};
-
-        req.gubun = ${gubun};
-        req.searchCode = '3';
-        req.addrSidoStr = $('#sido').find(':selected').text();
-        req.addrLastStr = $('#gungu').find(':selected').text()+' '+$('#dongro').find(':selected').text();
-        $als.execute('/pc/searchByAddr', req, function (data) {
-            console.log(data);
-            if (data.result_message == 'success') {
-                var source   = $("#result-template").html();
-                var template = Handlebars.compile(source);
-                var html = template(data);
-                $('#result').html(html);
-                tableevent();
-            }
-        }, function (err) {
-            alert(err.result_message);
-        });
-
-    };*/
-
 
     var setDataToMap = function (result) {
         console.log('setDataToMap');
@@ -385,6 +357,73 @@
 
     }
 
+    var setDataToMapCurr = function (result) {
+        console.log('setDataToMapCurr');
+
+        var address = $('#sido').val()+' '+$('#gungu').val()+' '+$('#dongro').val();
+        if (address != null && address != '') {
+            $.ajax({
+                url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q="+encodeURIComponent(address)+"&output=json",
+                dataType: 'jsonp',
+                jsonpCallback: "myCallback",
+                success: function (data) {
+                    console.log('성공 - ', data);
+                    if (data) {
+                        var latitude, longitude;
+                        if (data.channel) {
+                            if (data.channel.item.length >= 1) {
+                                console.log(data.channel.item.length );
+                                if (data.channel.item[0].lat) {
+                                    var lat = data.channel.item[0].lat;
+                                    console.log('lat - ', lat);
+                                    latitude = lat;
+                                }
+                                if (data.channel.item[0].lng) {
+                                    var lng = data.channel.item[0].lng;
+
+                                    console.log('lng - ', lng);
+
+                                    longitude = lng;
+                                }
+
+
+                                // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
+                                var placeOverlay = new daum.maps.CustomOverlay({zIndex:1}),
+                                        contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
+                                        markers = [], // 마커를 담을 배열입니다
+                                        currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
+                                var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                                        mapOption = {
+                                            center: new daum.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+                                            level: 4 // 지도의 확대 레벨
+                                        };
+                                // 지도를 생성합니다
+                                var map = new daum.maps.Map(mapContainer, mapOption);
+                                // 마커 이미지의 이미지 주소입니다
+                                console.log(result);
+
+
+                            }
+
+                        }
+
+                    }
+
+//        saveFunction();
+                },
+                error: function (xhr) {
+                    console.log('실패 - ', xhr);
+                }
+            });
+
+        }
+
+
+
+
+
+    }
+
     var searchByAddrMap = function () {
         console.log('searchByAddrMap');
         $('#map').show();
@@ -402,7 +441,7 @@
                     setDataToMap(data);
                 } else {
 //                    $('#map').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색 결과가 없습니다').show();
-                    setDataToMap(data);
+                    setDataToMapCurr(data);
                 }
 
             }
