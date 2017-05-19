@@ -11,7 +11,7 @@
     <div class="col-sm-4">
       <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" style="    width:130px">
     </div>
-    <a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png" style="margin-left: -25px;"/></a>
+    <a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png?vs=2" style="margin-left: -25px;"/></a>
     <input type="hidden" id="idCheck" value="N"/>
   </div>
   <div class="form-group">

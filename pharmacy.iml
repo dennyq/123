@@ -14,25 +14,12 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/resources/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/src/resources/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/src/resources/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/src/root-context.xml</file>
-          <file>file://$MODULE_DIR$/src/servlet-context.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/root-context.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/servlet-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/config/context-datasource.xml</file>
         </fileset>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">

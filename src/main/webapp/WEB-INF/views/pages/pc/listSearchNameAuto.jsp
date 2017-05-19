@@ -30,22 +30,7 @@
   <section class="content">
     <!-- row start -->
     <div class="row">
-      <!-- col-md-12 start -->
-      <%--<ul class="all-tab" style="">--%>
-        <%--<li class="clickTab" tab="1"><img src="/imgs/pc/bt_tab1<c:if test="${tab=='1'}">_on</c:if>.png"--%>
-                <%--<c:if test="${tab eq '1'}">  onmouseover="swapOutImg(this,'_on');" onmouseout="swapOverImg(this,'_on');" </c:if>--%>
-                <%--<c:if test="${tab ne '1'}">  onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');" </c:if>--%>
-                <%--/></li>--%>
-        <%--<li class="clickTab" tab="2"><img src="/imgs/pc/bt_tab2<c:if test="${tab=='2'}">_on</c:if>.png"--%>
-                <%--<c:if test="${tab eq '2'}">  onmouseover="swapOutImg(this,'_on');" onmouseout="swapOverImg(this,'_on');" </c:if>--%>
-                <%--<c:if test="${tab ne '2'}">  onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');" </c:if>--%>
-                <%--/></li>--%>
-        <%--<li class="clickTab" tab="3"><img src="/imgs/pc/bt_tab3<c:if test="${tab=='3'}">_on</c:if>.png"--%>
-                <%--<c:if test="${tab eq '3'}">  onmouseover="swapOutImg(this,'_on');" onmouseout="swapOverImg(this,'_on');" </c:if>--%>
-                <%--<c:if test="${tab ne '3'}">  onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');" </c:if>--%>
-                <%--/></li>--%>
-      <%--</ul>--%>
-      <%--조회start--%>
+
       <div class="col-md-12">
         <!-- bottom-25 start -->
         <div class="bottom-25">
@@ -352,7 +337,7 @@
       // 마커 이미지의 이미지 주소입니다
       console.log(result);
 
-      var imageSrc = "/imgs/picker_h_open.png";
+      var imageSrc = "/imgs/pc/picker_h_open.png?vs=2";
 //      var latSum = 0;
 //      var lngSum = 0;
       var points=[];
@@ -365,6 +350,7 @@
       }
 
       var bounds = new daum.maps.LatLngBounds();
+      var index=0;
       for (var i = 0; i < result.rows.length; i++) {
           var items = result.rows[i];
           if(parseInt(items.latitude)!=0 && parseInt(items.longitude)!=0){
@@ -385,7 +371,7 @@
           } else {
               imgGubun = 'h';
           }
-          imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
+          imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + ".png?vs=2";
 
           // 마커 이미지를 생성합니다
           var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
@@ -401,7 +387,14 @@
 
 
           // LatLngBounds 객체에 좌표를 추가합니다
-          bounds.extend(points[i]);
+              console.log('point : '+index);
+              console.log(points[index]);
+              // LatLngBounds 객체에 좌표를 추가합니다
+              bounds.extend(points[index]);
+//                bounds.extend(points[index]);
+              // 인포윈도우를 생성합니다
+
+              index++;
           // 인포윈도우를 생성합니다
 
 

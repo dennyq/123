@@ -58,6 +58,12 @@
       <input name="filename"  id="filename" placeholder="광고 파일" class="form-control"  type="file">
     </div>
   </div>
+  <div class="form-group">
+    <label for="advwebsite" class="col-sm-2 ">광고주 사이트</label>
+    <div class="col-sm-9">
+      <input name="advwebsite"  id="advwebsite" placeholder="광고주 사이트" class="form-control"  >
+    </div>
+  </div>
 </div>
 <div style="height: 200px;"></div>
 <!--// right input end -->

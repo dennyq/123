@@ -255,7 +255,7 @@
 
 
 
-        var imageSrc = "/imgs/pc/picker_h_open2_small.png";
+        var imageSrc = "/imgs/pc/picker_h_open2_small.png?vs=2";
 //      var latSum = 0;
 //      var lngSum = 0;
         var points=[];
@@ -289,7 +289,7 @@
                 } else {
                     imgGubun = 'h';
                 }
-                imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png";
+                imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + "2_small.png?vs=2";
 
 
                 // 마커 이미지를 생성합니다
@@ -333,7 +333,7 @@ console.log('point : '+index);
         map.setBounds(bounds);
 
 
-        var imageSrc = '/imgs/pc/icon_mylocal2.png', // 마커이미지의 주소입니다
+        var imageSrc = '/imgs/pc/icon_mylocal2.png?vs=2', // 마커이미지의 주소입니다
                 imageSize = new daum.maps.Size(64/3, 69/3), // 마커이미지의 크기입니다
                 imageOption = {offset: new daum.maps.Point(27/3, 69/3)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -430,7 +430,7 @@ console.log('point : '+index);
                                 // 마커 이미지의 이미지 주소입니다
                                 console.log(result);
 
-                                var imageSrc = '/imgs/pc/icon_mylocal2.png', // 마커이미지의 주소입니다
+                                var imageSrc = '/imgs/pc/icon_mylocal2.png?vs=2', // 마커이미지의 주소입니다
                                         imageSize = new daum.maps.Size(64/3, 69/3), // 마커이미지의 크기입니다
                                         imageOption = {offset: new daum.maps.Point(27/3, 69/3)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -483,6 +483,9 @@ console.log('point : '+index);
         req.searchCode = '3';
         req.addrSidoStr = $('#sido').find(':selected').text();
         req.addrLastStr = $('#gungu').find(':selected').text()+' '+$('#dongro').find(':selected').text();
+        req.addrDongStr = $('#dongro').find(':selected').text();
+        var label = $('#dongro :selected').parent().attr('label');
+        req.label = label;
         $als.execute('/pc/searchByAddr', req, function (data) {
             console.log(data);
             if (data.result_message == 'success') {

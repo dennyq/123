@@ -49,7 +49,7 @@
         <c:if test="${not empty data.handphone}">
             <a href="sms:${data.handphone}" id="sendMsgBtn" class="btn btn-blue-green btn-flat md-height">메시지보내기</a>
         </c:if>
-        <a id="kakaoBtn" class="btn btn-blue-green btn-flat md-height">카톡실행</a>
+        <%--<a id="kakaoBtn" class="btn btn-blue-green btn-flat md-height">카톡실행</a>--%>
 
     </center>
 </form>

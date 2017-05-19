@@ -346,7 +346,7 @@
       // 마커 이미지의 이미지 주소입니다
       console.log(result);
 
-      var imageSrc = "/imgs/picker_h_open.png";
+      var imageSrc = "/imgs/pc/picker_h_open.png?vs=2";
 //      var latSum = 0;
 //      var lngSum = 0;
       var points=[];
@@ -359,6 +359,7 @@
       }
 
       var bounds = new daum.maps.LatLngBounds();
+      var index=0;
       for (var i = 0; i < result.rows.length; i++) {
           var items = result.rows[i];
           if(parseInt(items.latitude)!=0 && parseInt(items.longitude)!=0){
@@ -379,7 +380,7 @@
           } else {
               imgGubun = 'h';
           }
-          imageSrc = "/imgs/picker_" + imgGubun + "_" + imgOpen + ".png";
+          imageSrc = "/imgs/pc/picker_" + imgGubun + "_" + imgOpen + ".png?vs=2";
 
           // 마커 이미지를 생성합니다
           var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
@@ -395,7 +396,14 @@
 
 
           // LatLngBounds 객체에 좌표를 추가합니다
-          bounds.extend(points[i]);
+              console.log('point : '+index);
+              console.log(points[index]);
+              // LatLngBounds 객체에 좌표를 추가합니다
+              bounds.extend(points[index]);
+//                bounds.extend(points[index]);
+              // 인포윈도우를 생성합니다
+
+              index++;
           // 인포윈도우를 생성합니다
 
 

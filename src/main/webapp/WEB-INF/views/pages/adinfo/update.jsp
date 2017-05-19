@@ -58,23 +58,12 @@
     <div class="col-sm-9">
       <c:if test="${not data.filename}">${data.filename}</c:if>
       <input name="filename"  id="filename" placeholder="광고 파일" class="form-control" value=""  type="file"/>
-      <%--<span class="btn btn-success fileinput-button">--%>
-      <%--<i class="glyphicon glyphicon-plus"></i>--%>
-      <%--<span>Select files...</span>--%>
-      <!-- The file input field used as target for the file upload widget -->
-      <%--<input id="filename" type="file" name="filename">--%>
-      <%--</span>--%>
-      <%--<div id="progress" class="progress">--%>
-        <%--<div class="progress-bar progress-bar-success"></div>--%>
-      <%--</div>--%>
-      <!-- The container for the uploaded files -->
-      <%--<div id="files" class="files"></div>--%>
-      <%--<div class="progress">--%>
-        <%--<div class="bar"></div >--%>
-        <%--<div class="percent">0%</div >--%>
-      <%--</div>--%>
-
-      <%--<div id="status"></div>--%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="advwebsite" class="col-sm-2 ">광고주 사이트</label>
+    <div class="col-sm-9">
+      <input name="advwebsite"  id="advwebsite" placeholder="광고주 사이트" class="form-control" value="${data.advwebsite}" >
     </div>
   </div>
 </div>
