@@ -211,4 +211,38 @@
         ORDER BY playorder ASC
         ]]>
     </select>
+
+    <select id="mapviewinfo" parameterType="dbmap" resultType="dbmap">
+        SELECT
+        memberid,
+        password,
+        grade,
+        gubun,
+        openflag,
+        name,
+        telephone,
+        handphone,
+        address,
+        address_etc,
+        introduce,
+        latitude,
+        longitude,
+        usestartdate,
+        useenddate,
+        deleteyn,
+        lastconnecttime,
+        regtime
+        FROM member
+        WHERE deleteyn = 0
+        <if test='gubun != null and gubun != "" and gubun == "1"'>AND gubun in ("1","2")/*all*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "2"'>AND gubun = "1"/*약국('1')*/</if>
+        <if test='gubun != null and gubun != "" and gubun == "3"'>AND gubun = "2"/*병원('2')*/</if>
+
+        <if test='latitude != null and latitude != "" and latitude != "0"'>
+            AND latitude BETWEEN (#{latitude}-0.0090090090) AND (#{latitude}+0.0090090090)
+        </if>
+        <if test='longitude != null and longitude != "" and longitude != "0"'>
+            AND longitude  BETWEEN (#{longitude}-0.0112612612) AND (#{longitude}+0.0112612612)
+        </if>
+    </select>
 </mapper>

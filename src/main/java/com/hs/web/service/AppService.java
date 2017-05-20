@@ -76,6 +76,18 @@ public class AppService extends ServiceBase {
     return res;
   }
 
+  public ResultMap mapviewinfo(RequestMap req) {
+    ResultMap res = ResultMap.create();
+    if (Global.isDev) logger.debug("[app mapviewinfo] recv:{}", req);
+
+     DbList list = mapper.mapviewinfo(req);
+
+    res.put("list", list);
+
+    if (Global.isDev) logger.debug("[app mapviewinfo] send:{}", res);
+    return res;
+  }
+
 
   public ResultMap detail(RequestMap req) {
     ResultMap res = ResultMap.create();

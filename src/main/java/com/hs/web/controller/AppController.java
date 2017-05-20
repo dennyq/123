@@ -34,6 +34,15 @@ public class AppController extends ControllerPageBase {
     }
 
     //안드로이드맵뷰
+    @RequestMapping(value = "mapviewinfo")
+    @ResponseBody
+    public ResultMap mapviewinfo(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+        return service.mapviewinfo(req);
+    }
+
+    //안드로이드맵뷰
     @RequestMapping(value = "locationSelectmapview")
     public String locationSelectmapview(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);

@@ -13,6 +13,7 @@ public interface AppMapper  extends CrudMapper{
   DbMap playOne(DbMap req);
 
   DbList getPlayList(DbMap req);
+  DbList mapviewinfo(DbMap req);
   DbList codeList(DbMap req);
 
   DbList codeListBig(DbMap req);
