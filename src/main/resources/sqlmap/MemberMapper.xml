@@ -54,6 +54,9 @@
     DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       A.deleteyn,
       A.lastconnecttime,
+      A.worktime,
+      A.slogan,
+      A.hospitaldept,
     DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
     FROM member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
@@ -110,6 +113,9 @@
       DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
         A.deleteyn,
         A.lastconnecttime,
+      A.worktime,
+      A.slogan,
+      A.hospitaldept,
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
     FROM member A
     WHERE 1=1 AND A.memberid = #{memberid}
