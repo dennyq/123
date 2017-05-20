@@ -104,6 +104,7 @@ public class AdInfoService extends ServiceBase {
     if (Global.isDev) logger.debug("[main insert] send:{}", res);
     return res;
   }
+
   //저장
   public ResultMap update(RequestMap req) throws IOException {
     ResultMap res = ResultMap.create();
@@ -115,30 +116,13 @@ public class AdInfoService extends ServiceBase {
     req.put("usestartdate",usestartdate.replace(".",""));
     req.put("useenddate",useenddate.replace(".",""));
 
+
     mapper.update(req);
     if (Global.isDev) logger.debug("[main update] send:{}", res);
     return res;
   }
 
 
-
-  //저장
-  public ResultMap changePwd(RequestMap req) throws IOException {
-    ResultMap res = ResultMap.create();
-    if (Global.isDev) logger.debug("[member changePwd] recv:{}", req);
-
-    int idPwCheckCnt = mapper.idPwCheck(req);
-    if(idPwCheckCnt==1){
-      mapper.changePwd(req);
-
-    }else {
-      res.put("result_message","fail");
-    }
-
-
-    if (Global.isDev) logger.debug("[member changePwd] send:{}", res);
-    return res;
-  }
 
   //수정
   public ResultMap modify(RequestMap req) {

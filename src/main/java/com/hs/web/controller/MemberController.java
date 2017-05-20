@@ -142,19 +142,9 @@ public class MemberController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //상세
-    @RequestMapping(value = "changePwdPage")
+    //changePwdPage
+    @RequestMapping({"changePwdPage", "changePwdPage/{adindex}"})
     public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        model.addAttribute("changePwd", "Y");
-        return rootPath + "detail";
-    }
-
-    //상세
-    @RequestMapping(value = "changePwdPage/{memberid}")
-    public String changePwdPageById(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
         model.addAllAttributes(service.detail(req));

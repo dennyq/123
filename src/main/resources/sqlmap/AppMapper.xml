@@ -204,7 +204,7 @@
 
     <select id="getPlayList" parameterType="dbmap" resultType="dbmap">
         <![CDATA[
-        SELECT CONCAT("/upload/adinfo/",filename) filename
+        SELECT CONCAT("/upload/adinfo/",filename) filename, advwebsite, fileversion
         FROM adinfo
         WHERE usestartdate <= NOW()
         AND useenddate >= NOW()

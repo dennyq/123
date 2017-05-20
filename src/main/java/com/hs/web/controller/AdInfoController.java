@@ -73,35 +73,7 @@ public class AdInfoController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //상세
-    @RequestMapping(value = "changePwdPage")
-    public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        model.addAttribute("changePwd", "Y");
-        return rootPath + "detail";
-    }
 
-    //상세
-    @RequestMapping(value = "changePwdPage/{adindex}")
-    public String changePwdPageById(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        model.addAttribute("changePwd", "Y");
-        return rootPath + "detail";
-    }
-
-
-    //쓰기
-    //수정
-    @RequestMapping(value = "changePwd")
-    @ResponseBody
-    public ResultMap changePwd(HttpServletRequest request) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        return service.changePwd(req);
-    }
 
 
     //쓰기페이지

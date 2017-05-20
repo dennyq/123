@@ -295,9 +295,33 @@
     <if test='addrLastStr == null or addrLastStr == ""'>
 
     </if>
+
     <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
     <if test='gubun == null or gubun == "" or gubun == "0"'>AND gubun in('1','2')</if>
       AND deleteyn = 0
+      <if test='label != null and label != "" and label == "Y"'>
+          UNION SELECT
+          memberid,
+          password,
+          grade,
+          gubun,
+          openflag,
+          name,
+          telephone,
+          handphone,
+          address,
+          address_etc,
+          introduce,
+          latitude,
+          longitude,
+          usestartdate,
+          useenddate,
+          deleteyn,
+          lastconnecttime,
+          regtime
+          where address like CONCAT(#{addrSidoStr},'%',#{addrLastStr}, '%')
+
+      </if>
   </select>
 
   <select id="searchByName" parameterType="dbmap" resultType="dbmap">

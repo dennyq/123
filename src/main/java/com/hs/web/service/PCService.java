@@ -200,7 +200,10 @@ public class PCService extends ServiceBase {
         addrSidoStr = addrSidoStr.substring(0,addrSidoStr.indexOf("광역시"));
       }
     }
-
+//    읍/면/동
+    if((req.get("label")+"").equals("읍/면/동")){
+      req.put("label","Y");
+    }
 
     if(addrLastStr.indexOf("선택하세요.")>-1){
       req.put("addrLastStr",null);

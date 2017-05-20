@@ -41,7 +41,7 @@
     DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
     DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
     A.playorder,
-    A.filename,
+    A.filename,A.advwebsite,
     DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
     FROM adinfo A
     <include refid="com.hs.web.mapper.AdInfoMapper.listConditions"/>
@@ -64,7 +64,7 @@
       DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
       DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       A.playorder,
-      A.filename,
+      A.filename,A.advwebsite,
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
     FROM adinfo A
     WHERE 1=1 AND A.adindex = #{adindex}
@@ -82,6 +82,9 @@
       playorder,
     </if>
       filename,
+    <if test = "advwebsite != null and advwebsite != ''">
+      advwebsite,
+    </if>
       regtime
     )
     VALUES (
@@ -95,6 +98,9 @@
       #{playorder},
     </if>
       #{filename},
+    <if test = "advwebsite != null and advwebsite != ''">
+      #{advwebsite},
+    </if>
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
     <selectKey resultType="int" keyProperty="adindex" order="BEFORE">
@@ -126,6 +132,8 @@
       <if test='useenddate != null and useenddate != ""'>useenddate = #{useenddate},</if>
       <if test='playorder != null and playorder != ""'>playorder = #{playorder},</if>
       <if test='filename != null and filename != ""'>filename = #{filename},</if>
+      <if test='advwebsite != null and advwebsite != ""'>advwebsite = #{advwebsite},</if>
+      <if test='filename != null and filename != ""'>fileversion = fileversion+1,</if>
       <if test='regtime != null and regtime != ""'>regtime= DATE_FORMATNOW()+0,'%Y%m%d%H%i%s')</if>
     </set>
     WHERE 1=1
