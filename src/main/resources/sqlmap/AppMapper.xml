@@ -81,14 +81,14 @@
     <!--읍면동 셀렉트-->
     <select id="codeListDong" parameterType="dbmap" resultType="dbmap">
         SELECT
-        A.big_addr,
-        A.middle_addr,
-        A.small_addr,
-        A.road_addr,
-        A.dong_addr,
-        A.post_number,
-        A.road_code,
-        A.dong_code,
+            A.big_addr,
+            A.middle_addr,
+            A.small_addr,
+            A.road_addr,
+            A.dong_addr,
+            A.post_number,
+            A.road_code,
+            A.dong_code,
             A.latitude,
             A.longitude
         FROM addressrange A
@@ -214,7 +214,9 @@
 
     <select id="getPlayList" parameterType="dbmap" resultType="dbmap">
         <![CDATA[
-        SELECT CONCAT("/upload/adinfo/",filename) filename, advwebsite, fileversion
+        SELECT IFNULL(CONCAT("/upload/adinfo/",filename), '') filename,
+            IFNULL(advwebsite, '') advwebsite,
+            fileversion
         FROM adinfo
         WHERE usestartdate <= NOW()
         AND useenddate >= NOW()
@@ -224,26 +226,26 @@
 
     <select id="mapviewinfo" parameterType="dbmap" resultType="dbmap">
         SELECT
-            A.memberid,
-            A.grade,
-            A.gubun,
-            A.openflag,
-            A.name,
-            A.telephone,
-            A.handphone,
-            A.address,
-            A.address_etc,
-            A.introduce,
+            IFNULL(A.memberid, '') memberid,
+            IFNULL(A.grade, '') grade,
+            IFNULL(A.gubun, '') gubun,
+            IFNULL(A.openflag, '') openflag,
+            IFNULL(A.name, '') name,
+            IFNULL(A.telephone, '') telephone,
+            IFNULL(A.handphone, '') handphone,
+            IFNULL(A.address, '') address,
+            IFNULL(A.address_etc, '') address_etc,
+            IFNULL(A.introduce, '') introduce,
             A.latitude,
             A.longitude,
-            A.usestartdate,
-            A.useenddate,
+            IFNULL(A.usestartdate, '') usestartdate,
+            IFNULL(A.useenddate, '') useenddate,
             A.deleteyn,
-            A.lastconnecttime,
-            A.regtime,
-            A.worktime,
-            A.slogan,
-            A.hospitaldept,
+            IFNULL(A.lastconnecttime, '') lastconnecttime,
+            IFNULL(A.regtime, '') regtime,
+            IFNULL(A.worktime, '') worktime,
+            IFNULL(A.slogan, '') slogan,
+            IFNULL(A.hospitaldept, '') hospitaldept
         FROM member A
         WHERE A.deleteyn = 0
         <if test='gubun != null and gubun != "" and gubun == "1"'>AND A.gubun in ("1","2")/*all*/</if>
