@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="pharmacy:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/pharmacy_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/web</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -58,7 +58,9 @@
           <element id="library" level="project" name="Maven: net.coobird:thumbnailator:0.4.7" />
         </element>
       </element>
-      <element id="library" level="project" name="Java EE 6-Java EE 6" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/web/META-INF/MANIFEST.MF" />
+      </element>
       <element id="javaee-facet-resources" facet="pharmacy/web/Web" />
     </root>
   </artifact>

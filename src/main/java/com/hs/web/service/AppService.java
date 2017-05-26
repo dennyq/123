@@ -1,6 +1,5 @@
 package com.hs.web.service;
 
-import com.hs.BizException;
 import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.ResultMap;
@@ -9,13 +8,10 @@ import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
 import com.hs.web.mapper.AppMapper;
-import com.hs.web.mapper.PCMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 
 @Service
@@ -30,9 +26,11 @@ public class AppService extends ServiceBase {
     if (Global.isDev) logger.debug("[app search] recv:{}", req);
 
      DbList list = mapper.search(req);
-     DbList playList = mapper.playList(req);
+//     DbList playList = mapper.playList(req);
 
     res.put("rows", list);
+
+    list = null;
 
     if (Global.isDev) logger.debug("[app search] send:{}", res);
     return res;
@@ -83,6 +81,8 @@ public class AppService extends ServiceBase {
      DbList list = mapper.mapviewinfo(req);
 
     res.put("list", list);
+
+    list = null;
 
     if (Global.isDev) logger.debug("[app mapviewinfo] send:{}", res);
     return res;
