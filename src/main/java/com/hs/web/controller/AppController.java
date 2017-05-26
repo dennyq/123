@@ -18,11 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/app/")
 public class AppController extends ControllerPageBase {
-    @Autowired
-    private AppService service;
+    private final AppService service;
     private static final Logger logger = LoggerFactory.getLogger(AppController.class);
-    private String rootKey = "app";
-    private String rootPath = "pages/" + rootKey + "/";
+    private final String rootKey = "app";
+    private final String rootPath = "pages/" + rootKey + "/";
+
+    @Autowired
+    public AppController(AppService service) {
+        this.service = service;
+    }
 
 
     //안드로이드맵뷰
@@ -89,7 +93,7 @@ public class AppController extends ControllerPageBase {
     private void getListModel(Model model, RequestMap req) {
         model.addAllAttributes(service.list(req));
         String gubun = (String) req.get("gubun");
-        String putGubun = null;
+        String putGubun;
         if (gubun.equals("2")) {//약국-1
             putGubun = "1";
         } else if (gubun.equals("3")) {//병원-2
@@ -100,7 +104,7 @@ public class AppController extends ControllerPageBase {
         req.put("gubun", putGubun);
         req.put("searchCode", "1");
         model.addAttribute("codeList", service.getCodeList(req).get("rows"));
-        model.addAttribute("gubun", putGubun == null ? "1" : putGubun);
+        model.addAttribute("gubun", putGubun);
     }
 
 }
