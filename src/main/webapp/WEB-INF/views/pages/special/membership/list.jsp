@@ -76,6 +76,14 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="sch_regstartdate" class="col-sm-4 ">등록시작일자</label>
+                  <div class="col-sm-6">
+                    <input name="sch_regstartdate" id="sch_regstartdate" placeholder="사용시작일자"
+                           class="form-control datepicker" value="${sch_regstartdate}">
+                  </div>
+                </div>
+
               </div>
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
@@ -117,6 +125,13 @@
                   <div class="col-sm-6">
                     <input name="sch_useenddate" id="sch_useenddate" placeholder="사용종료일자"
                            class="form-control datepicker" value="${sch_useenddate}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="sch_regenddate" class="col-sm-4 ">등록종료일자</label>
+                  <div class="col-sm-6">
+                    <input name="sch_regenddate" id="sch_regenddate" placeholder="사용종료일자"
+                           class="form-control datepicker" value="${sch_regenddate}">
                   </div>
                 </div>
 
@@ -192,9 +207,9 @@
               <c:if test="${not empty rows}">
                 <c:forEach items="${rows}" var="items" varStatus="idx">
                   <input type="hidden" id="isClicked"/>
-                  <tr class="clickTr" idx="${items.memberid}">
+                  <tr class="clickTr" idx="${items.specialid}">
                     <td>${total-(pageTimes)-idx.count+1}</td>
-                    <td>${items.memberid}</td>
+                    <td>${items.specialid}</td>
                     <td>${items.name}</td>
                     <td>${items.telephone}</td>
                     <td>${items.handphone}</td>
