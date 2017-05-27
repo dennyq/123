@@ -1,12 +1,16 @@
 package com.hs;
 
+import com.hs.web.controller.SpecialController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ResultMap extends DbMap{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7247523019191457251L;
-	
+
 	private ResultMap() {
 		setResult(ResultType.Success, "success");
 	}
@@ -14,6 +18,8 @@ public class ResultMap extends DbMap{
 	public void setResult(ResultType type) {
 		this.put("result_code", type.value());
 		this.put("result_message", "");
+
+
 	}
 	
 	public void setResult(ResultType type, String message) {

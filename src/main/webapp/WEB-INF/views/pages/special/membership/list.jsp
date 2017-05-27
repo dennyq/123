@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <c:set var="isAdmin" value="${sessionScope.memberid eq 'admin'}"/>
-<c:set var="thisPath" value="/special/membership"/>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -39,67 +39,97 @@
               <!-- left col-md-6 start -->
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="sch_memberid" class="col-sm-4 ">아이디</label>
+                  <label for="sch_specialid" class="col-sm-4 ">아이디</label>
                   <div class="col-sm-6">
-                    <input name="sch_memberid"  id="sch_memberid" placeholder="아이디" class="form-control" value="${sch_memberid}">
+                    <input name="sch_specialid" id="sch_specialid" placeholder="아이디" class="form-control"
+                           value="${sch_specialid}">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">전문가 회원명</label>
-                  <div class="col-sm-6">
-                    <input name="sch_name"  id="sch_name" placeholder="전문가 회원명" class="form-control" value="${sch_name}">
-                  </div>
-                </div>
+
                 <div class="form-group">
                   <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
                   <div class="col-sm-6">
-                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
+                    <input name="sch_telephone" id="sch_telephone" placeholder="전화번호" class="form-control"
+                           value="${sch_telephone}">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_handphone" class="col-sm-4 ">휴대폰</label>
+                  <label for="sch_job" class="col-sm-4 ">직업</label>
                   <div class="col-sm-6">
-                    <input name="sch_handphone"  id="sch_handphone" placeholder="휴대폰" class="form-control" value="${sch_handphone}">
+                    <input name="sch_job" id="sch_job" placeholder="직업" class="form-control"
+                           value="${sch_job}">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="sch_belongto" class="col-sm-4 ">소속</label>
+                  <div class="col-sm-6">
+                    <input name="sch_belongto" id="sch_belongto" placeholder="소속" class="form-control"
+                           value="${sch_belongto}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
+                  <div class="col-sm-6">
+                    <input name="sch_usestartdate" id="sch_usestartdate" placeholder="사용시작일자"
+                           class="form-control datepicker" value="${sch_usestartdate}">
+                  </div>
+                </div>
+
               </div>
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
               <div class="col-md-6 right">
-                <%--<div class="form-group">--%>
-                  <%--<label for="sch_regtime" class="col-sm-4 ">가입일자</label>--%>
-                  <%--<div class="col-sm-6">--%>
-                    <%--<input name="sch_regtime"  id="sch_regtime" placeholder="가입일자" class="form-control datepicker" value="${sch_regtime}">--%>
-                  <%--</div>--%>
-                <%--</div>--%>
                 <div class="form-group">
-                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
+                  <label for="sch_name" class="col-sm-4 ">이름</label>
                   <div class="col-sm-6">
-                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${sch_usestartdate}">
+                    <input name="sch_name" id="sch_name" placeholder="이름" class="form-control" value="${sch_name}">
                   </div>
                 </div>
+
+
+                <div class="form-group">
+                  <label for="sch_handphone" class="col-sm-4 ">휴대폰번호</label>
+                  <div class="col-sm-6">
+                    <input name="sch_handphone" id="sch_handphone" placeholder="휴대폰번호" class="form-control"
+                           value="${sch_handphone}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_specialty" class="col-sm-4 ">전문</label>
+                  <div class="col-sm-6">
+                    <input name="sch_specialty" id="sch_specialty" placeholder="전문" class="form-control"
+                           value="${sch_specialty}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_career" class="col-sm-4 ">경력</label>
+                  <div class="col-sm-6">
+                    <input name="sch_career" id="sch_career" placeholder="경력" class="form-control"
+                           value="${sch_career}">
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label for="sch_useenddate" class="col-sm-4 ">사용종료일자</label>
                   <div class="col-sm-6">
-                    <input name="sch_useenddate"  id="sch_useenddate" placeholder="사용종료일자" class="form-control datepicker" value="${sch_useenddate}">
+                    <input name="sch_useenddate" id="sch_useenddate" placeholder="사용종료일자"
+                           class="form-control datepicker" value="${sch_useenddate}">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="sch_introduce" class="col-sm-4 ">소개</label>
-                  <div class="col-sm-6">
-                    <input name="sch_introduce"  id="sch_introduce" placeholder="소개" class="form-control" value="${sch_introduce}">
-                  </div>
-                </div>
+
               </div>
               <!--// right col-md-6 end-->
             </div>
             <!--// box-body end -->
-            <div class="btn-box centeringContainer " >
+            <div class="btn-box centeringContainer ">
               <span class="centered ">
-                  <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height" >조회</a>
+                  <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height">조회</a>
               </span>
-              <span class="right inline" >
-                <a id="insertFileBtn" class="pointer btn btn-blue-green btn-flat md-height" >일괄등록</a>
+              <span class="right inline">
+                <a id="insertFileBtn" class="pointer btn btn-blue-green btn-flat md-height">일괄등록</a>
               </span>
             </div>
           </form>
@@ -115,34 +145,48 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">
               <colgroup>
-                <col width="1%"/><%--번호--%>
-                <col width="7%"/><%--아이디--%>
-                <col width="7%"/><%--전문가 회원명--%>
-                <col width="5%"/><%--구분--%>
-                <col width="10%"/><%--전화번호--%>
-                <col width="10%"/><%--위도--%>
-                <col width="10%"/><%--경도--%>
-                <col width="8%"/><%--사용시작일자--%>
-                <col width="8%"/><%--사용종료일자--%>
-                <col width="13%"/><%--폰번호--%>
-                <col width="5%"/><%--소개--%>
-                <col width="*"/><%--주소--%>
+                <col width="1%"/>
+                <%--번호--%>
+                <col width="7%"/>
+                <%--아이디--%>
+                <col width="7%"/>
+                <%--이름--%>
+                <col width="10%"/>
+                <%--전화번호--%>
+                <col width="10%"/>
+                <%--휴대폰번호--%>
+
+                <col width="8%"/>
+                <%--사용시작일자--%>
+                <col width="8%"/>
+                <%--사용종료일자--%>
+                <col width="13%"/>
+                <%--폰번호--%>
+                <col width="5%"/>
+                <%--소개--%>
+                <col width="*"/>
+                <%--등록시간--%>
               </colgroup>
               <thead>
-                <tr class="bg-gray text-align-center">
-                  <td>번호</td>
-                  <td>아이디</td>
-                  <td>전문가 회원명</td>
-                  <td>구분</td>
-                  <td>전화번호</td>
-                  <td>위도</td>
-                  <td>경도</td>
-                  <td>사용시작일자</td>
-                  <td>사용종료일자</td>
-                  <td>폰번호</td>
-                  <td>소개</td>
-                  <td>주소</td>
-                </tr>
+              <tr class="bg-gray text-align-center">
+                <td>번호</td>
+                <td>아이디</td>
+                <td>이름</td>
+                <td>전화번호</td>
+                <td>휴대폰번호</td>
+
+                <td>사용시작일자</td>
+                <td>사용종료일자</td>
+
+                <td>직업</td>
+                <td>전문</td>
+                <td>소속</td>
+                <td>경력</td>
+
+                <td>사진</td>
+
+                <td>등록시간</td>
+              </tr>
               </thead>
               <tbody>
               <c:if test="${not empty rows}">
@@ -152,26 +196,31 @@
                     <td>${total-(pageTimes)-idx.count+1}</td>
                     <td>${items.memberid}</td>
                     <td>${items.name}</td>
-                    <td><c:if test="${items.gubun eq 1}">약국</c:if><c:if test="${items.gubun eq 2}">병원</c:if></td>
                     <td>${items.telephone}</td>
-                    <td>
-                    ${items.latitude}
-                    </td>
-                    <td>
-                    ${items.longitude}
-                    </td>
+                    <td>${items.handphone}</td>
+
                     <td>${items.usestartdate}</td>
                     <td>${items.useenddate}</td>
-                    <td>${items.handphone}</td>
-                    <td>
-                      ${fn:substring(items.introduce, 0, 8)}
-                      <c:if test="${fn:length(items.introduce)>8}">...</c:if>
 
-                    </td>
-                    <td>
-                        ${fn:substring(items.address, 0, 8)}
-                      <c:if test="${fn:length(items.address)>8}">...</c:if>
-                    </td>
+                    <td>${items.job}</td>
+                    <td>${items.specialty}</td>
+                    <td>${items.belongto}</td>
+                    <td>${items.career}</td>
+
+                    <td>${items.picturename}</td>
+
+                    <td>${items.regtime}</td>
+
+                      <%----%>
+                      <%--<td>--%>
+                      <%--${fn:substring(items.introduce, 0, 8)}--%>
+                      <%--<c:if test="${fn:length(items.introduce)>8}">...</c:if>--%>
+
+                      <%--</td>--%>
+                      <%--<td>--%>
+                      <%--${fn:substring(items.address, 0, 8)}--%>
+                      <%--<c:if test="${fn:length(items.regtime)>8}">...</c:if>--%>
+                      <%--</td>--%>
                   </tr>
                 </c:forEach>
               </c:if>

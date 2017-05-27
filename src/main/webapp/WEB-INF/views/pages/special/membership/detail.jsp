@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -7,7 +8,7 @@
   <title>전문가 회원 관리</title>
 </head>
 <body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
+<form id="detailFrm" class="form-horizontal" action="<c:url value="${thisPath}/save"/>" method="post">
 <section class="content-header">
   <h1>
     <c:if test="${empty data && changePwd ne 'Y'}">
@@ -88,20 +89,11 @@
     var longitude = $('#longitude').val();
 //    console.log(latitude.split('.')[0].length)
 //    console.log(longitude.split('.')[0].length)
-    if(latitude.split('.')[0].length>4){
-      alert('올바른 위도값이 아닙니다.');
-      $('#latitude').focus();
-      return false;
-    }
-    if(longitude.split('.')[0].length>4){
-      alert('올바른 경도값이 아닙니다.');
-      $('#longitude').focus();
-      return false;
-    }
+    
 
-    if($('#memberid').val() ==''){
+    if($('#specialid').val() ==''){
       alert('아이디를 입력해주세요');
-      $('#memberid').focus();
+      $('#specialid').focus();
       return false;
     }
     <c:if test="${empty data}">
@@ -206,14 +198,14 @@
     });
 
     $('#id_check').click(function(){
-      if($('#memberid').val() ==''){
+      if($('#specialid').val() ==''){
         alert('아이디를 입력해주세요');
-        $('#memberid').focus();
+        $('#specialid').focus();
         return false;
       }
       var req = {};
       req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/idCheck"/>', req, function (data) {
+      $als.execute('<c:url value="${thisPath}/idCheck"/>', req, function (data) {
         if (data.result_message == 'success') {
           alert('사용할수 있는 아이디입니다.');
           $('#idCheck').val("Y");
@@ -229,7 +221,7 @@
     });
 
     $('#changePagePwdBtn').click(function(){
-      var id = $('#memberid').val();
+      var id = $('#specialid').val();
       console.log(id);
       location.href='/member/changePwdPage/'+id;
 

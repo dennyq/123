@@ -32,7 +32,7 @@ public class SpecialService extends ServiceBase {
     //목록
     public ResultMap list(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main list] recv:{}", req);
+        if (Global.isDev) logger.debug("[special list] recv:{}", req);
         req.put("rows", "10");
         setPaging(req);
         if (Global.isDev) logger.debug("[list] recv:{}", req);
@@ -53,25 +53,25 @@ public class SpecialService extends ServiceBase {
 
         res.put("paging", PageUtil.getPaging(req, total));
 
-        if (Global.isDev) logger.debug("[main list] send:{}", res);
+        if (Global.isDev) logger.debug("[special list] send:{}", res);
         return res;
     }
 
     //상세
     public ResultMap detail(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main detail] recv:{}", req);
+        if (Global.isDev) logger.debug("[special detail] recv:{}", req);
 
         res.put("data", mapper.detail(req));
 
-        if (Global.isDev) logger.debug("[main detail] send:{}", res);
+        if (Global.isDev) logger.debug("[special detail] send:{}", res);
         return res;
     }
 
     //excelDelete
     public ResultMap excelDelete(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main excelDelete] recv:{}", req);
+        if (Global.isDev) logger.debug("[special excelDelete] recv:{}", req);
 
 //        String insertedArr = ;
         String insertedArr[] =((String)req.get("insertedArr")).split(",");
@@ -82,7 +82,7 @@ public class SpecialService extends ServiceBase {
         }
 
 
-        if (Global.isDev) logger.debug("[main excelDelete] send:{}", res);
+        if (Global.isDev) logger.debug("[special excelDelete] send:{}", res);
         return res;
     }
 
@@ -153,18 +153,18 @@ public class SpecialService extends ServiceBase {
     //글쓰기
     public ResultMap write(RequestMap req) throws IOException {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main write] recv:{}", req);
+        if (Global.isDev) logger.debug("[special write] recv:{}", req);
 
         mapper.insert(req);
 
-        if (Global.isDev) logger.debug("[main write] send:{}", res);
+        if (Global.isDev) logger.debug("[special write] send:{}", res);
         return res;
     }
 
     //저장
     public ResultMap save(RequestMap req) throws IOException {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main save] recv:{}", req);
+        if (Global.isDev) logger.debug("[special save] recv:{}", req);
         String joindate = req.get("joindate") + "";
         String usestartdate = req.get("usestartdate") + "";
         String useenddate = req.get("useenddate") + "";
@@ -187,11 +187,6 @@ public class SpecialService extends ServiceBase {
         int idPwCheckCnt = mapper.idPwCheck(req);
 
         if (req.get("isNew").equals("Y")) {
-            if (req.get("memberid").equals("admin")) {
-                req.put("grade", "1");
-            } else {
-                req.put("grade", "2");
-            }
 
 
             if (idPwCheckCnt != 0) {
@@ -216,7 +211,7 @@ public class SpecialService extends ServiceBase {
         }
 
 
-        if (Global.isDev) logger.debug("[main save] send:{}", res);
+        if (Global.isDev) logger.debug("[special save] send:{}", res);
         return res;
     }
 
@@ -241,7 +236,7 @@ public class SpecialService extends ServiceBase {
     //수정
     public ResultMap modify(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main modify] recv:{}", req);
+        if (Global.isDev) logger.debug("[special modify] recv:{}", req);
 
         if (req.get("joindate") != null && req.get("joindate") != "") {
             String joindate = req.get("joindate") + "";
@@ -270,7 +265,7 @@ public class SpecialService extends ServiceBase {
         mapper.update(req);
 
 
-        if (Global.isDev) logger.debug("[main modify] send:{}", res);
+        if (Global.isDev) logger.debug("[special modify] send:{}", res);
         return res;
     }
 
@@ -278,22 +273,22 @@ public class SpecialService extends ServiceBase {
     //삭제
     public ResultMap delete(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main delete] recv:{}", req);
+        if (Global.isDev) logger.debug("[special delete] recv:{}", req);
 
         mapper.delete(req);
 
-        if (Global.isDev) logger.debug("[main delete] send:{}", res);
+        if (Global.isDev) logger.debug("[special delete] send:{}", res);
         return res;
     }
 
     //비밀번호 변경
     public ResultMap initailizePwd(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main initailizePwd] recv:{}", req);
+        if (Global.isDev) logger.debug("[special initailizePwd] recv:{}", req);
 
         mapper.initailizePwd(req);
 
-        if (Global.isDev) logger.debug("[main initailizePwd] send:{}", res);
+        if (Global.isDev) logger.debug("[special initailizePwd] send:{}", res);
         return res;
     }
 
@@ -303,7 +298,7 @@ public class SpecialService extends ServiceBase {
         RequestMap req = RequestMap.create(request);
         ResultMap res = ResultMap.create();
 
-        if (Global.isDev) logger.debug("[uploadImage] recv:{}", req);
+        if (Global.isDev) logger.debug("[special uploadImage] recv:{}", req);
 
         req.put("inputName", "file");
 
@@ -316,7 +311,7 @@ public class SpecialService extends ServiceBase {
 
         }
 
-        if (Global.isDev) logger.debug("[uploadImage] send:{}", res);
+        if (Global.isDev) logger.debug("[special uploadImage] send:{}", res);
         return res;
     }
 
@@ -325,7 +320,7 @@ public class SpecialService extends ServiceBase {
         RequestMap req = RequestMap.create(request);
         ResultMap res = ResultMap.create();
 
-        if (Global.isDev) logger.debug("[uploadFile] recv:{}", req);
+        if (Global.isDev) logger.debug("[special uploadFile] recv:{}", req);
 
         req.put("inputName", "file");
 
@@ -337,7 +332,7 @@ public class SpecialService extends ServiceBase {
             res.put("attach_file_key", fileService.uploadFile(request, req));
         }
 
-        if (Global.isDev) logger.debug("[uploadFile] send:{}", res);
+        if (Global.isDev) logger.debug("[special uploadFile] send:{}", res);
 
         return res;
     }
@@ -345,7 +340,7 @@ public class SpecialService extends ServiceBase {
     //아이디체크
     public ResultMap idCheck(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[main idCheck] recv:{}", req);
+        if (Global.isDev) logger.debug("[special idCheck] recv:{}", req);
 
         int cnt = mapper.idCheck(req);
 
@@ -353,7 +348,7 @@ public class SpecialService extends ServiceBase {
             res.put("result_message", "fail");
         }
 
-        if (Global.isDev) logger.debug("[main idCheck] send:{}", res);
+        if (Global.isDev) logger.debug("[special idCheck] send:{}", res);
         return res;
     }
 }

@@ -5,7 +5,7 @@
   <sql id="listConditions">
     WHERE 1=1 AND deleteyn = 0
     <if test='sch_memberid != null and sch_memberid != ""'>
-      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+      AND A.specialid  LIKE CONCAT('%', #{sch_memberid},'%')
     </if>
     <if test='sch_address != null and sch_address != ""'>
 
@@ -37,7 +37,20 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-      *
+            A.specialid,
+            A.password,
+            A.name,
+            A.telephone,
+            A.handphone,
+            A.picturename,
+            A.job,
+            A.specialty,
+            A.belongto,
+            A.career,
+            A.usestartdate,
+            A.useenddate,
+            A.deleteyn,
+    DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
 
     FROM special_member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
@@ -54,13 +67,13 @@
   <select id="idCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM special_member A
-      WHERE 1=1 AND deleteyn = 0 AND A.memberid  = #{memberid}
+      WHERE 1=1 AND deleteyn = 0 AND A.specialid  = #{memberid}
   </select>
 
   <select id="idPwCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM special_member A
-    WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
+    WHERE A.specialid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
   </select>
 
   <select id="addressCheck" parameterType="dbmap" resultType="int">
@@ -72,18 +85,31 @@
     <select id="idPwDelChk" parameterType="dbmap" resultType="int">
         SELECT COUNT(*) AS cnt
         FROM special_member A
-        WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
+        WHERE A.specialid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
     </select>
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-      *
+      A.specialid,
+      A.password,
+      A.name,
+      A.telephone,
+      A.handphone,
+      A.picturename,
+      A.job,
+      A.specialty,
+      A.belongto,
+      A.career,
+      A.usestartdate,
+      A.useenddate,
+      A.deleteyn,
+      DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
     FROM special_member A
-    WHERE 1=1 AND A.memberid = #{memberid}
+    WHERE 1=1 AND A.specialid = #{memberid}
   </select>
 
   <insert id="insert" parameterType="dbmap">
-    INSERT INTO member (
+    INSERT INTO special_member (
       specialid,
       password,
       name,
@@ -128,7 +154,7 @@
 
 
   <update id="update" parameterType="dbmap">
-    UPDATE member
+    UPDATE special_member
     <set>
       <if test='specialid != null and specialid != ""'>specialid= #{specialid},</if>
       <if test='password != null and password != ""'>password= #{password},</if>

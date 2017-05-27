@@ -140,6 +140,7 @@ public abstract class ControllerPageBase {
 
     protected void putPathVariable(HttpServletRequest request, RequestMap req) {
         req.putAll((Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
+
     }
 
 

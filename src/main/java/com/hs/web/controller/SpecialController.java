@@ -48,6 +48,8 @@ public class SpecialController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
         model.addAllAttributes(service.list(req));
+        String Path = request.getContextPath();
+        model.addAttribute("thisPath","/"+rootKey);
         return rootPath + "list";
     }
 
@@ -56,54 +58,27 @@ public class SpecialController extends ControllerPageBase {
     public String list(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         model.addAllAttributes(service.list(req));
+        model.addAttribute("thisPath","/"+rootKey);
+        logger.debug("thisPath={}","/"+rootKey);
         return rootPath + "list";
     }
-
-
-    //일괄등록팝업
-    @RequestMapping(value = "popup")
-    public String popup(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        return rootPath + "popup";
-    }
-
-
-
-
 
     //목록
     @RequestMapping(value = "search")
     public String search(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         model.addAllAttributes(service.list(req));
+        model.addAttribute("thisPath","/"+rootKey);
         return rootPath + "list";
     }
 
 
-    //상세
-    @RequestMapping(value = "info")
-    public String info(HttpServletRequest request, Model model) throws Exception {
+    //쓰기페이지
+    @RequestMapping(value = "detail")
+    public String input(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
-//    putPathVariable(request, req);
-//    model.addAllAttributes(service.detail(req));member
-        if (req.get("login_uid") == null) {
-            throw new BizException("9009", "need_login");
-        }
-//      return redirect:rootPath + "info"+;
-
-        return "redirect:/" + rootKey + "/info/" + req.get("login_uid");
-//    return rootPath + "info";
-    }
-
-    //상세
-    @RequestMapping(value = "info/{memberid}")
-    public String infoById(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        return rootPath + "info";
+        model.addAttribute("thisPath","/"+rootKey);
+        return rootPath + "detail";
     }
 
     //상세
@@ -112,6 +87,7 @@ public class SpecialController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
         model.addAllAttributes(service.detail(req));
+        model.addAttribute("thisPath","/"+rootKey);
         return rootPath + "detail";
     }
 
@@ -125,12 +101,6 @@ public class SpecialController extends ControllerPageBase {
     }
 
 
-    //쓰기페이지
-    @RequestMapping(value = "detail")
-    public String input(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        return rootPath + "detail";
-    }
 
     //쓰기
     @RequestMapping(value = "save")
@@ -142,15 +112,22 @@ public class SpecialController extends ControllerPageBase {
         return "redirect:/" + rootKey + "/list";
     }
 
-    //쓰기
-    @RequestMapping(value = "saveInfo")
-    public String saveInfo(HttpServletRequest request) throws Exception {
+
+
+    //일괄등록팝업
+    @RequestMapping(value = "popup")
+    public String popup(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
-
-        service.save(req);
-
-        return "redirect:/" + rootKey + "/info/" + req.get("memberid");
+        putPathVariable(request, req);
+        model.addAllAttributes(service.detail(req));
+        model.addAttribute("thisPath",rootKey);
+        return rootPath + "popup";
     }
+
+
+
+
+
 
     //수정
     @RequestMapping(value = "modify")
