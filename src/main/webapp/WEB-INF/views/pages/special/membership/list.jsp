@@ -192,9 +192,9 @@
               <c:if test="${not empty rows}">
                 <c:forEach items="${rows}" var="items" varStatus="idx">
                   <input type="hidden" id="isClicked"/>
-                  <tr class="clickTr" idx="${items.memberid}">
+                  <tr class="clickTr" idx="${items.specialid }">
                     <td>${total-(pageTimes)-idx.count+1}</td>
-                    <td>${items.memberid}</td>
+                    <td>${items.specialid }</td>
                     <td>${items.name}</td>
                     <td>${items.telephone}</td>
                     <td>${items.handphone}</td>
