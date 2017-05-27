@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hs.web.mapper.MemberMapper">
-
+<mapper namespace="com.hs.web.mapper.SpecialMapper">
   <sql id="listConditions">
     WHERE 1=1 AND deleteyn = 0
     <if test='sch_memberid != null and sch_memberid != ""'>
       AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
     </if>
     <if test='sch_address != null and sch_address != ""'>
+
       AND A.address  LIKE CONCAT('%', #{sch_address},'%')
     </if>
     <if test='sch_name != null and sch_name != ""'>
