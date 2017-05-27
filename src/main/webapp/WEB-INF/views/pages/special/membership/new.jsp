@@ -69,9 +69,9 @@
 
 <div class="col-md-12">
     <div class="form-group">
-        <label for="filename" class="col-sm-2 ">사진 파일</label>
+        <label for="picturename" class="col-sm-2 ">사진 파일</label>
         <div class="col-sm-10">
-            <input name="filename" id="filename" placeholder="사진 파일" class="form-control" type="file">
+            <input name="picturename" id="picturename" placeholder="사진 파일" class="form-control" type="file">
         </div>
     </div>
 </div>

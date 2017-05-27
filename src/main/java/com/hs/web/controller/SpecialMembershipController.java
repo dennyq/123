@@ -5,6 +5,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 
+import com.hs.web.service.FileService;
 import com.hs.web.service.SpecialMembershipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,8 @@ import javax.servlet.http.HttpSession;
 public class SpecialMembershipController extends ControllerPageBase {
     @Autowired
     private SpecialMembershipService service;
-
+    @Autowired
+    private FileService fileService;
 
     private static final Logger logger = LoggerFactory.getLogger(SpecialMembershipController.class);
     private String rootKey = "special/membership";
@@ -118,6 +120,16 @@ public class SpecialMembershipController extends ControllerPageBase {
     public String save(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
 
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = mrequest.getFile("picturename");
+        req.put("inputName","picturename");
+
+        if (file.getSize() > 0) {
+            fileService.uploadFiles(request, req);
+        } else {
+            req.put("picturename", null);
+        }
         service.save(req);
 
         return "redirect:/" + rootKey + "/list";

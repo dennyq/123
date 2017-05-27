@@ -309,9 +309,10 @@ public class FileService {
 
       logger.debug("req={}",req);
 
+      String inputName = (String) req.get("inputName");
 
 
-        req.put("filename", uploadFile(request,req));
+        req.put(inputName, uploadFile(request,req));
 
     }
   }

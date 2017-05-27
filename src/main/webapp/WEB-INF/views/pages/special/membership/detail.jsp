@@ -8,7 +8,7 @@
   <title>전문가 회원 관리</title>
 </head>
 <body>
-<form id="detailFrm" class="form-horizontal" action="<c:url value="${thisPath}/save"/>" method="post">
+<form id="detailFrm" class="form-horizontal" action="<c:url value="${thisPath}/save"/>" method="post" enctype="multipart/form-data" >
 <section class="content-header">
   <h1>
     <c:if test="${empty data && changePwd ne 'Y'}">
