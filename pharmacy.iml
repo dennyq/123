@@ -9,35 +9,28 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/resources-dev" />
+          <root url="file://$MODULE_DIR$/src/main/resources-prod" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/resources/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/src/resources/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/src/resources/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/src/root-context.xml</file>
-          <file>file://$MODULE_DIR$/src/servlet-context.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-aop.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-mybatis.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/resources/config/context-datasource.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/root-context.xml</file>
-          <file>file://$MODULE_DIR$/webapp/WEB-INF/classes/servlet-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/config/context-datasource.xml</file>
         </fileset>
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="true">
+    <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources-dev" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources-prod" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

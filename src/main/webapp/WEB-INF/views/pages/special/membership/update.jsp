@@ -6,7 +6,7 @@
     <div class="form-group">
         <label for="specialid" class="col-sm-4 ">아이디</label>
         <div class="col-sm-4">
-            <input name="specialid" id="specialid" placeholder="아이디" class="form-control" style="    width:130px" value="-1">
+            <input name="specialid" id="specialid" placeholder="아이디" class="form-control" style="    width:130px" value="${data.specialid}">
         </div>
         <a id="id_check" class="btn btn-blue-green btn-flat md-height">중복검사</a>
         <input type="hidden" id="idCheck" value="N"/>
