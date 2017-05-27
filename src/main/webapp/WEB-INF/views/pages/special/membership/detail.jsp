@@ -4,17 +4,17 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>회원 관리</title>
+  <title>전문가 회원 관리</title>
 </head>
 <body>
 <form id="detailFrm" class="form-horizontal" action="<c:url value="/member/save"/>" method="post">
 <section class="content-header">
   <h1>
     <c:if test="${empty data && changePwd ne 'Y'}">
-      회원등록
+      전문가 회원등록
     </c:if>
     <c:if test="${not empty data && changePwd ne 'Y'}">
-      회원상세
+      전문가 회원상세
     </c:if>
     <c:if test="${changePwd eq 'Y'}">
       비밀번호변경
@@ -24,9 +24,9 @@
 
   <ol class="breadcrumb">
     <li><a href="<c:url value="/"/>">HOME</a></li>
-    <li><a href="<c:url value="/member/list"/>">회원</a></li>
+    <li><a href="<c:url value="/member/list"/>">전문가 회원</a></li>
     <li>
-      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
+      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">전문가 회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">전문가 회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
     </li>
   </ol>
 </section>
@@ -79,91 +79,9 @@
 </form>
 
 <script>
-  var searchAddressAndSave = function(){
-   var address = $('#address').val();
-    if (address != null && address != ''){
-      $.ajax({
-        url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q="+encodeURIComponent(address)+"&output=json",
-        dataType: 'jsonp',
-        jsonpCallback: "myCallback",
-        success: function(data) {
-          console.log('성공 - ', data);
-          if(data){
-            if(data.channel){
-              if(data.channel.item.length>=1){
-                if(data.channel.item[0].lat){
-                  var lat = data.channel.item[0].lat;
-                  console.log('lat - ', lat);
-                  $('#latitude').val(lat);
-                }
-                if(data.channel.item[0].lng){
-                  var lng = data.channel.item[0].lng;
-
-                  console.log('lng - ', lng);
-
-                  $('#longitude').val(lng);
-                }
 
 
-              }
 
-            }
-
-          }
-
-          saveFunction();
-        },
-        error: function(xhr) {
-          console.log('실패 - ', xhr);
-        }
-      });
-    }else{
-      saveFunction();
-    }
-  }
-
-  var searchAddress = function(){
-    var address = $('#address').val();
-    if (address != null && address != '') {
-      $.ajax({
-        url: "https://apis.daum.net/local/geo/addr2coord?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&q="+encodeURIComponent(address)+"&output=json",
-        dataType: 'jsonp',
-        jsonpCallback: "myCallback",
-        success: function (data) {
-          console.log('성공 - ', data);
-          if (data) {
-            if (data.channel) {
-              if (data.channel.item.length >= 1) {
-                console.log(data.channel.item.length );
-                if (data.channel.item[0].lat) {
-                  var lat = data.channel.item[0].lat;
-                  console.log('lat - ', lat);
-                  $('#latitude').val(lat);
-                }
-                if (data.channel.item[0].lng) {
-                  var lng = data.channel.item[0].lng;
-
-                  console.log('lng - ', lng);
-
-                  $('#longitude').val(lng);
-                }
-
-
-              }
-
-            }
-
-          }
-
-//        saveFunction();
-        },
-        error: function (xhr) {
-          console.log('실패 - ', xhr);
-        }
-      });
-    }
-
-  }
   var saveFunction = function(){
 
     var latitude = $('#latitude').val();
@@ -244,19 +162,12 @@
     $('ul.sidebar-menu li.treeview').each(function(index){
       $(this).removeClass('active');
       var menu = $(this).attr('menu');
-      if(menu=='회원관리'){
+      if(menu=='전문가 회원관리'){
         $(this).addClass('active')
       }
     });
 
-    $('#address').keydown(function (key) {
-      if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
-        searchAddress();
-      }
-    });
-    $('#address').focusout(function (key) {
-        searchAddress();
-    });
+
 
 
 
@@ -290,14 +201,7 @@
       var longitude = $('#longitude').val();
       var oldlongitude = $('#oldlongitude').val();
       var address = $('#address').val();
-//      console.log(latitude);
-//      console.log(oldlatitude);
-      if ((latitude != oldlatitude || longitude != oldlongitude )){
         saveFunction();
-      }else{
-        searchAddressAndSave();
-      }
-
 
     });
 

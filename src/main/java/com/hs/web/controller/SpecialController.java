@@ -29,8 +29,18 @@ public class SpecialController extends ControllerPageBase {
 
 
     private static final Logger logger = LoggerFactory.getLogger(SpecialController.class);
-    private String rootKey = "special/membership/";
+    private String rootKey = "special/membership";
     private String rootPath = "pages/" + rootKey + "/";
+
+
+    //첫화면
+    @RequestMapping(value = "/")
+    public String index(HttpServletRequest request) throws Exception {
+
+        return "redirect:/special/membership/list";
+
+    }
+
 
     //목록
     @RequestMapping(value = "list/{page}")
@@ -105,17 +115,6 @@ public class SpecialController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //changePwdPage
-    @RequestMapping({"changePwdPage", "changePwdPage/{adindex}"})
-    public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        model.addAttribute("changePwd", "Y");
-        return rootPath + "detail";
-    }
-
-
     //쓰기
     //수정
     @RequestMapping(value = "changePwd")
@@ -131,18 +130,6 @@ public class SpecialController extends ControllerPageBase {
     public String input(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         return rootPath + "detail";
-    }
-
-    //쓰기
-    @RequestMapping(value = "write")
-    public String write(HttpServletRequest request) throws Exception {
-        RequestMap req = RequestMap.create(request);
-
-        req.put("uploadDir", rootKey);
-        req.putAll(service.uploadImage(request));
-        service.write(req);
-
-        return "redirect:/" + rootKey + "/list";
     }
 
     //쓰기
@@ -172,24 +159,6 @@ public class SpecialController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
         return service.modify(req);
     }
-
-    //세션바꾸기
-    @RequestMapping(value = "change/{change_uid}")
-//  @ResponseBody
-    public String change(HttpServletRequest request, HttpSession session) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        String change_uid = req.get("change_uid") + "";
-        req.put("login_uid", change_uid);
-        session.setAttribute("login_uid", change_uid);
-
-
-//    ResultMap res = ResultMap.create();
-
-
-        return rootPath + "list";
-    }
-
     //삭제
     @RequestMapping(value = "delete")
     @ResponseBody

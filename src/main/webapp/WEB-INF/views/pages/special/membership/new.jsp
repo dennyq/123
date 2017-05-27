@@ -11,7 +11,8 @@
     <div class="col-sm-4">
       <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" style="    width:130px">
     </div>
-    <a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png" style="margin-left: -25px;"/></a>
+    <a id="id_check" class="btn btn-blue-green btn-flat md-height">중복검사</a>
+    <%--<a id="id_check" onmouseover="chageImgSrc(this);"><img src="/imgs/bt_check_id.png" style="margin-left: -25px;"/></a>--%>
     <input type="hidden" id="idCheck" value="N"/>
   </div>
   <div class="form-group">
@@ -21,9 +22,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="name" class="col-sm-4 ">회원명</label>
+    <label for="name" class="col-sm-4 ">이름</label>
     <div class="col-sm-6">
-      <input name="name"  id="name" placeholder="회원명" class="form-control">
+      <input name="name"  id="name" placeholder="이름" class="form-control">
     </div>
   </div>
 
@@ -57,10 +58,10 @@
 <!-- right input start -->
 <div class="col-md-6 right">
   <div class="form-group">
-    <label for="name" class="col-sm-4 ">구분선택</label>
-    <div class="col-sm-6" style="height: 34px">
-      <input type="radio" name="gubun" value="1" checked>약국&nbsp;
-      <input type="radio" name="gubun" value="2">병원
+    <%--<label for="name" class="col-sm-4 ">구분선택</label>--%>
+    <div class="col-sm-6" style="height: 36px">
+      <%--<input type="radio" name="gubun" value="1" checked>약국&nbsp;--%>
+      <%--<input type="radio" name="gubun" value="2">병원--%>
     </div>
   </div>
   <div class="form-group">

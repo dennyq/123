@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <c:set var="isAdmin" value="${sessionScope.memberid eq 'admin'}"/>
+<c:set var="thisPath" value="/special/membership"/>
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>회원 관리</title>
+  <title>전문가 회원 관리</title>
 </head>
 <body>
   <section class="content-header">
     <h1>
-      회원 관리
+      전문가 회원 관리
     </h1>
     <div class="breadcrumb-line"></div>
     <ol class="breadcrumb">
       <li><a href="<c:url value="/"/>">HOME</a></li>
-      <li ><a href="<c:url value="/member/list"/>">회원 정보</a></li>
-      <li ><a href="<c:url value="/member/list"/>">회원 정보 조회</a></li>
+      <li ><a href="<c:url value="${thisPath}/list"/>">전문가 회원 정보</a></li>
+      <li ><a href="<c:url value="${thisPath}/list"/>">전문가 회원 정보 조회</a></li>
     </ol>
   </section>
 
@@ -29,10 +30,10 @@
         <!-- bottom-25 start -->
         <div class="bottom-25">
           <div class="box-header-sm">
-            <h3 class="box-title">회원 조회</h3>
+            <h3 class="box-title">전문가 회원 조회</h3>
           </div>
           <!-- form start -->
-          <form id="searchFrm" action="<c:url value="/member/search"/>" class="form-horizontal" method="post">
+          <form id="searchFrm" action="<c:url value="${thisPath}/search"/>" class="form-horizontal" method="post">
             <!-- box-body start -->
             <div class="box-body bg-gray">
               <!-- left col-md-6 start -->
@@ -44,9 +45,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">회원명</label>
+                  <label for="sch_name" class="col-sm-4 ">전문가 회원명</label>
                   <div class="col-sm-6">
-                    <input name="sch_name"  id="sch_name" placeholder="회원명" class="form-control" value="${sch_name}">
+                    <input name="sch_name"  id="sch_name" placeholder="전문가 회원명" class="form-control" value="${sch_name}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -109,14 +110,14 @@
       <div class="col-md-12">
         <div class="">
           <div class="box-header-sm">
-            <h3 class="box-title">회원 조회 결과</h3>
+            <h3 class="box-title">전문가 회원 조회 결과</h3>
           </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">
               <colgroup>
                 <col width="1%"/><%--번호--%>
                 <col width="7%"/><%--아이디--%>
-                <col width="7%"/><%--회원명--%>
+                <col width="7%"/><%--전문가 회원명--%>
                 <col width="5%"/><%--구분--%>
                 <col width="10%"/><%--전화번호--%>
                 <col width="10%"/><%--위도--%>
@@ -131,7 +132,7 @@
                 <tr class="bg-gray text-align-center">
                   <td>번호</td>
                   <td>아이디</td>
-                  <td>회원명</td>
+                  <td>전문가 회원명</td>
                   <td>구분</td>
                   <td>전화번호</td>
                   <td>위도</td>
@@ -200,7 +201,7 @@
   <!-- /.content -->
 <center>
   <div class="btn-box">
-    <a id="addBtn" class="pointer btn btn-blue-green btn-flat md-height" href="<c:url value="/member/detail"/>">등록</a>
+    <a id="addBtn" class="pointer btn btn-blue-green btn-flat md-height" href="<c:url value="${thisPath}/detail"/>">등록</a>
     <a id="selectBtn" class="pointer btn btn-default btn-flat md-height" > 수정</a>
   </div>
 </center>
@@ -226,7 +227,7 @@
     $('ul.sidebar-menu li.treeview').each(function(index){
       $(this).removeClass('active');
       var menu = $(this).attr('menu');
-      if(menu=='회원관리'){
+      if(menu=='전문가 회원관리'){
         $(this).addClass('active')
       }
     });
@@ -252,14 +253,14 @@
 
     $('.clickTr').on('dblclick',function(){
       var idx = $(this).attr('idx');
-      location.href = '/member/detail/' + idx;
+      location.href = '${thisPath}/detail/' + idx;
     });
 
 
     $('#selectBtn').click(function(){
       var idx = $('#isClicked').val();
       console.log('idx : '+idx);
-      location.href = '/member/detail/' + idx;
+      location.href = '${thisPath}/detail/' + idx;
 
       <%--var change_uid = $('#isClicked').val();--%>
       <%--location.href = '<c:url value="/member/change/"/>'+change_uid;--%>
@@ -271,13 +272,9 @@
 
     $('.page').click(function(){
       var page = $(this).attr('page');
-      location.href = '/member/list/' + page;
+      location.href = '${thisPath}/list/' + page;
     });
 
-    $('#insertFileBtn').click(function(){
-      popupOpen('/member/popup/${items.adindex}',600,500);
-
-    });
   });
   <!-- bind end -->
 

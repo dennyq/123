@@ -37,28 +37,9 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-      A.memberid,
-      A.password,
-      A.grade,
-      A.gubun,
-      A.openflag,
-      A.name,
-      A.telephone,
-      A.handphone,
-      A.address,
-      A.address_etc,
-      A.introduce,
-      A.latitude,
-      A.longitude,
-    DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-    DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-      A.deleteyn,
-      A.lastconnecttime,
-      A.worktime,
-      A.slogan,
-      A.hospitaldept,
-    DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
-    FROM member A
+      *
+
+    FROM special_member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
     ORDER BY A.regtime DESC
     <include refid="com.hs.web.mapper.paging_end"/>
@@ -66,100 +47,72 @@
 
   <select id="listCnt" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM member A
+    FROM special_member A
     <include refid="com.hs.web.mapper.MemberMapper.listConditions"/>
   </select>
 
   <select id="idCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM member A
+    FROM special_member A
       WHERE 1=1 AND deleteyn = 0 AND A.memberid  = #{memberid}
   </select>
 
   <select id="idPwCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM member A
+    FROM special_member A
     WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
   </select>
 
   <select id="addressCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
-    FROM member A
+    FROM special_member A
     WHERE A.name  = #{name} AND  A.address  = #{address} AND deleteyn = 0
   </select>
 
     <select id="idPwDelChk" parameterType="dbmap" resultType="int">
         SELECT COUNT(*) AS cnt
-        FROM member A
+        FROM special_member A
         WHERE A.memberid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
     </select>
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-        A.memberid,
-        A.password,
-        A.grade,
-        A.gubun,
-        A.openflag,
-        A.name,
-        A.telephone,
-        A.handphone,
-        A.address,
-        A.address_etc,
-        A.introduce,
-        A.latitude,
-        A.longitude,
-      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
-      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
-        A.deleteyn,
-        A.lastconnecttime,
-      A.worktime,
-      A.slogan,
-      A.hospitaldept,
-      DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
-    FROM member A
+      *
+    FROM special_member A
     WHERE 1=1 AND A.memberid = #{memberid}
   </select>
 
   <insert id="insert" parameterType="dbmap">
     INSERT INTO member (
-      memberid,
+      specialid,
       password,
-      grade,
-      gubun,
-      openflag,
       name,
       telephone,
       handphone,
-      address,
-      address_etc,
-      introduce,
-      latitude,
-      longitude,
+      picturename,
+      job,
+      specialty,
+      belongto,
+      career,
       usestartdate,
       useenddate,
       deleteyn,
-      lastconnecttime,
       regtime
     )
     VALUES (
-      #{memberid},
+      #{specialid},
       #{password},
-      #{grade},
-      #{gubun},
-      #{openflag},
       #{name},
       #{telephone},
       #{handphone},
-      #{address},
-      #{address_etc},
-      #{introduce},
-      #{latitude},
-      #{longitude},
+      #{picturename},
+      #{job},
+      #{specialty},
+      #{belongto},
+      #{career},
       #{usestartdate},
       #{useenddate},
       #{deleteyn},
-      #{lastconnecttime},
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
     <selectKey resultType="int" keyProperty="memberid" order="AFTER">
@@ -177,23 +130,19 @@
   <update id="update" parameterType="dbmap">
     UPDATE member
     <set>
-      <if test='memberid != null and memberid != ""'>memberid= #{memberid},</if>
+      <if test='specialid != null and specialid != ""'>specialid= #{specialid},</if>
       <if test='password != null and password != ""'>password= #{password},</if>
-      <if test='grade != null and grade != ""'>grade= #{grade},</if>
-      <if test='gubun != null and gubun != ""'>gubun= #{gubun},</if>
-      <if test='openflag != null and openflag != ""'>openflag= #{openflag},</if>
       <if test='name != null and name != ""'>name= #{name},</if>
       <if test='telephone != null and telephone != ""'>telephone= #{telephone},</if>
       <if test='handphone != null and handphone != ""'>handphone= #{handphone},</if>
-      <if test='address != null and address != ""'>address= #{address},</if>
-      <if test='address_etc != null and address_etc != ""'>address_etc= #{address_etc},</if>
-      <if test='introduce != null and introduce != ""'>introduce= #{introduce},</if>
-      <if test='latitude != null and latitude != ""'>latitude= #{latitude},</if>
-      <if test='longitude != null and longitude != ""'>longitude= #{longitude},</if>
+      <if test='picturename != null and picturename != ""'>picturename= #{picturename},</if>
+      <if test='job != null and job != ""'>job= #{job},</if>
+      <if test='specialty != null and specialty != ""'>specialty= #{specialty},</if>
+      <if test='belongto != null and belongto != ""'>belongto= #{belongto},</if>
+      <if test='career != null and career != ""'>career= #{career},</if>
       <if test='usestartdate != null and usestartdate != ""'>usestartdate= #{usestartdate},</if>
       <if test='useenddate != null and useenddate != ""'>useenddate= #{useenddate},</if>
       <if test='deleteyn != null and deleteyn != ""'>deleteyn= #{deleteyn},</if>
-      <if test='lastconnecttime != null and lastconnecttime != ""'>lastconnecttime= #{lastconnecttime},</if>
       <if test='regtime != null and regtime != ""'>regtime= DATE_FORMATNOW()+0,'%Y%m%d%H%i%s')</if>
     </set>
     WHERE 1=1
@@ -236,12 +185,12 @@
 
   <select id="currMemberId" parameterType="dbmap" resultType="String">
     SELECT IFNULL(MAX(memberid),0)
-    FROM member
+    FROM special_member
     WHERE SUBSTRING(memberid,1,1) = 'B' AND LENGTH(memberid)=10
   </select>
 
   <delete id="excelDelete" parameterType="dbmap">
-    delete FROM member
+    delete FROM special_member
     WHERE 1=1 and deleteyn=0
     AND memberid = #{memberid}
 

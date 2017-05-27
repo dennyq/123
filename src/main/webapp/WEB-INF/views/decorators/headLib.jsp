@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
+<%
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss.SSS");
+    String now = sf.format( new Date());
+%>
 <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -29,7 +35,7 @@ folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 
-<link rel="stylesheet" href="/dist/css/style.css?vs=170226">
+<link rel="stylesheet" href="/dist/css/style.css?vs=<%=now%>">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

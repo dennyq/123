@@ -1195,3 +1195,4 @@ ul.all-tab{
 }
 .centered { display: table; margin-left: auto; margin-right: auto; display: inline-block; }
 
+#navbar-collapse > ul > li.dropdown.open > ul.dropdown-menu{ min-width: 221px; }
