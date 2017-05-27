@@ -11,9 +11,9 @@
   <%--</div>--%>
 
   <div class="form-group">
-    <label for="memberid" class="col-sm-4 ">아이디</label>
+    <label for="specialid" class="col-sm-4 ">아이디</label>
     <div class="col-sm-6">
-      <input name="memberid"  id="memberid" placeholder="아이디" class="form-control" value="${data.memberid}">
+      <input name="specialid"  id="specialid" placeholder="아이디" class="form-control" value="${data.specialid}">
     </div>
   </div>
   <div class="form-group">

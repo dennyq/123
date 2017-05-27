@@ -165,19 +165,16 @@ public class SpecialMembershipService extends ServiceBase {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[special save] recv:{}", req);
         String joindate = req.get("joindate") + "";
-        String usestartdate = req.get("usestartdate") + "";
-        String useenddate = req.get("useenddate") + "";
-        String longitude = req.get("longitude") + "";
-        String latitude = req.get("latitude") + "";
-        longitude = longitude.equals("") ? "0" : longitude;
-        latitude = latitude.equals("") ? "0" : latitude;
-        longitude = longitude.equals("null") ? "0" : longitude;
-        latitude = latitude.equals("null") ? "0" : latitude;
-        double longitudeDouble = Double.parseDouble(longitude);
-        double latitudeDouble = Double.parseDouble(latitude);
-        req.put("longitude", longitudeDouble);
-        req.put("latitude", latitudeDouble);
+        String usestartdate = (String) req.get("usestartdate");
+        String useenddate = (String) req.get("useenddate");
 
+        if(usestartdate == null){
+            usestartdate="20170527";
+        }
+
+        if(useenddate == null){
+            useenddate="99991231";
+        }
 
         req.put("joindate", joindate.replace(".", ""));
         req.put("usestartdate", usestartdate.replace(".", ""));

@@ -25,9 +25,9 @@
 
   <ol class="breadcrumb">
     <li><a href="<c:url value="/"/>">HOME</a></li>
-    <li><a href="<c:url value="/member/list"/>">전문가 회원</a></li>
+    <li><a href="<c:url value="${thisPath}/list"/>">전문가 회원</a></li>
     <li>
-      <a href="<c:url value="/member/detail/${data.memberid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">전문가 회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">전문가 회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
+      <a href="<c:url value="${thisPath}/detail/${data.specialid}"/>"><c:if test="${empty data && changePwd ne 'Y'}">전문가 회원등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">전문가 회원상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
     </li>
   </ol>
 </section>
@@ -61,7 +61,7 @@
 <c:if test="${empty data}">
   <center>
     <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">가입하기</a>
-    <a href="<c:url value="/member/list"/>" class="btn btn-blue-green btn-flat md-height">목록</a>
+    <a href="<c:url value="${thisPath}/list"/>" class="btn btn-blue-green btn-flat md-height">목록</a>
   </center>
 
 </c:if>
@@ -85,11 +85,6 @@
 
   var saveFunction = function(){
 
-    var latitude = $('#latitude').val();
-    var longitude = $('#longitude').val();
-//    console.log(latitude.split('.')[0].length)
-//    console.log(longitude.split('.')[0].length)
-    
 
     if($('#specialid').val() ==''){
       alert('아이디를 입력해주세요');
@@ -173,10 +168,10 @@
     $('#delBtn').click(function(){
       var req = {};
       req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/delete"/>', req, function (data) {
+      $als.execute('<c:url value="${thisPath}/delete"/>', req, function (data) {
         if (data.result_message == 'success') {
           alert('삭제되었습니다.');
-          location.href='/member/list';
+          location.href='${thisPath}/list';
         }
       }, function (err) {
         alert(err.result_message);
@@ -188,11 +183,6 @@
     $('#saveBtn').click(function(){
 
 
-      var latitude = $('#latitude').val();
-      var oldlatitude = $('#oldlatitude').val();
-      var longitude = $('#longitude').val();
-      var oldlongitude = $('#oldlongitude').val();
-      var address = $('#address').val();
         saveFunction();
 
     });
@@ -223,7 +213,7 @@
     $('#changePagePwdBtn').click(function(){
       var id = $('#specialid').val();
       console.log(id);
-      location.href='/member/changePwdPage/'+id;
+      location.href='${thisPath}/changePwdPage/'+id;
 
     });
 
@@ -231,10 +221,10 @@
 
       var req = {};
       req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="/member/changePwd"/>', req, function (data) {
+      $als.execute('<c:url value="${thisPath}/changePwd"/>', req, function (data) {
         if (data.result_message == 'success') {
           alert('비밀번호가 변경되었습니다.');
-          location.href='/member/list';
+          location.href='${thisPath}/list';
         }else if (data.result_message == 'fail') {
           alert('비밀번호가 맞지 않습니다.');
         }

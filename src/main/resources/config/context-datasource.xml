@@ -23,9 +23,6 @@
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 		<property name="username" value="root"/>
 		<property name="password" value="kippakippa1226"/>
-		<!--<property name="password" value="9531nano@"/>-->
-		<!--<property name="username" value="root"/>-->
-		<!--<property name="password" value="9531nano@"/>-->
 	</bean>
 
 </beans>

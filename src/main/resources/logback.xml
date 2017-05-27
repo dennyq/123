@@ -59,7 +59,7 @@
 	</logger>
 
 
-     3rdparty Loggers
+     <!--3rdparty Loggers-->
 	<logger name="org.springframework.core" level="debug">
 	</logger>
 	<logger name="org.springframework.beans" level="debug">

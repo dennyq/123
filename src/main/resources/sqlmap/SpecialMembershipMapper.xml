@@ -8,7 +8,6 @@
       AND A.specialid  LIKE CONCAT('%', #{sch_specialid},'%')
     </if>
     <if test='sch_address != null and sch_address != ""'>
-
       AND A.address  LIKE CONCAT('%', #{sch_address},'%')
     </if>
     <if test='sch_name != null and sch_name != ""'>
@@ -47,10 +46,10 @@
             A.specialty,
             A.belongto,
             A.career,
-            A.usestartdate,
-            A.useenddate,
+            DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+            DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
             A.deleteyn,
-    DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
+            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
 
     FROM special_member A
     <include refid="com.hs.web.mapper.SpecialMembershipMapper.listConditions"/>
@@ -67,13 +66,13 @@
   <select id="idCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM special_member A
-      WHERE 1=1 AND deleteyn = 0 AND A.specialid  = #{memberid}
+      WHERE 1=1 AND deleteyn = 0 AND A.specialid  = #{specialid}
   </select>
 
   <select id="idPwCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM special_member A
-    WHERE A.specialid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 0
+    WHERE A.specialid  = #{specialid} AND  A.password  = #{password} AND deleteyn = 0
   </select>
 
   <select id="addressCheck" parameterType="dbmap" resultType="int">
@@ -82,11 +81,11 @@
     WHERE A.name  = #{name} AND  A.address  = #{address} AND deleteyn = 0
   </select>
 
-    <select id="idPwDelChk" parameterType="dbmap" resultType="int">
-        SELECT COUNT(*) AS cnt
-        FROM special_member A
-        WHERE A.specialid  = #{memberid} AND  A.password  = #{password} AND deleteyn = 1
-    </select>
+  <select id="idPwDelChk" parameterType="dbmap" resultType="int">
+      SELECT COUNT(*) AS cnt
+      FROM special_member A
+      WHERE A.specialid  = #{specialid} AND  A.password  = #{password} AND deleteyn = 1
+  </select>
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
@@ -100,8 +99,8 @@
       A.specialty,
       A.belongto,
       A.career,
-      A.usestartdate,
-      A.useenddate,
+      DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
+      DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       A.deleteyn,
       DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
     FROM special_member A
@@ -147,7 +146,7 @@
   </insert>
 
   <update id="changePwd" parameterType="dbmap">
-    UPDATE member SET password = #{newPassword}
+    UPDATE special_member SET password = #{newPassword}
     WHERE 1=1
     AND specialid = #{specialid}
   </update>
@@ -169,14 +168,14 @@
       <if test='usestartdate != null and usestartdate != ""'>usestartdate= #{usestartdate},</if>
       <if test='useenddate != null and useenddate != ""'>useenddate= #{useenddate},</if>
       <if test='deleteyn != null and deleteyn != ""'>deleteyn= #{deleteyn},</if>
-      <if test='regtime != null and regtime != ""'>regtime= DATE_FORMATNOW()+0,'%Y%m%d%H%i%s')</if>
+      <if test='regtime != null and regtime != ""'>regtime= DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')</if>
     </set>
     WHERE 1=1
     AND specialid = #{specialid}
   </update>
 
   <update id="updateHitcount" parameterType="dbmap">
-    UPDATE member
+    UPDATE special_member
     set hitcount = hitcount+1
     WHERE 1=1
     AND specialid = #{specialid}
@@ -184,7 +183,7 @@
 
 
   <delete id="delete" parameterType="dbmap">
-    UPDATE member
+    UPDATE special_member
     SET deleteyn	 = 1
     WHERE 1=1
     AND specialid = #{specialid}

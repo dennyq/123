@@ -79,11 +79,9 @@
 
   <div class="form-group">
     <label for="useenddate" class="col-sm-4 ">사용종료일자</label>
-
     <div class="col-sm-6">
       <input name="useenddate"  id="useenddate" placeholder="사용종료일자" class="form-control datepicker" value="${data.useenddate}">
     </div>
-
   </div>
 
 

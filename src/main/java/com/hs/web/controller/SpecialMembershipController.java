@@ -81,7 +81,7 @@ public class SpecialMembershipController extends ControllerPageBase {
     }
 
     //상세
-    @RequestMapping(value = "detail/{memberid}")
+    @RequestMapping(value = "detail/{specialid}")
     public String detail(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
@@ -90,8 +90,20 @@ public class SpecialMembershipController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //쓰기
-    //수정
+
+    //changePwdPage
+    @RequestMapping({"changePwdPage", "changePwdPage/{specialid}"})
+    public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        model.addAllAttributes(service.detail(req));
+        model.addAttribute("changePwd", "Y");
+        model.addAttribute("thisPath","/"+rootKey);
+        return rootPath + "detail";
+    }
+
+
+    //비밀번호수정
     @RequestMapping(value = "changePwd")
     @ResponseBody
     public ResultMap changePwd(HttpServletRequest request) throws Exception {
