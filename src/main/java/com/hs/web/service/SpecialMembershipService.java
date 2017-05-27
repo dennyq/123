@@ -7,8 +7,7 @@ import com.hs.util.PageUtil;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
-import com.hs.web.mapper.MemberMapper;
-import com.hs.web.mapper.SpecialMapper;
+import com.hs.web.mapper.SpecialMembershipMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,11 @@ import java.io.IOException;
 
 
 @Service
-public class SpecialService extends ServiceBase {
+public class SpecialMembershipService extends ServiceBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpecialService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpecialMembershipService.class);
     @Autowired
-    private SpecialMapper mapper;
+    private SpecialMembershipMapper mapper;
     @Autowired
     private FileService fileService;
 

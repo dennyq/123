@@ -3,7 +3,7 @@ package com.hs.web.mapper;
 
 import com.hs.DbMap;
 
-public interface SpecialMapper extends CrudMapper{
+public interface SpecialMembershipMapper extends CrudMapper{
   void initailizePwd(DbMap map);
   void updateMember(DbMap map);
   DbMap chkMemberExist(DbMap map);

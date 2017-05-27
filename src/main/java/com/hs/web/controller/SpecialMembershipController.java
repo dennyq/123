@@ -4,9 +4,8 @@ import com.hs.BizException;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
-import com.hs.web.service.ExcelFileService;
-import com.hs.web.service.MemberService;
-import com.hs.web.service.SpecialService;
+
+import com.hs.web.service.SpecialMembershipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +22,12 @@ import javax.servlet.http.HttpSession;
 // 전문가
 @Controller
 @RequestMapping(value = "/special/membership")
-public class SpecialController extends ControllerPageBase {
+public class SpecialMembershipController extends ControllerPageBase {
     @Autowired
-    private SpecialService service;
+    private SpecialMembershipService service;
 
 
-    private static final Logger logger = LoggerFactory.getLogger(SpecialController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpecialMembershipController.class);
     private String rootKey = "special/membership";
     private String rootPath = "pages/" + rootKey + "/";
 
