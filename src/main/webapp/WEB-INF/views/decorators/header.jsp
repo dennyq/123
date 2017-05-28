@@ -49,8 +49,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">공지사항 관리</a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="/adinfo/detail">공지사항 등록</a></li>
-              <li><a href="/adinfo/list">공지사항 조회</a></li>
+              <li><a href="/notice/detail">공지사항 등록</a></li>
+              <li><a href="/notice/list">공지사항 조회</a></li>
             </ul>
           </li>
           <li class="dropdown">

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.NoticeMapper">
+  <sql id="listConditions">
+    WHERE 1=1
+    <if test='sch_noticeindex != null and sch_noticeindex != ""'>
+      AND A.noticeindex  LIKE CONCAT('%', #{sch_noticeindex},'%')
+    </if>
+    <if test='sch_noticetitle != null and sch_noticetitle != ""'>
+      AND A.noticetitle  LIKE CONCAT('%', #{sch_noticetitle},'%')
+    </if>
+
+    <if test='sch_usestartdate != null and sch_usestartdate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
+    </if>
+    <if test='sch_useenddate != null and sch_useenddate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
+    </if>
+
+
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT
+            A.noticeindex,
+            A.noticetitle,
+            A.regid,
+            A.noticecontent,
+            A.searchcount,
+            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
+    FROM notice A
+    <include refid="com.hs.web.mapper.NoticeMapper.listConditions"/>
+    ORDER BY A.regtime DESC
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="listCnt" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM notice A
+    <include refid="com.hs.web.mapper.NoticeMapper.listConditions"/>
+  </select>
+
+  <select id="idCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM notice A
+      WHERE 1=1 AND A.noticeindex  = #{noticeindex}
+  </select>
+
+  <select id="getLastIndex" parameterType="dbmap" resultType="dbmap">
+    SELECT MAX(noticeindex) AS lastIndex
+    FROM notice A
+  </select>
+
+  <select id="addressCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM notice A
+    WHERE A.name  = #{name} AND  A.address  = #{address}
+  </select>
+
+  <select id="idPwDelChk" parameterType="dbmap" resultType="int">
+      SELECT COUNT(*) AS cnt
+      FROM notice A
+      WHERE A.noticeindex  = #{noticeindex} 
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+    SELECT
+            A.noticeindex,
+            A.noticetitle,
+            A.regid,
+            A.noticecontent,
+            A.searchcount,
+            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
+    FROM notice A
+    WHERE 1=1 AND A.noticeindex = #{noticeindex}
+  </select>
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO notice (
+      noticeindex,
+      noticetitle,
+      regid,
+      noticecontent,
+      searchcount,
+      regtime
+    )
+    VALUES (
+      #{noticeindex},
+      #{noticetitle},
+      #{regid},
+      #{noticecontent},
+      #{searchcount},
+      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="noticeindex" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+
+
+  <update id="update" parameterType="dbmap">
+    UPDATE notice
+    <set>
+      <if test='noticeindex!= null and noticeindex != ""'>noticeindex= #{noticeindex},</if>
+      <if test='noticetitle!= null and noticetitle != ""'>noticetitle= #{noticetitle},</if>
+      <if test='regid!= null and regid != ""'>regid= #{regid},</if>
+      <if test='noticecontent!= null and noticecontent != ""'>noticecontent= #{noticecontent},</if>
+      <if test='searchcount!= null and searchcount != ""'>searchcount= #{searchcount},</if>
+      <if test='regtime != null and regtime != ""'>regtime= DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')</if>
+    </set>
+    WHERE 1=1
+    AND noticeindex = #{noticeindex}
+  </update>
+
+  <update id="updateHitcount" parameterType="dbmap">
+    UPDATE notice
+    set hitcount = hitcount+1
+    WHERE 1=1
+    AND noticeindex = #{noticeindex}
+  </update>
+
+
+  <delete id="delete" parameterType="dbmap">
+    DELETE FROM notice
+    WHERE 1=1
+    AND noticeindex = #{noticeindex}
+  </delete>
+
+
+  <select id="currMemberId" parameterType="dbmap" resultType="String">
+    SELECT IFNULL(MAX(noticeindex),0)
+    FROM notice
+    WHERE SUBSTRING(noticeindex,1,1) = 'B' AND LENGTH(noticeindex)=10
+  </select>
+
+
+</mapper>
