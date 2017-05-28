@@ -77,12 +77,20 @@ public class FileService {
 //    String date = now.substring(6, 8);
 //    String middleName =  req.get("uploadDir")+"";
     String middleName = null;
-    String adindexStr = null;
-    int adindex;
-    if(inputName.equals("filename")){
-      adindex =Integer.parseInt((req.get("adindex") + "")) ;
-      adindexStr = String.format("%010d",adindex);
-      middleName ="adinfo";
+//    String adindexStr = null;
+    String fileIndexStr = null;
+//    int adindex;
+    int fileIndex;
+
+    if (inputName.equals("filename")) {
+      fileIndex = Integer.parseInt((req.get("adindex") + ""));
+      fileIndexStr = String.format("%010d", fileIndex);
+      middleName = "adinfo";
+
+    } else if (inputName.equals("picturename")) {
+
+      fileIndexStr = req.get("specialid") + "";
+      middleName = "special_member";
     }
 
 
@@ -105,14 +113,14 @@ public class FileService {
       name = "S";
     }
 //    randomName = adindex + "_" + name + "_" + randomStr[0] + "_" + nowtime + "." + fileExtention;
-    randomName = adindexStr +"." + fileExtention;
+    randomName = fileIndexStr +"." + fileExtention;
 
 
 
     //실제 저장위치
     pageFile = pathManager.getPageFileNotByDate(middleName,randomName);
 
-    existFiles(adindexStr,file, tempFile, pageFile);
+    existFiles(fileIndexStr,file, tempFile, pageFile);
     //파일 폴더에 저장
     saveFiles(file, tempFile, pageFile);
 

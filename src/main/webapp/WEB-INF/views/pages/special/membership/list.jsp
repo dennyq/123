@@ -207,7 +207,8 @@
                     <td>${items.belongto}</td>
                     <td>${items.career}</td>
 
-                    <td>${items.picturename}</td>
+                    <%--<td>${items.picturename}</td>--%>
+                    <td><img width="100px" src="/upload/special_member/${items.picturename}"</td>
 
                     <td>${items.regtime}</td>
 

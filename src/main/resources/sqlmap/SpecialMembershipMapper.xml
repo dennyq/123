@@ -3,6 +3,7 @@
 
 <mapper namespace="com.hs.web.mapper.SpecialMembershipMapper">
   <sql id="listConditions">
+
     WHERE 1=1 AND deleteyn = 0
     <if test='sch_specialid != null and sch_specialid != ""'>
       AND A.specialid  LIKE CONCAT('%', #{sch_specialid},'%')
@@ -14,10 +15,13 @@
       AND A.name  LIKE CONCAT('%', #{sch_name},'%')
     </if>
     <if test='sch_usestartdate != null and sch_usestartdate != ""'>
-      AND A.usestartdate  LIKE CONCAT('%', #{sch_usestartdate},'%')
+      AND  DATE_FORMAT(A.usestartdate,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
+      AND  DATE_FORMAT(A.useenddate,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
     </if>
     <if test='sch_useenddate != null and sch_useenddate != ""'>
-      AND A.useenddate  LIKE CONCAT('%', #{sch_useenddate},'%')
+
+      AND  DATE_FORMAT(A.useenddate,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
+      AND  DATE_FORMAT(A.usestartdate,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
     </if>
     <if test='sch_regtime != null and sch_regtime != ""'>
       AND A.regtime  LIKE CONCAT('%', #{sch_regtime},'%')
@@ -31,6 +35,7 @@
     <if test='sch_introduce != null and sch_introduce != ""'>
       AND A.introduce  LIKE CONCAT('%', #{sch_introduce},'%')
     </if>
+
   </sql>
 
   <select id="list" parameterType="dbmap" resultType="dbmap">

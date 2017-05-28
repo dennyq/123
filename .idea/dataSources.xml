@@ -15,6 +15,7 @@
     </data-source>
     <data-source source="LOCAL" name="MySQL - kippa@localhost" uuid="4e3b0c72-6dbc-4718-b3a3-90eb430b8d74">
       <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://58.127.215.240:3306/kippa</jdbc-url>
       <driver-properties>
