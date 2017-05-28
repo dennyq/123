@@ -92,10 +92,10 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">
               <colgroup>
-                <col width="1%"/><%--번호--%>
+                <col width="5%"/><%--번호--%>
                 <col width="*"/><%--공지사항제목--%>
                 <col width="10%"/><%--등록자--%>
-                <col width="10%"/><%--조회수--%>
+                <col width="5%"/><%--조회수--%>
                 <col width="10%"/><%--등록시간--%>
               </colgroup>
               <thead>

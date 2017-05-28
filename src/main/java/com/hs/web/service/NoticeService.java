@@ -63,6 +63,8 @@ public class NoticeService extends ServiceBase {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[notice detail] recv:{}", req);
 
+        mapper.updateHitcount(req);
+
         res.put("data", mapper.detail(req));
 
         if (Global.isDev) logger.debug("[notice detail] send:{}", res);

@@ -128,9 +128,7 @@
               <span class="centered ">
                   <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height">조회</a>
               </span>
-              <span class="right inline">
-                <a id="insertFileBtn" class="pointer btn btn-blue-green btn-flat md-height">일괄등록</a>
-              </span>
+
             </div>
           </form>
           <!--// form end-->

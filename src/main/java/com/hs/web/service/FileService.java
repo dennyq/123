@@ -91,6 +91,14 @@ public class FileService {
 
       fileIndexStr = req.get("specialid") + "";
       middleName = "special_member";
+
+    } else if (inputName.equals("notice_filename")) {
+
+      fileIndexStr = originalFilename + fileExtention;
+      middleName = "notice";
+
+      //todo: insert notice file
+
     }
 
 

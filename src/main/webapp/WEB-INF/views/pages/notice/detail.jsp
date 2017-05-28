@@ -70,7 +70,7 @@
   <center>
     <a id="saveBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
     <a id="delBtn" class="btn btn-green btn-flat md-height showEditor">삭제</a>
-    <a id="changePagePwdBtn" class="btn btn-blue-green btn-flat md-height">비밀번호 변경</a>
+
   </center>
 </c:if>
   <c:if test="${not empty data && changePwd eq 'Y'}">
@@ -201,28 +201,7 @@
 
     });
 
-    $('#changePagePwdBtn').click(function(){
-      var id = $('#noticeindex').val();
-      console.log(id);
-      location.href='${thisPath}/changePwdPage/'+id;
 
-    });
-
-    $('#changePwdBtn').click(function(){
-
-      var req = {};
-      req = $(this).closest('form').serialize();
-      $als.execute('<c:url value="${thisPath}/changePwd"/>', req, function (data) {
-        if (data.result_message == 'success') {
-          alert('비밀번호가 변경되었습니다.');
-          location.href='${thisPath}/list';
-        }else if (data.result_message == 'fail') {
-          alert('비밀번호가 맞지 않습니다.');
-        }
-      }, function (err) {
-        alert(err.result_message);
-      });
-    });
   });
   <!-- bind end -->
 

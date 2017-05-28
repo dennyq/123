@@ -21,3 +21,11 @@
     </div>
 </div>
 
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="notice_filename" class="col-sm-1 ">파일</label>
+        <div class="col-sm-11">
+            <input name="notice_filename" id="notice_filename" placeholder="사진 파일" class="form-control" type="file">
+        </div>
+    </div>
+</div>

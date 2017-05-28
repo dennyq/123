@@ -77,6 +77,7 @@
     WHERE 1=1 AND A.noticeindex = #{noticeindex}
   </select>
 
+
   <insert id="insert" parameterType="dbmap">
     INSERT INTO notice (
       noticeindex,
@@ -117,7 +118,7 @@
 
   <update id="updateHitcount" parameterType="dbmap">
     UPDATE notice
-    set hitcount = hitcount+1
+    set searchcount = searchcount+1
     WHERE 1=1
     AND noticeindex = #{noticeindex}
   </update>

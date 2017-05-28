@@ -118,16 +118,17 @@ public class NoticeController extends ControllerPageBase {
     public String save(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
 
-//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
-//
-//        MultipartFile file = mrequest.getFile("picturename");
-//        req.put("inputName","picturename");
-//
-//        if (file.getSize() > 0) {
-//            fileService.uploadFiles(request, req);
-//        } else {
-//            req.put("picturename", null);
-//        }
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = mrequest.getFile("notice_filename");
+        req.put("inputName","notice_filename");
+
+        if (file.getSize() > 0) {
+            fileService.uploadFiles(request, req);
+        } else {
+            req.put("notice_filename", null);
+        }
+
         service.save(req);
 
         return "redirect:/" + rootKey + "/list";
