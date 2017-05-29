@@ -53,6 +53,11 @@
     FROM notice A
   </select>
 
+  <select id="getLastFileIndex" parameterType="dbmap" resultType="dbmap">
+    SELECT MAX(sequencenum) AS lastFileIndex
+    FROM notice_file A
+  </select>
+
   <select id="addressCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM notice A
@@ -73,7 +78,24 @@
             A.noticecontent,
             A.searchcount,
             DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
+
     FROM notice A
+
+
+    WHERE 1=1 AND A.noticeindex = #{noticeindex}
+  </select>
+
+  <select id="detailFile" parameterType="dbmap" resultType="dbmap">
+    SELECT
+          B.noticeindex,
+            DATE_FORMAT( B.regtime,'%Y.%m.%d %H:%i') "regtime",
+            B.sequencenum,
+            B.filetype,
+            B.filename
+
+    FROM notice A
+      LEFT OUTER JOIN notice_file B ON A.noticeindex = B.noticeindex
+
     WHERE 1=1 AND A.noticeindex = #{noticeindex}
   </select>
 
@@ -96,6 +118,26 @@
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
     <selectKey resultType="int" keyProperty="noticeindex" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <insert id="insertFile" parameterType="dbmap">
+    INSERT INTO notice_file (
+      noticeindex,
+      sequencenum,
+      filetype,
+      filename,
+      regtime
+    )
+    VALUES (
+      #{noticeindex},
+      #{sequencenum},
+      #{filetype},
+      #{filename},
+      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="sequencenum" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
@@ -128,6 +170,12 @@
     DELETE FROM notice
     WHERE 1=1
     AND noticeindex = #{noticeindex}
+  </delete>
+
+  <delete id="deleteFile" parameterType="dbmap">
+    DELETE FROM notice_file
+    WHERE 1=1
+    AND noticeindex = #{noticeindex} AND sequencenum = #{sequencenum}
   </delete>
 
 

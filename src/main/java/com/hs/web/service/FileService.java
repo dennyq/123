@@ -1,10 +1,12 @@
 package com.hs.web.service;
 
 import com.hs.BizException;
+import com.hs.DbMap;
 import com.hs.util.DateUtil;
 import com.hs.web.Global;
 import com.hs.web.PathManager;
 import com.hs.web.RequestMap;
+import com.hs.web.mapper.NoticeMapper;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -32,6 +34,7 @@ public class FileService {
   private String file_id;
 
   @Autowired private PathManager pathManager;
+  @Autowired private NoticeMapper noticeMapper;
 
   //업로드
   public String uploadFile(HttpServletRequest request, RequestMap req) throws Exception {
@@ -81,30 +84,56 @@ public class FileService {
 //    int adindex;
     int fileIndex;
 
-    if (inputName.equals("filename")) {
-      String adindex = (String) req.get("adindex");
-      if(adindex==null){
-        fileIndex = 1;
-      }else{
-        fileIndex = Integer.parseInt(adindex);
+      if (inputName.equals("filename")) {//광고관리 파일
+          String adindex = (String) req.get("adindex");
+          if (adindex == null) {
+              fileIndex = 1;
+          } else {
+              fileIndex = Integer.parseInt(adindex);
+          }
+
+          fileIndexStr = String.format("%010d", fileIndex);
+          middleName = "adinfo";
+
+      } else if (inputName.equals("picturename")) { //전문가
+
+          fileIndexStr = req.get("specialid") + "";
+          middleName = "special_member";
+
+      } else if (inputName.equals("notice_filename")) {//공지사항
+
+//      fileIndexStr = originalFilename ;
+          int sequencenum;
+          //todo : sequencenum get
+          DbMap lastFileIndex = noticeMapper.getLastFileIndex(req);
+
+          if(lastFileIndex == null){
+              sequencenum = 1;
+
+          }else{
+
+              sequencenum = Integer.parseInt(lastFileIndex.get("lastFileIndex")+"")+1;
+
+
+          }
+
+        req.put("sequencenum",sequencenum);
+
+          int noticeindexNum = Integer.parseInt(req.get("noticeindex")+"");
+
+
+          String first = String.format("%010d",noticeindexNum);
+          String second = String.format("%03d",sequencenum);
+          fileIndexStr = first+ "_" +second+ "." + fileExtention;
+          middleName = "notice";
+
+          //todo: insert notice file
+
+          //noticeindex(%10d) + '_' + sequencenum(%3d) + '.' + 확장자. 예)0000000012_001.png
+
+          logger.info("[FileService fileInfo] req={}", req);
+
       }
-
-      fileIndexStr = String.format("%010d", fileIndex);
-      middleName = "adinfo";
-
-    } else if (inputName.equals("picturename")) {
-
-      fileIndexStr = req.get("specialid") + "";
-      middleName = "special_member";
-
-    } else if (inputName.equals("notice_filename")) {
-
-      fileIndexStr = originalFilename ;
-      middleName = "notice";
-
-      //todo: insert notice file
-
-    }
 
 
     //디비 저장위치
@@ -128,9 +157,15 @@ public class FileService {
 //    randomName = adindex + "_" + name + "_" + randomStr[0] + "_" + nowtime + "." + fileExtention;
 
     if (inputName.equals("notice_filename")) {
+
       randomName = fileIndexStr ;
+//      noticeMapper.insertFile(req);
+//        noticeindex(%10d) + '_' + sequencenum(%3d) + '.' + 확장자. 예)0000000012_001.png
+
     }else{
-      randomName = fileIndexStr +"." + fileExtention;
+
+        randomName = fileIndexStr +"." + fileExtention;
+
     }
 
 
@@ -161,6 +196,12 @@ public class FileService {
     file_id = randomName;
     //FILE_INFO 에 등록
     req.put("filename", file_id);
+    String filetype = "1";
+    String lowerExt = fileExtention.toLowerCase();
+    if(lowerExt.contains("mp4")|| lowerExt.contains("mpg")|| lowerExt.contains("mpeg")|| lowerExt.contains("mov")|| lowerExt.contains("wmv")|| lowerExt.contains("asf")){
+        filetype = "2";
+    }
+    req.put("filetype", filetype);
     req.put("file_path", "/upload" + dbFilePath);
     req.put("file_name", randomName);
     req.put("file_original_name", originalFilename);
@@ -181,6 +222,13 @@ public class FileService {
 
       logger.info("[FileService fileInfo] file_id={}", file_id);
     }
+
+
+      if (inputName.equals("notice_filename")) {
+
+
+          noticeMapper.insertFile(req);
+      }
 
     return file_id;
   }
@@ -291,15 +339,16 @@ public class FileService {
 
 
   public void deleteFile(RequestMap req) {
-
-    String s = "test_9999.txt";
-    File f = new File(s);
+      String deletePath = Global.UPLOAD_PATH + "/notice/"  +req.get("filename");
+      if (Global.isDev) logger.debug("[notice deleteFile] deletePath:{}", deletePath);
+//    String s = "test_9999.txt";
+    File f = new File(deletePath);
 
 
     if (f.delete()) {
-      logger.info("파일 또는 디렉토리를 성공적으로 지웠습니다: " + s);
+      logger.info("파일 또는 디렉토리를 성공적으로 지웠습니다: " + deletePath);
     } else {
-      logger.info("파일 또는 디렉토리 지우기 실패: " + s);
+      logger.info("파일 또는 디렉토리 지우기 실패: " + deletePath);
     }
 
   }

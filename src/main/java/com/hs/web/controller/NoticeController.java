@@ -1,11 +1,12 @@
 package com.hs.web.controller;
 
+import com.hs.BizException;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
+import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.service.FileService;
 import com.hs.web.service.NoticeService;
-import com.hs.web.service.SpecialMembershipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,13 +124,22 @@ public class NoticeController extends ControllerPageBase {
         MultipartFile file = mrequest.getFile("notice_filename");
         req.put("inputName","notice_filename");
 
+        if (req.get("login_uid") == null) {
+            throw new BizException("9009", "need_login");
+        }
+
+
+        service.save(req);
+
+        if (Global.isDev) logger.info("[NoticeController save] req = {}" + req);
+
         if (file.getSize() > 0) {
             fileService.uploadFiles(request, req);
         } else {
             req.put("notice_filename", null);
         }
 
-        service.save(req);
+
 
         return "redirect:/" + rootKey + "/list";
     }
@@ -180,6 +190,13 @@ public class NoticeController extends ControllerPageBase {
     public ResultMap idCheck(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
         return service.idCheck(req);
+    }
+    //아이디체크
+    @RequestMapping(value = "deleteFile")
+    @ResponseBody
+    public ResultMap deleteFile(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.deleteFile(req);
     }
 
 }

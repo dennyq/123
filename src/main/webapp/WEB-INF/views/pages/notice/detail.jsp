@@ -201,6 +201,28 @@
 
     });
 
+    $('.deleteFile').click(function(){
+        var noticeindex = $(this).attr('noticeindex');
+        var sequencenum = $(this).attr('sequencenum');
+        var filename = $(this).attr('filename');
+        console.log('noticeindex : '+noticeindex);
+        console.log('sequencenum : '+sequencenum);
+        var req = {};
+        req.noticeindex = noticeindex;
+        req.sequencenum = sequencenum;
+        req.filename = filename;
+        $als.execute('<c:url value="${thisPath}/deleteFile"/>', req, function (data) {
+            if (data.result_message == 'success') {
+                alert('파일이 삭제되었습니다.');
+                $(this).remove();
+
+            }else{
+                alert('파일이 삭제가 되지 않았습니다.');
+            }
+        }, function (err) {
+            alert(err.result_message);
+        });
+    });
 
   });
   <!-- bind end -->

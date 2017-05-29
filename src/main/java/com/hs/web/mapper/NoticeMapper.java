@@ -1,6 +1,7 @@
 package com.hs.web.mapper;
 
 
+import com.hs.DbList;
 import com.hs.DbMap;
 
 public interface NoticeMapper extends CrudMapper {
@@ -29,4 +30,12 @@ public interface NoticeMapper extends CrudMapper {
 
 
     DbMap getLastIndex(DbMap req);
+
+    DbMap getLastFileIndex(DbMap req);
+
+    void insertFile(DbMap req);
+
+    DbList detailFile(DbMap req);
+
+    int deleteFile(DbMap req);
 }

@@ -1,6 +1,5 @@
 package com.hs.web.service;
 
-import com.hs.BizException;
 import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.ResultMap;
@@ -9,7 +8,6 @@ import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
 import com.hs.web.mapper.NoticeMapper;
-import com.hs.web.mapper.SpecialMembershipMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +64,7 @@ public class NoticeService extends ServiceBase {
         mapper.updateHitcount(req);
 
         res.put("data", mapper.detail(req));
+        res.put("file", mapper.detailFile(req));
 
         if (Global.isDev) logger.debug("[notice detail] send:{}", res);
         return res;
@@ -95,13 +94,15 @@ public class NoticeService extends ServiceBase {
             req.put("searchcount",0);
 
 
-            mapper.insert(req);
-
+          mapper.insert(req);
+          req.put("noticeindex",lastIndex+1);
+            if (Global.isDev) logger.debug("[notice insert] req:{}", req);
 
         } else {
 
-
+            if (Global.isDev) logger.debug("[notice update] reqb:{}", req);
             mapper.update(req);
+            if (Global.isDev) logger.debug("[notice update] req:{}", req);
         }
 
 
@@ -243,6 +244,21 @@ public class NoticeService extends ServiceBase {
         }
 
         if (Global.isDev) logger.debug("[notice idCheck] send:{}", res);
+        return res;
+    }
+
+    //아이디체크
+    public ResultMap deleteFile(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[notice deleteFile] recv:{}", req);
+
+        int cnt = mapper.deleteFile(req);
+        fileService.deleteFile(req);
+        if (cnt > 0) {
+            res.put("result_message", "fail");
+        }
+
+        if (Global.isDev) logger.debug("[notice deleteFile] send:{}", res);
         return res;
     }
 }
