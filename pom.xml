@@ -337,9 +337,9 @@
       </properties>
       <activation>
         <!--개발-->
-        <activeByDefault>true</activeByDefault>
+        <!--<activeByDefault>true</activeByDefault>-->
         <!--운영-->
-        <!--<activeByDefault>false</activeByDefault>-->
+        <activeByDefault>false</activeByDefault>
       </activation>
     </profile>
     <profile>
@@ -351,9 +351,9 @@
       </properties>
       <activation>
         <!--개발-->
-        <activeByDefault>false</activeByDefault>
+        <!--<activeByDefault>false</activeByDefault>-->
         <!--운영-->
-        <!--<activeByDefault>true</activeByDefault>-->
+        <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
 
