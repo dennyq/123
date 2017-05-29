@@ -8,7 +8,6 @@ import com.hs.web.RequestMap;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +82,13 @@ public class FileService {
     int fileIndex;
 
     if (inputName.equals("filename")) {
-      fileIndex = Integer.parseInt((req.get("adindex") + ""));
+      String adindex = (String) req.get("adindex");
+      if(adindex==null){
+        fileIndex = 1;
+      }else{
+        fileIndex = Integer.parseInt(adindex);
+      }
+
       fileIndexStr = String.format("%010d", fileIndex);
       middleName = "adinfo";
 
@@ -94,7 +99,7 @@ public class FileService {
 
     } else if (inputName.equals("notice_filename")) {
 
-      fileIndexStr = originalFilename + fileExtention;
+      fileIndexStr = originalFilename ;
       middleName = "notice";
 
       //todo: insert notice file
@@ -121,7 +126,14 @@ public class FileService {
       name = "S";
     }
 //    randomName = adindex + "_" + name + "_" + randomStr[0] + "_" + nowtime + "." + fileExtention;
-    randomName = fileIndexStr +"." + fileExtention;
+
+    if (inputName.equals("notice_filename")) {
+      randomName = fileIndexStr ;
+    }else{
+      randomName = fileIndexStr +"." + fileExtention;
+    }
+
+
 
 
 
