@@ -206,7 +206,13 @@
                     <td>${items.career}</td>
 
                     <%--<td>${items.picturename}</td>--%>
-                    <td><img width="100px" src="/upload/special_member/${items.picturename}"</td>
+                    <td>
+                      <c:if test="${items.picturename != null}">
+                        <img width="100px" src="/upload/special_member/${items.picturename}"/>
+                      </c:if>
+                      <c:if test="${items.picturename == null}"></c:if>
+
+                    </td>
 
                     <td>${items.regtime}</td>
 

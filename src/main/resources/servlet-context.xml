@@ -40,6 +40,12 @@
 			<exclude-mapping path="/app"/>
 			<exclude-mapping path="/app/*"/>
 			<exclude-mapping path="/app/*/*"/>
+			<exclude-mapping path="/special"/>
+			<exclude-mapping path="/special/*"/>
+			<exclude-mapping path="/special/*/*"/>
+			<exclude-mapping path="/notice"/>
+			<exclude-mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/*/*"/>
 			<exclude-mapping path="/history/detail"/>
 			<exclude-mapping path="/history/write"/>
 
