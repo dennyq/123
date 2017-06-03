@@ -22,6 +22,7 @@
     <pattern>/member/excelUpload</pattern>
     <pattern>/member/excelUpload/</pattern>
     <pattern>/member/excelUpload/*</pattern>
+    <!--<pattern>/special/</pattern>-->
 
     <pattern>/*/popup*</pattern>
     <pattern>/*/popup*/</pattern>
@@ -64,6 +65,8 @@
 
   <decorator name="login" page="/WEB-INF/views/decorators/login.jsp">
     <pattern>/</pattern>
+    <pattern>/special</pattern>
+    <pattern>/special/</pattern>
   </decorator>
 
   <decorator name="m_login" page="/WEB-INF/views/decorators/m_login.jsp">

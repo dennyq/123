@@ -1,10 +1,8 @@
 package com.hs.web.controller;
 
-import com.hs.BizException;
 import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
-
 import com.hs.web.service.FileService;
 import com.hs.web.service.SpecialMembershipService;
 import org.slf4j.Logger;
@@ -117,7 +115,7 @@ public class SpecialMembershipController extends ControllerPageBase {
 
     //쓰기
     @RequestMapping(value = "save")
-    public String save(HttpServletRequest request) throws Exception {
+    public String save(HttpServletRequest request, HttpSession session) throws Exception {
         RequestMap req = RequestMap.create(request);
 
         MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
@@ -130,9 +128,22 @@ public class SpecialMembershipController extends ControllerPageBase {
         } else {
             req.put("picturename", null);
         }
+
+
         service.save(req);
 
-        return "redirect:/" + rootKey + "/list";
+        if(session.getAttribute("login_type")==null){
+            return "redirect:/" + rootKey + "/list";
+        }else {
+            if (session.getAttribute("login_type").equals("special")) {
+                return "redirect:/" + rootKey + "/list";
+            } else {
+                return "redirect:/" + rootKey + "/list";
+            }
+        }
+
+
+
     }
 
 

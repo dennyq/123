@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.SpecialLoginMapper">
+
+  <select id="checkLogin" parameterType="dbmap" resultType="int">
+    SELECT COUNT(0)
+    FROM special_member
+    WHERE specialid = #{specialid} AND deleteyn = 0
+    <if test='super_pwd != "Y" and password != null and password != ""'>
+      AND password = #{password}
+    </if>
+
+  </select>
+
+
+  <insert id="insertLoginHist" parameterType="dbmap">
+    INSERT INTO login_hist (
+    specialid,
+    logintime
+    ) VALUES (
+    #{specialid},
+    DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+  </insert>
+
+
+  <select id="login" parameterType="dbmap" resultType="dbmap">
+
+    SELECT
+            A.specialid,
+            A.password,
+            A.name,
+            A.telephone,
+            A.handphone,
+            A.picturename,
+            A.job,
+            A.specialty,
+            A.belongto,
+            A.career,
+            A.usestartdate,
+            A.useenddate,
+            A.deleteyn,
+            A.regtime
+
+    FROM special_member A
+
+    WHERE A.specialid = #{specialid} AND deleteyn = 0
+    <if test='super_pwd != "Y" and password != null and password != ""'>
+      AND A.password = #{password}
+    </if>
+
+  </select>
+
+</mapper>

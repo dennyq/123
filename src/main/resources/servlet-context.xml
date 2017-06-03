@@ -43,13 +43,57 @@
 			<exclude-mapping path="/special"/>
 			<exclude-mapping path="/special/*"/>
 			<exclude-mapping path="/special/*/*"/>
+			<exclude-mapping path="/special/*/*/*"/>
 			<exclude-mapping path="/notice"/>
 			<exclude-mapping path="/notice/*"/>
 			<exclude-mapping path="/notice/*/*"/>
-			<exclude-mapping path="/history/detail"/>
-			<exclude-mapping path="/history/write"/>
+
 
 			<beans:bean class="com.hs.web.interceptor.LoginCheckInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/login/*"/>
+			<exclude-mapping path="/noauth"/>
+			<exclude-mapping path="/special/noauth"/>
+			<exclude-mapping path="/common/*"/>
+			<exclude-mapping path="/common/*/*"/>
+			<exclude-mapping path="/test/*"/>
+			<exclude-mapping path="/print/*"/>
+			<exclude-mapping path="/main/*"/>
+			<exclude-mapping path="/main/*/*"/>
+			<exclude-mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/*/*"/>
+			<exclude-mapping path="/m_login/*"/>
+			<exclude-mapping path="/m_login/*/*"/>
+			<exclude-mapping path="/pc_login"/>
+			<exclude-mapping path="/pc_login/*"/>
+			<exclude-mapping path="/pc_login/*/*"/>
+			<exclude-mapping path="/pc"/>
+			<exclude-mapping path="/pc/*"/>
+			<exclude-mapping path="/pc/*/*"/>
+			<exclude-mapping path="/member/memberLogin"/>
+			<exclude-mapping path="/member/memberLogout"/>
+			<exclude-mapping path="/app"/>
+			<exclude-mapping path="/app/*"/>
+			<exclude-mapping path="/app/*/*"/>
+			<exclude-mapping path="/special"/>
+			<exclude-mapping path="/special/"/>
+			<exclude-mapping path="/special/login"/>
+			<exclude-mapping path="/special/membership/detail/"/>
+			<exclude-mapping path="/special/membership/detail"/>
+			<exclude-mapping path="/special/membership/save"/>
+			<exclude-mapping path="/special/membership/idCheck"/>
+			<!--<exclude-mapping path="/special/*"/>-->
+			<!--<exclude-mapping path="/special/*/*"/>-->
+			<exclude-mapping path="/notice"/>
+			<exclude-mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/*/*"/>
+
+
+			<beans:bean class="com.hs.web.interceptor.SpecialLoginCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 
