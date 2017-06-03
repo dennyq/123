@@ -19,6 +19,7 @@
 			<exclude-mapping path="/login"/>
 			<exclude-mapping path="/login/*"/>
 			<exclude-mapping path="/noauth"/>
+			<exclude-mapping path="/special/noauth"/>
 			<exclude-mapping path="/common/*"/>
 			<exclude-mapping path="/common/*/*"/>
 			<exclude-mapping path="/test/*"/>
@@ -82,9 +83,9 @@
 			<exclude-mapping path="/special"/>
 			<exclude-mapping path="/special/"/>
 			<exclude-mapping path="/special/login"/>
-			<exclude-mapping path="/special/membership/detail/"/>
-			<exclude-mapping path="/special/membership/detail"/>
-			<exclude-mapping path="/special/membership/save"/>
+			<exclude-mapping path="/special/membership/contract/"/>
+			<exclude-mapping path="/special/membership/contract"/>
+			<exclude-mapping path="/special/membership/contract/save"/>
 			<exclude-mapping path="/special/membership/idCheck"/>
 			<!--<exclude-mapping path="/special/*"/>-->
 			<!--<exclude-mapping path="/special/*/*"/>-->

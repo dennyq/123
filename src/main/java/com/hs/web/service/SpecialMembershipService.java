@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 
 @Service
@@ -64,6 +68,17 @@ public class SpecialMembershipService extends ServiceBase {
         res.put("data", mapper.detail(req));
 
         if (Global.isDev) logger.debug("[special detail] send:{}", res);
+        return res;
+    }
+
+    //상세
+    public ResultMap contract(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[special contract] recv:{}", req);
+
+        res.put("data", mapper.detail(req));
+
+        if (Global.isDev) logger.debug("[special contract] send:{}", res);
         return res;
     }
 
@@ -204,6 +219,68 @@ public class SpecialMembershipService extends ServiceBase {
 
 
             mapper.update(req);
+        }
+
+
+        if (Global.isDev) logger.debug("[special save] send:{}", res);
+        return res;
+    }
+
+    //저장
+    public ResultMap contractSave(RequestMap req) throws IOException {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[special save] recv:{}", req);
+        String joindate = req.get("joindate") + "";
+        String usestartdate = (String) req.get("usestartdate");
+        String useenddate = (String) req.get("useenddate");
+
+        //todo: 현재날짜, 전일.
+        SimpleDateFormat formatter = new SimpleDateFormat ( "yyyyMMdd", Locale.KOREA );
+        Date currentTime = new Date( );
+        String dTime = formatter.format ( currentTime );
+
+        logger.info("dTime ={}",dTime);
+
+//        if(usestartdate == null){
+        usestartdate = dTime;
+//        }
+        Calendar day = Calendar.getInstance();
+        day.add(Calendar.DATE , -1);
+        String beforeDate = new java.text.SimpleDateFormat("yyyyMMdd").format(day.getTime());
+
+//        if(useenddate == null){
+        useenddate = beforeDate;
+//        }
+
+        req.put("joindate", joindate.replace(".", ""));
+        req.put("usestartdate", usestartdate.replace(".", ""));
+        req.put("useenddate", useenddate.replace(".", ""));
+
+        int idPwCheckCnt = mapper.idPwCheck(req);
+
+        if (req.get("isNew").equals("Y")) {
+
+
+            if (idPwCheckCnt != 0) {
+                throw new BizException("9009", "id_exist");
+            }
+
+            int idPwDelChk = mapper.idPwDelChk(req);
+            logger.info("idPwDelChk={}", idPwDelChk);
+
+            if (idPwDelChk == 1) {
+                //삭제했으니 delyn 원복
+                mapper.restore(req);
+                mapper.update(req);
+
+            } else {
+                mapper.insert(req);
+
+            }
+
+        } else {
+            mapper.update(req);
+
         }
 
 

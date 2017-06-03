@@ -80,7 +80,7 @@
 
     $('#specialRegister').click(function(){
 
-        location.href = '/special/membership/detail';
+        location.href = '/special/membership/contract';
     });
 
     $('#specialLogin').click(function(){
@@ -91,13 +91,13 @@
 //          console.log(data);
         if (data.result_message == 'success') {
 //          alert('관리자외에 접근할 수 없습니다..');
-            location.href = '/special/membership/list';
-        }
+            location.href = '/special/membership/contract/' + $('#login-id').val();
+//        }
 //        else  if (data.result_message == 'success_admin') {
 //          location.href = '/member/list';
-//        }else{
-//          alert('아이디나 비밀번호가 맞지 않습니다.');
-//        }
+        }else{
+          alert('아이디나 비밀번호가 맞지 않습니다.');
+        }
       }, function (err) {
         alert(err.result_message);
       });

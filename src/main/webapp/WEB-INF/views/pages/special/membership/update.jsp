@@ -109,7 +109,7 @@
     <div class="form-group">
         <label for="regtime" class="col-sm-2 ">등록시간</label>
         <div class="col-sm-10">
-            <input name="regtime"  id="regtime" placeholder="등록시간" class="form-control datepicker" value="${data.regtime}">
+            <input name="regtime"  id="regtime" placeholder="등록시간" class="form-control" value="${data.regtime}" readonly>
         </div>
     </div>
 </div>

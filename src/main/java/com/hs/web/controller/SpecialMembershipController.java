@@ -91,6 +91,25 @@ public class SpecialMembershipController extends ControllerPageBase {
     }
 
 
+    //쓰기페이지
+    @RequestMapping(value = "contract")
+    public String contract(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        model.addAttribute("thisPath","/"+rootKey);
+        return rootPath + "contract";
+    }
+
+    //상세
+    @RequestMapping(value = "contract/{specialid}")
+    public String contractDetail(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        model.addAllAttributes(service.contract(req));
+        model.addAttribute("thisPath","/"+rootKey);
+        return rootPath + "contract";
+    }
+
+
     //changePwdPage
     @RequestMapping({"changePwdPage", "changePwdPage/{specialid}"})
     public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
@@ -132,16 +151,45 @@ public class SpecialMembershipController extends ControllerPageBase {
 
         service.save(req);
 
+        return "redirect:/" + rootKey + "/list";
+
+
+
+
+    }
+    //쓰기
+    @RequestMapping(value = "/contract/save")
+    public String contractSave(HttpServletRequest request, HttpSession session) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = mrequest.getFile("picturename");
+        req.put("inputName","picturename");
+
+        if (file.getSize() > 0) {
+            fileService.uploadFiles(request, req);
+        } else {
+            req.put("picturename", null);
+        }
+//        logger.debug("111111111111specialid ={}",session.getAttribute("specialid"));
+//        logger.debug("111111111111login_type ={}",session.getAttribute("login_type"));
+
+        service.contractSave(req);
+
+//        return "redirect:/" + rootKey + "/detail";
+
         if(session.getAttribute("login_type")==null){
             return "redirect:/" + rootKey + "/list";
         }else {
             if (session.getAttribute("login_type").equals("special")) {
-                return "redirect:/" + rootKey + "/list";
+
+
+                return "redirect:/" + rootKey + "/contract/"+session.getAttribute("specialid");
             } else {
                 return "redirect:/" + rootKey + "/list";
             }
         }
-
 
 
     }

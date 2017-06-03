@@ -62,7 +62,7 @@ public class SpecialLoginCheckInterceptor extends HandlerInterceptorAdapter {
 
     HttpSession session = request.getSession();
     if(session != null){
-      if (session.getAttribute("specialid") != null) {
+      if (session.getAttribute("specialid") != null || session.getAttribute("memberid") != null) {
         return true;
       }
     }
