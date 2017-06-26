@@ -56,6 +56,63 @@ public class NoticeService extends ServiceBase {
         return res;
     }
 
+    //앱목록
+    public ResultMap noticeList(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[notice list] recv:{}", req);
+
+
+        int p_size;
+        p_size = Integer.parseInt(req.get("p_size")+"");
+//        p_start = Integer.parseInt(req.get("p_start")+"");
+
+
+//        req.put("rows", p_size);
+        setPagingApp(req);
+        if (Global.isDev) logger.debug("[list] recv:{}", req);
+        int total;
+        DbList list = mapper.list(req);
+        total=list.size();
+
+
+
+        res.put("total", total);
+
+
+        if (total == 0) {
+            res.put("rows", null);
+        } else {
+            res.put("rows", list);
+        }
+//        res.put("sch_memberid", req.get("sch_memberid"));
+//        res.put("sch_joindate", req.get("sch_joindate"));
+//        res.put("sch_name", req.get("sch_name"));
+//        res.put("sch_usestartdate", req.get("sch_usestartdate"));
+//        res.put("sch_useenddate", req.get("sch_useenddate"));
+//        res.put("sch_handphone", req.get("sch_handphone"));
+
+//        res.put("pageTimes", (Integer.parseInt(req.get("page") + "") - 1) * Integer.parseInt(req.get("rows") + ""));
+
+//        res.put("paging", PageUtil.getPaging(req, total));
+
+        if (Global.isDev) logger.debug("[notice list] send:{}", res);
+        return res;
+    }
+
+    //앱상세
+    public ResultMap noticeDetail(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[notice detail] recv:{}", req);
+
+        mapper.updateHitcount(req);
+
+        res.put("data", mapper.detail(req));
+        res.put("file", mapper.detailFile(req));
+
+        if (Global.isDev) logger.debug("[notice detail] send:{}", res);
+        return res;
+    }
+
     //상세
     public ResultMap detail(RequestMap req) {
         ResultMap res = ResultMap.create();

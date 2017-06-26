@@ -4,6 +4,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.RequestMap;
 import com.hs.web.service.AppService;
+import com.hs.web.service.NoticeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/app/")
 public class AppController extends ControllerPageBase {
-    private final AppService service;
+    @Autowired private AppService service;
+    @Autowired private NoticeService noticeService;
     private static final Logger logger = LoggerFactory.getLogger(AppController.class);
     private final String rootKey = "app";
     private final String rootPath = "pages/" + rootKey + "/";
@@ -35,6 +37,26 @@ public class AppController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
 
         return rootPath + "mapview";
+    }
+
+    //안드로이드공지사항 리스트
+    @RequestMapping(value = "notice/mainList")
+    @ResponseBody
+    public ResultMap noticeList(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+        return noticeService.noticeList(req);
+    }
+
+    //안드로이드공지사항 상세
+    @RequestMapping(value = "notice/detail")
+//    @ResponseBody
+    public String noticeDetail(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        model.addAllAttributes(noticeService.noticeDetail(req));
+        model.addAttribute("thisPath","/"+rootKey);
+        return rootPath + "notice/detail";
+//        return noticeService.noticeDetail(req);
     }
 
     //안드로이드맵뷰

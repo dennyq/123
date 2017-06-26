@@ -37,9 +37,11 @@
   </select>
 
   <select id="listCnt" parameterType="dbmap" resultType="int">
-    SELECT COUNT(*) AS cnt
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT IFNULL(COUNT(*),0) AS cnt
     FROM notice A
     <include refid="com.hs.web.mapper.NoticeMapper.listConditions"/>
+    <include refid="com.hs.web.mapper.paging_end"/>
   </select>
 
   <select id="idCheck" parameterType="dbmap" resultType="int">

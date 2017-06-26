@@ -77,6 +77,19 @@ public class ServiceBase {
 		req.put("p_start", (page_num - 1) * (page_size) );
 		req.put("p_size", page_size);
 	}
+	protected void setPagingApp(RequestMap req) {
+
+		String p_start_str = StringUtil.nvl((String) req.get("p_start"), "1");
+		String p_size_str =StringUtil.nvl((String) req.get("p_size"), "10");
+//
+    int p_start  = UnitUtil.toInt(p_start_str);
+    int p_size =  UnitUtil.toInt(p_size_str);
+//
+////    req.put("page",page);
+////		req.put("p_start", (page_num - 1) * (page_size) );
+		req.put("p_start", p_start);
+		req.put("p_size", p_size);
+	}
 
 
   protected ResultMap setDownload2(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws IOException
