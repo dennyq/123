@@ -25,11 +25,11 @@
             <!-- input start -->
             <input type="hidden" name="isNew" value="N"/>
 
-            <div class="form-group">
-                <div class="row" style="font-weight: bold;padding: 0 15px 0 15px;font-size: 15px;border-bottom: 1px solid #eaeaea">
-                ${data.noticetitle}
-              </div>
-            </div>
+            <%--<div class="form-group">--%>
+                <%--<div class="row" style="font-weight: bold;padding: 0 15px 0 15px;font-size: 15px;border-bottom: 1px solid #eaeaea">--%>
+                <%--${data.noticetitle}--%>
+              <%--</div>--%>
+            <%--</div>--%>
             <div class="form-group">
               <div class="row" style="padding: 0 15px 0 15px;">
 
