@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hs.web.mapper.EpilogueMapper">
+  <sql id="listConditions">
+    WHERE 1=1
+    <if test='sch_memberid != null and sch_memberid != ""'>
+      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    </if>
+    <if test='sch_noticetitle != null and sch_noticetitle != ""'>
+      AND A.noticetitle  LIKE CONCAT('%', #{sch_noticetitle},'%')
+    </if>
+
+    <if test='sch_usestartdate != null and sch_usestartdate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[>=]]> DATE_FORMAT(#{sch_usestartdate},'%Y%m%d')
+    </if>
+    <if test='sch_useenddate != null and sch_useenddate != ""'>
+      AND  DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
+    </if>
+
+
+  </sql>
+
+  <select id="list" parameterType="dbmap" resultType="dbmap">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT
+            IFNULL(A.memberid,'') memberid,
+            IFNULL(A.epiloguename,'') epiloguename,
+            IFNULL(A.epiloguecontent,'') epiloguecontent,
+
+            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
+    FROM member_epilogue A
+    <include refid="com.hs.web.mapper.EpilogueMapper.listConditions"/>
+    ORDER BY A.regtime DESC
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="listCnt" parameterType="dbmap" resultType="int">
+    <include refid="com.hs.web.mapper.paging_start"/>
+    SELECT IFNULL(COUNT(*),0) AS cnt
+    FROM member_epilogue A
+    <include refid="com.hs.web.mapper.EpilogueMapper.listConditions"/>
+    <include refid="com.hs.web.mapper.paging_end"/>
+  </select>
+
+  <select id="idCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM member_epilogue A
+      WHERE 1=1 AND A.memberid  = #{memberid}
+  </select>
+
+  <select id="getLastIndex" parameterType="dbmap" resultType="dbmap">
+    SELECT MAX(memberid) AS lastIndex
+    FROM member_epilogue A
+  </select>
+
+  <select id="getLastFileIndex" parameterType="dbmap" resultType="dbmap">
+    SELECT MAX(sequencenum) AS lastFileIndex
+    FROM notice_file A
+  </select>
+
+  <select id="addressCheck" parameterType="dbmap" resultType="int">
+    SELECT COUNT(*) AS cnt
+    FROM member_epilogue A
+    WHERE A.name  = #{name} AND  A.address  = #{address}
+  </select>
+
+  <select id="idPwDelChk" parameterType="dbmap" resultType="int">
+      SELECT COUNT(*) AS cnt
+      FROM member_epilogue A
+      WHERE A.memberid  = #{memberid} 
+  </select>
+
+  <select id="detail" parameterType="dbmap" resultType="dbmap">
+    SELECT
+            IFNULL(A.memberid,'') memberid,
+            IFNULL(A.epiloguename,'') epiloguename,
+            IFNULL(A.epiloguecontent,'') epiloguecontent,
+            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
+
+    FROM member_epilogue A
+
+
+    WHERE 1=1 AND A.memberid = #{memberid}
+  </select>
+
+  <select id="detailFile" parameterType="dbmap" resultType="dbmap">
+    SELECT
+          B.memberid,
+            DATE_FORMAT( B.regtime,'%Y.%m.%d %H:%i') "regtime",
+            B.sequencenum,
+            B.filetype,
+            B.filename
+
+    FROM member_epilogue A
+      LEFT OUTER JOIN notice_file B ON A.memberid = B.memberid
+
+    WHERE 1=1 AND A.memberid = #{memberid}
+  </select>
+
+
+  <insert id="insert" parameterType="dbmap">
+    INSERT INTO member_epilogue (
+      memberid,
+      epiloguename,
+      epiloguecontent,
+      regtime
+    )
+    VALUES (
+      #{memberid},
+      #{epiloguename},
+      #{epiloguecontent},
+
+      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="memberid" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <insert id="insertFile" parameterType="dbmap">
+    INSERT INTO notice_file (
+      memberid,
+      sequencenum,
+      filetype,
+      filename,
+      regtime
+    )
+    VALUES (
+      #{memberid},
+      #{sequencenum},
+      #{filetype},
+      #{filename},
+      DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
+    )
+    <selectKey resultType="int" keyProperty="sequencenum" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+
+
+  <update id="update" parameterType="dbmap">
+    UPDATE member_epilogue
+    <set>
+      <if test='memberid!= null and memberid != ""'>memberid= #{memberid},</if>
+      <if test='epiloguename!= null and epiloguename != ""'>epiloguename= #{epiloguename},</if>
+      <if test='epiloguecontent!= null and epiloguecontent != ""'>epiloguecontent= #{epiloguecontent},</if>
+      <if test='regtime != null and regtime != ""'>regtime= DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')</if>
+    </set>
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+  <update id="updateHitcount" parameterType="dbmap">
+    UPDATE notice
+    set searchcount = searchcount+1
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </update>
+
+
+  <delete id="delete" parameterType="dbmap">
+    DELETE FROM member_epilogue
+    WHERE 1=1
+    AND memberid = #{memberid}
+  </delete>
+
+  <delete id="deleteFile" parameterType="dbmap">
+    DELETE FROM notice_file
+    WHERE 1=1
+    AND memberid = #{memberid} AND sequencenum = #{sequencenum}
+  </delete>
+
+
+  <select id="countByMemberId" parameterType="dbmap" resultType="int">
+    SELECT COUNT(memberid) cnt
+    FROM member_epilogue
+    WHERE memberid = #{memberid}
+  </select>
+
+
+</mapper>

@@ -38,6 +38,13 @@ public class AppController extends ControllerPageBase {
 
         return rootPath + "mapview";
     }
+    //안드로이드맵뷰
+    @RequestMapping(value = "detailmapview")
+    public String detailmapview(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+
+        return rootPath + "detailmapview";
+    }
 
     //안드로이드공지사항 리스트
     @RequestMapping(value = "notice/mainList")
