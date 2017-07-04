@@ -4,8 +4,8 @@
 <mapper namespace="com.hs.web.mapper.EpilogueMapper">
   <sql id="listConditions">
     WHERE 1=1
-    <if test='sch_memberid != null and sch_memberid != ""'>
-      AND A.memberid  LIKE CONCAT('%', #{sch_memberid},'%')
+    <if test='memberid != null and memberid != ""'>
+      AND A.memberid  = #{memberid}
     </if>
     <if test='sch_noticetitle != null and sch_noticetitle != ""'>
       AND A.noticetitle  LIKE CONCAT('%', #{sch_noticetitle},'%')
@@ -22,7 +22,7 @@
   </sql>
 
   <select id="list" parameterType="dbmap" resultType="dbmap">
-    <include refid="com.hs.web.mapper.paging_start"/>
+
     SELECT
             IFNULL(A.memberid,'') memberid,
             IFNULL(A.epiloguename,'') epiloguename,
@@ -31,16 +31,16 @@
             DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
     FROM member_epilogue A
     <include refid="com.hs.web.mapper.EpilogueMapper.listConditions"/>
-    ORDER BY A.regtime DESC
-    <include refid="com.hs.web.mapper.paging_end"/>
+    ORDER BY A.regtime,A.epiloguename DESC
+
   </select>
 
   <select id="listCnt" parameterType="dbmap" resultType="int">
-    <include refid="com.hs.web.mapper.paging_start"/>
+
     SELECT IFNULL(COUNT(*),0) AS cnt
     FROM member_epilogue A
     <include refid="com.hs.web.mapper.EpilogueMapper.listConditions"/>
-    <include refid="com.hs.web.mapper.paging_end"/>
+
   </select>
 
   <select id="idCheck" parameterType="dbmap" resultType="int">

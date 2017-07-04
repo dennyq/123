@@ -2,7 +2,6 @@ package com.hs.web.service;
 
 import com.hs.DbList;
 import com.hs.ResultMap;
-import com.hs.util.PageUtil;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
@@ -42,9 +41,9 @@ public class EpilogueService extends ServiceBase {
         res.put("rows", list);
 
 
-        res.put("pageTimes", (Integer.parseInt(req.get("page") + "") - 1) * Integer.parseInt(req.get("rows") + ""));
+//        res.put("pageTimes", (Integer.parseInt(req.get("page") + "") - 1) * Integer.parseInt(req.get("rows") + ""));
 
-        res.put("paging", PageUtil.getPaging(req, total));
+//        res.put("paging", PageUtil.getPaging(req, total));
 
         if (Global.isDev) logger.debug("[Epilogue list] send:{}", res);
         return res;
@@ -74,12 +73,7 @@ public class EpilogueService extends ServiceBase {
 
 
 
-        int cnt = mapper.countByMemberId(req);
-        if(cnt>0){
-            mapper.update(req);
-        }else{
-            mapper.insert(req);
-        }
+        mapper.insert(req);
 
 
 
