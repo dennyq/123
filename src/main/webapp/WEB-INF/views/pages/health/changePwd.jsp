@@ -11,9 +11,9 @@
   <%--</div>--%>
 
   <div class="form-group">
-    <label for="noticeindex" class="col-sm-4 ">아이디</label>
+    <label for="healthindex" class="col-sm-4 ">아이디</label>
     <div class="col-sm-6">
-      <input name="noticeindex"  id="noticeindex" placeholder="아이디" class="form-control" value="${data.noticeindex}">
+      <input name="healthindex"  id="healthindex" placeholder="아이디" class="form-control" value="${data.healthindex}">
     </div>
   </div>
   <div class="form-group">

@@ -4,11 +4,11 @@
 <mapper namespace="com.hs.web.mapper.HealthMapper">
   <sql id="listConditions">
     WHERE 1=1
-    <if test='sch_noticeindex != null and sch_noticeindex != ""'>
-      AND A.noticeindex  LIKE CONCAT('%', #{sch_noticeindex},'%')
+    <if test='sch_healthindex != null and sch_healthindex != ""'>
+      AND A.healthindex  LIKE CONCAT('%', #{sch_healthindex},'%')
     </if>
-    <if test='sch_noticetitle != null and sch_noticetitle != ""'>
-      AND A.noticetitle  LIKE CONCAT('%', #{sch_noticetitle},'%')
+    <if test='sch_healthtitle != null and sch_healthtitle != ""'>
+      AND A.healthtitle  LIKE CONCAT('%', #{sch_healthtitle},'%')
     </if>
 
     <if test='sch_usestartdate != null and sch_usestartdate != ""'>
@@ -23,21 +23,21 @@
   <select id="list" parameterType="dbmap" resultType="dbmap">
     <include refid="com.hs.web.mapper.paging_start"/>
     SELECT
-            A.healthindex,    <!--번호-->
-            A.healthtitle,    <!--제목-->
-            A.regid,          <!--아이디-->
-            B.name,           <!--이름-->
-            B.telephone,      <!--전화번호-->
-            B.handphone,      <!--휴대폰번호-->
-            B.job,            <!--직업-->
-            B.specialty,      <!--전문-->
-            B.belongto,       <!--소속-->
-            B.career,         <!--경력-->
-            A.thumbnailfile,  <!--사진-->
-            A.healthcontent,  <!--내용-->
+            A.healthindex,
+            A.healthtitle,
+            A.regid,
+            B.name,
+            B.telephone,
+            B.handphone,
+            B.job,
+            B.specialty,
+            B.belongto,
+            B.career,         
+            A.thumbnailfile,
+            A.healthcontent,
             DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
     FROM health A
-    INNER JOIN special_member B ON A.regid = B.specialid
+      LEFT OUTER JOIN  special_member B ON A.regid = B.specialid
 
     <include refid="com.hs.web.mapper.HealthMapper.listConditions"/>
     ORDER BY A.regtime DESC
@@ -55,11 +55,11 @@
   <select id="idCheck" parameterType="dbmap" resultType="int">
     SELECT COUNT(*) AS cnt
     FROM health A
-      WHERE 1=1 AND A.noticeindex  = #{noticeindex}
+      WHERE 1=1 AND A.healthindex  = #{healthindex}
   </select>
 
   <select id="getLastIndex" parameterType="dbmap" resultType="dbmap">
-    SELECT MAX(noticeindex) AS lastIndex
+    SELECT MAX(healthindex) AS lastIndex
     FROM health A
   </select>
 
@@ -77,73 +77,77 @@
   <select id="idPwDelChk" parameterType="dbmap" resultType="int">
       SELECT COUNT(*) AS cnt
       FROM health A
-      WHERE A.noticeindex  = #{noticeindex} 
+      WHERE A.healthindex  = #{healthindex} 
   </select>
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-            A.noticeindex,
-            A.noticetitle,
+            A.healthindex,
+            A.healthtitle,
             A.regid,
-            A.noticecontent,
+            A.healthcontent,
             A.searchcount,
             DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
 
     FROM health A
 
 
-    WHERE 1=1 AND A.noticeindex = #{noticeindex}
+    WHERE 1=1 AND A.healthindex = #{healthindex}
   </select>
 
   <select id="detailFile" parameterType="dbmap" resultType="dbmap">
     SELECT
-          B.noticeindex,
-            DATE_FORMAT( B.regtime,'%Y.%m.%d %H:%i') "regtime",
-            B.sequencenum,
-            B.filetype,
-            B.filename
+          B.healthindex,
+        DATE_FORMAT( B.regtime,'%Y.%m.%d %H:%i') "regtime",
+        B.sequencenum,
+        B.pictureorder,
+        B.filename
 
     FROM health A
-      LEFT OUTER JOIN notice_file B ON A.noticeindex = B.noticeindex
+      LEFT OUTER JOIN health_file B ON A.healthindex = B.healthindex
 
-    WHERE 1=1 AND A.noticeindex = #{noticeindex}
+    WHERE 1=1 AND A.healthindex = #{healthindex}
   </select>
 
 
   <insert id="insert" parameterType="dbmap">
     INSERT INTO health (
-      noticeindex,
-      noticetitle,
+      healthindex,
+      healthtitle,
       regid,
-      noticecontent,
+      healthcontent,
       searchcount,
+      heartcount,
+      thumbnailfile,
       regtime
     )
     VALUES (
-      #{noticeindex},
-      #{noticetitle},
+      #{healthindex},
+      #{healthtitle},
       #{regid},
-      #{noticecontent},
-      #{searchcount},
+      #{healthcontent},
+      1,
+      1,
+      #{thumbnailfile},
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
-    <selectKey resultType="int" keyProperty="noticeindex" order="AFTER">
+    <selectKey resultType="int" keyProperty="healthindex" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
 
   <insert id="insertFile" parameterType="dbmap">
     INSERT INTO health_file (
-      noticeindex,
+      healthindex,
       sequencenum,
-      filetype,
+      pictureorder,
       filename,
       regtime
     )
     VALUES (
-      #{noticeindex},
+      #{healthindex},
       #{sequencenum},
-      #{filetype},
+      #{pictureorder},
       #{filename},
       DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')
     )
@@ -153,46 +157,49 @@
   </insert>
 
 
-
   <update id="update" parameterType="dbmap">
     UPDATE health
     <set>
-      <if test='noticeindex!= null and noticeindex != ""'>noticeindex= #{noticeindex},</if>
-      <if test='noticetitle!= null and noticetitle != ""'>noticetitle= #{noticetitle},</if>
-      <if test='regid!= null and regid != ""'>regid= #{regid},</if>
-      <if test='noticecontent!= null and noticecontent != ""'>noticecontent= #{noticecontent},</if>
-      <if test='searchcount!= null and searchcount != ""'>searchcount= #{searchcount},</if>
+      <if test='healthindex != null and healthindex != ""'>healthindex= #{healthindex},</if>
+      <if test='healthtitle != null and healthtitle != ""'>healthtitle= #{healthtitle},</if>
+      <if test='regid != null and regid != ""'>regid= #{regid},</if>
+      <if test='healthcontent != null and healthcontent != ""'>healthcontent= #{healthcontent},</if>
+      <if test='searchcount != null and searchcount != ""'>searchcount= #{searchcount},</if>
+      <if test='heartcount != null and heartcount != ""'>heartcount= #{heartcount},</if>
+      <if test='thumbnailfile != null and thumbnailfile != ""'>thumbnailfile= #{thumbnailfile},</if>
       <if test='regtime != null and regtime != ""'>regtime= DATE_FORMAT(NOW()+0,'%Y%m%d%H%i%s')</if>
     </set>
     WHERE 1=1
-    AND noticeindex = #{noticeindex}
+    AND healthindex = #{healthindex}
   </update>
 
+
   <update id="updateHitcount" parameterType="dbmap">
-    UPDATE notice
+    UPDATE health
     set searchcount = searchcount+1
     WHERE 1=1
-    AND noticeindex = #{noticeindex}
+    AND healthindex = #{healthindex}
   </update>
 
 
   <delete id="delete" parameterType="dbmap">
     DELETE FROM health
     WHERE 1=1
-    AND noticeindex = #{noticeindex}
+    AND healthindex = #{healthindex}
   </delete>
+    
 
   <delete id="deleteFile" parameterType="dbmap">
     DELETE FROM health_file
     WHERE 1=1
-    AND noticeindex = #{noticeindex} AND sequencenum = #{sequencenum}
+    AND healthindex = #{healthindex} AND sequencenum = #{sequencenum}
   </delete>
 
 
   <select id="currMemberId" parameterType="dbmap" resultType="String">
-    SELECT IFNULL(MAX(noticeindex),0)
+    SELECT IFNULL(MAX(healthindex),0)
     FROM health
-    WHERE SUBSTRING(noticeindex,1,1) = 'B' AND LENGTH(noticeindex)=10
+    WHERE SUBSTRING(healthindex,1,1) = 'B' AND LENGTH(healthindex)=10
   </select>
 
 

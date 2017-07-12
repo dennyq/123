@@ -48,9 +48,9 @@
 			<exclude-mapping path="/notice"/>
 			<exclude-mapping path="/notice/*"/>
 			<exclude-mapping path="/notice/*/*"/>
-			<exclude-mapping path="/health"/>
-			<exclude-mapping path="/health/*"/>
-			<exclude-mapping path="/health/*/*"/>
+			<!--<exclude-mapping path="/health"/>-->
+			<!--<exclude-mapping path="/health/*"/>-->
+			<!--<exclude-mapping path="/health/*/*"/>-->
 			<beans:bean class="com.hs.web.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 
@@ -95,9 +95,9 @@
 			<exclude-mapping path="/notice"/>
 			<exclude-mapping path="/notice/*"/>
 			<exclude-mapping path="/notice/*/*"/>
-			<exclude-mapping path="/health"/>
-			<exclude-mapping path="/health/*"/>
-			<exclude-mapping path="/health/*/*"/>
+			<!--<exclude-mapping path="/health"/>-->
+			<!--<exclude-mapping path="/health/*"/>-->
+			<!--<exclude-mapping path="/health/*/*"/>-->
 			<beans:bean class="com.hs.web.interceptor.SpecialLoginCheckInterceptor"/>
 		</interceptor>
 	</interceptors>

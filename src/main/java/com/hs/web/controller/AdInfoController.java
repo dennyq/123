@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-// 머신
+/**
+ * 광고관리
+ */
 @Controller
 @RequestMapping(value = "/adinfo/")
 public class AdInfoController extends ControllerPageBase {
@@ -30,7 +32,13 @@ public class AdInfoController extends ControllerPageBase {
     private String rootKey = "adinfo";
     private String rootPath = "pages/" + rootKey + "/";
 
-    //목록
+    /**
+     * 페이지 목록
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "list/{page}")
     public String listPage(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -39,7 +47,13 @@ public class AdInfoController extends ControllerPageBase {
         return rootPath + "list";
     }
 
-    //목록
+    /**
+     * 목록
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "list")
     public String list(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -47,7 +61,13 @@ public class AdInfoController extends ControllerPageBase {
         return rootPath + "list";
     }
 
-    //목록
+    /**
+     * 검색
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "search")
     public String search(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -55,7 +75,13 @@ public class AdInfoController extends ControllerPageBase {
         return rootPath + "list";
     }
 
-    //상세
+    /**
+     * 팝업
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "popup/{adindex}")
     public String infoById(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -64,7 +90,13 @@ public class AdInfoController extends ControllerPageBase {
         return rootPath + "popup";
     }
 
-    //상세
+    /**
+     * 상세페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail/{adindex}")
     public String detail(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -74,16 +106,25 @@ public class AdInfoController extends ControllerPageBase {
     }
 
 
-
-
-    //쓰기페이지
+    /**
+     * 쓰기페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail")
     public String input(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         return rootPath + "detail";
     }
 
-    //쓰기
+    /**
+     * 쓰기
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "write")
     public String write(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -95,7 +136,12 @@ public class AdInfoController extends ControllerPageBase {
         return "redirect:/" + rootKey + "/list";
     }
 
-    //쓰기
+    /**
+     * 글저장(신규/업데이트)
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "save")
     public String save(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -122,7 +168,12 @@ public class AdInfoController extends ControllerPageBase {
         return "redirect:/" + rootKey + "/list";
     }
 
-    //수정
+    /**
+     * 수정
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "modify")
     @ResponseBody
     public ResultMap modify(HttpServletRequest request) throws Exception {
@@ -130,9 +181,15 @@ public class AdInfoController extends ControllerPageBase {
         return service.modify(req);
     }
 
-    //세션바꾸기
+
+    /**
+     * 세션바꾸기
+     * @param request
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "change/{change_uid}")
-//  @ResponseBody
     public String change(HttpServletRequest request, HttpSession session) throws Exception {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
@@ -140,14 +197,16 @@ public class AdInfoController extends ControllerPageBase {
         req.put("login_uid", change_uid);
         session.setAttribute("login_uid", change_uid);
 
-
-//    ResultMap res = ResultMap.create();
-
-
         return rootPath + "list";
     }
 
-    //삭제
+
+    /**
+     * 삭제
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "delete")
     @ResponseBody
     public ResultMap delete(HttpServletRequest request) throws Exception {
@@ -155,7 +214,12 @@ public class AdInfoController extends ControllerPageBase {
         return service.delete(req);
     }
 
-    //  upPlayOrder
+    /**
+     * 순서 위로
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "upPlayOrder/{adindex}/{playorder}")
     @ResponseBody
     public ResultMap upPlayOrder(HttpServletRequest request) throws Exception {
@@ -164,7 +228,13 @@ public class AdInfoController extends ControllerPageBase {
         return service.upPlayOrder(req);
     }
 
-    //  downPlayOrder
+
+    /**
+     * 순서 아래로
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "downPlayOrder/{adindex}/{playorder}")
     @ResponseBody
     public ResultMap downPlayOrder(HttpServletRequest request) throws Exception {
@@ -173,7 +243,14 @@ public class AdInfoController extends ControllerPageBase {
         return service.downPlayOrder(req);
     }
 
-    //광고제목체크
+
+
+    /**
+     * 광고제목체크
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "adCheck")
     @ResponseBody
     public ResultMap adCheck(HttpServletRequest request) throws Exception {

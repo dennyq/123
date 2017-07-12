@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <input type="hidden"  name="isNew" value="N"/>
-<input type="hidden"  name="noticeindex" value="${data.noticeindex}"/>
+<input type="hidden"  name="healthindex" value="${data.healthindex}"/>
 <div class="col-md-12">
     <div class="form-group">
-        <label for="noticetitle" class="col-sm-1">제목</label>
+        <label for="healthtitle" class="col-sm-1">제목</label>
         <div class="col-sm-11">
-            <input name="noticetitle" id="noticetitle" placeholder="제목" class="form-control" value="${data.noticetitle}">
+            <input name="healthtitle" id="healthtitle" placeholder="제목" class="form-control" value="${data.healthtitle}">
         </div>
 
     </div>
@@ -14,23 +14,23 @@
 
 <div class="col-md-12">
     <div class="form-group">
-        <textarea name="noticecontent" id="editor1" rows="10" cols="10">${data.noticecontent}</textarea>
+        <textarea name="healthcontent" id="editor1" rows="10" cols="10">${data.healthcontent}</textarea>
         <script>CKEDITOR.replace('editor1')</script>
     </div>
 </div>
 
 <div class="col-md-12">
     <div class="form-group">
-        <label for="notice_filename" class="col-sm-1 ">파일 :</label>
+        <label for="health_filename" class="col-sm-1 ">파일 :</label>
         <div class="col-sm-11">
 
 
             <c:if test="${file != null}">
                 <c:forEach items="${file}" var="item">
-                    <a href="/upload/notice/${item.filename}"
+                    <a href="/upload/health/${item.filename}"
                           style="cursor: pointer;text-decoration: underline;color: blue">
                         ${item.filename}
-                            </a> <a class="deleteFile" noticeindex="${item.noticeindex}" sequencenum="${item.sequencenum}"  filename="${item.filename}" style="cursor: pointer;text-decoration: none;color: red">x</a><br>
+                            </a> <a class="deleteFile" healthindex="${item.healthindex}" sequencenum="${item.sequencenum}"  filename="${item.filename}" style="cursor: pointer;text-decoration: none;color: red">x</a><br>
                 </c:forEach>
 
             </c:if>
@@ -40,15 +40,15 @@
                 </span>
             </c:if>
 
-            <%--<input name="notice_filename" id="notice_filename" placeholder="사진 파일" class="form-control" type="file">--%>
+            <%--<input name="health_filename" id="health_filename" placeholder="사진 파일" class="form-control" type="file">--%>
         </div>
     </div>
 </div>
 <div class="col-md-12">
     <div class="form-group">
-        <label for="notice_filename" class="col-sm-2 ">파일첨부</label>
+        <label for="health_filename" class="col-sm-2 ">파일첨부</label>
         <div class="col-sm-10">
-            <input name="notice_filename" id="notice_filename" placeholder="사진 파일" class="form-control" type="file" value="${data.filename}">
+            <input name="health_filename" id="health_filename" placeholder="사진 파일" class="form-control" type="file" value="${data.filename}">
         </div>
     </div>
 </div>

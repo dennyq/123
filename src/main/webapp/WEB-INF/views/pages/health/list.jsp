@@ -39,10 +39,10 @@
               <!-- left col-md-6 start -->
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="sch_noticetitle" class="col-sm-2 ">건강정보 제목</label>
+                  <label for="sch_healthtitle" class="col-sm-2 ">건강정보 제목</label>
                   <div class="col-sm-10">
-                    <input name="sch_noticetitle" id="sch_noticetitle" placeholder="건강정보 제목" class="form-control"
-                           value="${sch_noticetitle}">
+                    <input name="sch_healthtitle" id="sch_healthtitle" placeholder="건강정보 제목" class="form-control"
+                           value="${sch_healthtitle}">
                   </div>
                 </div>
               </div>
@@ -132,17 +132,16 @@
                     <td>${total-(pageTimes)-idx.count+1}</td><%--번호--%>
                     <td>${items.healthtitle}</td><%--제목--%>
                     <td>${items.regid}</td><%--아이디--%>
-                    <td>${items.healthcontent}</td><%--이름--%>
-                    <td>${items.searchcount}</td><%--전화번호--%>
-                    <td>${items.heartcount}</td><%--휴대폰번호--%>
-                    <td>${items.regtime}</td><%--직업--%>
-                    <td>${items.thumbnailfile}</td><%--전문--%>
-                    <td>${items.regtime}</td><%--소속--%>
-                    <td>${items.searchcount}</td><%--경력--%>
-                    <td>${items.heartcount}</td><%--사진--%>
-                    <td>${items.regtime}</td><%--내용--%>
-                    <td>${items.thumbnailfile}</td><%--등록시간--%>
-                    <td>${items.regtime}</td>
+                    <td>${items.name}</td><%--이름--%>
+                    <td>${items.telephone}</td><%--전화번호--%>
+                    <td>${items.handphone}</td><%--휴대폰번호--%>
+                    <td>${items.job}</td><%--직업--%>
+                    <td>${items.specialty}</td><%--전문--%>
+                    <td>${items.belongto}</td><%--소속--%>
+                    <td>${items.career}</td><%--경력--%>
+                    <td>${items.thumbnailfile}</td><%--사진--%>
+                    <td>${items.healthcontent}</td><%--내용--%>
+                    <td>${items.regtime}</td><%--등록시간--%>
                   </tr>
                 </c:forEach>
               </c:if>

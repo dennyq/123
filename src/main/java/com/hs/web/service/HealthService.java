@@ -31,7 +31,7 @@ public class HealthService extends ServiceBase {
     //목록
     public ResultMap list(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health list] recv:{}", req);
+        if (Global.isDev) logger.debug("[health list] recv:{}", req);
         req.put("rows", "10");
         setPaging(req);
         if (Global.isDev) logger.debug("[list] recv:{}", req);
@@ -52,14 +52,14 @@ public class HealthService extends ServiceBase {
 
         res.put("paging", PageUtil.getPaging(req, total));
 
-        if (Global.isDev) logger.debug("[Health list] send:{}", res);
+        if (Global.isDev) logger.debug("[health list] send:{}", res);
         return res;
     }
 
     //앱목록
-    public ResultMap HealthList(RequestMap req) {
+    public ResultMap healthList(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health list] recv:{}", req);
+        if (Global.isDev) logger.debug("[health list] recv:{}", req);
 
 
         int p_size;
@@ -95,100 +95,100 @@ public class HealthService extends ServiceBase {
 
 //        res.put("paging", PageUtil.getPaging(req, total));
 
-        if (Global.isDev) logger.debug("[Health list] send:{}", res);
+        if (Global.isDev) logger.debug("[health list] send:{}", res);
         return res;
     }
 
     //앱상세
-    public ResultMap HealthDetail(RequestMap req) {
+    public ResultMap healthDetail(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health detail] recv:{}", req);
+        if (Global.isDev) logger.debug("[health detail] recv:{}", req);
 
         mapper.updateHitcount(req);
 
         res.put("data", mapper.detail(req));
         res.put("file", mapper.detailFile(req));
 
-        if (Global.isDev) logger.debug("[Health detail] send:{}", res);
+        if (Global.isDev) logger.debug("[health detail] send:{}", res);
         return res;
     }
 
     //상세
     public ResultMap detail(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health detail] recv:{}", req);
+        if (Global.isDev) logger.debug("[health detail] recv:{}", req);
 
         mapper.updateHitcount(req);
 
         res.put("data", mapper.detail(req));
         res.put("file", mapper.detailFile(req));
 
-        if (Global.isDev) logger.debug("[Health detail] send:{}", res);
+        if (Global.isDev) logger.debug("[health detail] send:{}", res);
         return res;
     }
 
 
-    //저장
+    /**
+     * todo : 1.건강정보 저장
+     * 건강정보 저장
+     *
+     * @param req
+     * @return
+     * @throws IOException
+     */
     public ResultMap save(RequestMap req) throws IOException {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health save] recv:{}", req);
+        if (Global.isDev) logger.debug("[health save] recv:{}", req);
 
         int lastIndex = 0;
         DbMap lastIndexMap = mapper.getLastIndex(req);
         if (lastIndexMap == null) {
             lastIndex = 0;
-        }else{
-            lastIndex = Integer.parseInt(lastIndexMap.get("lastIndex")+"");
+        } else {
+            lastIndex = Integer.parseInt(lastIndexMap.get("lastIndex") + "");
         }
 
 
-        if (Global.isDev) logger.debug("[Health lastIndex] send:{}", lastIndex);
-        req.put("regid",req.get("login_uid"));
+        if (Global.isDev) logger.debug("[health lastIndex] send:{}", lastIndex);
 
+
+        req.put("regid", req.get("login_uid"));
+
+        /**
+         * 신규저장
+         */
         if (req.get("isNew").equals("Y")) {
 
-            req.put("Healthindex",lastIndex+1);
-            req.put("searchcount",0);
+            req.put("healthindex", lastIndex + 1);
+            req.put("searchcount", 0);
 
 
-          mapper.insert(req);
-          req.put("Healthindex",lastIndex+1);
-            if (Global.isDev) logger.debug("[Health insert] req:{}", req);
+            mapper.insert(req);
+            req.put("healthindex", lastIndex + 1);
+            if (Global.isDev) logger.debug("[health insert] req:{}", req);
 
+
+            /**
+             * 업데이트저장
+             */
         } else {
 
-            if (Global.isDev) logger.debug("[Health update] reqb:{}", req);
+            if (Global.isDev) logger.debug("[health update] reqb:{}", req);
             mapper.update(req);
-            if (Global.isDev) logger.debug("[Health update] req:{}", req);
+            if (Global.isDev) logger.debug("[health update] req:{}", req);
         }
 
 
-        if (Global.isDev) logger.debug("[Health save] send:{}", res);
+        if (Global.isDev) logger.debug("[health save] send:{}", res);
         return res;
     }
 
-    //저장
-    public ResultMap changePwd(RequestMap req) throws IOException {
-        ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[member changePwd] recv:{}", req);
 
-        int idPwCheckCnt = mapper.idPwCheck(req);
-        if (idPwCheckCnt == 1) {
-            mapper.changePwd(req);
-
-        } else {
-            res.put("result_message", "fail");
-        }
-
-
-        if (Global.isDev) logger.debug("[member changePwd] send:{}", res);
-        return res;
-    }
 
     //수정
     public ResultMap modify(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health modify] recv:{}", req);
+        if (Global.isDev) logger.debug("[health modify] recv:{}", req);
 
         if (req.get("joindate") != null && req.get("joindate") != "") {
             String joindate = req.get("joindate") + "";
@@ -217,7 +217,7 @@ public class HealthService extends ServiceBase {
         mapper.update(req);
 
 
-        if (Global.isDev) logger.debug("[Health modify] send:{}", res);
+        if (Global.isDev) logger.debug("[health modify] send:{}", res);
         return res;
     }
 
@@ -225,22 +225,22 @@ public class HealthService extends ServiceBase {
     //삭제
     public ResultMap delete(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health delete] recv:{}", req);
+        if (Global.isDev) logger.debug("[health delete] recv:{}", req);
 
         mapper.delete(req);
 
-        if (Global.isDev) logger.debug("[Health delete] send:{}", res);
+        if (Global.isDev) logger.debug("[health delete] send:{}", res);
         return res;
     }
 
     //비밀번호 변경
     public ResultMap initailizePwd(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health initailizePwd] recv:{}", req);
+        if (Global.isDev) logger.debug("[health initailizePwd] recv:{}", req);
 
         mapper.initailizePwd(req);
 
-        if (Global.isDev) logger.debug("[Health initailizePwd] send:{}", res);
+        if (Global.isDev) logger.debug("[health initailizePwd] send:{}", res);
         return res;
     }
 
@@ -250,7 +250,7 @@ public class HealthService extends ServiceBase {
         RequestMap req = RequestMap.create(request);
         ResultMap res = ResultMap.create();
 
-        if (Global.isDev) logger.debug("[Health uploadImage] recv:{}", req);
+        if (Global.isDev) logger.debug("[health uploadImage] recv:{}", req);
 
         req.put("inputName", "file");
 
@@ -263,7 +263,7 @@ public class HealthService extends ServiceBase {
 
         }
 
-        if (Global.isDev) logger.debug("[Health uploadImage] send:{}", res);
+        if (Global.isDev) logger.debug("[health uploadImage] send:{}", res);
         return res;
     }
 
@@ -272,7 +272,7 @@ public class HealthService extends ServiceBase {
         RequestMap req = RequestMap.create(request);
         ResultMap res = ResultMap.create();
 
-        if (Global.isDev) logger.debug("[Health uploadFile] recv:{}", req);
+        if (Global.isDev) logger.debug("[health uploadFile] recv:{}", req);
 
         req.put("inputName", "file");
 
@@ -284,7 +284,7 @@ public class HealthService extends ServiceBase {
             res.put("attach_file_key", fileService.uploadFile(request, req));
         }
 
-        if (Global.isDev) logger.debug("[Health uploadFile] send:{}", res);
+        if (Global.isDev) logger.debug("[health uploadFile] send:{}", res);
 
         return res;
     }
@@ -292,7 +292,7 @@ public class HealthService extends ServiceBase {
     //아이디체크
     public ResultMap idCheck(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health idCheck] recv:{}", req);
+        if (Global.isDev) logger.debug("[health idCheck] recv:{}", req);
 
         int cnt = mapper.idCheck(req);
 
@@ -300,14 +300,14 @@ public class HealthService extends ServiceBase {
             res.put("result_message", "fail");
         }
 
-        if (Global.isDev) logger.debug("[Health idCheck] send:{}", res);
+        if (Global.isDev) logger.debug("[health idCheck] send:{}", res);
         return res;
     }
 
     //아이디체크
     public ResultMap deleteFile(RequestMap req) {
         ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[Health deleteFile] recv:{}", req);
+        if (Global.isDev) logger.debug("[health deleteFile] recv:{}", req);
 
         int cnt = mapper.deleteFile(req);
         fileService.deleteFile(req);
@@ -315,7 +315,7 @@ public class HealthService extends ServiceBase {
             res.put("result_message", "fail");
         }
 
-        if (Global.isDev) logger.debug("[Health deleteFile] send:{}", res);
+        if (Global.isDev) logger.debug("[health deleteFile] send:{}", res);
         return res;
     }
 }

@@ -28,7 +28,7 @@
     <li><a href="<c:url value="/"/>">HOME</a></li>
     <li><a href="<c:url value="${thisPath}/list"/>">건강정보</a></li>
     <li>
-      <a href="<c:url value="${thisPath}/detail/${data.noticeindex}"/>"><c:if test="${empty data && changePwd ne 'Y'}">건강정보등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">건강정보상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
+      <a href="<c:url value="${thisPath}/detail/${data.healthindex}"/>"><c:if test="${empty data && changePwd ne 'Y'}">건강정보등록</c:if><c:if test="${not empty data && changePwd ne 'Y'}">건강정보상세</c:if><c:if test="${changePwd eq 'Y'}">비밀번호변경</c:if></a>
     </li>
   </ol>
 </section>
@@ -87,9 +87,9 @@
   var saveFunction = function(){
 
 
-    if($('#noticeindex').val() ==''){
+    if($('#healthindex').val() ==''){
       alert('아이디를 입력해주세요');
-      $('#noticeindex').focus();
+      $('#healthindex').focus();
       return false;
     }
     <c:if test="${empty data}">
@@ -179,9 +179,9 @@
     });
 
     $('#id_check').click(function(){
-      if($('#noticeindex').val() ==''){
+      if($('#healthindex').val() ==''){
         alert('아이디를 입력해주세요');
-        $('#noticeindex').focus();
+        $('#healthindex').focus();
         return false;
       }
       var req = {};
@@ -202,13 +202,13 @@
     });
 
     $('.deleteFile').click(function(){
-        var noticeindex = $(this).attr('noticeindex');
+        var healthindex = $(this).attr('healthindex');
         var sequencenum = $(this).attr('sequencenum');
         var filename = $(this).attr('filename');
-        console.log('noticeindex : '+noticeindex);
+        console.log('healthindex : '+healthindex);
         console.log('sequencenum : '+sequencenum);
         var req = {};
-        req.noticeindex = noticeindex;
+        req.healthindex = healthindex;
         req.sequencenum = sequencenum;
         req.filename = filename;
         $als.execute('<c:url value="${thisPath}/deleteFile"/>', req, function (data) {

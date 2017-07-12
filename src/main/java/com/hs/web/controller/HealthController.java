@@ -33,7 +33,12 @@ public class HealthController extends ControllerPageBase {
     private String rootPath = "pages/" + rootKey + "/";
 
 
-    //첫화면
+    /**
+     * index redirect
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/")
     public String index(HttpServletRequest request) throws Exception {
 
@@ -41,8 +46,16 @@ public class HealthController extends ControllerPageBase {
 
     }
 
+    //todo: 여기서 관리자용, sepecial 용으로 나누자.
 
-    //목록
+
+    /**
+     * 페이지목록
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "list/{page}")
     public String listPage(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -53,7 +66,13 @@ public class HealthController extends ControllerPageBase {
         return rootPath + "list";
     }
 
-    //목록
+    /**
+     * 목록
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "list")
     public String list(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -63,7 +82,13 @@ public class HealthController extends ControllerPageBase {
         return rootPath + "list";
     }
 
-    //목록
+    /**
+     * 검색
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "search")
     public String search(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -73,7 +98,13 @@ public class HealthController extends ControllerPageBase {
     }
 
 
-    //쓰기페이지
+    /**
+     * 쓰기페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail")
     public String input(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -81,7 +112,13 @@ public class HealthController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //상세
+    /**
+     * 상세페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail/{healthindex}")
     public String detail(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -92,52 +129,36 @@ public class HealthController extends ControllerPageBase {
     }
 
 
-    //changePwdPage
-    @RequestMapping({"changePwdPage", "changePwdPage/{healthindex}"})
-    public String changePwdPage(HttpServletRequest request, Model model) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        putPathVariable(request, req);
-        model.addAllAttributes(service.detail(req));
-        model.addAttribute("changePwd", "Y");
-        model.addAttribute("thisPath","/"+rootKey);
-        return rootPath + "detail";
-    }
-
-
-    //비밀번호수정
-    @RequestMapping(value = "changePwd")
-    @ResponseBody
-    public ResultMap changePwd(HttpServletRequest request) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        return service.changePwd(req);
-    }
-
-
-
-    //쓰기
+    /**
+     * 저장(신규/업데이트)
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "save")
     public String save(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
-
-        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
-
-        MultipartFile file = mrequest.getFile("health_filename");
-        req.put("inputName","health_filename");
-
         if (req.get("login_uid") == null) {
             throw new BizException("9009", "need_login");
         }
 
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
 
-        service.save(req);
+        MultipartFile file = mrequest.getFile("thumbnailfile");
+        req.put("inputName","thumbnailfile");
+
+
 
         if (Global.isDev) logger.info("[HealthController save] req = {}" + req);
 
         if (file.getSize() > 0) {
             fileService.uploadFiles(request, req);
         } else {
-            req.put("health_filename", null);
+            req.put("thumbnailfile", null);
         }
+        if (Global.isDev) logger.info("[HealthController after upload] req = {}" + req);
+
+        service.save(req);
 
 
 
