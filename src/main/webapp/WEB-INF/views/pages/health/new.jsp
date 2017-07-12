@@ -31,14 +31,7 @@
 </div>
 
 <div>
-    //todo: 업로드된 파일 리스트
-    healthindex,
-    healthtitle,
-    regid,
-    healthcontent,
-    searchcount,
-    thumbnailfile,
-    regtime
+
 </div>
 
 <div class="col-md-12">
