@@ -184,6 +184,16 @@ public class HealthService extends ServiceBase {
     }
 
 
+    /**
+     * NextIndex
+     * @param req
+     * @return
+     */
+    public int getNextIndex(RequestMap req) {
+
+        return mapper.getNextIndex(req);
+    }
+
 
     //수정
     public ResultMap modify(RequestMap req) {

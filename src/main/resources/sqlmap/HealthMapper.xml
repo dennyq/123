@@ -63,6 +63,10 @@
     FROM health A
   </select>
 
+<select id="getNextIndex" resultType="int">
+    SELECT IFNULL((MAX(healthindex)+1),1) FROM health
+</select>
+
   <select id="getLastFileIndex" parameterType="dbmap" resultType="dbmap">
     SELECT MAX(sequencenum) AS lastFileIndex
     FROM health_file A

@@ -152,6 +152,10 @@ public class HealthController extends ControllerPageBase {
         if (Global.isDev) logger.info("[HealthController save] req = {}" + req);
 
         if (file.getSize() > 0) {
+
+            if (req.get("isNew").equals("Y")) {
+                req.put("healthindex", service.getNextIndex(req));
+            }
             fileService.uploadFiles(request, req);
         } else {
             req.put("thumbnailfile", null);

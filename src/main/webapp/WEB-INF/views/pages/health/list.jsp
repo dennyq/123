@@ -139,7 +139,14 @@
                     <td>${items.specialty}</td><%--전문--%>
                     <td>${items.belongto}</td><%--소속--%>
                     <td>${items.career}</td><%--경력--%>
-                    <td>${items.thumbnailfile}</td><%--사진--%>
+                    <td>
+                      <c:if test="${items.thumbnailfile != null}">
+                        <img width="100px" src="/upload/thumbnailfile/${items.thumbnailfile}"/>
+                      </c:if>
+                      <c:if test="${items.thumbnailfile == null}"></c:if>
+
+
+                    </td><%--사진--%>
                     <td>${items.healthcontent}</td><%--내용--%>
                     <td>${items.regtime}</td><%--등록시간--%>
                   </tr>

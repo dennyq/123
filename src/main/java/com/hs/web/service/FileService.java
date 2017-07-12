@@ -152,8 +152,8 @@ public class FileService {
 
             String first = String.format("%010d", indexNum);
 
-            fileIndexStr = first;
-//            fileIndexStr = first + "." + fileExtention;
+
+            fileIndexStr = first + "." + fileExtention;
 
             middleName = "thumbnailfile";
         }
@@ -163,8 +163,17 @@ public class FileService {
 
 
 
-
+        /**
+         todo : 공지사항 파일저장이름 1:N
+         **/
         if (inputName.equals("notice_filename")) {
+
+            randomName = fileIndexStr;
+
+        /**
+         todo : 건강정보 썸네일파일저장 이름 1:1
+         **/
+        }else if (inputName.equals("thumbnailfile")) {
 
             randomName = fileIndexStr;
 

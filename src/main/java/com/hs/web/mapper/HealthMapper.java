@@ -38,4 +38,6 @@ public interface HealthMapper extends CrudMapper {
     DbList detailFile(DbMap req);
 
     int deleteFile(DbMap req);
+
+    int getNextIndex(DbMap req);
 }
