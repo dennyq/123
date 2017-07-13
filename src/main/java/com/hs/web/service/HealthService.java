@@ -152,7 +152,7 @@ public class HealthService extends ServiceBase {
         if (Global.isDev) logger.debug("[health lastIndex] send:{}", lastIndex);
 
 
-        req.put("regid", req.get("login_uid"));
+
 
         /**
          * 신규저장
@@ -240,17 +240,6 @@ public class HealthService extends ServiceBase {
         mapper.delete(req);
 
         if (Global.isDev) logger.debug("[health delete] send:{}", res);
-        return res;
-    }
-
-    //비밀번호 변경
-    public ResultMap initailizePwd(RequestMap req) {
-        ResultMap res = ResultMap.create();
-        if (Global.isDev) logger.debug("[health initailizePwd] recv:{}", req);
-
-        mapper.initailizePwd(req);
-
-        if (Global.isDev) logger.debug("[health initailizePwd] send:{}", res);
         return res;
     }
 

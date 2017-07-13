@@ -86,14 +86,21 @@
 
   <select id="detail" parameterType="dbmap" resultType="dbmap">
     SELECT
-            A.healthindex,
-            A.healthtitle,
-            A.regid,
-            A.healthcontent,
-            A.searchcount,
-            DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i') "regtime"
-
+      A.healthindex,
+      A.healthtitle,
+      A.regid,
+      B.name,
+      B.telephone,
+      B.handphone,
+      B.job,
+      B.specialty,
+      B.belongto,
+      B.career,
+      A.thumbnailfile,
+      A.healthcontent,
+      DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
     FROM health A
+      LEFT OUTER JOIN  special_member B ON A.regid = B.specialid
 
 
     WHERE 1=1 AND A.healthindex = #{healthindex}

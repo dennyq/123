@@ -193,6 +193,7 @@ public class HealthController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
         return service.modify(req);
     }
+
     //삭제
     @RequestMapping(value = "delete")
     @ResponseBody
@@ -201,13 +202,6 @@ public class HealthController extends ControllerPageBase {
         return service.delete(req);
     }
 
-    //비밀번호 변경
-    @RequestMapping(value = "initailizePwd")
-    @ResponseBody
-    public ResultMap initailizePwd(HttpServletRequest request) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        return service.initailizePwd(req);
-    }
 
     //아이디체크
     @RequestMapping(value = "idCheck")

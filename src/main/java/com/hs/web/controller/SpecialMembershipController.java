@@ -71,8 +71,29 @@ public class SpecialMembershipController extends ControllerPageBase {
         return rootPath + "list";
     }
 
+    /**
+     * 목록
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "searchAjax")
+    @ResponseBody
+    public ResultMap searchAjax(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.list(req);
+//        model.addAttribute("thisPath","/"+rootKey);
+//        return rootPath + "list";
+    }
 
-    //쓰기페이지
+    /**
+     * 쓰기페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail")
     public String input(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
