@@ -241,8 +241,9 @@
                 </div><!-- /.row -->
             </div>
             <div class="modal-footer">
+                <button id="selectIdx" type="button" class="btn btn-primary">선택</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">선택</button>
+
             </div>
         </div>
     </div>
@@ -324,72 +325,81 @@
             <td colspan="10">데이터가 없습니다.</td>
         </tr>
         {{/if}}
-        <%--<c:if test="${not empty rows}">--%>
-            <%--<c:forEach items="${rows}" var="items" varStatus="idx">--%>
-                <%--<input type="hidden" id="isClicked"/>--%>
-                <%--<tr class="clickTr" idx="${items.specialid }">--%>
-                    <%--<td>${total-(pageTimes)-idx.count+1}</td>--%>
-                    <%--<td>${items.specialid }</td>--%>
-                    <%--<td>${items.name}</td>--%>
-                    <%--<td>${items.telephone}</td>--%>
-                    <%--<td>${items.handphone}</td>--%>
-                    <%--<td>${items.usestartdate}</td>--%>
-                    <%--<td>${items.useenddate}</td>--%>
-                    <%--<td>${items.job}</td>--%>
-                    <%--<td>${items.specialty}</td>--%>
-                    <%--<td>${items.belongto}</td>--%>
-                    <%--<td>${items.career}</td>--%>
-                    <%--<td>--%>
-                        <%--<c:if test="${items.picturename != null}">--%>
-                            <%--<img width="100px" src="/upload/special_member/${items.picturename}"/>--%>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${items.picturename == null}"></c:if>--%>
-                    <%--</td>--%>
-                    <%--<td>${items.regtime}</td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${empty rows}">--%>
-            <%--<tr>--%>
-                <%--<td colspan="10">데이터가 없습니다.</td>--%>
-            <%--</tr>--%>
-        <%--</c:if>--%>
+
         </tbody>
     </table>
 </script>
 <script>
     $(function(){
+
         getListData();
-        function getListData(){
 
-            var req, url;
-            req = $(this).closest('form').serialize();
+        function getListData() {
+            var req = {}, url;
             url = '/special/membership/searchAjax';
-
+            req.sch_specialid = $('#sch_specialid').val();
+            req.sch_telephone = $('#sch_telephone').val();
+            req.sch_job = $('#sch_job').val();
+            req.sch_belongto = $('#sch_belongto').val();
+            req.sch_usestartdate = $('#sch_usestartdate').val();
+            req.sch_handphone = $('#sch_handphone').val();
+            req.sch_specialty = $('#sch_specialty').val();
+            req.sch_career = $('#sch_career').val();
             $als.execute(url, req, function (data) {
                 if (data.result_message == 'success') {
                     onSuccess(data);
-
                 }
             }, function (err) {
                 alert(err.result_message);
             });
-
         }
+
         function onSuccess(data){
-            console.log(data);
-            $('#search-table').html('');
+//            $('#search-table').html('');
             var source   = $("#list-template").html();
             var template = Handlebars.compile(source);
-
             var html = template(data);
             $('#search-table').html(html);
+
+
+            $('.clickTr').click(function(){
+                $('.clickTr').css('background','#fff');
+                var idx = $(this).attr('idx');
+
+                $(this).css('background','#eee');
+                $('#regid').val(idx);
+
+            });
         }
+
 
         $('#searchBtn').click(function(){
             getListData();
-
         });
+
+        $('#selectIdx').click(function(){
+            $('#searchModal').modal('hide');
+
+            var url = '/special/membership/detailAjax/'+$('#regid').val();;
+            var req = {}
+            $als.execute(url, req, function (data) {
+                if (data.result_message == 'success') {
+                    console.log(data);
+                    console.log($('#name')[0]);
+                    $('#name').val(data.data.name);
+                    $('#telephone').val(data.data.telephone);
+                    $('#handphone').val(data.data.handphone);
+                    $('#job').val(data.data.job);
+                    $('#specialty').val(data.data.specialty);
+                    $('#belongto').val(data.data.belongto);
+                    $('#career').val(data.data.career);
+                }
+            }, function (err) {
+                alert(err.result_message);
+            });
+        });
+
+
     });
 
 </script>

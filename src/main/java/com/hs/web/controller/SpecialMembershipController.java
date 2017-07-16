@@ -101,7 +101,13 @@ public class SpecialMembershipController extends ControllerPageBase {
         return rootPath + "detail";
     }
 
-    //상세
+    /**
+     * 상세페이지
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "detail/{specialid}")
     public String detail(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
@@ -109,6 +115,24 @@ public class SpecialMembershipController extends ControllerPageBase {
         model.addAllAttributes(service.detail(req));
         model.addAttribute("thisPath","/"+rootKey);
         return rootPath + "detail";
+    }
+
+    /**
+     * 상세 AJAX
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "detailAjax/{specialid}")
+    @ResponseBody
+    public ResultMap detailAjax(HttpServletRequest request, Model model) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        return service.detail(req);
+//        model.addAllAttributes(service.detail(req));
+//        model.addAttribute("thisPath","/"+rootKey);
+//        return rootPath + "detail";
     }
 
 

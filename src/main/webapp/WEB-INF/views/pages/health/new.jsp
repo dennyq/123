@@ -51,9 +51,9 @@
         <div class="col-sm-2">
             <input name="belongto" id="belongto" placeholder="제목" class="form-control" value="" readonly>
         </div>
-        <label for="healthcontent" class="col-sm-1">경력</label>
+        <label for="career" class="col-sm-1">경력</label>
         <div class="col-sm-2">
-            <input name="healthcontent" id="healthcontent" placeholder="제목" class="form-control" value="" readonly>
+            <input name="career" id="career" placeholder="제목" class="form-control" value="" readonly>
         </div>
     </div>
 </div>
