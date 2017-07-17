@@ -87,51 +87,12 @@
   var saveFunction = function(){
 
 
-    if($('#healthindex').val() ==''){
-      alert('아이디를 입력해주세요');
-      $('#healthindex').focus();
-      return false;
-    }
-    <c:if test="${empty data}">
-    if($('#password').val() ==''){
-      alert('비밀번호를 입력해주세요');
-      $('#password').focus();
-      return false;
-    }
-    if($('#cfrm_password').val() ==''){
-      alert('비밀번호확인을 입력해주세요');
-      $('#cfrm_password').focus();
-      return false;
-    }
-    </c:if>
-    if($('#name').val() ==''){
-      alert('이름을 입력해주세요');
-      $('#name').focus();
-      return false;
-    }
-    if($('#gubun').val() ==''){
-      alert('약국/병원 구분을 입력해주세요');
-      $('#gubun').focus();
+    if($('#thumbnailfile').val() ==''){
+      alert('썸네일을 올려주세요');
+      $('#thumbnailfile').focus();
       return false;
     }
 
-    if($('#usestartdate').val() ==''){
-      alert('사용시작일자를 입력해주세요');
-      $('#usestartdate').focus();
-      return false;
-    }
-    if($('#useenddate').val() ==''){
-      alert('사용종료일자를 입력해주세요');
-      $('#useenddate').focus();
-      return false;
-    }
-
-    <c:if test="${empty data}">
-
-    </c:if>
-    <c:if test="${empty data}">
-
-    </c:if>
     $('#detailFrm').submit();
 
   }
@@ -147,14 +108,6 @@
 
 
 
-
-
-
-    $('.datepicker').datepicker({
-      format: "yyyy.mm.dd",
-//      startDate: '+0d',
-      todayBtn: true
-    });
 
     $('#delBtn').click(function(){
       var req = {};

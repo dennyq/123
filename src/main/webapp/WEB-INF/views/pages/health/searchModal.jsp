@@ -5,7 +5,7 @@
 <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" >
-        <div class="modal-content" style="width: 1000px;margin-left: -200px">
+        <div class="modal-content" style="width: 1200px;margin-left: -300px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">전문가 목록</h4>
@@ -312,12 +312,11 @@
             <td>{{belongto}}</td>
             <td>{{career}}</td>
             <td>
-                <c:if test="${items.picturename != null}">
-                    <img width="100px" src="/upload/special_member/${items.picturename}"/>
-                </c:if>
-                <c:if test="${items.picturename == null}"></c:if>
+                {{#if picturename}}
+                <img width="100px" src="/upload/special_member/{{picturename}}"/>
+                {{/if}}
             </td>
-            <td>${items.regtime}</td>
+            <td>{{regtime}}</td>
         </tr>
         {{/rows}}
         {{else}}

@@ -83,16 +83,5 @@
     </div>
 </div>
 
-<div>
 
-</div>
-<%--tood:멀티파일업로드--%>
-<%--<div class="col-md-12">--%>
-    <%--<div class="form-group">--%>
-        <%--<label for="health_filename" class="col-sm-1 ">파일</label>--%>
-        <%--<div class="col-sm-11">--%>
-            <%--<input name="health_filename" id="health_filename" placeholder="사진 파일" class="form-control" type="file">--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-
+<%@include file="multiFileUpload.jsp"%>
