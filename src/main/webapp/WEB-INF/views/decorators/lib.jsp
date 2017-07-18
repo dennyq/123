@@ -44,5 +44,5 @@
 <script src="/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
-<script src="<c:url value="/js/common.js"/>"></script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&libraries=services"></script>
+<script src="/js/common.js"></script>
+<%--<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=74c56e6f2090bf55cdcae9f05e8e0baa&libraries=services"></script>--%>

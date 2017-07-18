@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 // 전문가
 @Controller
@@ -136,17 +138,29 @@ public class HealthController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "save")
-    public String save(HttpServletRequest request) throws Exception {
+    public String save(HttpServletRequest request,MultipartHttpServletRequest mrequest) throws Exception {
         RequestMap req = RequestMap.create(request);
         if (req.get("login_uid") == null) {
             throw new BizException("9009", "need_login");
         }
 
-        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
 
         MultipartFile file = mrequest.getFile("thumbnailfile");
         req.put("inputName","thumbnailfile");
+        List<MultipartFile> files = mrequest.getFiles("files");
 
+        List<String> fileNames = new ArrayList<String>();
+
+        if(null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
+
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+                //Handle file content - multipartFile.getInputStream()
+
+            }
+        }
 
 
         if (Global.isDev) logger.info("[HealthController save] req = {}" + req);

@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
+<link rel="stylesheet" href="/css/jquery.fileupload.css"/>
 <script type="text/javascript" src="/js/lib/handlebars.min.js"></script>
 <script type="text/javascript" src="/js/common_handlerbar.js"></script>
-<style>
 
-</style>
-<%--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">--%>
-<!-- Generic page styles -->
-<%--<link rel="stylesheet" href="/css/style.css">--%>
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="/css/jquery.fileupload.css">
 <div class="col-md-12">
     <div class="form-group">
         <label for="fileupload" class="col-sm-1 ">사진파일</label>
@@ -43,7 +37,7 @@
         <td>삭제</td>
     </tr>
     </thead>
-    <tbody id="files" class="files">
+    <tbody id="files" class="files" style=" overflow: auto;">
 
 
     </tbody>
@@ -51,30 +45,30 @@
 
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script type="text/javascript" src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script type="text/javascript" src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
-<script src="/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload.js"></script>
 <!-- The File Upload processing plugin -->
-<script src="/js/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload image preview & resize plugin -->
-<script src="/js/jquery.fileupload-image.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload-image.js"></script>
 <!-- The File Upload audio preview plugin -->
-<script src="/js/jquery.fileupload-audio.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload-audio.js"></script>
 <!-- The File Upload video preview plugin -->
-<script src="/js/jquery.fileupload-video.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload-video.js"></script>
 <!-- The File Upload validation plugin -->
-<script src="/js/jquery.fileupload-validate.js"></script>
-<script>
+<script type="text/javascript" src="/js/jquery.fileupload-validate.js"></script>
+<script type="text/javascript">
     /*jslint unparam: true, regexp: true */
     /*global window, $ */
 
@@ -102,12 +96,13 @@
                             var $this = $(this),
                                     data = $this.data();
                             var rowData =  $this.parent().parent();
-                            var index = rowData.find('[name=pictureorder]');;
-                            console.log('index : '+index);
-//                            rowData.parent().append(rowData.clone(true).data(data))
+                            var index = rowData.find('[name=pictureorder]');
+                            console.log('index : '+index.val());
+
                             var $tr = rowData; // 클릭한 버튼이 속한 tr 요소
+                            $tr.prev().find('[name=pictureorder]').val(index.val());
                             $tr.prev().before($tr); // 현재 tr 의 이전 tr 앞에 선택한 tr 넣기
-                            $tr.find('[name=pictureorder]').val(index);
+                            $tr.find('[name=pictureorder]').val(eval(index.val()-1));
 //                            rowData.clone();
                         })
                 ,downButton= $('<a/>')
@@ -219,5 +214,7 @@
             });
         }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
+//        $('.wrapper').css('height',$('.wrapper').height()+$('#files').height()+'px');
+
     });
 </script>

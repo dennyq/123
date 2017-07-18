@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
-
 <input type="hidden" name="isNew" value="Y"/>
-<%--<input type="hidden" name="regid" value="user-1"/>--%>
-
-
 <div style="border-bottom: 1px solid #eaeaea;padding-bottom: 20px;margin-bottom: 20px;">
     <a id="searchSpecialMember" class="btn btn-blue-green btn-flat md-height" data-toggle="modal" data-target="#searchModal">전문가검색</a>
 </div>
 
 <!-- Button trigger modal -->
-
 <%@include file="searchModal.jsp"%>
-
 
 <div class="col-md-12">
     <div class="form-group">
@@ -32,8 +26,6 @@
         <div class="col-sm-2">
             <input name="handphone" id="handphone" placeholder="제목" class="form-control" value="" readonly>
         </div>
-
-
     </div>
 </div>
 
@@ -83,5 +75,5 @@
     </div>
 </div>
 
-
+<!-- multi File Upload -->
 <%@include file="multiFileUpload.jsp"%>

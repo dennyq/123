@@ -83,8 +83,7 @@ public class SpecialMembershipController extends ControllerPageBase {
     public ResultMap searchAjax(HttpServletRequest request, Model model) throws Exception {
         RequestMap req = RequestMap.create(request);
         return service.list(req);
-//        model.addAttribute("thisPath","/"+rootKey);
-//        return rootPath + "list";
+
     }
 
     /**
