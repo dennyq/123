@@ -3,13 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hs/web/RequestMap.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/HistoryMapper.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sqlmap/MachineMapper.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/commons-logging-1.1.1.jar" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/codebase/webVideoCtrl.js" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/codebase/webVideoCtrl_debug.js" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/dist/css/iFarmer.css" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/downloads/test.html" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/01_sub_모니터링_161012.jpg" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/bt_alertcheck.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/bt_alertcheck_on.png" charset="x-windows-949" />
@@ -58,6 +52,7 @@
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_copy-logo.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_humidity.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_mbg-illust.png" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_recent_location.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_search.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_subhead-bg.png" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/imgs/img_temperture.png" charset="x-windows-949" />
