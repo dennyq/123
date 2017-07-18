@@ -2,12 +2,19 @@
 <%@ include file="/common/include/taglibs.jspf" %>
 <script type="text/javascript" src="/js/lib/handlebars.min.js"></script>
 <script type="text/javascript" src="/js/common_handlerbar.js"></script>
+
+<div style="border-bottom: 1px solid #eaeaea;padding-bottom: 20px;margin-bottom: 20px;">
+    <a id="searchSpecialMember" class="btn btn-blue-green btn-flat md-height" data-toggle="modal"
+       data-target="#searchModal">전문가검색</a>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" >
+    <div class="modal-dialog" role="document">
         <div class="modal-content" style="width: 1200px;margin-left: -300px">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">전문가 목록</h4>
             </div>
             <div class="modal-body">
@@ -28,21 +35,26 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sch_specialid" class="col-sm-4 ">아이디</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_specialid" id="sch_specialid" placeholder="아이디" class="form-control"
+                                                <input name="sch_specialid" id="sch_specialid" placeholder="아이디"
+                                                       class="form-control"
                                                        value="${sch_specialid}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_telephone" id="sch_telephone" placeholder="전화번호" class="form-control"
+                                                <input name="sch_telephone" id="sch_telephone" placeholder="전화번호"
+                                                       class="form-control"
                                                        value="${sch_telephone}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="sch_job" class="col-sm-4 ">직업</label>
+
                                             <div class="col-sm-6">
                                                 <input name="sch_job" id="sch_job" placeholder="직업" class="form-control"
                                                        value="${sch_job}">
@@ -50,16 +62,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="sch_belongto" class="col-sm-4 ">소속</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_belongto" id="sch_belongto" placeholder="소속" class="form-control"
+                                                <input name="sch_belongto" id="sch_belongto" placeholder="소속"
+                                                       class="form-control"
                                                        value="${sch_belongto}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_usestartdate" id="sch_usestartdate" placeholder="사용시작일자"
+                                                <input name="sch_usestartdate" id="sch_usestartdate"
+                                                       placeholder="사용시작일자"
                                                        class="form-control datepicker" value="${sch_usestartdate}">
                                             </div>
                                         </div>
@@ -70,38 +86,47 @@
                                     <div class="col-md-6 right">
                                         <div class="form-group">
                                             <label for="sch_name" class="col-sm-4 ">이름</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_name" id="sch_name" placeholder="이름" class="form-control" value="${sch_name}">
+                                                <input name="sch_name" id="sch_name" placeholder="이름"
+                                                       class="form-control" value="${sch_name}">
                                             </div>
                                         </div>
 
 
                                         <div class="form-group">
                                             <label for="sch_handphone" class="col-sm-4 ">휴대폰번호</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_handphone" id="sch_handphone" placeholder="휴대폰번호" class="form-control"
+                                                <input name="sch_handphone" id="sch_handphone" placeholder="휴대폰번호"
+                                                       class="form-control"
                                                        value="${sch_handphone}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="sch_specialty" class="col-sm-4 ">전문</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_specialty" id="sch_specialty" placeholder="전문" class="form-control"
+                                                <input name="sch_specialty" id="sch_specialty" placeholder="전문"
+                                                       class="form-control"
                                                        value="${sch_specialty}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="sch_career" class="col-sm-4 ">경력</label>
+
                                             <div class="col-sm-6">
-                                                <input name="sch_career" id="sch_career" placeholder="경력" class="form-control"
+                                                <input name="sch_career" id="sch_career" placeholder="경력"
+                                                       class="form-control"
                                                        value="${sch_career}">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="sch_useenddate" class="col-sm-4 ">사용종료일자</label>
+
                                             <div class="col-sm-6">
                                                 <input name="sch_useenddate" id="sch_useenddate" placeholder="사용종료일자"
                                                        class="form-control datepicker" value="${sch_useenddate}">
@@ -191,7 +216,8 @@
                     </div>
 
 
-                </div><!-- /.row -->
+                </div>
+                <!-- /.row -->
             </div>
             <div class="modal-footer">
                 <button id="selectIdx" type="button" class="btn btn-primary">선택</button>
@@ -281,9 +307,10 @@
         </tbody>
     </table>
 </script>
+
 <script>
-    $(function(){
-        $('#searchModal').on('show.bs.modal', function (e) {
+    $(function () {
+        $('#searchSpecialMember').click(function () {
             console.log('searchModal.jsp');
 
             getListData();
@@ -336,7 +363,7 @@
                 $('#searchModal').modal('hide');
 
                 var url = '/special/membership/detailAjax/' + $('#regid').val();
-                ;
+
                 var req = {};
                 $als.execute(url, req, function (data) {
                     if (data.result_message == 'success') {
@@ -355,11 +382,7 @@
                 });
             });
         });
-
-
-
-
-
     });
-//
+
+    //
 </script>

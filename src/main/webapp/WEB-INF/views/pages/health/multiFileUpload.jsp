@@ -1,23 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
-<link rel="stylesheet" href="/css/jquery.fileupload.css"/>
-<script type="text/javascript" src="/js/lib/handlebars.min.js"></script>
-<script type="text/javascript" src="/js/common_handlerbar.js"></script>
 
-<div class="col-md-12">
-    <div class="form-group">
-        <label for="fileupload" class="col-sm-1 ">사진파일</label>
-        <div class="col-sm-11">
-            <%--<input name="thumbnailfile" id="thumbnailfile" placeholder="사진 파일" class="form-control" type="file">--%>
-            <input id="fileupload" type="file" name="files[]" multiple>
-        </div>
-    </div>
-</div>
-<!-- The global progress bar -->
-<%--<div id="progress" class="progress">--%>
-    <%--<div class="progress-bar progress-bar-success"></div>--%>
-<%--</div>--%>
-<%--<div id="files" class="files"></div>--%>
+<link rel="stylesheet" href="/css/jquery.fileupload.css"/>
 <table class="table table-hover pointer">
     <colgroup>
         <col width="1%"/><%--번호--%>
@@ -45,15 +29,15 @@
 
 
 
-<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
+
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script type="text/javascript" src="/js/vendor/jquery.ui.widget.js"></script>
+<%--<script type="text/javascript" src="/js/vendor/jquery.ui.widget.js"></script>--%>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 <script type="text/javascript" src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
 <script type="text/javascript" src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<%--<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--%>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <script type="text/javascript" src="/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
@@ -62,10 +46,7 @@
 <script type="text/javascript" src="/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload image preview & resize plugin -->
 <script type="text/javascript" src="/js/jquery.fileupload-image.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload-video.js"></script>
+
 <!-- The File Upload validation plugin -->
 <script type="text/javascript" src="/js/jquery.fileupload-validate.js"></script>
 <script type="text/javascript">
@@ -214,7 +195,7 @@
             });
         }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
-//        $('.wrapper').css('height',$('.wrapper').height()+$('#files').height()+'px');
+
 
     });
 </script>

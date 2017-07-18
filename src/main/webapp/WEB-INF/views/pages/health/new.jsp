@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
+
+
 <input type="hidden" name="isNew" value="Y"/>
-<div style="border-bottom: 1px solid #eaeaea;padding-bottom: 20px;margin-bottom: 20px;">
-    <a id="searchSpecialMember" class="btn btn-blue-green btn-flat md-height" data-toggle="modal" data-target="#searchModal">전문가검색</a>
-</div>
+
 
 <!-- Button trigger modal -->
 <%@include file="searchModal.jsp"%>
@@ -75,5 +75,13 @@
     </div>
 </div>
 
-<!-- multi File Upload -->
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="fileupload" class="col-sm-1 ">사진파일</label>
+        <div class="col-sm-11">
+            <%--<input name="thumbnailfile" id="thumbnailfile" placeholder="사진 파일" class="form-control" type="file">--%>
+            <input id="fileupload" type="file" name="files" multiple>
+        </div>
+    </div>
+</div>
 <%@include file="multiFileUpload.jsp"%>

@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 // 전문가
@@ -140,40 +139,55 @@ public class HealthController extends ControllerPageBase {
     @RequestMapping(value = "save")
     public String save(HttpServletRequest request,MultipartHttpServletRequest mrequest) throws Exception {
         RequestMap req = RequestMap.create(request);
+        int healthindex = 0;
         if (req.get("login_uid") == null) {
             throw new BizException("9009", "need_login");
         }
 
-//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
 
+
+
+//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+        if (req.get("isNew").equals("Y")) {
+            healthindex =  service.getNextIndex(req);
+        }
+        req.put("healthindex", healthindex);
         MultipartFile file = mrequest.getFile("thumbnailfile");
         req.put("inputName","thumbnailfile");
-        List<MultipartFile> files = mrequest.getFiles("files");
 
-        List<String> fileNames = new ArrayList<String>();
-
-        if(null != files && files.size() > 0) {
-            for (MultipartFile multipartFile : files) {
-
-                String fileName = multipartFile.getOriginalFilename();
-                fileNames.add(fileName);
-                //Handle file content - multipartFile.getInputStream()
-
-            }
+        List<MultipartFile> map = mrequest.getFiles("files");
+        for(int i=0;i<map.size();i++){
+            MultipartFile item = map.get(i);
+            logger.info("mpf = i {}"+i);
+            logger.info("mpf = {}"+item.getOriginalFilename());
         }
-
-
-        if (Global.isDev) logger.info("[HealthController save] req = {}" + req);
+//        MultiValueMap<String, MultipartFile> map = mrequest.getMultiFileMap();
+//        if(map != null) {
+//            Iterator iter = map.keySet().iterator();
+//            while(iter.hasNext()) {
+//                String str = (String) iter.next();
+//                List<MultipartFile> fileList =  map.get(str);
+//                for(MultipartFile mpf : fileList) {
+//                    logger.info("mpf = {}"+mpf.getOriginalFilename());
+////                    File localFile = new File("c:\\temp\\" + StringUtils.trimAllWhitespace(mpf.getOriginalFilename()));
+////                    OutputStream out = new FileOutputStream(localFile);
+////                    out.write(mpf.getBytes());
+////                    out.close();
+//                }
+//            }
+//        }
+//        return null;
 
         if (file.getSize() > 0) {
 
-            if (req.get("isNew").equals("Y")) {
-                req.put("healthindex", service.getNextIndex(req));
-            }
+
             fileService.uploadFiles(request, req);
         } else {
             req.put("thumbnailfile", null);
         }
+
+
+
         if (Global.isDev) logger.info("[HealthController after upload] req = {}" + req);
 
         service.save(req);

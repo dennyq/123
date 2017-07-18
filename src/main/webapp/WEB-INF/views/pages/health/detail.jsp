@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -181,5 +180,6 @@
   <!-- bind end -->
 
 </script>
+
 </body>
 </html>
