@@ -186,4 +186,71 @@
   <data-source name="MySQL - pharmacy@dev" uuid="cdec9802-50f9-48b1-9d7f-ff12a0a73706">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source name="MySQL - pharmacy@local" uuid="83854691-02d7-4182-96eb-9bf8692e066b">
+    <database-info product="MySQL" version="5.5.5-10.2.6-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="kippa"/>
+    <table name="health" schema="" catalog="kippa" type="TABLE">
+      <column name="healthindex" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="healthtitle" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="regid" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="healthcontent" sqlType="VARCHAR" precision="3000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="searchcount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="heartcount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="regtime" sqlType="CHAR" precision="14" scale="0" nullable="false" jdbcType="1"/>
+      <column name="thumbnailfile" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="healthindex"/>
+    </table>
+    <table name="health_file" schema="" catalog="kippa" type="TABLE">
+      <column name="healthindex" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sequencenum" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="filename" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pictureorder" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="regtime" sqlType="CHAR" precision="14" scale="0" nullable="false" jdbcType="1"/>
+    </table>
+    <table name="member" schema="" catalog="kippa" type="TABLE">
+      <column name="memberid" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="JzEyMzQn"/>
+      <column name="grade" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="JzIn"/>
+      <column name="gubun" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="openflag" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1" def="JzEn"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="telephone" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="handphone" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="400" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address_etc" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="introduce" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="latitude" sqlType="DOUBLE" precision="14" scale="10" nullable="true" jdbcType="8"/>
+      <column name="longitude" sqlType="DOUBLE" precision="14" scale="10" nullable="true" jdbcType="8"/>
+      <column name="usestartdate" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="useenddate" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="deleteyn" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="lastconnecttime" sqlType="CHAR" precision="14" scale="0" nullable="true" jdbcType="1"/>
+      <column name="regtime" sqlType="CHAR" precision="14" scale="0" nullable="false" jdbcType="1"/>
+      <column name="worktime" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="slogan" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hospitaldept" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="memberid"/>
+    </table>
+    <table name="special_member" schema="" catalog="kippa" type="TABLE">
+      <column name="specialid" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="JzEyMzQn"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="telephone" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="handphone" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="picturename" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="job" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="specialty" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="belongto" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="career" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="usestartdate" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="useenddate" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="deleteyn" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="regtime" sqlType="CHAR" precision="14" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="specialid"/>
+    </table>
+  </data-source>
 </component>

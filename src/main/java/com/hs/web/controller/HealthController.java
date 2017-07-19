@@ -13,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 // 전문가
 @Controller
@@ -137,7 +137,7 @@ public class HealthController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "save")
-    public String save(HttpServletRequest request,MultipartHttpServletRequest mrequest) throws Exception {
+    public String save(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile[] files) throws Exception {
         RequestMap req = RequestMap.create(request);
         int healthindex = 0;
         if (req.get("login_uid") == null) {
@@ -147,36 +147,24 @@ public class HealthController extends ControllerPageBase {
 
 
 
-//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
         if (req.get("isNew").equals("Y")) {
             healthindex =  service.getNextIndex(req);
         }
         req.put("healthindex", healthindex);
         MultipartFile file = mrequest.getFile("thumbnailfile");
         req.put("inputName","thumbnailfile");
-
-        List<MultipartFile> map = mrequest.getFiles("files");
-        for(int i=0;i<map.size();i++){
-            MultipartFile item = map.get(i);
-            logger.info("mpf = i {}"+i);
-            logger.info("mpf = {}"+item.getOriginalFilename());
+        int multiFileSize = mrequest.getMultiFileMap().size();
+        logger.info("multiFileSize = {}" + multiFileSize);
+//        List<FileMeta> fileMetas = new ArrayList<FileMeta>();
+        for (MultipartFile item : files) {
+            logger.info("multiFile item= {}" + item);
+//            File uploadFile = new File("/", file.getOriginalFilename());
+//            file.transferTo(uploadFile);
+//            FileMeta fileMeta = new FileMeta(uploadFile.getAbsolutePath(), file.getSize(), "");
+//            fileMetas.add(fileMeta);
         }
-//        MultiValueMap<String, MultipartFile> map = mrequest.getMultiFileMap();
-//        if(map != null) {
-//            Iterator iter = map.keySet().iterator();
-//            while(iter.hasNext()) {
-//                String str = (String) iter.next();
-//                List<MultipartFile> fileList =  map.get(str);
-//                for(MultipartFile mpf : fileList) {
-//                    logger.info("mpf = {}"+mpf.getOriginalFilename());
-////                    File localFile = new File("c:\\temp\\" + StringUtils.trimAllWhitespace(mpf.getOriginalFilename()));
-////                    OutputStream out = new FileOutputStream(localFile);
-////                    out.write(mpf.getBytes());
-////                    out.close();
-//                }
-//            }
-//        }
-//        return null;
+
 
         if (file.getSize() > 0) {
 
@@ -197,6 +185,22 @@ public class HealthController extends ControllerPageBase {
         return "redirect:/" + rootKey + "/list";
     }
 
+    /**
+     * 저장테스트 ajax(신규/업데이트)
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "upload")
+    @ResponseBody
+    public ResultMap upload(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile[] files) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        if (Global.isDev) logger.debug("[health upload] recv:{}", req);
+
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health upload] send:{}", res);
+       return res;
+    }
 
 
     //일괄등록팝업
