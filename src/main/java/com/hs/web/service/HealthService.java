@@ -3,7 +3,6 @@ package com.hs.web.service;
 import com.hs.DbList;
 import com.hs.DbMap;
 import com.hs.ResultMap;
-import com.hs.util.PageUtil;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
@@ -32,25 +31,27 @@ public class HealthService extends ServiceBase {
     public ResultMap list(RequestMap req) {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[health list] recv:{}", req);
-        req.put("rows", "10");
-        setPaging(req);
+
+        setPagingApp(req);
+
         if (Global.isDev) logger.debug("[list] recv:{}", req);
 
         DbList list = mapper.list(req);
-        int total = mapper.listCnt(req);
+        int total = list.size();
+        //int total = mapper.listCnt(req);
 
         res.put("total", total);
         res.put("rows", list);
-        res.put("sch_memberid", req.get("sch_memberid"));
-        res.put("sch_joindate", req.get("sch_joindate"));
-        res.put("sch_name", req.get("sch_name"));
-        res.put("sch_usestartdate", req.get("sch_usestartdate"));
-        res.put("sch_useenddate", req.get("sch_useenddate"));
-        res.put("sch_handphone", req.get("sch_handphone"));
+//        res.put("sch_memberid", req.get("sch_memberid"));
+//        res.put("sch_joindate", req.get("sch_joindate"));
+//        res.put("sch_name", req.get("sch_name"));
+//        res.put("sch_usestartdate", req.get("sch_usestartdate"));
+//        res.put("sch_useenddate", req.get("sch_useenddate"));
+//        res.put("sch_handphone", req.get("sch_handphone"));
 
-        res.put("pageTimes", (Integer.parseInt(req.get("page") + "") - 1) * Integer.parseInt(req.get("rows") + ""));
+//        res.put("pageTimes", (Integer.parseInt(req.get("page") + "") - 1) * Integer.parseInt(req.get("rows") + ""));
 
-        res.put("paging", PageUtil.getPaging(req, total));
+//        res.put("paging", PageUtil.getPaging(req, total));
 
         if (Global.isDev) logger.debug("[health list] send:{}", res);
         return res;

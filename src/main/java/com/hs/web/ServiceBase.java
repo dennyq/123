@@ -65,31 +65,31 @@ public class ServiceBase {
 	}
 
 
-	protected void setPaging(RequestMap req) {
+  protected void setPaging(RequestMap req) {
 
-		String page = StringUtil.nvl((String) req.get("page"), "1");
-		String rows =StringUtil.nvl((String) req.get("rows"), "10");
+    String page = StringUtil.nvl((String) req.get("page"), "1");
+    String rows = StringUtil.nvl((String) req.get("rows"), "10");
 
-    int page_num  = UnitUtil.toInt(page);
-    int page_size =  UnitUtil.toInt(rows);
+    int page_num = UnitUtil.toInt(page);
+    int page_size = UnitUtil.toInt(rows);
 
-    req.put("page",page);
-		req.put("p_start", (page_num - 1) * (page_size) );
-		req.put("p_size", page_size);
-	}
-	protected void setPagingApp(RequestMap req) {
+    req.put("page", page);
+    req.put("p_start", (page_num - 1) * (page_size));
+    req.put("p_size", page_size);
+  }
 
-		String p_start_str = StringUtil.nvl((String) req.get("p_start"), "1");
-		String p_size_str =StringUtil.nvl((String) req.get("p_size"), "10");
+  protected void setPagingApp(RequestMap req) {
+
+    String p_start_str = StringUtil.nvl((String) req.get("p_start"), "0");
+    String p_size_str = StringUtil.nvl((String) req.get("p_size"), "10");
 //
-    int p_start  = UnitUtil.toInt(p_start_str);
-    int p_size =  UnitUtil.toInt(p_size_str);
-//
-////    req.put("page",page);
-////		req.put("p_start", (page_num - 1) * (page_size) );
-		req.put("p_start", p_start);
-		req.put("p_size", p_size);
-	}
+    int p_start = UnitUtil.toInt(p_start_str);
+    if (p_start < 0) p_start = 0;
+    int p_size = UnitUtil.toInt(p_size_str);
+    if (p_size < 1) p_start = 1;
+    req.put("p_start", p_start);
+    req.put("p_size", p_size);
+  }
 
 
   protected ResultMap setDownload2(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws IOException

@@ -121,7 +121,11 @@
                     .test(window.navigator.userAgent),
             previewMaxWidth: 100,
             previewMaxHeight: 100,
-            previewCrop: true
+            previewCrop: true,
+//            add:function(e,data){
+//                pendingList.push(data);
+//
+//            },
         }).on('fileuploadadd', function (e, data) {
 
             //todo: make table
@@ -140,6 +144,7 @@
 
                 }
                 node.appendTo(data.context);
+                pendingList.push(data);
             });
         }).on('fileuploadprocessalways', function (e, data) {
             var index = data.index,
