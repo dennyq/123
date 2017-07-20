@@ -31,7 +31,7 @@
             DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
     FROM member_epilogue A
     <include refid="com.hs.web.mapper.EpilogueMapper.listConditions"/>
-    ORDER BY A.regtime,A.epiloguename DESC
+    ORDER BY A.regtime DESC,A.epiloguename
 
   </select>
 

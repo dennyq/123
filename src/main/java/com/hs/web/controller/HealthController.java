@@ -160,22 +160,25 @@ public class HealthController extends ControllerPageBase {
             mpf = mrequest.getFile(itr.next());
             logger.debug("Uploading {}", mpf.getOriginalFilename());
 
-            String newFilenameBase = UUID.randomUUID().toString();
-            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-            String newFilename = newFilenameBase + originalFileExtension;
-//            String storageDirectory = fileUploadDirectory;
-            String contentType = mpf.getContentType();
+//            String newFilenameBase = UUID.randomUUID().toString();
+//            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+//            String newFilename = newFilenameBase + originalFileExtension;
+////            String storageDirectory = fileUploadDirectory;
+//            String contentType = mpf.getContentType();
             logger.error(" upload file " + mpf.getOriginalFilename());
         }
-        if (file.getSize() > 0) {
+        if(file!=null){
+            if (file.getSize() > 0) {
 
 
-            fileService.uploadFiles(request, req);
-        } else {
-            req.put("thumbnailfile", null);
+                fileService.uploadFiles(request, req);
+            } else {
+                req.put("thumbnailfile", null);
+            }
+
+
+
         }
-
-
 
         if (Global.isDev) logger.info("[HealthController after upload] req = {}" + req);
 
@@ -186,6 +189,8 @@ public class HealthController extends ControllerPageBase {
         return "redirect:/" + rootKey + "/list";
     }
 
+
+
     /**
      * 저장테스트 ajax(신규/업데이트)
      * @param request
@@ -194,24 +199,24 @@ public class HealthController extends ControllerPageBase {
      */
     @RequestMapping(value = "upload")
     @ResponseBody
-    public ResultMap upload(HttpServletRequest request,MultipartHttpServletRequest mrequest) throws Exception {
-        RequestMap req = RequestMap.create(request);
-        if (Global.isDev) logger.debug("[health upload] recv:{}", req);
+    public ResultMap upload(MultipartHttpServletRequest request) throws Exception {
+//        RequestMap req = RequestMap.create(request);
+//        if (Global.isDev) logger.debug("[health upload] recv:{}", req);
 //        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
-        Iterator<String> itr = mrequest.getFileNames();
+        Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
 //        List<Image> list = new LinkedList<>();
 
         while (itr.hasNext()) {
-            mpf = mrequest.getFile(itr.next());
+            mpf = request.getFile(itr.next());
             logger.debug("Uploading {}", mpf.getOriginalFilename());
 
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
 //            String storageDirectory = fileUploadDirectory;
-            String contentType = mpf.getContentType();
-            logger.error(" upload file "+mpf.getOriginalFilename());
+//            String contentType = mpf.getContentType();
+//            logger.error(" upload file "+mpf.getOriginalFilename());
 //            File newFile = new File(storageDirectory + "/" + newFilename);
 //            try {
 //                mpf.transferTo(newFile);

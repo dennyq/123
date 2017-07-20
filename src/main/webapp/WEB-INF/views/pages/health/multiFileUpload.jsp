@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
-<%--<div class="col-md-12">--%>
-    <%--<div class="form-group">--%>
-        <%--<label for="fileupload" class="col-sm-1 ">사진파일</label>--%>
-        <%--<div class="col-sm-11">--%>
-            <%--&lt;%&ndash;<input name="thumbnailfile" id="thumbnailfile" placeholder="사진 파일" class="form-control" type="file">&ndash;%&gt;--%>
-            <%--<input id="fileupload" type="file" name="files[]" multiple>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-<%--<link rel="stylesheet" href="/css/style.css">--%>
-<!-- blueimp Gallery styles -->
-<%--<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">--%>
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+
 <link rel="stylesheet" href="/css/jquery.fileupload.css">
 <link rel="stylesheet" href="/css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
+<%--<!-- CSS adjustments for browsers with JavaScript disabled -->--%>
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-ui-noscript.css"></noscript>
 
@@ -163,10 +151,7 @@
 <script src="/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload image preview & resize plugin -->
 <script src="/js/jquery.fileupload-image.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="/js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="/js/jquery.fileupload-video.js"></script>
+
 <!-- The File Upload validation plugin -->
 <script src="/js/jquery.fileupload-validate.js"></script>
 <!-- The File Upload user interface plugin -->

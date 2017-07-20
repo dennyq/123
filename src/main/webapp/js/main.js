@@ -18,7 +18,9 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        //url: '/health/save'
+        //url: '/health/upload',
+        //formData: {example: 'test'}
+        formData:$('#detailFrm').serializeArray(),
         autoUpload:false
 
     });

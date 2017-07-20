@@ -82,7 +82,7 @@
 <script>
 
 
-  var pendingList=[];
+//  var pendingList=[];
   var saveFunction = function(){
 
 
@@ -91,8 +91,8 @@
       $('#thumbnailfile').focus();
       return false;
     }
-    pendingList.forEach(function (data) { data.submit(); });
-    pendingList = [];
+//    pendingList.forEach(function (data) { data.submit(); });
+//    pendingList = [];
 
     $('#detailFrm').submit();
 
