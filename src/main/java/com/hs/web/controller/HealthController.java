@@ -13,12 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
+import java.util.UUID;
 
 // 전문가
 @Controller
@@ -137,15 +138,12 @@ public class HealthController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "save")
-    public String save(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile[] files) throws Exception {
+    public String save(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
         int healthindex = 0;
         if (req.get("login_uid") == null) {
             throw new BizException("9009", "need_login");
         }
-
-
-
 
         MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
         if (req.get("isNew").equals("Y")) {
@@ -154,18 +152,21 @@ public class HealthController extends ControllerPageBase {
         req.put("healthindex", healthindex);
         MultipartFile file = mrequest.getFile("thumbnailfile");
         req.put("inputName","thumbnailfile");
-        int multiFileSize = mrequest.getMultiFileMap().size();
-        logger.info("multiFileSize = {}" + multiFileSize);
-//        List<FileMeta> fileMetas = new ArrayList<FileMeta>();
-        for (MultipartFile item : files) {
-            logger.info("multiFile item= {}" + item);
-//            File uploadFile = new File("/", file.getOriginalFilename());
-//            file.transferTo(uploadFile);
-//            FileMeta fileMeta = new FileMeta(uploadFile.getAbsolutePath(), file.getSize(), "");
-//            fileMetas.add(fileMeta);
+
+        //todo: health_file
+        Iterator<String> itr = mrequest.getFileNames();
+        MultipartFile mpf;
+        while (itr.hasNext()) {
+            mpf = mrequest.getFile(itr.next());
+            logger.debug("Uploading {}", mpf.getOriginalFilename());
+
+            String newFilenameBase = UUID.randomUUID().toString();
+            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+            String newFilename = newFilenameBase + originalFileExtension;
+//            String storageDirectory = fileUploadDirectory;
+            String contentType = mpf.getContentType();
+            logger.error(" upload file " + mpf.getOriginalFilename());
         }
-
-
         if (file.getSize() > 0) {
 
 
@@ -193,10 +194,57 @@ public class HealthController extends ControllerPageBase {
      */
     @RequestMapping(value = "upload")
     @ResponseBody
-    public ResultMap upload(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile[] files) throws Exception {
+    public ResultMap upload(HttpServletRequest request,MultipartHttpServletRequest mrequest) throws Exception {
         RequestMap req = RequestMap.create(request);
         if (Global.isDev) logger.debug("[health upload] recv:{}", req);
+//        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+        Iterator<String> itr = mrequest.getFileNames();
+        MultipartFile mpf;
+//        List<Image> list = new LinkedList<>();
 
+        while (itr.hasNext()) {
+            mpf = mrequest.getFile(itr.next());
+            logger.debug("Uploading {}", mpf.getOriginalFilename());
+
+            String newFilenameBase = UUID.randomUUID().toString();
+            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+            String newFilename = newFilenameBase + originalFileExtension;
+//            String storageDirectory = fileUploadDirectory;
+            String contentType = mpf.getContentType();
+            logger.error(" upload file "+mpf.getOriginalFilename());
+//            File newFile = new File(storageDirectory + "/" + newFilename);
+//            try {
+//                mpf.transferTo(newFile);
+//
+//                BufferedImage thumbnail = Scalr.resize(ImageIO.read(newFile), 290);
+//                String thumbnailFilename = newFilenameBase + "-thumbnail.png";
+//                File thumbnailFile = new File(storageDirectory + "/" + thumbnailFilename);
+//                ImageIO.write(thumbnail, "png", thumbnailFile);
+//
+//                Image image = new Image();
+//                image.setName(mpf.getOriginalFilename());
+//                image.setThumbnailFilename(thumbnailFilename);
+//                image.setNewFilename(newFilename);
+//                image.setContentType(contentType);
+//                image.setSize(mpf.getSize());
+//                image.setThumbnailSize(thumbnailFile.length());
+//                image = imageDao.create(image);
+//
+//                image.setUrl("/picture/"+image.getId());
+//                image.setThumbnailUrl("/thumbnail/"+image.getId());
+//                image.setDeleteUrl("/delete/"+image.getId());
+//                image.setDeleteType("DELETE");
+//
+//                list.add(image);
+//
+//            } catch(IOException e) {
+//
+//            }
+
+        }
+
+//        Map<String, Object> files = new HashMap<>();
+//        files.put("files", list);
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[health upload] send:{}", res);
        return res;

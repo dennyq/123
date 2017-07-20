@@ -75,13 +75,5 @@
     </div>
 </div>
 
-<div class="col-md-12">
-    <div class="form-group">
-        <label for="fileupload" class="col-sm-1 ">사진파일</label>
-        <div class="col-sm-11">
-            <%--<input name="thumbnailfile" id="thumbnailfile" placeholder="사진 파일" class="form-control" type="file">--%>
-            <input id="fileupload" type="file" name="files[]" multiple>
-        </div>
-    </div>
-</div>
+
 <%@include file="multiFileUpload.jsp"%>

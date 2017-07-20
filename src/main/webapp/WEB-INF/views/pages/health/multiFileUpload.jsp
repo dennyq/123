@@ -1,206 +1,181 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/include/taglibs.jspf" %>
+<%--<div class="col-md-12">--%>
+    <%--<div class="form-group">--%>
+        <%--<label for="fileupload" class="col-sm-1 ">사진파일</label>--%>
+        <%--<div class="col-sm-11">--%>
+            <%--&lt;%&ndash;<input name="thumbnailfile" id="thumbnailfile" placeholder="사진 파일" class="form-control" type="file">&ndash;%&gt;--%>
+            <%--<input id="fileupload" type="file" name="files[]" multiple>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+<%--<link rel="stylesheet" href="/css/style.css">--%>
+<!-- blueimp Gallery styles -->
+<%--<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">--%>
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="/css/jquery.fileupload.css">
+<link rel="stylesheet" href="/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="/css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="/css/jquery.fileupload-ui-noscript.css"></noscript>
 
-<link rel="stylesheet" href="/css/jquery.fileupload.css"/>
-<table class="table table-hover pointer">
-    <colgroup>
-        <col width="1%"/><%--번호--%>
-        <col width="7%"/><%--파일명--%>
-        <col width="*"/><%--사진--%>
-        <col width="10%"/><%--사진순서(위로이동)--%>
-        <col width="10%"/><%--사진순서(아래로이동)--%>
-        <col width="8%"/><%--삭제--%>
-    </colgroup>
-    <thead>
-    <tr class="bg-gray text-align-center">
-        <td>번호</td>
-        <td>파일명</td>
-        <td>사진</td>
-        <td>사진순서<br/>(위로이동)</td>
-        <td>사진순서<br/>(아래로이동)</td>
-        <td>삭제</td>
+
+<div id="fileupload" >
+<%--<form id="fileupload" action='<c:url value="/health/upload"/>' method="POST" enctype="multipart/form-data">--%>
+    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+    <%--<noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>--%>
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+        <div class="col-lg-7">
+            <label for="health_file" class="col-sm-1 ">사진파일</label>
+            <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" id="health_file" name="files[]" multiple>
+                </span>
+            <button type="submit" class="btn btn-primary start">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>Start upload</span>
+            </button>
+            <button type="reset" class="btn btn-warning cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Cancel upload</span>
+            </button>
+            <button type="button" class="btn btn-danger delete">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span>Delete</span>
+            </button>
+            <input type="checkbox" class="toggle">
+            <!-- The global file processing state -->
+            <span class="fileupload-process"></span>
+        </div>
+        <!-- The global progress state -->
+        <div class="col-lg-5 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+            </div>
+            <!-- The extended global progress state -->
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+    </div>
+    <!-- The table listing the files available for upload/download -->
+    <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+<%--</form>--%>
+</div>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
     </tr>
-    </thead>
-    <tbody id="files" class="files" style=" overflow: auto;">
-
-
-    </tbody>
-</table>
-
-
-
-
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<%--<script type="text/javascript" src="/js/vendor/jquery.ui.widget.js"></script>--%>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script type="text/javascript" src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script type="text/javascript" src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<%--<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--%>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script type="text/javascript" src="/js/jquery.iframe-transport.js"></script>
-<!-- The basic File Upload plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload-process.js"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload-image.js"></script>
-
-<!-- The File Upload validation plugin -->
-<script type="text/javascript" src="/js/jquery.fileupload-validate.js"></script>
-<script type="text/javascript">
-    /*jslint unparam: true, regexp: true */
-    /*global window, $ */
-
-    $(function () {
-        'use strict';
-        // Change this to the location of your server-side upload handler:
-        var url = '/',
-                deleteButton = $('<a/>')
-                        .addClass('btn btn-danger delete-btn')
-                        .prop('disabled', true)
-                        .text('Processing...')
-                        .on('click', function () {
-                            var $this = $(this),
-                                    data = $this.data();
-                            $this.parent().parent().remove();
-                            //todo: list 삭제
-
-
-                        })
-                ,upButton= $('<a/>')
-                        .addClass('btn btn-primary up-btn')
-                        .prop('disabled', true)
-                        .text('Processing...')
-                        .on('click', function () {
-                            var $this = $(this),
-                                    data = $this.data();
-                            var rowData =  $this.parent().parent();
-                            var index = rowData.find('[name=pictureorder]');
-                            console.log('index : '+index.val());
-
-                            var $tr = rowData; // 클릭한 버튼이 속한 tr 요소
-                            $tr.prev().find('[name=pictureorder]').val(index.val());
-                            $tr.prev().before($tr); // 현재 tr 의 이전 tr 앞에 선택한 tr 넣기
-                            $tr.find('[name=pictureorder]').val(eval(index.val()-1));
-//                            rowData.clone();
-                        })
-                ,downButton= $('<a/>')
-                        .addClass('btn btn-primary down-btn')
-                        .prop('disabled', true)
-                        .text('Processing...')
-                        .on('click', function () {
-                            var $this = $(this),
-                                    data = $this.data();
-                            var rowData =  $this.parent().parent();
-//                            $this
-//                                    .off('click')
-//                                    .text('Abort')
-//                                    .on('click', function () {
-////                                        $this.remove();
-////                                        data.abort();
-//                                    });
-                            var $tr = rowData; // 클릭한 버튼이 속한 tr 요소
-                            $tr.next().after($tr); // 현재 tr 의 다음 tr 뒤에 선택한 tr 넣기
-//                            data.submit().always(function () {
-//                                $this.remove();
-//                            });
-                        });
-        var fileIndex= 0,prevIndex=0;
-        $('#fileupload').fileupload({//test
-            url: url,
-            dataType: 'json',
-            autoUpload: false,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 999000,
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/
-                    .test(window.navigator.userAgent),
-            previewMaxWidth: 100,
-            previewMaxHeight: 100,
-            previewCrop: true,
-//            add:function(e,data){
-//                pendingList.push(data);
-//
-//            },
-        }).on('fileuploadadd', function (e, data) {
-
-            //todo: make table
-            console.log(data);
-            data.context = $('#files');
-            $.each(data.files, function (index, file) {
-                var node = $('<tr/>');
-                fileIndex++;
-                if (!index) {
-                    node .append($('<td/>').html('<input id="pictureorder'+fileIndex+'" name="pictureorder" value="'+fileIndex+'"/>'+fileIndex))/*번호*/
-                            .append($('<td/>').html(file.name))   /*파일명*/
-                            .append($('<td/>').html('<span class="preview"></span>'))   /*사진*/
-                            .append($('<td/>').html(upButton.clone(true).data(data)))/*위로버튼*/
-                            .append($('<td/>').html(downButton.clone(true).data(data)))/*아래버튼*/
-                            .append($('<td/>').html(deleteButton.clone(true).data(data)));/*삭제버튼*/
-
-                }
-                node.appendTo(data.context);
-                pendingList.push(data);
-            });
-        }).on('fileuploadprocessalways', function (e, data) {
-            var index = data.index,
-                    file = data.files[index],
-                    node = $(data.context.find('tr').eq(prevIndex));
-            if (file.preview) {
-                node.find('.preview').prepend(file.preview);
-                prevIndex++;
-            }
-            if (file.error) {
-                node
-                        .append('<br>')
-                        .append($('<span class="text-danger"/>').text(file.error));
-            }
-            if (index + 1 === data.files.length) {
-                data.context.find('a.up-btn')
-                        .html('<i class="fa fa-fw fa-arrow-up"></i>')
-                        .prop('disabled', !!data.files.error);
-                data.context.find('a.down-btn')
-                        .html('<i class="fa fa-fw fa-arrow-down"></i>')
-                        .prop('disabled', !!data.files.error);
-                data.context.find('a.delete-btn')
-                        .html('삭제')
-                        .prop('disabled', !!data.files.error);
-            }
-        }).on('fileuploadprogressall', function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-            );
-        }).on('fileuploaddone', function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                if (file.url) {
-                    var link = $('<a>')
-                            .attr('target', '_blank')
-                            .prop('href', file.url);
-                    $(data.context.children()[index])
-                            .wrap(link);
-                } else if (file.error) {
-                    var error = $('<span class="text-danger"/>').text(file.error);
-                    $(data.context.children()[index])
-                            .append('<br>')
-                            .append(error);
-                }
-            });
-        }).on('fileuploadfail', function (e, data) {
-            $.each(data.files, function (index) {
-                var error = $('<span class="text-danger"/>').text('File upload failed.');
-                $(data.context.children()[index])
-                        .append('<br>')
-                        .append(error);
-            });
-        }).prop('disabled', !$.support.fileInput)
-                .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
-
-    });
+{% } %}
 </script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<%--<script src="/js/jquery-1.11.0.min.js"></script>--%>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<%--<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>--%>
+<script src="/js/load-image.js"></script>
+<script src="/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="/js/bootstrap-3.1.1.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script src="/js/main.js"></script>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="/js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+
+
