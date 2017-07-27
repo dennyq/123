@@ -142,6 +142,7 @@
             LEFT OUTER JOIN health_file B ON A.healthindex = B.healthindex
 
         WHERE 1 = 1 AND A.healthindex = #{healthindex}
+        ORDER BY B.pictureorder ASC
     </select>
 
 
