@@ -122,7 +122,20 @@ public class HealthService extends ServiceBase {
         mapper.updateHitcount(req);
 
         res.put("data", mapper.detail(req));
-        res.put("file", mapper.detailFile(req));
+        DbList fileDList = mapper.detailFile(req);
+        if (fileDList != null) {
+            String healthidx = String.format("%010d", Integer.parseInt((String) req.get("healthindex")));
+            res.put("healthidx",healthidx);
+            res.put("fileData", fileDList);
+
+            int total = fileDList.size();
+            if(total>=1){
+                DbMap orderMinMax = mapper.getOrderMinMax(req);
+                res.put("ordermin",orderMinMax.get("ordermin"));
+                res.put("ordermax",orderMinMax.get("ordermax"));
+
+            }
+        }
 
         if (Global.isDev) logger.debug("[health detail] send:{}", res);
         return res;
@@ -181,6 +194,66 @@ public class HealthService extends ServiceBase {
 
 
         if (Global.isDev) logger.debug("[health save] send:{}", res);
+        return res;
+    }
+
+    /**
+     * todo : 1.건강사ㅏ진 저장
+     * 건강사ㅏ진 저장
+     *
+     * @param req
+     * @return
+     * @throws IOException
+     */
+    public ResultMap saveFile(RequestMap req) throws IOException {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health saveFile] recv:{}", req);
+
+        int sequencenum = mapper.getNextFileSeq(req);
+        req.put("sequencenum",sequencenum);
+        req.put("pictureorder", 1);
+        mapper.insertFile(req);
+
+//        int lastIndex = 0;
+//        DbMap lastIndexMap = mapper.getLastIndex(req);
+//        if (lastIndexMap == null) {
+//            lastIndex = 0;
+//        } else {
+//            lastIndex = Integer.parseInt(lastIndexMap.get("lastIndex") + "");
+//        }
+//
+//
+//        if (Global.isDev) logger.debug("[health lastIndex] send:{}", lastIndex);
+//
+//
+//
+//
+//        /**
+//         * 신규저장
+//         */
+//        if (req.get("isNew").equals("Y")) {
+//
+//            req.put("healthindex", lastIndex + 1);
+//            req.put("searchcount", 0);
+//
+//
+//            mapper.insert(req);
+//            req.put("healthindex", lastIndex + 1);
+//            if (Global.isDev) logger.debug("[health insert] req:{}", req);
+//
+//
+//            /**
+//             * 업데이트저장
+//             */
+//        } else {
+//
+//            if (Global.isDev) logger.debug("[health update] reqb:{}", req);
+//            mapper.update(req);
+//            if (Global.isDev) logger.debug("[health update] req:{}", req);
+//        }
+
+
+        if (Global.isDev) logger.debug("[health save] saveFile:{}", res);
         return res;
     }
 
@@ -310,7 +383,7 @@ public class HealthService extends ServiceBase {
         if (Global.isDev) logger.debug("[health deleteFile] recv:{}", req);
 
         int cnt = mapper.deleteFile(req);
-        fileService.deleteFile(req);
+        fileService.deleteHealthFile(req);
         if (cnt > 0) {
             res.put("result_message", "fail");
         }
@@ -318,4 +391,49 @@ public class HealthService extends ServiceBase {
         if (Global.isDev) logger.debug("[health deleteFile] send:{}", res);
         return res;
     }
+
+
+    //아이디체크
+    public ResultMap deleteHealthFile(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health deleteHealthFile] recv:{}", req);
+
+        int cnt = mapper.deleteHealthFile(req);
+        fileService.deleteHealthFile(req);
+        if (cnt > 0) {
+            res.put("result_message", "fail");
+        }
+
+        if (Global.isDev) logger.debug("[health deleteHealthFile] send:{}", res);
+        return res;
+    }
+
+
+
+    //upPlayOrder
+    public ResultMap upOrder(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[adinfo upOrder] recv:{}", req);
+
+        mapper.upOrderOther(req);
+
+
+        mapper.upOrder(req);
+
+        if (Global.isDev) logger.debug("[adinfo upOrder] send:{}", res);
+        return res;
+    }
+
+    public ResultMap downOrder(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[adinfo downOrder] recv:{}", req);
+
+        mapper.downOrderOther(req);
+
+        mapper.downOrder(req);
+
+        if (Global.isDev) logger.debug("[adinfo downOrder] send:{}", res);
+        return res;
+    }
+
 }

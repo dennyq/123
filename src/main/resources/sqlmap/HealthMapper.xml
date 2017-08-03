@@ -132,17 +132,17 @@
 
     <select id="detailFile" parameterType="dbmap" resultType="dbmap">
         SELECT
-            B.healthindex,
-            DATE_FORMAT(B.regtime, '%Y.%m.%d %H:%i') "regtime",
-            B.sequencenum,
-            B.pictureorder,
-            B.filename
+            A.healthindex,
+            DATE_FORMAT(A.regtime, '%Y.%m.%d %H:%i') "regtime",
+            A.sequencenum,
+            A.pictureorder,
+            A.filename
 
-        FROM health A
-            LEFT OUTER JOIN health_file B ON A.healthindex = B.healthindex
+        FROM health_file A
+
 
         WHERE 1 = 1 AND A.healthindex = #{healthindex}
-        ORDER BY B.pictureorder ASC
+        ORDER BY A.pictureorder ASC
     </select>
 
 
@@ -231,12 +231,58 @@
               AND healthindex = #{healthindex} AND sequencenum = #{sequencenum}
     </delete>
 
+    <delete id="deleteHealthFile" parameterType="dbmap">
+        DELETE FROM health_file
+        WHERE 1 = 1
+              AND healthindex = #{healthindex} AND sequencenum = #{sequencenum}
+    </delete>
+
 
     <select id="currMemberId" parameterType="dbmap" resultType="String">
         SELECT IFNULL(MAX(healthindex), 0)
         FROM health
         WHERE SUBSTRING(healthindex, 1, 1) = 'B' AND LENGTH(healthindex) = 10
     </select>
+
+    <select id="getNextFileSeq" parameterType="dbmap" resultType="int">
+
+        select ifnull(max(sequencenum), 0)+1
+        from health_file
+        where healthindex = #{healthindex}
+    </select>
+
+    <select id="getOrderMinMax" parameterType="dbmap" resultType="dbmap">
+        SELECT MIN(pictureorder) "ordermin", MAX(pictureorder) "ordermax" from health_file WHERE healthindex = #{healthindex}
+    </select>
+
+
+    <update id="upOrder" parameterType="dbmap">
+        UPDATE health_file
+        SET pictureorder = pictureorder-1
+        WHERE 1=1
+        AND healthindex = #{healthindex} AND sequencenum = #{sequencenum}
+    </update>
+
+    <update id="upOrderOther" parameterType="dbmap">
+        UPDATE health_file
+        SET pictureorder = pictureorder+1
+        WHERE 1=1
+        AND pictureorder = #{pictureorder}-1 AND healthindex = #{healthindex}
+    </update>
+
+    <update id="downOrder" parameterType="dbmap">
+        UPDATE health_file
+        SET pictureorder = pictureorder + 1
+        WHERE 1=1
+        AND healthindex = #{healthindex}  AND sequencenum = #{sequencenum}
+    </update>
+
+    <update id="downOrderOther" parameterType="dbmap">
+        UPDATE health_file
+        SET pictureorder = pictureorder - 1
+        WHERE 1=1
+        AND pictureorder = #{pictureorder}+1 AND healthindex = #{healthindex}
+    </update>
 
 
 </mapper>

@@ -6,6 +6,7 @@ import com.hs.util.DateUtil;
 import com.hs.web.Global;
 import com.hs.web.PathManager;
 import com.hs.web.RequestMap;
+import com.hs.web.mapper.HealthMapper;
 import com.hs.web.mapper.NoticeMapper;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
@@ -37,6 +38,8 @@ public class FileService {
     private PathManager pathManager;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private HealthMapper healthMapper;
 
     //업로드
     public String uploadFile(HttpServletRequest request, RequestMap req) throws Exception {
@@ -156,6 +159,30 @@ public class FileService {
             fileIndexStr = first + "." + fileExtention;
 
             middleName = "healthinfo/thumbnailfile";
+
+        /**
+         todo : 건강정보 사진저장 1:N
+         **/
+        } else if (inputName.equals("health_file")) {//공지사항
+//            healthindex(%10d) + '.' + 확장자. 예)0000000012.png
+
+            int indexNum = 0;
+            if (req.get("healthindex") != null) {
+                indexNum = Integer.parseInt(req.get("healthindex") + "");
+            }
+
+
+
+            String first = String.format("%010d", indexNum);
+
+            //todo: getsecond healthMapper
+            int getNextFileSeq = healthMapper.getNextFileSeq(req);
+            String second = String.format("%03d", getNextFileSeq);
+
+
+            fileIndexStr = first + "_" + second + "." + fileExtention;
+//            트 /upload/healthinfo/healthfiles/0000000001/0000000001_001.png
+            middleName = "healthinfo/healthfiles/"+first;
         }
 
 
@@ -174,6 +201,14 @@ public class FileService {
          todo : 건강정보 썸네일파일저장 이름 1:1
          **/
         }else if (inputName.equals("thumbnailfile")) {
+
+            randomName = fileIndexStr;
+
+
+        /**
+         todo : 건강정보 썸네일파일저장 이름 1:NM
+         **/
+        }else if (inputName.equals("health_file")) {
 
             randomName = fileIndexStr;
 
@@ -355,6 +390,27 @@ public class FileService {
     public void deleteFile(RequestMap req) {
         String deletePath = Global.UPLOAD_PATH + "/notice/" + req.get("filename");
         if (Global.isDev) logger.debug("[notice deleteFile] deletePath:{}", deletePath);
+//    String s = "test_9999.txt";
+        File f = new File(deletePath);
+
+
+        if (f.delete()) {
+            logger.info("파일 또는 디렉토리를 성공적으로 지웠습니다: " + deletePath);
+        } else {
+            logger.info("파일 또는 디렉토리 지우기 실패: " + deletePath);
+        }
+
+    }
+
+    public void deleteHealthFile(RequestMap req) {
+        String healthindex = req.get("healthindex")+"";
+//        if(healthindex.equals("")){
+//            healthindex="0";
+//        }
+        int healthindexInt =  Integer.parseInt(healthindex);
+        String healthindexStr = String.format("%010d", healthindexInt);
+        String deletePath = Global.UPLOAD_PATH + "/healthinfo/healthfiles/" +healthindexStr+"/" +req.get("filename");
+        logger.info("[health_file deleteHealthFile] deletePath:{}", deletePath);
 //    String s = "test_9999.txt";
         File f = new File(deletePath);
 

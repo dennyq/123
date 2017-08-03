@@ -86,7 +86,7 @@
   var saveFunction = function(){
 
 
-    if($('#thumbnailfile').val() ==''){
+    if($('#thumbnailfile').val() =='' && $('#isNew').val()=='Y'){
       alert('썸네일을 올려주세요');
       $('#thumbnailfile').focus();
       return false;

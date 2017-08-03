@@ -3,6 +3,7 @@ package com.hs.web.mapper;
 
 import com.hs.DbList;
 import com.hs.DbMap;
+import com.hs.web.RequestMap;
 
 public interface HealthMapper extends CrudMapper {
 
@@ -40,4 +41,14 @@ public interface HealthMapper extends CrudMapper {
     int deleteFile(DbMap req);
 
     int getNextIndex(DbMap req);
+    int getNextFileSeq(DbMap req);
+
+    DbMap getOrderMinMax(DbMap req);
+
+    void upOrder(DbMap req);
+    void upOrderOther(DbMap req);
+    void downOrder(DbMap req);
+    void downOrderOther(DbMap req);
+
+    int deleteHealthFile(RequestMap req);
 }

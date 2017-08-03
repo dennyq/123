@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <input type="hidden"  name="isNew" value="N"/>
-<input type="hidden"  name="healthindex" value="${data.healthindex}"/>
+<input  id="healthindex"  name="healthindex" value="${data.healthindex}"/>
 <div class="col-md-12">
     <div class="form-group">
         <label for="regid" class="col-sm-1">아이디</label>
@@ -94,11 +94,152 @@
     <div class="form-group">
         <label for="thumbnailfile" class="col-sm-2 ">썸네일파일수정</label>
         <div class="col-sm-10">
-            <input name="thumbnailfile" id="thumbnailfile" placeholder="썸네일파일첨부" class="form-control" type="file" value="${data.thumbnailfile}">
+            <input name="thumbnailfile" id="thumbnailfile" placeholder="썸네일파일첨부" class="form-control" type="file" >
         </div>
     </div>
 </div>
 
 
--=--
-번호 파일명 사진 사진순서 사진순서 삭제
+
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="health_file" class="col-sm-2 ">사진파일</label>
+        <div class="col-sm-10">
+            <input name="health_file" id="health_file" placeholder="썸네일파일첨부" class="form-control" type="file" >
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover pointer">
+            <colgroup>
+                <col width="5%"/>
+                <%--번호--%>
+                <col width="*"/>
+                <%--파일명 --%>
+                <col width="10%"/>
+                <%--사진 --%>
+                <col width="5%"/>
+                <%--사진순서 --%>
+                <col width="10%"/>
+                <%--사진순서 --%>
+                <col width="10%"/>
+                <%--삭제--%>
+            </colgroup>
+            <thead>
+            <tr class="bg-gray text-align-center">
+                <td>번호</td>
+                <td>파일명</td>
+                <td>사진</td>
+                <td>사진순서</td>
+                <td>사진순서</td>
+                <td>삭제</td>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${not empty fileData}">
+                <c:forEach items="${fileData}" var="items" varStatus="idx">
+                    <input type="hidden" id="isClicked"/>
+                    <tr class="clickTr" idx="${items.healthindex}">
+                        <td>${items.sequencenum}</td><%--번호--%>
+                        <td>${items.filename}</td><%--파일명--%>
+                        <td><img src="/upload/healthinfo/healthfiles/${healthidx}/${items.filename}" width="100"></td><%--사진--%>
+                        <td><a class="upOrder" index="${items.healthindex}" order="${items.pictureorder}" seq="${items.sequencenum}"><img src="/imgs/bt_up.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
+                        <td><a class="downOrder" index="${items.healthindex}" order="${items.pictureorder}" seq="${items.sequencenum}"><img src="/imgs/bt_down.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a></td><%--플레이순서(위로이동)--%>
+                        <td>
+                            <a class="deleteFile" index="${items.healthindex}" order="${items.pictureorder}" seq="${items.sequencenum}" filename="${items.filename}"><img width="30" height="30" src="/imgs/bt_x.png" onmouseover="swapOverImg(this,'_on');" onmouseout="swapOutImg(this,'_on');"/></a>
+
+                        </td><%--플레이순서(위로이동)--%>
+                    </tr>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty fileData}">
+                <tr>
+                    <td colspan="10">데이터가 없습니다.</td>
+                </tr>
+            </c:if>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script>
+    $('.upOrder').click(function(){
+        var ordermax = '${ordermax}';
+        var ordermin = '${ordermin}';
+
+        var index = $(this).attr('index');
+        var seq = $(this).attr('seq');
+        var order = $(this).attr('order');
+
+        if (eval(ordermin) == eval(index)) {
+            alert('위로 이동할수없습니다.');
+            return;
+        }
+
+        var req = {};
+        req = $(this).closest('form').serialize();
+        $als.execute('/health/upOrder/'+index+'/'+order+'/'+seq, req, function (data) {
+            if (data.result_message == 'success') {
+                alert('순서가 변경되었습니다.');
+                location.href='/health/list';
+            }
+        }, function (err) {
+            alert(err.result_message);
+        });
+    });
+    $('.downOrder').click(function(){
+        var ordermax = '${ordermax}';
+        var ordermin = '${ordermin}';
+
+        var index = $(this).attr('index');
+        var seq = $(this).attr('seq');
+        var order = $(this).attr('order');
+
+
+        if (eval(ordermax) <= eval(index)) {
+            alert('아래로 이동할수없습니다.');
+            return;
+        }
+        var req = {};
+        req = $(this).closest('form').serialize();
+        $als.execute('/health/downOrder/'+index+'/'+order+'/'+seq, req, function (data) {
+            if (data.result_message == 'success') {
+                alert('순서가 변경되었습니다.');
+                location.href='/health/list';
+            }
+        }, function (err) {
+            alert(err.result_message);
+        });
+    });
+    $('.deleteFile').click(function(){
+        var ordermax = '${ordermax}';
+        var ordermin = '${ordermin}';
+
+        var index = $(this).attr('index');
+        var seq = $(this).attr('seq');
+        var order = $(this).attr('order');
+        var filename = $(this).attr('filename');
+
+        var req = {};
+        req = $(this).closest('form').serialize();
+        console.log('req');
+        console.log(req);
+        req = req+"&filename="+ filename;
+        $als.execute('/health/deleteHealthFile/'+index+'/'+order+'/'+seq, req, function (data) {
+            console.log('data');
+            console.log(data);
+            if (data.result_message == 'success') {
+                alert('삭제되었습니다.');
+
+            }else{
+                alert(data.result_message);
+
+            }
+            location.href='/health/detail/'+index;
+        }, function (err) {
+            alert(err.result_message);
+        });
+    });
+</script>

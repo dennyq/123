@@ -148,32 +148,58 @@ public class HealthController extends ControllerPageBase {
         MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
         if (req.get("isNew").equals("Y")) {
             healthindex =  service.getNextIndex(req);
+            req.put("healthindex", healthindex);
         }
-        req.put("healthindex", healthindex);
+
         MultipartFile file = mrequest.getFile("thumbnailfile");
-        req.put("inputName","thumbnailfile");
+
+
+
+
+        MultipartFile health_file = mrequest.getFile("health_file");
+
 
         //todo: health_file
-        Iterator<String> itr = mrequest.getFileNames();
-        MultipartFile mpf;
-        while (itr.hasNext()) {
-            mpf = mrequest.getFile(itr.next());
-            logger.debug("Uploading {}", mpf.getOriginalFilename());
-
-//            String newFilenameBase = UUID.randomUUID().toString();
-//            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-//            String newFilename = newFilenameBase + originalFileExtension;
-////            String storageDirectory = fileUploadDirectory;
-//            String contentType = mpf.getContentType();
-            logger.error(" upload file " + mpf.getOriginalFilename());
-        }
+//        Iterator<String> itr = mrequest.getFileNames();
+//        MultipartFile mpf;
+//        while (itr.hasNext()) {
+//            mpf = mrequest.getFile(itr.next());
+//            logger.debug("Uploading {}", mpf.getOriginalFilename());
+//
+////            String newFilenameBase = UUID.randomUUID().toString();
+////            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+////            String newFilename = newFilenameBase + originalFileExtension;
+//////            String storageDirectory = fileUploadDirectory;
+////            String contentType = mpf.getContentType();
+//            logger.error(" upload file " + mpf.getOriginalFilename());
+//        }
         if(file!=null){
             if (file.getSize() > 0) {
-
+                req.put("inputName","thumbnailfile");
 
                 fileService.uploadFiles(request, req);
+
+
             } else {
                 req.put("thumbnailfile", null);
+            }
+
+
+
+        }
+
+        if(health_file!=null){
+            if (health_file.getSize() > 0) {
+                req.put("inputName","health_file");
+
+                fileService.uploadFiles(request, req);
+
+                service.saveFile(req);
+
+
+                
+            } else {
+                req.put("health_file", null);
             }
 
 
@@ -295,12 +321,56 @@ public class HealthController extends ControllerPageBase {
         RequestMap req = RequestMap.create(request);
         return service.idCheck(req);
     }
+
     //아이디체크
     @RequestMapping(value = "deleteFile")
     @ResponseBody
     public ResultMap deleteFile(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
         return service.deleteFile(req);
+    }
+
+    /**
+     * 파일삭제.
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "deleteHealthFile/{healthindex}/{pictureorder}/{sequencenum}")
+    @ResponseBody
+    public ResultMap deleteHealthFile(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        return service.deleteHealthFile(req);
+    }
+
+    /**
+     * 순서 위로
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "upOrder/{healthindex}/{pictureorder}/{sequencenum}")
+    @ResponseBody
+    public ResultMap upOrder(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        return service.upOrder(req);
+    }
+
+
+    /**
+     * 순서 아래로
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "downOrder/{healthindex}/{pictureorder}/{sequencenum}")
+    @ResponseBody
+    public ResultMap downOrder(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        return service.downOrder(req);
     }
 
 }
