@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
 <input type="hidden"  name="isNew" value="N"/>
-<input  id="healthindex"  name="healthindex" value="${data.healthindex}"/>
+<input   type="hidden" id="healthindex"  name="healthindex" value="${data.healthindex}"/>
 <div class="col-md-12">
     <div class="form-group">
         <label for="regid" class="col-sm-1">아이디</label>
@@ -60,18 +60,18 @@
     <div class="form-group">
         <label for="searchcount" class="col-sm-1">조회수</label>
 
-        <div class="col-sm-1">
-            <input name="searchcount" id="searchcount" placeholder="조회수" class="form-control" value="${data.searchcount}" readonly style="border: none;background: white">
+        <div class="col-sm-2">
+            <input name="searchcount" id="searchcount" placeholder="조회수" class="form-control" value="${data.searchcount}" readonly style="border: none;background: white;padding: 0 0 9px 0">
         </div>
         <label for="specialty" class="col-sm-1">하트수</label>
 
-        <div class="col-sm-1">
-            <input name="heartcount" id="heartcount" placeholder="하트수" class="form-control" value="${data.heartcount}" readonly style="border: none;background: white">
+        <div class="col-sm-2">
+            <input name="heartcount" id="heartcount" placeholder="하트수" class="form-control" value="${data.heartcount}" readonly style="border: none;background: white;padding: 0 0 9px 0">
         </div>
         <label for="regtime" class="col-sm-3">등록 시간</label>
 
-        <div class="col-sm-4">
-            <input name="regtime" id="regtime" placeholder="등록 시간" class="form-control" value="${data.regtime}" readonly style="border: none;background: white">
+        <div class="col-sm-3">
+            <input name="regtime" id="regtime" placeholder="등록 시간" class="form-control" value="${data.regtime}" readonly style="border: none;background: white;padding: 0 0 9px 0">
         </div>
     </div>
 </div>
@@ -165,81 +165,82 @@
     </div>
 </div>
 <script>
-    $('.upOrder').click(function(){
-        var ordermax = '${ordermax}';
-        var ordermin = '${ordermin}';
+    $(function () {
+        $('.upOrder').click(function () {
+            var ordermax = '${ordermax}';
+            var ordermin = '${ordermin}';
 
-        var index = $(this).attr('index');
-        var seq = $(this).attr('seq');
-        var order = $(this).attr('order');
+            var index = $(this).attr('index');
+            var seq = $(this).attr('seq');
+            var order = $(this).attr('order');
 
-        if (eval(ordermin) == eval(index)) {
-            alert('위로 이동할수없습니다.');
-            return;
-        }
-
-        var req = {};
-        req = $(this).closest('form').serialize();
-        $als.execute('/health/upOrder/'+index+'/'+order+'/'+seq, req, function (data) {
-            if (data.result_message == 'success') {
-                alert('순서가 변경되었습니다.');
-                location.href='/health/list';
+            if (eval(ordermin) == eval(index)) {
+                alert('위로 이동할수없습니다.');
+                return;
             }
-        }, function (err) {
-            alert(err.result_message);
+
+            var req = {};
+            req = $(this).closest('form').serialize();
+            $als.execute('/health/upOrder/' + index + '/' + order + '/' + seq, req, function (data) {
+                if (data.result_message == 'success') {
+                    alert('순서가 변경되었습니다.');
+                    location.href = '/health/list';
+                }
+            }, function (err) {
+                alert(err.result_message);
+            });
         });
-    });
-    $('.downOrder').click(function(){
-        var ordermax = '${ordermax}';
-        var ordermin = '${ordermin}';
+        $('.downOrder').click(function () {
+            var ordermax = '${ordermax}';
+            var ordermin = '${ordermin}';
 
-        var index = $(this).attr('index');
-        var seq = $(this).attr('seq');
-        var order = $(this).attr('order');
+            var index = $(this).attr('index');
+            var seq = $(this).attr('seq');
+            var order = $(this).attr('order');
 
 
-        if (eval(ordermax) <= eval(index)) {
-            alert('아래로 이동할수없습니다.');
-            return;
-        }
-        var req = {};
-        req = $(this).closest('form').serialize();
-        $als.execute('/health/downOrder/'+index+'/'+order+'/'+seq, req, function (data) {
-            if (data.result_message == 'success') {
-                alert('순서가 변경되었습니다.');
-                location.href='/health/list';
+            if (eval(ordermax) <= eval(index)) {
+                alert('아래로 이동할수없습니다.');
+                return;
             }
-        }, function (err) {
-            alert(err.result_message);
+            var req = {};
+            req = $(this).closest('form').serialize();
+            $als.execute('/health/downOrder/' + index + '/' + order + '/' + seq, req, function (data) {
+                if (data.result_message == 'success') {
+                    alert('순서가 변경되었습니다.');
+                    location.href = '/health/list';
+                }
+            }, function (err) {
+                alert(err.result_message);
+            });
         });
-    });
-    $('.deleteFile').click(function(){
-        var ordermax = '${ordermax}';
-        var ordermin = '${ordermin}';
+        $('.deleteFile').click(function () {
+            var ordermax = '${ordermax}';
+            var ordermin = '${ordermin}';
 
-        var index = $(this).attr('index');
-        var seq = $(this).attr('seq');
-        var order = $(this).attr('order');
-        var filename = $(this).attr('filename');
+            var index = $(this).attr('index');
+            var seq = $(this).attr('seq');
+            var order = $(this).attr('order');
+            var filename = $(this).attr('filename');
 
-        var req = {};
-        req = $(this).closest('form').serialize();
-        console.log('req');
-        console.log(req);
-        req = req+"&filename="+ filename;
-        $als.execute('/health/deleteHealthFile/'+index+'/'+order+'/'+seq, req, function (data) {
-            console.log('data');
-            console.log(data);
-            if (data.result_message == 'success') {
-                alert('삭제되었습니다.');
+            var req = {};
+            req = $(this).closest('form').serialize();
+            console.log('req');
+            console.log(req);
+            req = req + "&filename=" + filename;
+            $als.execute('/health/deleteHealthFile/' + index + '/' + order + '/' + seq, req, function (data) {
 
-            }else{
-                alert(data.result_message);
+                if (data.result_message == 'success') {
+                    alert('삭제되었습니다.');
 
-            }
-            location.href='/health/detail/'+index;
-        }, function (err) {
-            alert(err.result_message);
+                } else {
+                    console.log(data.result_message);
+
+                }
+                location.href = '/health/detail/' + index;
+            }, function (err) {
+                alert(err.result_message);
+            });
         });
     });
 </script>

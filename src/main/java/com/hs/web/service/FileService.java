@@ -403,11 +403,12 @@ public class FileService {
     }
 
     public void deleteHealthFile(RequestMap req) {
-        String healthindex = req.get("healthindex")+"";
-//        if(healthindex.equals("")){
-//            healthindex="0";
-//        }
-        int healthindexInt =  Integer.parseInt(healthindex);
+        int healthindexInt = 0;
+        String healthindex = (String) req.get("healthindex");
+        if (healthindex != null) {
+            healthindexInt = Integer.parseInt(healthindex);
+        }
+
         String healthindexStr = String.format("%010d", healthindexInt);
         String deletePath = Global.UPLOAD_PATH + "/healthinfo/healthfiles/" +healthindexStr+"/" +req.get("filename");
         logger.info("[health_file deleteHealthFile] deletePath:{}", deletePath);

@@ -341,6 +341,7 @@ public class HealthController extends ControllerPageBase {
     public ResultMap deleteHealthFile(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
         putPathVariable(request, req);
+        logger.info("파일삭제 req={}",req);
         return service.deleteHealthFile(req);
     }
 
