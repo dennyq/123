@@ -72,11 +72,21 @@
               <li><a href="/notice/list">공지사항 조회</a></li>
             </ul>
           </li>
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">건강정보 관리</a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="/health/detail">건강정보 등록</a></li>
               <li><a href="/health/list">건강정보 조회</a></li>
+            </ul>
+          </li>
+          </c:if>
+          <c:if test="${isSpecial}">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">건강정보 관리</a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/health/membership/detail">건강정보 등록</a></li>
+              <li><a href="/health/membership/list">건강정보 조회</a></li>
             </ul>
           </li>
           </c:if>

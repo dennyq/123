@@ -5,6 +5,7 @@ import com.hs.ResultMap;
 import com.hs.web.ControllerPageBase;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
+import com.hs.web.interceptor.SkipLoginInterceptor;
 import com.hs.web.service.FileService;
 import com.hs.web.service.HealthService;
 import org.slf4j.Logger;
@@ -18,20 +19,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.UUID;
 
 // 전문가
+@SkipLoginInterceptor
 @Controller
-@RequestMapping(value = "/health")
-public class HealthController extends ControllerPageBase {
+@RequestMapping(value = "/health/membership")
+public class HealthMembershipController extends ControllerPageBase {
     @Autowired
     private HealthService service;
     @Autowired
     private FileService fileService;
 
-    private static final Logger logger = LoggerFactory.getLogger(HealthController.class);
-    private String rootKey = "health";
+    private static final Logger logger = LoggerFactory.getLogger(HealthMembershipController.class);
+    private String rootKey = "health/membership";
     private String rootPath = "pages/" + rootKey + "/";
 
 
@@ -108,11 +111,21 @@ public class HealthController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "detail")
-    public String input(HttpServletRequest request, Model model) throws Exception {
+    public String input(HttpServletRequest request, Model model,HttpSession session) throws Exception {
         RequestMap req = RequestMap.create(request);
-        model.addAttribute("thisPath","/"+rootKey);
+        logger.info("HealthMembershipController detail req"+req);
+        logger.info("HealthMembershipController detail specialid={}"+session.getAttribute("specialid"));
+
+        if(session.getAttribute("specialid")==null){
+            throw new BizException("9009", "need_login");
+//            if (req.get("login_uid") == null) {
+//                throw new BizException("9009", "need_login");
+//            }
+        }
+        model.addAttribute("regid",session.getAttribute("specialid"));
         model.addAttribute("isNew","Y");
 
+        model.addAttribute("thisPath","/"+rootKey);
         return rootPath + "detail";
     }
 
@@ -140,11 +153,15 @@ public class HealthController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "save")
-    public String save(HttpServletRequest request) throws Exception {
+    public String save(HttpServletRequest request,HttpSession session) throws Exception {
         RequestMap req = RequestMap.create(request);
         int healthindex = 0;
-        if (req.get("login_uid") == null) {
-            throw new BizException("9009", "need_login");
+
+        if(session.getAttribute("specialid")==null){
+            throw new BizException("9009", "need_login","/special/login");
+//            if (req.get("login_uid") == null) {
+//                throw new BizException("9009", "need_login");
+//            }
         }
 
         MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;

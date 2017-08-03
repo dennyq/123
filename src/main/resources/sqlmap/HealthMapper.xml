@@ -23,18 +23,36 @@
         <if test='sch_useenddate != null and sch_useenddate != ""'>
             AND DATE_FORMAT(A.regtime,'%Y%m%d') <![CDATA[<=]]> DATE_FORMAT(#{sch_useenddate},'%Y%m%d')
         </if>
-    </sql>
+        <!--아이디 이름 전화번호 휴대폰번호 직업 전문 소속 경력 제목 내용 등록일자 종료일자-->
+        <if test='sch_specialid != null and sch_specialid != ""'><!--아이디-->
+            AND A.regid = #{sch_specialid}
+        </if>
+        <if test='sch_name != null and sch_name != ""'><!--이름-->
+            AND B.name LIKE CONCAT('%',#{sch_name},'%')
+        </if>
+        <if test='sch_telephone != null and sch_telephone != ""'><!--전화번호-->
+            AND B.telephonee LIKE CONCAT('%',#{sch_telephone},'%')
+        </if>
+        <if test='sch_handphone != null and sch_handphone != ""'><!--휴대폰번호-->
+            AND B.handphone LIKE CONCAT('%',#{sch_handphone},'%')
+        </if>
+        <if test='sch_job != null and sch_job != ""'><!--직업-->
+            AND B.job LIKE CONCAT('%',#{sch_job},'%')
+        </if>
+        <if test='sch_specialty != null and sch_specialty != ""'><!--전문-->
+            AND B.specialty LIKE CONCAT('%',#{sch_specialty},'%')
+        </if>
+        <if test='sch_belongto != null and sch_belongto != ""'><!--소속-->
+            AND B.belongto = #{sch_belongto}
+        </if>
+        <if test='sch_career != null and sch_career != ""'><!--경력-->
+            AND B.career = #{sch_career}
+        </if>
+
+</sql>
 
 
-    <!--//todo: 1. mainList?start=시작위치&count=개수-->
-    <!--//            (1) healthindex(2) healthtitle (3) regid(4)healthcontent (5) Searchcount(6) thumbnailfile (7)regtime-->
-    <!--//todo: 2. searchList?searchvalue=검색값&start=시작위치&count=개수-->
-    <!--//todo: 3. detail?healthindex=인덱스값-->
-    <!--//– special_member, health_file 테이블의 정보들-->
-    <!--// (1) special_member테이블의 name (2) special_member테이블의 job(3)special_member테이블의 specialty (4) special_member테이블의 belongto-->
-    <!--// (5)special_member테이블의 career (6) special_member테이블의 picturename(7) “list”(health_file 테이블 컬럼 모두 반복)  - pictureorder 컬럼 asc로 조회-->
-
-    <!--번호 제목 아이디 이름 전화번호 휴대폰번호 직업 전문 소속 경력 사진 내용 등록 시간-->
+<!--번호 제목 아이디 이름 전화번호 휴대폰번호 직업 전문 소속 경력 사진 내용 등록 시간-->
     <select id="list" parameterType="dbmap" resultType="dbmap">
         <include refid="com.hs.web.mapper.paging_start"/>
         SELECT
@@ -56,7 +74,7 @@
         A.thumbnailfile,
         DATE_FORMAT( A.regtime,'%Y.%m.%d %H:%i:%s') "regtime"
         FROM health A
-        LEFT OUTER JOIN special_member B ON A.regid = B.specialid
+        INNER JOIN special_member B ON A.regid = B.specialid
 
         <include refid="com.hs.web.mapper.HealthMapper.listConditions"/>
         ORDER BY A.regtime DESC

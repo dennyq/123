@@ -2,7 +2,6 @@ package com.hs.web;
 
 import com.google.gson.Gson;
 import com.hs.DbMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.ServletRequestUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -56,6 +54,12 @@ public class RequestMap extends DbMap {
         if(memberid.equals("admin")){
             req.put("login_admin", "Y");
             session.setAttribute("login_admin","Y");
+            if(session.getAttribute("login_uid")!=null){
+                req.put("login_uid", session.getAttribute("login_uid"));
+            }
+        }else{
+            req.put("login_admin", "N");
+            session.setAttribute("login_admin","N");
             if(session.getAttribute("login_uid")!=null){
                 req.put("login_uid", session.getAttribute("login_uid"));
             }

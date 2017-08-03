@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
-<input type="hidden"  id="isNew" name="isNew" value="N"/>
+<input type="hidden"  name="isNew" value="N"/>
 <input   type="hidden" id="healthindex"  name="healthindex" value="${data.healthindex}"/>
 <div class="col-md-12">
     <div class="form-group">

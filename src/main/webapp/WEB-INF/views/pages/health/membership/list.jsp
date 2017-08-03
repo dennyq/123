@@ -37,51 +37,30 @@
             <!-- box-body start -->
             <div class="box-body bg-gray">
               <!-- left col-md-6 start -->
-              <%--아이디 이름 전화번호 휴대폰번호 직업 전문 소속 경력 제목 내용 등록일자 종료일자--%>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="sch_healthtitle" class="col-sm-2 ">건강정보 제목</label>
+                  <div class="col-sm-10">
+                    <input name="sch_healthtitle" id="sch_healthtitle" placeholder="건강정보 제목" class="form-control"
+                           value="${sch_healthtitle}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="sch_healthcontent" class="col-sm-2 ">건강정보 내용</label>
+                  <div class="col-sm-10">
+                    <input name="sch_healthcontent" id="sch_healthcontent" placeholder="건강정보 내용" class="form-control"
+                           value="${sch_healthcontent}">
+                  </div>
+                </div>
+              </div>
+
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="sch_specialid" class="col-sm-4 ">아이디</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_specialid" id="sch_specialid" placeholder="아이디"
-                           class="form-control"
-                           value="${sch_specialid}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_telephone" id="sch_telephone" placeholder="전화번호"
-                           class="form-control"
-                           value="${sch_telephone}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sch_job" class="col-sm-4 ">직업</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_job" id="sch_job" placeholder="직업" class="form-control"
-                           value="${sch_job}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sch_belongto" class="col-sm-4 ">소속</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_belongto" id="sch_belongto" placeholder="소속"
-                           class="form-control"
-                           value="${sch_belongto}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_usestartdate" id="sch_usestartdate"
-                           placeholder="사용시작일자"
+                  <label for="sch_usestartdate" class="col-sm-4 ">등록시작일자</label>
+                  <div class="col-sm-8">
+                    <input name="sch_usestartdate" id="sch_usestartdate" placeholder="등록시작일자"
                            class="form-control datepicker" value="${sch_usestartdate}">
                   </div>
                 </div>
@@ -90,57 +69,19 @@
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
               <div class="col-md-6 right">
-                <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">이름</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_name" id="sch_name" placeholder="이름"
-                           class="form-control" value="${sch_name}">
-                  </div>
-                </div>
 
 
                 <div class="form-group">
-                  <label for="sch_handphone" class="col-sm-4 ">휴대폰번호</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_handphone" id="sch_handphone" placeholder="휴대폰번호"
-                           class="form-control"
-                           value="${sch_handphone}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sch_specialty" class="col-sm-4 ">전문</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_specialty" id="sch_specialty" placeholder="전문"
-                           class="form-control"
-                           value="${sch_specialty}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sch_career" class="col-sm-4 ">경력</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_career" id="sch_career" placeholder="경력"
-                           class="form-control"
-                           value="${sch_career}">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="sch_useenddate" class="col-sm-4 ">사용종료일자</label>
-
-                  <div class="col-sm-6">
-                    <input name="sch_useenddate" id="sch_useenddate" placeholder="사용종료일자"
+                  <label for="sch_useenddate" class="col-sm-4 ">등록종료일자</label>
+                  <div class="col-sm-8">
+                    <input name="sch_useenddate" id="sch_useenddate" placeholder="등록종료일자"
                            class="form-control datepicker" value="${sch_useenddate}">
                   </div>
                 </div>
 
               </div>
-
+              <!--// right col-md-6 end-->
+            </div>
             <!--// box-body end -->
             <div class="btn-box centeringContainer ">
               <span class="centered ">
