@@ -155,7 +155,7 @@ public class FileService {
 
             fileIndexStr = first + "." + fileExtention;
 
-            middleName = "thumbnailfile";
+            middleName = "healthinfo/thumbnailfile";
         }
 
 

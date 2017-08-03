@@ -141,7 +141,7 @@
                     <td>${items.career}</td><%--경력--%>
                     <td>
                       <c:if test="${items.thumbnailfile != null}">
-                        <img width="100px" src="/upload/thumbnailfile/${items.thumbnailfile}"/>
+                        <img width="100px" src=" /upload/healthinfo/thumbnailfile/${items.thumbnailfile}"/>
                       </c:if>
                       <c:if test="${items.thumbnailfile == null}"></c:if>
 
