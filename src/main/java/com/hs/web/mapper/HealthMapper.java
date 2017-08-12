@@ -50,10 +50,10 @@ public interface HealthMapper extends CrudMapper {
     void downOrder(DbMap req);
     void downOrderOther(DbMap req);
 
-    
-    void updateContents(DbMap req);
-    void updateThum(DbMap req);
-    void updateFile(DbMap req);
+
+    int updateContents(DbMap req);
+    int updateThum(DbMap req);
+    int updateFile(DbMap req);
 
     int deleteHealthFile(RequestMap req);
 }

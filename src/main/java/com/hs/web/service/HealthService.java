@@ -377,7 +377,44 @@ public class HealthService extends ServiceBase {
         return res;
     }
 
-    //아이디체크
+    //updateContents
+    public ResultMap updateContents(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health updateContents] recv:{}", req);
+
+        mapper.updateContents(req);
+
+
+        if (Global.isDev) logger.debug("[health updateContents] send:{}", res);
+        return res;
+    }
+
+    //updateThum
+    public ResultMap updateThum(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health updateThum] recv:{}", req);
+
+        mapper.updateThum(req);
+
+
+        if (Global.isDev) logger.debug("[health updateThum] send:{}", res);
+        return res;
+    }
+
+    //updateFile
+    public ResultMap updateFile(RequestMap req) {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health updateFile] recv:{}", req);
+
+        mapper.updateFile(req);
+
+
+        if (Global.isDev) logger.debug("[health updateFile] send:{}", res);
+        return res;
+    }
+
+
+    //deleteFile
     public ResultMap deleteFile(RequestMap req) {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[health deleteFile] recv:{}", req);
@@ -393,7 +430,7 @@ public class HealthService extends ServiceBase {
     }
 
 
-    //아이디체크
+    //deleteHealthFile
     public ResultMap deleteHealthFile(RequestMap req) {
         ResultMap res = ResultMap.create();
         if (Global.isDev) logger.debug("[health deleteHealthFile] recv:{}", req);

@@ -269,11 +269,35 @@
         //todo 1: saveContentsBtn
         //todo 1: 저장 버튼 클릭 시 healthtitle과 healthcontent만 업데이트하고 regtime는 업데이트 하면 안됨.
         $('#saveContentsBtn').click(function () {
+            var req = {};
+            req = $(this).closest('form').serialize();
+            console.log('req');
+            console.log(req);
+
+            var index = $('#healthindex').val();
+            console.log('index');
+            console.log(index);
+            $als.execute('/health/updateContents/' + index , req, function (data) {
+
+                if (data.result_message == 'success') {
+                    alert('저장되었습니다.');
+
+                } else {
+                    alert('실패.');
+                    console.log(data.result_message);
+                    location.href = '/health/detail/' + index;
+                }
+
+            }, function (err) {
+                alert(err.result_message);
+                location.href = '/health/detail/' + index;
+            });
         });
 
         //todo 2: saveThumBtn
         //todo 2: 저장 버튼 클릭 시 썸네일파일수정 에디트에 파일명이 들어가 있으면 업로드 하고 없으면 “파일을 선택하세요” 메시지 박스.
         $('#saveThumBtn').click(function () {
+
         });
 
         //todo 3: saveFileBtn

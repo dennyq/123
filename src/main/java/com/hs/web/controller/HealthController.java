@@ -332,6 +332,34 @@ public class HealthController extends ControllerPageBase {
         return service.deleteFile(req);
     }
 
+
+    //updateContents //2017.08.13 : -ek
+    @RequestMapping(value = "updateContents/{healthindex}")
+    @ResponseBody
+    public ResultMap updateContents(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        putPathVariable(request, req);
+        return service.updateContents(req);
+    }
+
+    //updateThum //2017.08.13 : -ek
+    @RequestMapping(value = "updateThum")
+    @ResponseBody
+    public ResultMap updateThum(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.updateThum(req);
+    }
+
+    //updateFile //2017.08.13 : -ek
+    @RequestMapping(value = "updateFile")
+    @ResponseBody
+    public ResultMap updateFile(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.updateFile(req);
+    }
+
+
+
     /**
      * 파일삭제.
      * @param request
