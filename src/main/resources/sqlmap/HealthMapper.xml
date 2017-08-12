@@ -302,5 +302,41 @@
         AND pictureorder = #{pictureorder}+1 AND healthindex = #{healthindex}
     </update>
 
+    <!--//todo 1: saveContentsBtn    -->
+    <update id="updateContents" parameterType="dbmap">
+        UPDATE health
+        <set>
+
+            <if test='healthtitle != null and healthtitle != ""'>healthtitle= #{healthtitle},</if>
+            <if test='healthcontent != null and healthcontent != ""'>healthcontent= #{healthcontent},</if>
+        </set>
+        WHERE 1=1
+        AND healthindex = #{healthindex}
+    </update>
+
+    <!--//todo 2: saveThumBtn-->
+    <update id="updateThum" parameterType="dbmap">
+        UPDATE health
+        <set>
+            <if test='thumbnailfile != null and thumbnailfile != ""'>thumbnailfile= #{thumbnailfile},</if>
+        </set>
+        WHERE 1=1
+        AND healthindex = #{healthindex}
+    </update>
+
+    <!--//todo 3: saveFileBtn-->
+    <update id="updateFile" parameterType="dbmap">
+        UPDATE health_file
+        <set>
+            <if test='healthindex != null and healthindex != ""'>healthindex = #{healthindex},</if>
+            <if test='sequencenum != null and sequencenum != ""'>sequencenum = #{sequencenum},</if>
+            <if test='filename != null and filename != ""'>filename = #{filename},</if>
+            <if test='pictureorder != null and pictureorder != ""'>pictureorder = #{pictureorder},</if>
+            <if test='regtime != null and regtime != ""'>regtime = #{regtime},</if>
+        </set>
+        WHERE 1=1
+        AND healthindex = #{healthindex}
+    </update>
+
 
 </mapper>

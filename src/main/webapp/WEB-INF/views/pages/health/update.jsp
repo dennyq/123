@@ -75,12 +75,21 @@
         </div>
     </div>
 </div>
+
 <div class="col-md-12">
     <div class="form-group">
         <textarea name="healthcontent" id="editor1" rows="10" cols="10">${data.healthcontent}</textarea>
         <script>CKEDITOR.replace('editor1')</script>
     </div>
 </div>
+
+
+<div style="float: right">
+    <a id="saveContentsBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+
+</div>
+
+
 
 <div class="col-md-12">
     <div class="form-group">
@@ -98,6 +107,12 @@
         </div>
     </div>
 </div>
+
+<div style="float: right">
+    <a id="saveThumBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+
+</div>
+
 
 
 
@@ -162,7 +177,15 @@
             </tbody>
         </table>
 
+
+
+
     </div>
+</div>
+<div style="float: right">
+    <a id="saveFileBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
+    <a id="deleteFileBtn" class="btn btn-blue-green btn-flat md-height">삭제</a>
+
 </div>
 <script>
     $(function () {
@@ -242,5 +265,22 @@
                 alert(err.result_message);
             });
         });
+
+        //todo 1: saveContentsBtn
+        //todo 1: 저장 버튼 클릭 시 healthtitle과 healthcontent만 업데이트하고 regtime는 업데이트 하면 안됨.
+        $('#saveContentsBtn').click(function () {
+        });
+
+        //todo 2: saveThumBtn
+        //todo 2: 저장 버튼 클릭 시 썸네일파일수정 에디트에 파일명이 들어가 있으면 업로드 하고 없으면 “파일을 선택하세요” 메시지 박스.
+        $('#saveThumBtn').click(function () {
+        });
+
+        //todo 3: saveFileBtn
+        //todo 3: 1`저장 버튼 클릭 시 health_file 테이블만 업데이트 하고 health_file 테이블 관련 이미지 파일 업로드 수행.
+        //todo 3: 1`버튼 클릭 시 ‘삭제하시겠습니까?’ 물어보고 확인, 취소 버튼 있어야 하며 확인 버튼클릭 시 health 테이블과 health_file 테이블에서 해당 데이터 삭제하고 관련이미지 파일 삭제.
+        $('#saveFileBtn').click(function () {
+        });
+
     });
 </script>
