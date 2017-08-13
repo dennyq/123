@@ -430,6 +430,21 @@ public class HealthService extends ServiceBase {
     }
 
 
+    //deleteFile
+    public ResultMap deleteFiles(RequestMap req) throws Exception {
+        ResultMap res = ResultMap.create();
+        if (Global.isDev) logger.debug("[health deleteFiles] recv:{}", req);
+
+        //
+
+        mapper.deleteFiles(req);
+        fileService.deleteHealthFiles(req);
+
+        if (Global.isDev) logger.debug("[health deleteFiles] send:{}", res);
+        return res;
+    }
+
+
     //deleteHealthFile
     public ResultMap deleteHealthFile(RequestMap req) {
         ResultMap res = ResultMap.create();

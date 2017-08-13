@@ -160,21 +160,6 @@ public class HealthController extends ControllerPageBase {
 
         MultipartFile health_file = mrequest.getFile("health_file");
 
-
-        //todo: health_file
-//        Iterator<String> itr = mrequest.getFileNames();
-//        MultipartFile mpf;
-//        while (itr.hasNext()) {
-//            mpf = mrequest.getFile(itr.next());
-//            logger.debug("Uploading {}", mpf.getOriginalFilename());
-//
-////            String newFilenameBase = UUID.randomUUID().toString();
-////            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-////            String newFilename = newFilenameBase + originalFileExtension;
-//////            String storageDirectory = fileUploadDirectory;
-////            String contentType = mpf.getContentType();
-//            logger.error(" upload file " + mpf.getOriginalFilename());
-//        }
         if(file!=null){
             if (file.getSize() > 0) {
                 req.put("inputName","thumbnailfile");
@@ -324,12 +309,20 @@ public class HealthController extends ControllerPageBase {
         return service.idCheck(req);
     }
 
-    //아이디체크
+    //deleteFile
     @RequestMapping(value = "deleteFile")
     @ResponseBody
     public ResultMap deleteFile(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
         return service.deleteFile(req);
+    }
+
+    //deleteFile
+    @RequestMapping(value = "deleteFile/{healthindex}")
+    @ResponseBody
+    public ResultMap deleteFiles(HttpServletRequest request) throws Exception {
+        RequestMap req = RequestMap.create(request);
+        return service.deleteFiles(req);
     }
 
 
@@ -343,19 +336,58 @@ public class HealthController extends ControllerPageBase {
     }
 
     //updateThum //2017.08.13 : -ek
-    @RequestMapping(value = "updateThum")
-    @ResponseBody
-    public ResultMap updateThum(HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "updateThum/{healthindex}")
+    public String updateThum(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
-        return service.updateThum(req);
+        putPathVariable(request, req);
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+        String healthindex = req.get("healthindex")+"";
+        MultipartFile file = mrequest.getFile("thumbnailfile");
+
+        if (file != null) {
+            if (file.getSize() > 0) {
+                req.put("inputName", "thumbnailfile");
+                fileService.uploadFiles(request, req);
+                service.updateThum(req);
+
+            } else {
+                req.put("thumbnailfile", null);
+            }
+
+
+        }
+
+
+        return "redirect:/" + rootKey + "/detail/"+healthindex;
     }
 
     //updateFile //2017.08.13 : -ek
-    @RequestMapping(value = "updateFile")
-    @ResponseBody
-    public ResultMap updateFile(HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "updateFile/{healthindex}")
+    public String updateFile(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
-        return service.updateFile(req);
+        putPathVariable(request, req);
+        MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
+        String healthindex = req.get("healthindex")+"";
+
+        MultipartFile health_file = mrequest.getFile("health_file");
+        if(health_file!=null){
+            if (health_file.getSize() > 0) {
+                req.put("inputName","health_file");
+
+                fileService.uploadFiles(request, req);
+
+                service.saveFile(req);
+
+
+
+            } else {
+                req.put("health_file", null);
+            }
+
+
+
+        }
+        return "redirect:/" + rootKey + "/detail/"+healthindex;
     }
 
 

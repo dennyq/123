@@ -248,8 +248,7 @@
 
             var req = {};
             req = $(this).closest('form').serialize();
-            console.log('req');
-            console.log(req);
+
             req = req + "&filename=" + filename;
             $als.execute('/health/deleteHealthFile/' + index + '/' + order + '/' + seq, req, function (data) {
 
@@ -257,7 +256,8 @@
                     alert('삭제되었습니다.');
 
                 } else {
-                    console.log(data.result_message);
+                    alert('실패');
+//                    console.log(data.result_message);
 
                 }
                 location.href = '/health/detail/' + index;
@@ -271,12 +271,10 @@
         $('#saveContentsBtn').click(function () {
             var req = {};
             req = $(this).closest('form').serialize();
-            console.log('req');
-            console.log(req);
+
 
             var index = $('#healthindex').val();
-            console.log('index');
-            console.log(index);
+
             $als.execute('/health/updateContents/' + index , req, function (data) {
 
                 if (data.result_message == 'success') {
@@ -284,7 +282,7 @@
 
                 } else {
                     alert('실패.');
-                    console.log(data.result_message);
+//                    console.log(data.result_message);
                     location.href = '/health/detail/' + index;
                 }
 
@@ -297,13 +295,61 @@
         //todo 2: saveThumBtn
         //todo 2: 저장 버튼 클릭 시 썸네일파일수정 에디트에 파일명이 들어가 있으면 업로드 하고 없으면 “파일을 선택하세요” 메시지 박스.
         $('#saveThumBtn').click(function () {
+            var thumbnailfile = $('#thumbnailfile').val();
+            var index = $('#healthindex').val();
+            if(thumbnailfile==null || thumbnailfile==''){
+                alert("파일을 선택하세요.")
+                return;
+            }
+            var form = $('#detailFrm');
+            form.attr('action','/health/updateThum/'+index);
+            form.submit();
+
 
         });
 
         //todo 3: saveFileBtn
         //todo 3: 1`저장 버튼 클릭 시 health_file 테이블만 업데이트 하고 health_file 테이블 관련 이미지 파일 업로드 수행.
-        //todo 3: 1`버튼 클릭 시 ‘삭제하시겠습니까?’ 물어보고 확인, 취소 버튼 있어야 하며 확인 버튼클릭 시 health 테이블과 health_file 테이블에서 해당 데이터 삭제하고 관련이미지 파일 삭제.
         $('#saveFileBtn').click(function () {
+            var health_file = $('#health_file').val();
+            var index = $('#healthindex').val();
+            if (health_file == null || health_file == '') {
+                alert("파일을 선택하세요.");
+                return;
+            }
+            var form = $('#detailFrm');
+            form.attr('action','/health/updateFile/'+index);
+            form.submit();
+        });
+
+        //todo 3: deleteFileBtn
+        //todo 3: 1`버튼 클릭 시 ‘삭제하시겠습니까?’ 물어보고 확인, 취소 버튼 있어야 하며 확인 버튼클릭 시 health 테이블과 health_file 테이블에서 해당 데이터 삭제하고 관련이미지 파일 삭제.
+        $('#deleteFileBtn').click(function () {
+            if(confirm("삭제하시겠습니까?")){
+                var req = {};
+
+                req = $(this).closest('form').serialize();
+
+                var health_file = $('#health_file').val();
+                var index = $('#healthindex').val();
+
+                $als.execute('/health/deleteFile/' + index , req, function (data) {
+
+                    if (data.result_message == 'success') {
+                        alert('삭제되었습니다.');
+
+                    } else {
+                        alert('실패.');
+
+                        location.href = '/health/detail/' + index;
+                    }
+
+                }, function (err) {
+                    alert(err.result_message);
+                    location.href = '/health/detail/' + index;
+                });
+
+            }
         });
 
     });

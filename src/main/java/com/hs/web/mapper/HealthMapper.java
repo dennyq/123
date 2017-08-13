@@ -56,4 +56,6 @@ public interface HealthMapper extends CrudMapper {
     int updateFile(DbMap req);
 
     int deleteHealthFile(RequestMap req);
+
+    int deleteFiles(RequestMap req);
 }

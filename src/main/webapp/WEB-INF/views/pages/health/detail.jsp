@@ -82,21 +82,19 @@
 <script>
 
 
-//  var pendingList=[];
+
   var saveFunction = function(){
 
-
-    if($('#thumbnailfile').val() =='' && '${not empty data}'){
+    if($('#thumbnailfile').val() =='' && '${empty data}'==true){
       alert('썸네일을 올려주세요');
       $('#thumbnailfile').focus();
       return false;
     }
-//    pendingList.forEach(function (data) { data.submit(); });
-//    pendingList = [];
 
     $('#detailFrm').submit();
 
-  }
+  };
+
   $(function(){
 
     $('ul.sidebar-menu li.treeview').each(function(index){

@@ -412,7 +412,6 @@ public class FileService {
         String healthindexStr = String.format("%010d", healthindexInt);
         String deletePath = Global.UPLOAD_PATH + "/healthinfo/healthfiles/" +healthindexStr+"/" +req.get("filename");
         logger.info("[health_file deleteHealthFile] deletePath:{}", deletePath);
-//    String s = "test_9999.txt";
         File f = new File(deletePath);
 
 
@@ -421,6 +420,47 @@ public class FileService {
         } else {
             logger.info("파일 또는 디렉토리 지우기 실패: " + deletePath);
         }
+
+    }
+
+    private boolean deleteDirectory(File path) throws IOException {
+
+        if (!path.exists()) {
+            return false;
+        }
+        File[] files = path.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                deleteDirectory(file);
+            } else {
+                file.delete();
+            }
+        }
+
+
+        return path.delete();
+    }
+
+    public void deleteHealthFiles(RequestMap req) throws Exception {
+        int healthindexInt = 0;
+        String healthindex = (String) req.get("healthindex");
+        if (healthindex != null) {
+            healthindexInt = Integer.parseInt(healthindex);
+        }
+
+        String healthindexStr = String.format("%010d", healthindexInt);
+        String deletePath = Global.UPLOAD_PATH + "/healthinfo/healthfiles/" +healthindexStr;
+        logger.info("[health_file deleteHealthFile] deletePath:{}", deletePath);
+        File f = new File(deletePath);
+        deleteDirectory(f);
+
+//        if (f.delete()) {
+//            logger.info("파일 또는 디렉토리를 성공적으로 지웠습니다: " + deletePath);
+//        } else {
+//            logger.info("파일 또는 디렉토리 지우기 실패: " + deletePath);
+//        }
+
+
 
     }
 

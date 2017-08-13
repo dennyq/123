@@ -249,6 +249,12 @@
               AND healthindex = #{healthindex} AND sequencenum = #{sequencenum}
     </delete>
 
+    <delete id="deleteFiles" parameterType="dbmap">
+        DELETE FROM health_file
+        WHERE 1 = 1
+              AND healthindex = #{healthindex}
+    </delete>
+
     <delete id="deleteHealthFile" parameterType="dbmap">
         DELETE FROM health_file
         WHERE 1 = 1
