@@ -4,6 +4,9 @@
 <mapper namespace="com.hs.web.mapper.HealthMapper">
     <sql id="listConditions">
         WHERE 1=1
+        <if test='specialid != null and specialid != ""'>
+            AND A.regid = #{specialid}
+        </if>
         <if test='sch_healthindex != null and sch_healthindex != ""'>
             AND A.healthindex = #{sch_healthindex}
         </if>
@@ -275,6 +278,13 @@
         where healthindex = #{healthindex}
     </select>
 
+    <select id="getNextFileOrder" parameterType="dbmap" resultType="int">
+
+        select ifnull(max(pictureorder), 0)+1
+        from health_file
+        where healthindex = #{healthindex}
+    </select>
+
     <select id="getOrderMinMax" parameterType="dbmap" resultType="dbmap">
         SELECT MIN(pictureorder) "ordermin", MAX(pictureorder) "ordermax" from health_file WHERE healthindex = #{healthindex}
     </select>
@@ -312,7 +322,6 @@
     <update id="updateContents" parameterType="dbmap">
         UPDATE health
         <set>
-
             <if test='healthtitle != null and healthtitle != ""'>healthtitle= #{healthtitle},</if>
             <if test='healthcontent != null and healthcontent != ""'>healthcontent= #{healthcontent},</if>
         </set>

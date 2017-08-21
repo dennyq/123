@@ -29,7 +29,7 @@ public class SpecialController extends ControllerPageBase  {
 
 
     //첫화면
-    @RequestMapping(value = "/")
+    @RequestMapping({"/"})
     public String index(HttpServletRequest request) throws Exception {
         RequestMap req = RequestMap.create(request);
 

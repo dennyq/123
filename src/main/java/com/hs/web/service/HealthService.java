@@ -211,7 +211,8 @@ public class HealthService extends ServiceBase {
 
         int sequencenum = mapper.getNextFileSeq(req);
         req.put("sequencenum",sequencenum);
-        req.put("pictureorder", 1);
+        int pictureorder = mapper.getNextFileOrder(req);
+        req.put("pictureorder", pictureorder);
         mapper.insertFile(req);
 
 //        int lastIndex = 0;

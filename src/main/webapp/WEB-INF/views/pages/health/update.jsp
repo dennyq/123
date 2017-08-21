@@ -197,7 +197,7 @@
             var seq = $(this).attr('seq');
             var order = $(this).attr('order');
 
-            if (eval(ordermin) == eval(index)) {
+            if (eval(ordermin) == eval(order)) {
                 alert('위로 이동할수없습니다.');
                 return;
             }
@@ -222,7 +222,7 @@
             var order = $(this).attr('order');
 
 
-            if (eval(ordermax) <= eval(index)) {
+            if (eval(ordermax) <= eval(order)) {
                 alert('아래로 이동할수없습니다.');
                 return;
             }
@@ -269,11 +269,17 @@
         //todo 1: saveContentsBtn
         //todo 1: 저장 버튼 클릭 시 healthtitle과 healthcontent만 업데이트하고 regtime는 업데이트 하면 안됨.
         $('#saveContentsBtn').click(function () {
-            var req = {};
-            req = $(this).closest('form').serialize();
-
 
             var index = $('#healthindex').val();
+            var req = {};
+            req.healthindex = index;
+            req.healthtitle = $('#healthtitle').val();
+            req.healthcontent = CKEDITOR.instances.editor1.getData();
+
+
+            console.log('req');
+            console.log(req);
+
 
             $als.execute('/health/updateContents/' + index , req, function (data) {
 

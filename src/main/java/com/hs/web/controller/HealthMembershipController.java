@@ -79,10 +79,19 @@ public class HealthMembershipController extends ControllerPageBase {
      * @throws Exception
      */
     @RequestMapping(value = "list")
-    public String list(HttpServletRequest request, Model model) throws Exception {
+    public String list(HttpServletRequest request, Model model,HttpSession session) throws Exception {
         RequestMap req = RequestMap.create(request);
+        String login_type = (String) session.getAttribute("login_type");
+
+        if(login_type.equals("special")){
+            String specialid = (String) session.getAttribute("specialid");
+            req.put("specialid",specialid);
+        }
         model.addAllAttributes(service.list(req));
         model.addAttribute("thisPath","/"+rootKey);
+
+
+        logger.debug("login_type={}","/"+login_type);
         logger.debug("thisPath={}","/"+rootKey);
         return rootPath + "list";
     }

@@ -46,14 +46,25 @@
         </div>
     </div>
 </div>
-<div class="col-md-12">
-    <div class="form-group">
-        <label for="picturename" class="col-sm-2 ">사진 파일</label>
-        <div class="col-sm-10">
-            <input name="picturename" id="picturename" placeholder="사진 파일" class="form-control" type="file">
+<c:if test="${not empty data.picturename}">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="col-sm-2 ">사진 파일</label>
+            <div class="col-sm-10">
+                <img src="/upload/special_member/${data.picturename}" width="300"/>
+
+            </div>
         </div>
     </div>
-</div>
+</c:if>
+<%--<div class="col-md-12">--%>
+    <%--<div class="form-group">--%>
+        <%--<label for="picturename" class="col-sm-2 ">사진 파일</label>--%>
+        <%--<div class="col-sm-10">--%>
+            <%--<input name="picturename" id="picturename" placeholder="사진 파일" class="form-control" type="file" value="${data.picturename}">--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <div style="height: 200px;"></div>
 <!--// right input end -->
 <div class="col-md-6">

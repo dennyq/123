@@ -42,6 +42,7 @@ public interface HealthMapper extends CrudMapper {
 
     int getNextIndex(DbMap req);
     int getNextFileSeq(DbMap req);
+    int getNextFileOrder(DbMap req);
 
     DbMap getOrderMinMax(DbMap req);
 
