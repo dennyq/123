@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/common/include/taglibs.jspf" %>
+<style>
+    .save-each{float: right;margin-bottom: 20px;}
+</style>
 <input type="hidden"  name="isNew" value="N"/>
 <input   type="hidden" id="healthindex"  name="healthindex" value="${data.healthindex}"/>
 <div class="col-md-12">
@@ -83,7 +86,7 @@
 </div>
 
 
-<div style="float: right">
+<div class="save-each">
     <a id="saveContentsBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
 
 </div>
@@ -107,7 +110,7 @@
     </div>
 </div>
 
-<div style="float: right">
+<div class="save-each">
     <a id="saveThumBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
 
 </div>
@@ -181,7 +184,7 @@
 
     </div>
 </div>
-<div style="float: right">
+<div class="save-each">
     <a id="saveFileBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
     <a id="deleteFileBtn" class="btn btn-blue-green btn-flat md-height">삭제</a>
 
