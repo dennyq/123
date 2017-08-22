@@ -2,6 +2,7 @@
 <%@ include file="/common/include/taglibs.jspf" %>
 <style>
     .save-each{float: right;margin-bottom: 20px;}
+    .margin-top{margin-top: 10px}
 </style>
 <input type="hidden"  name="isNew" value="N"/>
 <input   type="hidden" id="healthindex"  name="healthindex" value="${data.healthindex}"/>
@@ -78,6 +79,7 @@
         </div>
     </div>
 </div>
+
 <div class="col-md-12">
     <div class="form-group">
         <textarea name="healthcontent" id="editor1" rows="10" cols="10">${data.healthcontent}</textarea>
@@ -184,7 +186,7 @@
 
     </div>
 </div>
-<div class="save-each">
+<div class="save-each margin-top">
     <a id="saveFileBtn" class="btn btn-blue-green btn-flat md-height">저장</a>
     <a id="deleteFileBtn" class="btn btn-blue-green btn-flat md-height">삭제</a>
 
@@ -199,7 +201,7 @@
             var seq = $(this).attr('seq');
             var order = $(this).attr('order');
 
-            if (eval(ordermin) == eval(index)) {
+            if (eval(ordermin) == eval(order)) {
                 alert('위로 이동할수없습니다.');
                 return;
             }
@@ -224,7 +226,7 @@
             var order = $(this).attr('order');
 
 
-            if (eval(ordermax) <= eval(index)) {
+            if (eval(ordermax) <= eval(order)) {
                 alert('아래로 이동할수없습니다.');
                 return;
             }
@@ -271,11 +273,17 @@
         //todo 1: saveContentsBtn
         //todo 1: 저장 버튼 클릭 시 healthtitle과 healthcontent만 업데이트하고 regtime는 업데이트 하면 안됨.
         $('#saveContentsBtn').click(function () {
-            var req = {};
-            req = $(this).closest('form').serialize();
-
 
             var index = $('#healthindex').val();
+            var req = {};
+            req.healthindex = index;
+            req.healthtitle = $('#healthtitle').val();
+            req.healthcontent = CKEDITOR.instances.editor1.getData();
+
+
+            console.log('req');
+            console.log(req);
+
 
             $als.execute('/health/updateContents/' + index , req, function (data) {
 
