@@ -321,7 +321,10 @@
           regtime
           FROM member
 
-          WHERE address like CONCAT('%',#{addrDongStr}, '%') and address like CONCAT('%', #{addrGuStr}, '%')
+          WHERE  deleteyn = 0
+          <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
+          <if test='gubun == null or gubun == "" or gubun == "0"'>AND gubun in('1','2')</if>
+          AND address like CONCAT('%',#{addrDongStr}, '%') and address like CONCAT('%', #{addrGuStr}, '%')
 
       </if>
   </select>
