@@ -351,7 +351,13 @@
         regtime
     FROM member
     WHERE name LIKE CONCAT('%', #{nameStr}, '%')
-          AND deleteyn = 0
+
+
+      <if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>
+      <if test='gubun == null or gubun == "" or gubun == "0"'>AND gubun in('1','2')</if>
+      AND deleteyn = 0
+
+
   </select>
 
 

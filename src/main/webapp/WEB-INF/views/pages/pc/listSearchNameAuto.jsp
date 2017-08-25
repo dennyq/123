@@ -298,7 +298,11 @@
       var req = {};
       var tab = $('#tab').val();
       req.nameStr = $('#nameStr').val();
+      if(!req.nameStr || req.nameStr==''){
+          alert('이름을 적어주세요.');return false;
+      }
       req.gubun = tab-1;
+      console.log( req );
       req.searchCode = '3';
       req.addrSidoStr = $('#sido').find(':selected').text();
       req.addrLastStr = $('#gungu').find(':selected').text()+' '+$('#dongro').find(':selected').text();
@@ -452,7 +456,11 @@
       var req = {};
       var tab = $('#tab').val();
       req.nameStr = $('#nameStr').val();
+      if(!req.nameStr || req.nameStr==''){
+          alert('이름을 적어주세요.');return false;
+      }
       req.gubun = tab-1;
+      console.log( req );
       req.searchCode = '3';
       req.addrSidoStr = $('#sido').find(':selected').text();
       req.addrLastStr = $('#gungu').find(':selected').text()+' '+$('#dongro').find(':selected').text();
