@@ -7,15 +7,12 @@ import com.hs.util.PageUtil;
 import com.hs.web.Global;
 import com.hs.web.RequestMap;
 import com.hs.web.ServiceBase;
-import com.hs.web.mapper.MemberMapper;
 import com.hs.web.mapper.PCMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 
@@ -203,6 +200,11 @@ public class PCService extends ServiceBase {
 //    읍/면/동
     if((req.get("label")+"").equals("읍/면/동")){
       req.put("label","Y");
+      String addrGuStr = addrLastStr.split(" ")[0];
+      String addrDongStr = addrLastStr.split(" ")[1];
+      req.put("addrGuStr",addrGuStr);
+      req.put("addrDongStr","("+addrDongStr);
+
     }
 
     if(addrLastStr.indexOf("선택하세요.")>-1){

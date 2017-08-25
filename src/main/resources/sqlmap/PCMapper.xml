@@ -320,18 +320,8 @@
           lastconnecttime,
           regtime
           FROM member
-          <!--WHERE  TRIM(LEFT(address, LOCATE(' ',address) -1)) LIKE CONCAT(#{addrSidoStr}, '%')-->
-          <!--<if test='addrLastStr != null and addrLastStr != ""'>-->
-              <!--AND SUBSTRING(address, LOCATE(' ',address) + 1) LIKE CONCAT(#{addrLastStr}, '%')-->
-          <!--</if>-->
-          <!--<if test='addrLastStr == null or addrLastStr == ""'>-->
 
-          <!--</if>-->
-
-          <!--<if test='gubun != null and gubun != "" and gubun != "0"'>AND gubun = #{gubun}</if>-->
-          <!--<if test='gubun == null or gubun == "" or gubun == "0"'>AND gubun in('1','2')</if>-->
-          <!--AND deleteyn = 0-->
-          WHERE address like CONCAT(#{addrSidoStr},'%',#{addrLastStr}, '%')
+          WHERE address like CONCAT('%',#{addrDongStr}, '%') and address like CONCAT('%', #{addrGuStr}, '%')
 
       </if>
   </select>
