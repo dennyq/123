@@ -13,19 +13,9 @@
 	<!--<jee:jndi-lookup id="dataSource" jndi-name="jdbc/ifarms"/>-->
 
 
-	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-		<!--<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver"/>-->
-		<!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/kippa"/>-->
-		<!--<property name="validationQuery" value="select 1 from dual" />-->
-		<!--<property name="testWhileIdle" value="true" />-->
-		<!--<property name="minEvictableIdleTimeMillis" value="3600000" />-->
-		<!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
-		<!--<property name="username" value="root"/>-->
-		<!--<property name="password" value="kippakippa1226"/>-->
-	<!--</bean>-->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver"/>
-		<property name="url" value="jdbc:mysql://221.143.21.225:3306/kippa"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/kippa"/>
 		<property name="validationQuery" value="select 1 from dual" />
 		<property name="testWhileIdle" value="true" />
 		<property name="minEvictableIdleTimeMillis" value="3600000" />
@@ -33,6 +23,16 @@
 		<property name="username" value="root"/>
 		<property name="password" value="kippakippa1226"/>
 	</bean>
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+		<!--<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver"/>-->
+		<!--<property name="url" value="jdbc:mysql://221.143.21.225:3306/kippa"/>-->
+		<!--<property name="validationQuery" value="select 1 from dual" />-->
+		<!--<property name="testWhileIdle" value="true" />-->
+		<!--<property name="minEvictableIdleTimeMillis" value="3600000" />-->
+		<!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
+		<!--<property name="username" value="root"/>-->
+		<!--<property name="password" value="kippakippa1226"/>-->
+	<!--</bean>-->
 
 	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
 		<!--<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver"/>-->

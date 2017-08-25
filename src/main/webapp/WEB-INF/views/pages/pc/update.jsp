@@ -8,16 +8,21 @@
 <div class="col-md-6">
   <div class="form-group">
     <label for="name" class="col-sm-4 ">이름</label>
+
     <div class="col-sm-6">
-      <input name="name"  id="name" placeholder="이름" class="form-control" value="${data.name}" readonly>
+      <input name="name" id="name" placeholder="이름" class="form-control" value="${data.name}" readonly>
     </div>
   </div>
+</div>
+<div class="col-md-12">
   <div class="form-group">
-    <label for="address" class="col-sm-4 ">주소</label>
-    <div class="col-sm-6">
+    <label for="address" class="col-sm-2 ">주소</label>
+    <div class="col-sm-9">
       <input name="address"  id="address" placeholder="주소" class="form-control" value="${data.address}">
     </div>
   </div>
+  </div>
+<div class="col-md-6">
   <div class="form-group">
     <label for="telephone" class="col-sm-4 ">전화번호</label>
     <div class="col-sm-6">
@@ -34,18 +39,18 @@
 </div>
 
 <div class="col-md-6 right">
-  <div class="form-group">
-    <label class="col-sm-4 "></label>
-    <div class="col-sm-6" style="height: 34px">
-      <input type="hidden" >
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="address_etc" class="col-sm-4 ">기타 주소입력</label>
-    <div class="col-sm-6">
-      <input name="address_etc"  id="address_etc" placeholder="기타 주소입력" class="form-control" value="${data.address_etc}">
-    </div>
-  </div>
+  <%--<div class="form-group">--%>
+    <%--<label class="col-sm-4 "></label>--%>
+    <%--<div class="col-sm-6" style="height: 34px">--%>
+      <%--<input type="hidden" >--%>
+    <%--</div>--%>
+  <%--</div>--%>
+  <%--<div class="form-group">--%>
+    <%--<label for="address_etc" class="col-sm-4 ">기타 주소입력</label>--%>
+    <%--<div class="col-sm-6">--%>
+      <%--<input name="address_etc"  id="address_etc" placeholder="기타 주소입력" class="form-control" value="${data.address_etc}">--%>
+    <%--</div>--%>
+  <%--</div>--%>
   <div class="form-group">
     <label for="handphone" class="col-sm-4 ">폰번호</label>
     <div class="col-sm-6">
