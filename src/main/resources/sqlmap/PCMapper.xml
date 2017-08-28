@@ -148,6 +148,9 @@
         A.longitude,
         A.deleteyn,
         A.lastconnecttime,
+        A.worktime,
+        A.slogan,
+        A.hospitaldept,
       DATE_FORMAT( A.usestartdate,'%Y.%m.%d') "usestartdate",
       DATE_FORMAT( A.useenddate,'%Y.%m.%d') "useenddate",
       DATE_FORMAT( A.regtime,'%Y.%m.%d') "regtime"
@@ -280,12 +283,17 @@
         address,
         address_etc,
         introduce,
-        latitude,
-        longitude,
+
+      IFNULL(latitude,0) latitude,
+      IFNULL(longitude,0) longitude,
+
         usestartdate,
         useenddate,
         deleteyn,
         lastconnecttime,
+        worktime,
+        slogan,
+        hospitaldept,
         regtime
     FROM member
     WHERE  TRIM(LEFT(address, LOCATE(' ',address) -1)) LIKE CONCAT(#{addrSidoStr}, '%')
@@ -312,12 +320,17 @@
           address,
           address_etc,
           introduce,
-          latitude,
-          longitude,
+
+          IFNULL(latitude,0) latitude,
+          IFNULL(longitude,0) longitude,
           usestartdate,
           useenddate,
           deleteyn,
           lastconnecttime,
+
+          worktime,
+          slogan,
+          hospitaldept,
           regtime
           FROM member
 
@@ -342,12 +355,16 @@
         address,
         address_etc,
         introduce,
-        latitude,
-        longitude,
+
+      IFNULL(latitude,0) latitude,
+      IFNULL(longitude,0) longitude,
         usestartdate,
         useenddate,
         deleteyn,
         lastconnecttime,
+        worktime,
+        slogan,
+        hospitaldept,
         regtime
     FROM member
     WHERE name LIKE CONCAT('%', #{nameStr}, '%')

@@ -28,6 +28,12 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="worktime" class="col-sm-4 ">근무시간</label>
+    <div class="col-sm-6">
+      <input name="worktime"  id="worktime" placeholder="근무시간" class="form-control" value="${data.worktime}">
+    </div>
+  </div>
+  <div class="form-group">
   <label for="latitude" class="col-sm-4 ">위도</label>
   <div class="col-sm-6">
     <input name="latitude"  id="latitude" placeholder="위도" class="form-control" value="${data.latitude}">
@@ -70,6 +76,12 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="hospitaldept" class="col-sm-4 ">진료과목</label>
+    <div class="col-sm-6">
+      <input name="hospitaldept"  id="hospitaldept" placeholder="진료과목" class="form-control" value="${data.hospitaldept}">
+    </div>
+  </div>
+  <div class="form-group">
     <label for="longitude" class="col-sm-4 ">경도</label>
     <div class="col-sm-6">
       <input name="longitude"  id="longitude" placeholder="경도" class="form-control" value="${data.longitude}">
@@ -91,6 +103,12 @@
     <label for="introduce" class="col-sm-2 ">회원기타소개</label>
     <div class="col-sm-9">
       <input name="introduce"  id="introduce" placeholder="회원기타소개" class="form-control" value="${data.introduce}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="slogan" class="col-sm-2 ">슬로건</label>
+    <div class="col-sm-9">
+      <input name="slogan"  id="slogan" placeholder="슬로건" class="form-control" value="${data.slogan}">
     </div>
   </div>
 </div>
