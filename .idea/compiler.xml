@@ -14,8 +14,8 @@
         <module name="web" />
       </profile>
       <profile default="false" name="Annotation profile for pharmacy" enabled="true">
-        <sourceOutputDir name="target\generated-sources\annotations" />
-        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="pharmacy" />
@@ -23,7 +23,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="pharmacy" target="1.6" />
-      <module name="web" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
