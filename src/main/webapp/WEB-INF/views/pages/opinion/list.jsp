@@ -37,57 +37,131 @@
               <!-- left col-md-6 start -->
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="sch_opinionkey" class="col-sm-4 ">아이디</label>
+                  <label for="sch_gubun" class="col-sm-4 ">구분</label>
                   <div class="col-sm-6">
-                    <input name="sch_opinionkey"  id="sch_opinionkey" placeholder="아이디" class="form-control" value="${sch_opinionkey}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="sch_name" class="col-sm-4 ">의견올리기명</label>
-                  <div class="col-sm-6">
-                    <input name="sch_name"  id="sch_name" placeholder="의견올리기명" class="form-control" value="${sch_name}">
+                    <select name="sch_gubun"  id="sch_gubun" placeholder="아이디" class="form-control" value="${sch_opinionkey}">
+                        <option value="1">약국+병원 의견</option>
+                        <option value="2">일반 의견</option>
+
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="sch_telephone" class="col-sm-4 ">전화번호</label>
                   <div class="col-sm-6">
-                    <input name="sch_telephone"  id="sch_telephone" placeholder="전화번호" class="form-control" value="${sch_telephone}">
+                    <input name="sch_telephone"  id="sch_telephone" placeholder="아이디" class="form-control" value="${sch_telephone}">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_handphone" class="col-sm-4 ">휴대폰</label>
+                  <label for="schhospitaldept" class="col-sm-4 ">진료과목</label>
                   <div class="col-sm-6">
-                    <input name="sch_handphone"  id="sch_handphone" placeholder="휴대폰" class="form-control" value="${sch_handphone}">
+                    <input name="schhospitaldept"  id="schhospitaldept" placeholder="의견올리기명" class="form-control" value="${schhospitaldept}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_address" class="col-sm-4 ">주소</label>
+                  <div class="col-sm-6">
+                    <input name="sch_address"  id="sch_address" placeholder="휴대폰" class="form-control" value="${sch_address}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_slogan" class="col-sm-4 ">슬로건</label>
+                  <div class="col-sm-6">
+                    <input name="sch_slogan"  id="sch_slogan" placeholder="전화번호" class="form-control" value="${sch_slogan}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="sch_opiniontitle" class="col-sm-4 ">일반의견제목</label>
+                  <div class="col-sm-6">
+                    <input name="sch_opiniontitle"  id="sch_opiniontitle" placeholder="전화번호" class="form-control" value="${sch_opiniontitle}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_usestartdate" class="col-sm-4 ">등록시작일자</label>
+                  <div class="col-sm-6">
+                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="등록시작일자" class="form-control datepicker" value="${sch_usestartdate}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_writername" class="col-sm-4 ">작성자 이름</label>
+                  <div class="col-sm-6">
+                    <input name="sch_writername"  id="sch_writername" placeholder="사용시작일자" class="form-control" value="${sch_writername}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_opinioncontent" class="col-sm-4 ">연락처</label>
+                  <div class="col-sm-6">
+                    <input name="sch_opinioncontent"  id="sch_opinioncontent" placeholder="사용시작일자" class="form-control" value="${sch_opinioncontent}">
                   </div>
                 </div>
               </div>
               <!-- //left col-md-6 end -->
               <!-- right col-md-6 start -->
               <div class="col-md-6 right">
-                <%--<div class="form-group">--%>
-                  <%--<label for="sch_regtime" class="col-sm-4 ">가입일자</label>--%>
-                  <%--<div class="col-sm-6">--%>
-                    <%--<input name="sch_regtime"  id="sch_regtime" placeholder="가입일자" class="form-control datepicker" value="${sch_regtime}">--%>
-                  <%--</div>--%>
-                <%--</div>--%>
+                  <div class="form-group">
+                      <label for="sch_name" class="col-sm-4 ">이름</label>
+                      <div class="col-sm-6">
+                          <input name="sch_name"  id="sch_name" placeholder="아이디" class="form-control" value="${sch_name}">
+                      </div>
+                  </div>
                 <div class="form-group">
-                  <label for="sch_usestartdate" class="col-sm-4 ">사용시작일자</label>
+                  <label for="sch_handphone" class="col-sm-4 ">휴대폰</label>
                   <div class="col-sm-6">
-                    <input name="sch_usestartdate"  id="sch_usestartdate" placeholder="사용시작일자" class="form-control datepicker" value="${sch_usestartdate}">
+                    <input name="sch_handphone"  id="sch_handphone" placeholder="휴대폰" class="form-control" value="${sch_handphone}">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="sch_useenddate" class="col-sm-4 ">사용종료일자</label>
+                  <label for="sch_worktime" class="col-sm-4 ">근무시간</label>
                   <div class="col-sm-6">
-                    <input name="sch_useenddate"  id="sch_useenddate" placeholder="사용종료일자" class="form-control datepicker" value="${sch_useenddate}">
+                    <input name="sch_worktime"  id="sch_worktime" placeholder="휴대폰" class="form-control" value="${sch_worktime}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_address_etc" class="col-sm-4 ">기타주소</label>
+                  <div class="col-sm-6">
+                    <input name="sch_address_etc"  id="sch_address_etc" placeholder="휴대폰" class="form-control" value="${sch_address_etc}">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="sch_introduce" class="col-sm-4 ">소개</label>
                   <div class="col-sm-6">
-                    <input name="sch_introduce"  id="sch_introduce" placeholder="소개" class="form-control" value="${sch_introduce}">
+                    <input name="sch_introduce"  id="sch_introduce" placeholder="휴대폰" class="form-control" value="${sch_introduce}">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="sch_opinioncontent" class="col-sm-4 ">일반의견 내용</label>
+                  <div class="col-sm-6">
+                    <input name="sch_opinioncontent"  id="sch_opinioncontent" placeholder="휴대폰" class="form-control" value="${sch_opinioncontent}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_useenddate" class="col-sm-4 ">등록종료일자</label>
+                  <div class="col-sm-6">
+                    <input name="sch_useenddate"  id="sch_useenddate" placeholder="등록종료일자" class="form-control datepicker" value="${sch_useenddate}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_relation" class="col-sm-4 ">관계</label>
+                  <div class="col-sm-6">
+                    <input name="sch_relation"  id="sch_relation" placeholder="사용종료일자" class="form-control" value="${sch_relation}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="sch_email" class="col-sm-4 ">이메일</label>
+                  <div class="col-sm-6">
+                    <input name="sch_email"  id="sch_email" placeholder="사용종료일자" class="form-control" value="${sch_email}">
+                  </div>
+                </div>
+
               </div>
               <!--// right col-md-6 end-->
             </div>
@@ -95,9 +169,6 @@
             <div class="btn-box centeringContainer " >
               <span class="centered ">
                   <a id="searchBtn" class="pointer btn btn-blue-green btn-flat md-height" >조회</a>
-              </span>
-              <span class="right inline" >
-                <a id="insertFileBtn" class="pointer btn btn-blue-green btn-flat md-height" >일괄등록</a>
               </span>
             </div>
           </form>
@@ -110,29 +181,30 @@
           <div class="box-header-sm">
             <h3 class="box-title">의견올리기 조회 결과</h3>
 
-                    번호,구분,이름,전화번호,휴대폰번호,진료과목,근무시간,슬로건,소개,일반의견제목,일반의견내용,작성자이름,등록시간,삭제
           </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover pointer">
               <colgroup>
-                <col width="1%"/><%--구분--%>
-                <col width="7%"/><%--이름--%>
-                <col width="7%"/><%--전화번호--%>
-                <col width="5%"/><%--휴대폰번호--%>
-                <col width="10%"/><%--진료과목--%>
-                <col width="10%"/><%--근무시간--%>
-                <col width="10%"/><%--슬로건--%>
-                <col width="8%"/><%--소개--%>
-                <col width="8%"/><%--일반의견제목--%>
-                <col width="13%"/><%--일반의견내용--%>
-                <col width="5%"/><%--작성자이름--%>
-                <col width="5%"/><%--등록시간--%>
-                <col width="8%"/><%--삭제--%>
+                <col width="1%"/>
+                <col width="1%"/>
+                <col width="7%"/>
+                <col width="7%"/>
+                <col width="5%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="8%"/>
+                <col width="8%"/>
+                <col width="13%"/>
+                <col width="5%"/>
+                <col width="5%"/>
+                <col width="8%"/>
 
-                <col width="*"/><%----%>
+                <col width="*"/>
               </colgroup>
               <thead>
                 <tr class="bg-gray text-align-center">
+                  <td>번호</td>
                   <td>구분</td>
                   <td>이름</td>
                   <td>전화번호</td>
@@ -159,19 +231,13 @@
                     <td><c:if test="${items.gubun eq 1}">약국</c:if><c:if test="${items.gubun eq 2}">병원</c:if></td>
                     <td>${items.telephone}</td>
                     <td> ${items.handphone} </td>
-                    <td> ${items.longitude} </td>
-                    <td>${items.usestartdate}</td>
-                    <td>${items.useenddate}</td>
-                    <td>${items.handphone}</td>
-                    <td>
-                      ${fn:substring(items.introduce, 0, 8)}
-                      <c:if test="${fn:length(items.introduce)>8}">...</c:if>
-
-                    </td>
-                    <td>
-                        ${fn:substring(items.address, 0, 8)}
-                      <c:if test="${fn:length(items.address)>8}">...</c:if>
-                    </td>
+                    <td> ${items.hospitaldept} </td>
+                    <td>${items.worktime}</td>
+                    <td>${items.slogan}</td>
+                    <td>${items.introduce}</td>
+                    <td>${items.opiniontitle}</td>
+                    <td>${items.opinioncontent}</td>
+                    <td>${items.writername}</td>
                   </tr>
                 </c:forEach>
               </c:if>

@@ -8,6 +8,9 @@
     <if test='sch_opinionkey != null and sch_opinionkey != ""'>
       AND A.opinionkey  LIKE CONCAT('%', #{sch_opinionkey},'%')
     </if>
+    <if test='sch_gubun != null and sch_gubun != ""'>
+      AND A.gubun = #{sch_gubun}
+    </if>
     <if test='sch_address != null and sch_address != ""'>
       AND A.address  LIKE CONCAT('%', #{sch_address},'%')
     </if>
